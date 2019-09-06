@@ -1,17 +1,26 @@
 {
-  "name": "oauth",
+  "name": "yummycakebeta",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "PORT=1234 NODE_ENV=dev nodemon index.js",
+    "dev": "PORT=5000 NODE_ENV=dev nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReshavMaskey/YummyCakeBeta.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ReshavMaskey/YummyCakeBeta/issues"
+  },
+  "homepage": "https://github.com/ReshavMaskey/YummyCakeBeta#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^2.7.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sequelize": "^5.18.1"
   }
 }
