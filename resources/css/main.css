@@ -6,3 +6,10 @@
 .data {
     display: none;
 }
+
+.register{
+    height: 50px;
+width: 240px;
+background:green;
+color: white;
+}

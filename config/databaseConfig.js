@@ -1,6 +1,6 @@
 ///////////database connection to mysql,mariadb
 var Sequelize = require("sequelize"); //setting up connection
-var sequelize = new Sequelize("softwarica", "root", "password", {
+var sequelize = new Sequelize("cakedp", "root", "password", {
   host: "localhost",
   dialect: "mysql",
   logging: false

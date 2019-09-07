@@ -23,12 +23,12 @@ app.use("/user", userRoute);
 
 
 
-const port = 1234;//set port
+const port =1234;//set port
 app.listen(port, () => {
   try {
-    console.log("server running on port -" + port)
+    console.log("server running on port: " + port)
   } catch (err) {
-    console.log("server not running on port -" + port)
+    console.log("server not running on port: " + port)
   }
 });
 module.exports = app;
