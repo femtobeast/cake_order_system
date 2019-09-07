@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <meta name="google-signin-client_id"
-        content="915969573855-vjr1qlcc9pnevsvp0gnlc4lg5jqk508o.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="915969573855-vjr1qlcc9pnevsvp0gnlc4lg5jqk508o.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <script src="/js/script.js"></script>
     <title>Login</title>
+    
+
 </head>
 
 <body>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <p>The time now is: <%= new Date() %></p>
     <div class="data">
         <p>Profile Detail</p>
@@ -23,7 +25,13 @@
         <p>Email Address0</p>
         <p id="email" class="alert alert-danger"></p>
         <button onclick="onSignOut();" class="btn btn-danger">Signout</button>
-    </div>
+    </div> -->
+    <div class="container">
+    <!-- Display Google sign-in button -->
+    <div id="gSignIn"></div>
+    
+    <!-- Show the user profile details -->
+    <div class="userContent" style="display: none;"></div></div>
 </body>
 
 </html>
