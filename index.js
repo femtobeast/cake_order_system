@@ -1,6 +1,6 @@
 const express = require("express"); //server framework
-const bodyparser = require("body-parser");
-const app = express();
+const bodyparser = require("body-parser");//packages body-parser
+const app = express(); //express method 
 const path = require("path");
 //setRoute for url path
 const userRoute = require('./route/userroute');
@@ -19,7 +19,18 @@ app.use(express.static(path.join(__dirname, "resources")));
 
 
 
+//---------route defination
 app.use("/user", userRoute);
+
+
+
+
+app.use((err,req,res,next)=>{
+  res.locals.error=err;
+  if(err.status >=100 && err.status<600) res.status(err.status);
+  else res.status(500);
+  res.send({"message":err.message});
+});
 
 
 

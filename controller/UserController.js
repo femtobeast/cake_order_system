@@ -5,7 +5,7 @@ function addUser(req,res,next){
             cust_email:req.body.email,
             cust_password: req.body.password,
             cust_phone:req.body.phone,
-            cust_dob:req.body.dob,
+            cust_dob:req.body.birthday,
             cust_address:req.body.address,
             cust_gender:req.body.gender,
             cust_fname:req.body.firstname,
