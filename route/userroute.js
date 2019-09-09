@@ -11,7 +11,9 @@ router.get('/register', function (req, res) {
     res.render('register')
 });
 router.get('/dashboard', function (req, res) {
-    res.render('user_dashboard')
+
+    res.render('user_dashboard');
+
 });
 //-----------POST FUNCTION ROUTE-------------
 router.post('/registerAdd', UserController.addUser,
