@@ -1,38 +1,46 @@
 var mysequelize = require("../config/databaseConfig");
 var customer = mysequelize.sequelize.define(
   "tblcustomer",
-  {
-    id: {
-      type: mysequelize.Sequelize.BIGINT(10),
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false
+    {
+        cust_id: {
+            type: mysequelize.Sequelize.BIGINT(10),
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false
+        },
+        cust_email: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cust_fname: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cust_lname: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cust_password: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cust_phone: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: true
+        },
+        cust_dob: {
+            type: mysequelize.Sequelize.DATE,
+            allowNull: true
+        },
+        cust_address: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: true
+        },
+        cust_gender: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: true
+        }
     },
-    username: {
-      type: mysequelize.Sequelize.STRING,
-      allowNull: false
-    },
-    password: {
-      type: mysequelize.Sequelize.STRING,
-      allowNull: false
-    },
-    firstname: {
-      type: mysequelize.Sequelize.STRING,
-      allowNull: true
-    },
-    lastname: {
-      type: mysequelize.Sequelize.STRING,
-      allowNull: true
-    },
-    address: {
-      type: mysequelize.Sequelize.STRING,
-      allowNull: false
-    }
-    // userphoto: {
-    //   type: mysequelize.Sequelize.STRING(100),
-    //   allowNull: true
-    // }
-  },
   {
     freezeTableName: true,
     tableName: "tblcustomer"
