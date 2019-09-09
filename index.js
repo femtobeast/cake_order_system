@@ -34,12 +34,12 @@ app.use((err,req,res,next)=>{
 
 
 
-const port =1234;//set port
-app.listen(port, () => {
+// const port =1234;//set port
+app.listen(process.env.PORT, () => {
   try {
-    console.log("server running on port: " + port)
+    console.log("server running on port: " + process.env.PORT)
   } catch (err) {
-    console.log("server not running on port: " + port)
+    console.log("server not running on port: " + process.env.PORT)
   }
 });
 module.exports = app;

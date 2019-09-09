@@ -3,19 +3,20 @@ const router = express.Router();
 const UserController = require("../controller/UserController");
 
 
+//---------GET FUNCTION PAGES ROUTE
 router.get('/login', function (req, resp) {
     resp.render('login');
 });
-router.get('/rp',function(req,res){
+router.get('/register', function (req, res) {
     res.render('register')
- });
- router.get('/dashboard',function(req,res){
+});
+router.get('/dashboard', function (req, res) {
     res.render('user_dashboard')
- });
-router.post('/register',UserController.addUser,
-    function(req,res,next){
-    res.render("register",{"message": "User successfully Registered"})
-
+});
+//-----------POST FUNCTION ROUTE-------------
+router.post('/registerAdd', UserController.addUser,
+    function (req, res, next) {
+        res.render("register", { "message": "User successfully Registered" })
     }
 );
 
@@ -38,7 +39,7 @@ module.exports = router;
 //     let projectedWallet = projectWallet(newWallet);
 //     res.render('profile.ejs', {
 //       user : req.user,
-  
+
 //       // We are now feeding your EJS template another variable
 //       projectedWallet : JSON.stringify(projectedWallet),
 //     });
