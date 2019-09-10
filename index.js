@@ -35,6 +35,7 @@ app.use((err,req,res,next)=>{
 
 
 // const port =1234;//set port
+// curl -X GET http://localhost:1234/user/login -v
 app.listen(process.env.PORT, () => {
   try {
     console.log("server running on port: " + process.env.PORT)
