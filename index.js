@@ -15,8 +15,10 @@ app.set("views", __dirname + "/views");//set view folder
 app.set("view engine", "ejs");//set the view engine as ejs
 app.use(bodyparser.urlencoded({ extended: true })); //multipart data for image video giving true
 app.use(bodyparser.json());
-app.use(express.static(path.join(__dirname, "resources")));
 
+app.use(express.static(path.join(__dirname, "resources")));
+// app.use(express.static('resources'));
+// app.use(express.static('route'));
 
 
 //---------route defination

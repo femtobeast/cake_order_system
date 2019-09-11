@@ -1,3 +1,4 @@
+const userController = require("../controller/UserController");
 
 // Render Google Sign-in button
 function renderButton() {
@@ -23,15 +24,16 @@ function onSuccess(googleUser) {
             'userId': 'me'
         });
         request.execute(function (resp) {
-            console.log(resp)
+            
             // Display the user details
-            var connect = {}
-            var profileHTML = '<h3>Welcome ' +
-            resp.given_name + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
-            profileHTML += '                  <img src="' + resp.picture + '"/><p><b>Google ID: </b>' + resp.id + '</p><p><b>Name: </b>' + resp.name + '</p><p><b>Email: </b>' + resp.email + '</p><p><b>Gender: </b>' + resp.gender + '</p><p><b>Locale: </b>' + resp.locale + '</p><p><b>Google Profile:</b> <a target="_blank" href="' + resp.link + '">click to view profile</a></p>';
-            document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
-            document.getElementById("gSignIn").style.display = "none";
-            document.getElementsByClassName("userContent")[0].style.display = "block";
+            // var connect = {}
+            // var profileHTML = '<h3>Welcome ' +
+            // resp.given_name + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
+            // profileHTML += '<img src="' + resp.picture + '"/><p><b>Google ID: </b>' + resp.id + '</p><p><b>Name: </b>' + resp.name + '</p><p><b>Email: </b>' + resp.email + '</p><p><b>Gender: </b>' + resp.gender + '</p><p><b>Locale: </b>' + resp.locale + '</p><p><b>Google Profile:</b> <a target="_blank" href="' + resp.link + '">click to view profile</a></p>';
+            // document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
+            // document.getElementById("gSignIn").style.display = "none";
+            // document.getElementsByClassName("userContent")[0].style.display = "block";
+            userController.addUserByGoogle(resp);
         });
     });
 }

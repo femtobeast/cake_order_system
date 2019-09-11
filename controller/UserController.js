@@ -24,6 +24,12 @@ function addUser(req,res,next){
 
 }
 
+function addUserByGoogle(userdata){
+    console.log(userdata);
+
+}
+
 module.exports = {
-    addUser
+    addUser,
+    addUserByGoogle
 }
