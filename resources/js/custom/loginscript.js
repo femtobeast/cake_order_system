@@ -1,5 +1,4 @@
 
-
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     $(".g-sign2").css("display", "none");
@@ -24,7 +23,7 @@ function onSignOut() {
 // Render Google Sign-in button
 function renderButton() {
     gapi.signin2.render('gSignIn', {
-        'scope': 'profile email',
+        
         'width': 240,
         'height': 50,
         'longtitle': true,
@@ -53,7 +52,7 @@ function onSuccess(googleUser) {
             document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
             document.getElementById("gSignIn").style.display = "none";
             document.getElementsByClassName("userContent")[0].style.display = "block";
-   
+           
         });
     });
 }

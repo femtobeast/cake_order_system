@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "resources")));
 // app.use(express.static('route'));
 
 
-//---------route defination
+//----route defination
 app.use("/user", userRoute);
 
 

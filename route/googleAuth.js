@@ -1,4 +1,4 @@
-const userController = require("../controller/UserController");
+// const userController = require("../controller/UserController");
 
 // Render Google Sign-in button
 function renderButton() {
@@ -33,7 +33,7 @@ function onSuccess(googleUser) {
             // document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
             // document.getElementById("gSignIn").style.display = "none";
             // document.getElementsByClassName("userContent")[0].style.display = "block";
-            userController.addUserByGoogle(resp);
+            // userController.addUserByGoogle(resp);
         });
     });
 }
