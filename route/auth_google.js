@@ -34,7 +34,7 @@ function onSuccess(googleUser) {
             // document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
             // document.getElementById("gSignIn").style.display = "none";
             // document.getElementsByClassName("userContent")[0].style.display = "block";
-            // userController.addUserByGoogle(resp);
+
         });
     });
 }

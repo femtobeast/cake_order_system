@@ -18,9 +18,13 @@ router.get('/cp', function (req, res) {
 });
 
 //-----------POST FUNCTION ROUTE-------------
-router.post('/registerAdd', UserController.addUser,
-    function (req, res, next) {
-        res.render("register", { "message": "User successfully Registered" })
+//adding user data
+router.post('/registerAdd',
+    UserController.addUser,
+    function (req, res) {
+        res.status(201);
+        res.send({ message: "Registeration Successful!!" });
+        // res.render("register", { "message": "User successfully Registered" })
     }
 );
 

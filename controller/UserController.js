@@ -1,15 +1,15 @@
 var usermodel = require("../model/Customer");
-function addUser(req,res,next){
+exports.addUser = (req, res, next) => {
     usermodel.customer.create(
         {
-            cust_email:req.body.email,
+            cust_email: req.body.email,
             cust_password: req.body.password,
-            cust_phone:req.body.phone,
-            cust_dob:req.body.birthday,
-            cust_address:req.body.address,
-            cust_gender:req.body.gender,
-            cust_fname:req.body.firstname,
-            cust_lname:req.body.lastname
+            cust_phone: req.body.phone,
+            cust_dob: req.body.birthday,
+            cust_address: req.body.address,
+            cust_gender: req.body.gender,
+            cust_fname: req.body.firstname,
+            cust_lname: req.body.lastname
         })
         .then(function (result) {
             next();
@@ -18,18 +18,13 @@ function addUser(req,res,next){
             //to show error if any mistake is occured in addEmployee function.
             //extraNote: whenever we write some thing in next by defaultly it
             //will go to error.
-            next({"status": 500, "message": "Something went wrong"});
+            next({ "status": 500, "message": "Something went wrong" });
             console.log(err)
         })
 
 }
 
-function addUserByGoogle(userdata){
-    console.log(userdata);
 
-}
-
-module.exports = {
-    addUser,
-    addUserByGoogle
-}
+// module.exports = {
+//     addUser
+// }

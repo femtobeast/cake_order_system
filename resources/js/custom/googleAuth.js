@@ -60,6 +60,7 @@ function onSuccess(googleUser) {
                 lastname: resp.family_name,
                 email: resp.email
             }
+
             $.ajax({
                 url: "http://localhost:1234/user/registerAdd/",
                 method: "POST",
@@ -67,20 +68,20 @@ function onSuccess(googleUser) {
                 dataType: "json",
                 data: JSON.stringify(userdetail),
                 success: function (result, status) {
-                    alert('Data Saved');
+                    redirectPage("/cp");
 
                 },
                 error: function (err, status) {
-                    console.log(err);
+                    alert('Google Data not saved');
                 }
             });
             // Display the user details
-            var profileHTML = '<h3>Welcome ' +
-                resp.given_name + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
-            profileHTML += '<img src="' + resp.picture + '"/><p><b>Google ID: </b>' + resp.id + '</p><p><b>Name: </b>' + resp.name + '</p><p><b>Email: </b>' + resp.email + '</p><p><b>Gender: </b>' + resp.gender + '</p><p><b>Locale: </b>' + resp.locale + '</p><p><b>Google Profile:</b> <a target="_blank" href="' + resp.link + '">click to view profile</a></p>';
-            document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
-            document.getElementById("gSignIn").style.display = "none";
-            document.getElementsByClassName("userContent")[0].style.display = "block";
+            // var profileHTML = '<h3>Welcome ' +
+            //     resp.given_name + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
+            // profileHTML += '<img src="' + resp.picture + '"/><p><b>Google ID: </b>' + resp.id + '</p><p><b>Name: </b>' + resp.name + '</p><p><b>Email: </b>' + resp.email + '</p><p><b>Gender: </b>' + resp.gender + '</p><p><b>Locale: </b>' + resp.locale + '</p><p><b>Google Profile:</b> <a target="_blank" href="' + resp.link + '">click to view profile</a></p>';
+            // document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
+            // document.getElementById("gSignIn").style.display = "none";
+            // document.getElementsByClassName("userContent")[0].style.display = "block";
 
         });
     });
