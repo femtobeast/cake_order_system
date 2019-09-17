@@ -26,10 +26,9 @@ function onFailure(error) {
 }
 // var search = function searc(n) { return n < 2 ? 1 : n * searc(n - 1); };
 
-(function redirectPage(path) {
-
-    return window.location.href = path;
-})
+function redirectPage(path) {
+    return window.location.href = path;;
+}
 
 // Render Google Sign-in button
 function renderButton() {
@@ -68,7 +67,7 @@ function onSuccess(googleUser) {
                 dataType: "json",
                 data: JSON.stringify(userdetail),
                 success: function (result, status) {
-                    redirectPage("/cp");
+                    redirectPage("/user/cp");
 
                 },
                 error: function (err, status) {
