@@ -13,3 +13,10 @@ width: 240px;
 background:green;
 color: white;
 }
+
+.gbtn{
+    background-color: #4285f4;
+    width: 240px;
+    height: 50px;
+    color: white;
+}

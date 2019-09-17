@@ -24,7 +24,8 @@ function onSuccess(googleUser) {
             'userId': 'me'
         });
         request.execute(function (resp) {
-            
+            console.log(resp);
+
             // Display the user details
             // var connect = {}
             // var profileHTML = '<h3>Welcome ' +
@@ -40,8 +41,8 @@ function onSuccess(googleUser) {
 
 // Sign-in failure callback
 function onFailure(error) {
-   alert("Your not logged in!!!");
-   
+    alert("Your not logged in!!!");
+
 }
 
 // Sign out the user

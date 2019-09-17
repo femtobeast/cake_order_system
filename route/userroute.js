@@ -8,13 +8,14 @@ router.get('/login', function (req, resp) {
     resp.render('login');
 });
 router.get('/register', function (req, res) {
-    res.render('register')
-
+    res.render('register');
 });
 router.get('/dashboard', function (req, res) {
     res.render('user_dashboard');
 });
-
+router.get('/cp', function (req, res) {
+    res.render('changePwd');
+});
 
 //-----------POST FUNCTION ROUTE-------------
 router.post('/registerAdd', UserController.addUser,

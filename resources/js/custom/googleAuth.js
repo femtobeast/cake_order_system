@@ -1,4 +1,4 @@
-
+// function for google sign in
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     $(".g-sign2").css("display", "none");
@@ -8,7 +8,7 @@ function onSignIn(googleUser) {
 
 
 }
-
+//function for google sign out
 function onSignOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -20,10 +20,20 @@ function onSignOut() {
 
 }
 
+// Sign-in failure callback
+function onFailure(error) {
+    alert(error);
+}
+// var search = function searc(n) { return n < 2 ? 1 : n * searc(n - 1); };
+
+(function redirectPage(path) {
+
+    return window.location.href = path;
+})
+
 // Render Google Sign-in button
 function renderButton() {
     gapi.signin2.render('gSignIn', {
-        
         'width': 240,
         'height': 50,
         'longtitle': true,
@@ -44,23 +54,39 @@ function onSuccess(googleUser) {
             'userId': 'me'
         });
         request.execute(function (resp) {
-            console.log(resp)
+            console.log(resp);
+            var userdetail = {
+                firstname: resp.given_name,
+                lastname: resp.family_name,
+                email: resp.email
+            }
+            $.ajax({
+                url: "http://localhost:1234/user/registerAdd/",
+                method: "POST",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(userdetail),
+                success: function (result, status) {
+                    alert('Data Saved');
+
+                },
+                error: function (err, status) {
+                    console.log(err);
+                }
+            });
             // Display the user details
             var profileHTML = '<h3>Welcome ' +
-            resp.given_name + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
+                resp.given_name + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></h3>';
             profileHTML += '<img src="' + resp.picture + '"/><p><b>Google ID: </b>' + resp.id + '</p><p><b>Name: </b>' + resp.name + '</p><p><b>Email: </b>' + resp.email + '</p><p><b>Gender: </b>' + resp.gender + '</p><p><b>Locale: </b>' + resp.locale + '</p><p><b>Google Profile:</b> <a target="_blank" href="' + resp.link + '">click to view profile</a></p>';
             document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
             document.getElementById("gSignIn").style.display = "none";
             document.getElementsByClassName("userContent")[0].style.display = "block";
-           
+
         });
     });
 }
 
-// Sign-in failure callback
-function onFailure(error) {
-    alert(error);
-}
+
 
 // Sign out the user
 function signOut() {
@@ -73,4 +99,3 @@ function signOut() {
 
     auth2.disconnect();
 }
-
