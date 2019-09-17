@@ -18,6 +18,9 @@ app.use(bodyparser.urlencoded({ extended: true })); //multipart data for image v
 app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, "resources")));
+//public folder
+app.use(express.static('./resources'));
+
 // app.use(express.static('resources'));
 // app.use(express.static('route'));
 

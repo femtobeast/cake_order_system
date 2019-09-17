@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="well well-sm">
-                    <form class="form-horizontal" method="post">
+                    <%= typeof msg != 'undefined' ? msg:'' %>
+                    <form class="form-horizontal" method="post" action="/admin/acake" enctype="multipart/form-data">
                         <fieldset>
                             <legend class="text-center header">Add cake details</legend>
 
