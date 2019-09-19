@@ -7,10 +7,10 @@
 
     <meta name="google-signin-client_id"
         content="915969573855-vjr1qlcc9pnevsvp0gnlc4lg5jqk508o.apps.googleusercontent.com">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
-    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <script src="/js/library/jquery-3.3.0.min.js"></script>
     <!-- ?onload=renderButton -->
     <script src="/js/custom/googleAuth.js"></script>
 
@@ -23,22 +23,50 @@
 
 <body>
 
+    <div class="data">
+        <p>Profile Detail</p>
+        <img id="pic" class="img-circle" width="100" height="100">
+        <p>Email Address0</p>
+        <p id="email" class="alert alert-danger"></p>
+        <button onclick="onSignOut();" class="btn btn-danger">Signout</button>
+    </div>
+
     <div class="container">
-        <!-- Display Google sign-in button -->
-        <div id="gSignIn"></div>
+        <form method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                    placeholder="example@gmail.com">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your password with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Confirm Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+        </form>
+
+        <div class="g-signin2" id="gSignIn" data-onsuccess="onSignIn"></div>
+        <div class="userContent" style="display: none;"> </div>
         <div id="gSignUp">
+            <!-- Display Google sign-in button -->
             <a href="/user/register">
                 <button class="register">Register</button>
             </a>
         </div>
 
-        <!-- Show the user profile details -->
-        <div class="userContent" style="display: none;"> </div>
     </div>
 </body>
 
 </html>
 
+<!-- <div id="gSignIn"></div>
+<div class="userContent" style="display: none;"> </div> -->
 <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <p>The time now is: <%= new Date() %></p>
     <div class="data">

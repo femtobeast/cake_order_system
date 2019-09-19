@@ -4,8 +4,8 @@ const UserController = require("../controller/UserController");
 
 
 //---------GET FUNCTION PAGES ROUTE
-router.get('/login', function (req, resp) {
-    resp.render('login');
+router.get('/login', function (req, res) {
+    res.render('login');
 });
 router.get('/register', function (req, res) {
     res.render('register');

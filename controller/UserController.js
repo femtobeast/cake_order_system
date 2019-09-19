@@ -1,4 +1,6 @@
 var usermodel = require("../model/Customer");
+
+//insert user data into database
 exports.addUser = (req, res, next) => {
     usermodel.customer.create(
         {
@@ -22,6 +24,24 @@ exports.addUser = (req, res, next) => {
             console.log(err)
         })
 
+}
+
+
+///checking username in database already exist or not
+exports.checkUserEmail = async (req, res, next) => {
+    await cm.customer.findOne({
+        where: { cust_email: req.body.email }
+    })
+        .then(function (result) {
+            console.log(result.dataValues);
+            if (result.dataValues != "") {
+                next({ "status": 409, "message": 'email already exists' })
+            }
+        })
+        .catch(function (err) {
+            //error handling
+            next();
+        });
 }
 
 
