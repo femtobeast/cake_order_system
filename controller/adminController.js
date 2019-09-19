@@ -1,5 +1,7 @@
 const  multer=  require('multer');
 const path = require('path');
+var cakemodel = require("../model/Cake");
+
 //setting storage engine
 const storage = multer.diskStorage({
     destination: './resources/uploads/',

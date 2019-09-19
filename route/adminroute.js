@@ -4,11 +4,17 @@ const adminController = require("../controller/adminController");
 const path = require("path");
 
 
-
+//-----------GET FUNCTION ROUTE-------------
 //route for adding cake details
 router.get('/acd', function (req, res) {
     res.render('admin/addcake');
 });
+//-----------END OF GET FUNCTION ROUTE------
+
+
+
+
+
 
 //-----------POST FUNCTION ROUTE-------------
 
@@ -18,12 +24,24 @@ adminController.upload(req,res,(err)=>{
        res.render('admin/addcake',{
           msg:err
        });
+
    }else {
+       if(req.file == undefined){
+           res.render('admin/addcake',{
+               msg: 'Error: no file selected!!'
+           });
+       }else{
+           res.render('admin/addcake',{
+              file: `./resources/uploads/${req.file.filename}`
+           });
+       }
+
        console.log(req.file);
        res.send('test');
    }
 });
 });
+//-----------END OF POST FUNCTION ROUTE-------------
 
 
 module.exports = router;
