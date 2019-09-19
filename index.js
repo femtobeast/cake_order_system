@@ -4,6 +4,7 @@ const app = express(); //express method
 const path = require("path");
 //setRoute for url path
 const userRoute = require('./route/userroute');
+const adminRoute = require('./route/adminroute');
 //------------------------
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "resources")));
 
 //----route defination
 app.use("/user", userRoute);
+app.use("/admin", adminRoute);
 
 
 
