@@ -9,6 +9,10 @@ const path = require("path");
 router.get('/acd', function (req, res) {
     res.render('admin/addcake');
 });
+
+router.get('/af', function (req, res) {
+    res.render('admin/addflavour');
+});
 //-----------END OF GET FUNCTION ROUTE------
 
 
