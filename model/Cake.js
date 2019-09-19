@@ -33,7 +33,7 @@ var cake = mysequelize.sequelize.define(
             allowNull: true
         },
         descriptions: {
-            type: mysequelize.Sequelize.DATE,
+            type: mysequelize.Sequelize.STRING,
             allowNull: true
         }
     },
@@ -43,7 +43,7 @@ var cake = mysequelize.sequelize.define(
     }
 );
 cake
-    .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
+    .sync({ force: true }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
         console.log("user table created");
     })

@@ -1,6 +1,8 @@
 const  multer=  require('multer');
 const path = require('path');
 var cakemodel = require("../model/Cake");
+var flavourmodel = require("../model/Flavour");
+
 
 //setting storage engine
 const storage = multer.diskStorage({
@@ -36,8 +38,29 @@ const upload = multer({
     }
 }).single('cakeimage');
 
+//add flavour details information
+function addFlavour(req,res,next){
+    usermodel.customer.create(
+        {
+            flavour_name:req.body.flavourname,
+            flavour_type: req.body.flavourtype
+        })
+        .then(function (result) {
+            next();
+        })
+        .catch(function (err) {
+            //to show error if any mistake is occured in addEmployee function.
+            //extraNote: whenever we write some thing in next by defaultly it
+            //will go to error.
+            next({"status": 500, "message": "Something went wrong"});
+            console.log(err)
+        })
+
+}
+
 
 module.exports={
-    upload
+    upload,
+    addFlavour
 
 };

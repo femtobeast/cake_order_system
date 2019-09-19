@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="749db091-6455-4dec-9171-f5a738cd6eef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route/adminroute.js" beforeDir="false" afterPath="$PROJECT_DIR$/route/adminroute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/addcake.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/addcake.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/addflavour.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/addflavour.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/partials/footer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/partials/footer.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/partials/menu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/partials/menu.ejs" afterDir="false" />
-    </list>
+    <list default="true" id="749db091-6455-4dec-9171-f5a738cd6eef" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -251,16 +244,15 @@
       <workItem from="1568877848814" duration="1307000" />
       <workItem from="1568879968643" duration="1194000" />
       <workItem from="1568881702676" duration="394000" />
-      <workItem from="1568882315046" duration="58000" />
+      <workItem from="1568882315046" duration="344000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28761000" />
+    <option name="totallyTimeSpent" value="29047000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18534179" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
