@@ -1,85 +1,105 @@
 <% include partials/header.ejs %>
 <% include partials/menu.ejs %>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="well well-sm">
-                    <form class="form-horizontal" method="post" action="/admin/acake" enctype="multipart/form-data">
-                        <fieldset>
-                            <legend class="text-center header">Add cake details</legend>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <form class="form-horizontal" method="post" action="/admin/acake" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend class="text-center header">Add cake details</legend>
 
-                            <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-birthday-cake"></i></span>
-                                <div class="col-md-8">
-                                    <label for="cakename">Cake Name</label>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-birthday-cake"></i></span>
+                            <div class="col-md-8">
+                                <label for="cakename">Cake Name</label>
 
-                                    <input id="cakename" name="cakename" type="text" placeholder="cake Name" class="form-control">
-                                </div>
+                                <input id="cakename" name="cakename" type="text" placeholder="cake Name"
+                                    class="form-control">
                             </div>
-                            <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-birthday-cake"></i></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-birthday-cake"></i></span>
 
-                                <div class="col-md-8">
-                                    <label for="flavourname">Flavour Name</label>
-                                    <select class="form-control" id="flavourname">
-                                        <option>Basic</option>
-                                        <option>Premium</option>
-                                    </select>
-                                    </div>
+                            <div class="col-md-8">
+                                <label for="flavourname">Flavour Name</label>
+                                <select class="form-control" id="flavourname">
+                                    <% fdata.forEach(function(data){%>
+                                    <!-- <p><%= JSON.stringify(data).flavour_name %></p> -->
+                                    <option><%= data.flavour_name %>
+
+                                        <%})%>
+                                    </option>
+
+                                </select>
                             </div>
+                        </div>
 
 
 
-                            <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-birthday-cake"></i></span>
-                                <div class="col-md-8">
-                                    <label for="flavourtype">Flavour Type</label>
-                                    <select class="form-control" id="flavourtype" name="flavourtype">
-                                        <option>special</option>
-                                        <option>fruits</option>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-birthday-cake"></i></span>
+                            <div class="col-md-8">
+                                <label for="flavourtype">Flavour Type</label>
+                                <select class="form-control" id="flavourtype" name="flavourtype">
+                                    <% fdata.forEach(function(data){%>
+                                    <!-- <p><%= JSON.stringify(data).flavour_name %></p> -->
+                                    <option><%= data.flavour_type %>
+
+                                        <%})%>
+                                    </option>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-birthday-cake"></i></span>
-                                <div class="col-md-8">
-                                    <label for="size">Number of pound</label>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-birthday-cake"></i></span>
+                            <div class="col-md-8">
+                                <label for="size">Number of pound</label>
 
-                                    <input id="size" name="size" type="text" placeholder="Cake Size" class="form-control">
-                                </div>
+                                <input id="size" name="size" type="text" placeholder="Cake Size" class="form-control">
                             </div>
+                        </div>
 
 
-                            <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-birthday-cake"></i></span>
-                                <div class="col-md-8">
-                                    <label for="cakeimage">Update Image of Cake</label>
-                                   <p style="color: red" ><%= typeof msg != 'undefined' ? msg:'' %></p>
-                                    <input id="cakeimage" name="cakeimage" type="file" placeholder="cake image" class="form-control">
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-birthday-cake"></i></span>
+                            <div class="col-md-8">
+                                <label for="cakeimage">Update Image of Cake</label>
+                                <p style="color: red"><%= typeof msg != 'undefined' ? msg:'' %></p>
+                                <input id="cakeimage" name="cakeimage" type="file" placeholder="cake image"
+                                    class="form-control">
 
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
-                                <div class="col-md-8">
-                                    <textarea class="form-control" id="desc" name="desc" placeholder="Description of cake" rows="7"></textarea>
-                                </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="fa fa-pencil-square-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="desc" name="desc" placeholder="Description of cake"
+                                    rows="7"></textarea>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+
 
 
 <% include partials/footer.ejs %>
