@@ -17,6 +17,8 @@ router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
 
+router.get('/gcustomer',UserController.getCustomerDetali);
+
 //-----------POST FUNCTION ROUTE-------------
 //adding user data
 router.post('/registerAdd',

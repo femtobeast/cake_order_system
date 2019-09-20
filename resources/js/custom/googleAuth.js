@@ -1,5 +1,5 @@
 
-BASE_URL = "http://localhost:1234/";
+// BASE_URL = "http://localhost:1234/";
 
 //google sign in
 function onSignIn(googleUser) {
@@ -10,13 +10,7 @@ function onSignIn(googleUser) {
         });
         request.execute(function (resp) {
             console.log(resp);
-            $.getScript("/js/custom/apiurl.js")
-                .done(function (script, textStatus) {
-                    alert(BASE_URL);
-                })
-                .fail(function (jqxhr, settings, exception) {
-                    console.log(jqxhr);
-                });
+
             // Display the user details
             var profileHTML = '<h3>Welcome ' +
                 resp.given_name + '! <a href="javascript:void(0);" onclick="onSignOut();">Sign out</a></h3>';
@@ -83,6 +77,14 @@ function renderButton() {
         'onfailure': onFailure
     });
 }//not used
+
+// $.getScript("/js/custom/apiurl.js")
+// .done(function (script, textStatus) {
+//     alert(BASE_URL);
+// })
+// .fail(function (jqxhr, settings, exception) {
+//     console.log(jqxhr);
+// });
 // var search = function searc(n) { return n < 2 ? 1 : n * searc(n - 1); };
 
 // Sign out the user
