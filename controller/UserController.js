@@ -1,8 +1,5 @@
 var usermodel = require("../model/Customer");
-const request=require('request');
-//insert user data into database
-exports.addUser = (req, res, next) => {
-
+function addUser(req, res, next) {
     usermodel.customer.create(
         {
             cust_email: req.body.email,
@@ -26,6 +23,10 @@ exports.addUser = (req, res, next) => {
         })
 
 }
+
+
+function addUserByGoogle(userdata) {
+    console.log(userdata);
 
 
 //checking username in database already exist or not

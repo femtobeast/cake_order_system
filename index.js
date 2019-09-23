@@ -9,7 +9,7 @@ const adminRoute = require('./route/adminroute');
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE');
-  res.setHeader("Access-Control-Allow-Headers", "content-type,X-Requested-With,authorization");
+  res.setHeader("Access-Control-Allow-Headers", "content-type,X-Requested-With,authorization,ERR_HTTP_HEADERS_SENT");
   next();
 });
 app.set("views", __dirname + "/views");//set view folder
@@ -18,6 +18,9 @@ app.use(bodyparser.urlencoded({ extended: true })); //multipart data for image v
 app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, "resources")));
+//public folder
+app.use(express.static('./resources'));
+
 // app.use(express.static('resources'));
 // app.use(express.static('route'));
 
@@ -29,11 +32,11 @@ app.use("/admin", adminRoute);
 
 
 
-app.use((err,req,res,next)=>{
-  res.locals.error=err;
-  if(err.status >=100 && err.status<600) res.status(err.status);
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  if (err.status >= 100 && err.status < 600) res.status(err.status);
   else res.status(500);
-  res.send({"message":err.message});
+  res.send({ "message": err.message });
 });
 
 
