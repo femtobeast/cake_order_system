@@ -5,9 +5,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="/admin/acake" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="/admin/cakeAdd" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Add cake details</legend>
+                        <% if(typeof message !== 'undefined') { %>
+                        <p><%= message %></p>
+                        <% } %>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i
@@ -27,9 +30,7 @@
                                 <label for="flavourname">Flavour Name</label>
                                 <select class="form-control" id="flavourname">
                                     <% fdata.forEach(function(data){%>
-                                    <!-- <p><%= JSON.stringify(data).flavour_name %></p> -->
                                     <option><%= data.flavour_name %>
-
                                         <%})%>
                                     </option>
 
@@ -46,11 +47,8 @@
                                 <label for="flavourtype">Flavour Type</label>
                                 <select class="form-control" id="flavourtype" name="flavourtype">
                                     <% fdata.forEach(function(data){%>
-                                    <!-- <p><%= JSON.stringify(data).flavour_name %></p> -->
                                     <option><%= data.flavour_type %>
-
                                         <%})%>
-                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -98,6 +96,8 @@
         </div>
     </div>
 </div>
+
+<input id="flavourid" name="flavourid" type="text" placeholder="cake Name" class="form-control" hidden>
 
 
 

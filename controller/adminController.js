@@ -35,7 +35,8 @@ const upload = multer({
     fileFilter: function (req, file, cb) {
         checkFileType(file, cb);
 
-    }
+    },
+
 }).single('cakeimage');
 
 //add flavour details information
@@ -101,17 +102,36 @@ function getflavour(req, res, next) {
 // }
 
 
-function arrayRemove(arr, value) {
+// function arrayRemove(arr, value) {
 
-    return arr.filter(function (ele) {
-        return ele != value;
-    });
+//     return arr.filter(function (ele) {
+//         return ele != value;
+//     });
 
-}
+// }
 
+function addCake(req, res, next) {
+    cakemodel.cake.create({
+        cake_name: req.body.cakename,
+        pound: req.body.size,
+        cake_image: req.file.filename,
+        flavour_id: "1",
+        descriptions: req.body.desc,
+
+    })
+        .then(function (result) {
+            { fdata: flavour_arry[0] }
+            next()
+        })
+        .catch(function (err) {
+
+            console.log(err);
+        })
+};
 module.exports = {
     upload,
     addFlavour,
-    getflavour
+    getflavour,
+    addCake
 
 };

@@ -55,6 +55,11 @@ router.post('/flavourAdd', adminController.addFlavour,
 
     }
 );
+
+router.post('/cakeAdd', adminController.upload, adminController.addCake, function (req, res, next) {
+
+    res.redirect("http://localhost:1234/admin/acd")
+});
 //-----------END OF POST FUNCTION ROUTE-------------
 
 
