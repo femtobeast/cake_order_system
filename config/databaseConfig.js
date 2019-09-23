@@ -8,10 +8,10 @@ var sequelize = new Sequelize("cakedb", "root", "password", {
 
 sequelize
   .authenticate()
-  .then(function() {
+  .then(function () {
     console.log("databases connected");
   })
-  .catch(function(err) {
+  .catch(function (err) {
     console.log(err);
   });
 

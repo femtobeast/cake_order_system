@@ -24,7 +24,8 @@ function onSuccess(googleUser) {
             'userId': 'me'
         });
         request.execute(function (resp) {
-            
+            console.log(resp);
+
             // Display the user details
             // var connect = {}
             // var profileHTML = '<h3>Welcome ' +
@@ -33,15 +34,15 @@ function onSuccess(googleUser) {
             // document.getElementsByClassName("userContent")[0].innerHTML = profileHTML;
             // document.getElementById("gSignIn").style.display = "none";
             // document.getElementsByClassName("userContent")[0].style.display = "block";
-            // userController.addUserByGoogle(resp);
+
         });
     });
 }
 
 // Sign-in failure callback
 function onFailure(error) {
-   alert("Your not logged in!!!");
-   
+    alert("Your not logged in!!!");
+
 }
 
 // Sign out the user

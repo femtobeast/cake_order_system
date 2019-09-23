@@ -4,22 +4,29 @@ const UserController = require("../controller/UserController");
 
 
 //---------GET FUNCTION PAGES ROUTE
-router.get('/login', function (req, resp) {
-    resp.render('login');
+router.get('/login', function (req, res) {
+    res.render('login');
 });
 router.get('/register', function (req, res) {
-    res.render('register')
-
+    res.render('register');
 });
 router.get('/dashboard', function (req, res) {
     res.render('user_dashboard');
 });
+router.get('/cp', function (req, res) {
+    res.render('changePwd');
+});
 
+router.get('/gcustomer',UserController.getCustomerDetali);
 
 //-----------POST FUNCTION ROUTE-------------
-router.post('/registerAdd', UserController.addUser,
-    function (req, res, next) {
-        res.render("register", { "message": "User successfully Registered" })
+//adding user data
+router.post('/registerAdd',
+    UserController.addUser,
+    function (req, res) {
+        res.status(201);
+        res.send({ message: "Registeration Successful!!" });
+        // res.render("register", { "message": "User successfully Registered" })
     }
 );
 

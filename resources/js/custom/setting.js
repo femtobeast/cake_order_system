@@ -1,3 +1,4 @@
+
 var url_string = window.location.href; //window.location.href
 var url = new URL(url_string);
 // var name = url.searchParams.get("name");
@@ -68,7 +69,7 @@ function setErrorMessage(msg) {
 
 function loadFirst() {
     $('#workLoader').show();
-    load = setTimeout(function() {
+    load = setTimeout(function () {
         $('#workLoader').hide();
     }, 2000);
 
@@ -93,10 +94,10 @@ function alertError(msg) {
 }
 
 function holdContent() {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
         $('.alert').hide();
     }, 5000);
-    window.setTimeout(function() {
+    window.setTimeout(function () {
         $('.msgdiv').hide();
     }, 4000);
 }
