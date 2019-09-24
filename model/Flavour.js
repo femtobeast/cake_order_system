@@ -25,7 +25,7 @@ var flavour = mysequelize.sequelize.define(
 flavour
     .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
-        console.log("user table created");
+        console.log("flavour table created");
     })
     .catch(function (err) {
         console.log("err in creating table");

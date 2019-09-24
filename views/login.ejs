@@ -8,12 +8,6 @@
 
     <meta name="google-signin-client_id"
         content="915969573855-vjr1qlcc9pnevsvp0gnlc4lg5jqk508o.apps.googleusercontent.com">
-    <script data-main="/js/custom/apiurl.js" src="/js/library/require.js"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
-    <script src="/js/library/jquery-3.3.0.min.js"></script>
-    <!-- ?onload=renderButton -->
-    <script src="/js/custom/googleAuth.js"></script>
     <link rel="stylesheet" href="/css/main.css" class="href">
     <title>Login</title>
 
@@ -61,6 +55,22 @@
 
     </div>
 </body>
+<script data-main="/js/custom/config.js" src="/js/library/requirejs.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="https://apis.google.com/js/client:platform.js" async defer></script>
+<!-- <script src="/js/library/jquery-3.3.0.min.js"></script> -->
+<!-- <script src="/js/custom/googleAuth.js"></script> -->
+
+<script>
+    require(['/js/custom/config.js'], function () {
+        require(['/js/custom/setting.js']);
+        require(['/js/library/jquery-3.3.0.min.js']);
+        // require(['/js/custom/googleAuth.js'],function($){
+        //     alert(gooless)
+        // });
+    //    alert('inside require')
+    })
+</script>
 
 </html>
 

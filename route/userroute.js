@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
-
+const path = require('path')
 
 //---------GET FUNCTION PAGES ROUTE
 router.get('/login', function (req, res) {
@@ -16,7 +16,13 @@ router.get('/dashboard', function (req, res) {
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-
+router.get('/vc',(req,res)=>{
+    
+})
+// router.get('/config',function(req,res){
+//     // res.sendFile('config.js');
+//     res.sendFile(path.join(__dirname, "../config.js"))
+// });
 router.get('/gcustomer',UserController.getCustomerDetali);
 
 //-----------POST FUNCTION ROUTE-------------

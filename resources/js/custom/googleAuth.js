@@ -1,6 +1,3 @@
-
-// BASE_URL = "http://localhost:1234/";
-
 //google sign in
 function onSignIn(googleUser) {
     // Retrieve the Google account data
@@ -10,7 +7,7 @@ function onSignIn(googleUser) {
         });
         request.execute(function (resp) {
             console.log(resp);
-
+     
             // Display the user details
             var profileHTML = '<h3>Welcome ' +
                 resp.given_name + '! <a href="javascript:void(0);" onclick="onSignOut();">Sign out</a></h3>';
@@ -36,26 +33,27 @@ function onSignOut() {
 
 
 function addCustomerAPI(resp) {
-    var userdetail = {
-        firstname: resp.given_name,
-        lastname: resp.family_name,
-        email: resp.email
-    }
+    alert(addCustomerByGoogleUser)
+    // var userdetail = {
+    //     firstname: resp.given_name,
+    //     lastname: resp.family_name,
+    //     email: resp.email
+    // }
 
-    $.ajax({
-        url: addCustomerURL,
-        method: "POST",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify(userdetail),
-        success: function (result, status) {
-            redirectPage("/user/cp");
+    // $.ajax({
+    //     url: addCustomerByGoogleUser,
+    //     method: "POST",
+    //     contentType: "application/json",
+    //     dataType: "json",
+    //     data: JSON.stringify(userdetail),
+    //     success: function (result, status) {
+    //         redirectPage("/user/cp");
 
-        },
-        error: function (err, status) {
-            alert('Google Data not saved');
-        }
-    });
+    //     },
+    //     error: function (err, status) {
+    //         alert('Google Data not saved');
+    //     }
+    // });
 }
 
 // Sign-in failure callback

@@ -1,5 +1,5 @@
 var usermodel = require("../model/Customer");
-function addUser(req, res, next) {
+exports.addUser =(req, res, next) =>{
     usermodel.customer.create(
         {
             cust_email: req.body.email,
@@ -23,10 +23,6 @@ function addUser(req, res, next) {
         })
 
 }
-
-
-function addUserByGoogle(userdata) {
-    console.log(userdata);
 
 
 //checking username in database already exist or not
@@ -75,8 +71,3 @@ exports.getCustomerDetali = (req, res, next) => {
             next({ "status": 500, "message": "no user detail saved" });
         });
 };
-
-
-// module.exports = {
-//     addUser
-// }

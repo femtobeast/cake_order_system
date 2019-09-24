@@ -43,9 +43,9 @@ var cake = mysequelize.sequelize.define(
     }
 );
 cake
-    .sync({ force: true }) //first time is true second should be false. repeatedly creating tables new
+    .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
-        console.log("user table created");
+        console.log("cake table created");
     })
     .catch(function (err) {
         console.log("err in creating table");
