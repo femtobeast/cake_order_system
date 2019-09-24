@@ -30,13 +30,14 @@
                                 <label for="flavourname">Flavour Name</label>
                                 <select class="form-control" id="flavourname">
                                     <% fdata.forEach(function(data){%>
-                                    <option><%= data.flavour_name %>
-                                        <%})%>
+                                    <option><%=
+                                        data.flavour_name %> <%})%>
                                     </option>
 
                                 </select>
                             </div>
                         </div>
+
 
 
 
@@ -48,7 +49,7 @@
                                 <select class="form-control" id="flavourtype" name="flavourtype">
                                     <% fdata.forEach(function(data){%>
                                     <option><%= data.flavour_type %>
-                                        <%})%>
+                                        <%})%></option>
                                 </select>
                             </div>
                         </div>
@@ -70,8 +71,10 @@
                             <div class="col-md-8">
                                 <label for="cakeimage">Update Image of Cake</label>
                                 <p style="color: red"><%= typeof msg != 'undefined' ? msg:'' %></p>
+
                                 <input id="cakeimage" name="cakeimage" type="file" placeholder="cake image"
                                     class="form-control">
+
 
                             </div>
                         </div>
@@ -98,7 +101,15 @@
 </div>
 
 <input id="flavourid" name="flavourid" type="text" placeholder="cake Name" class="form-control" hidden>
+<script>
+    function flavouridget() {
+        var fid = document.getElementById('flavourname').value;
+        // fid =1;
+        alert(fid);
+    }
 
+
+</script>
 
 
 
