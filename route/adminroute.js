@@ -4,25 +4,29 @@ const adminController = require("../controller/adminController");
 const path = require("path");
 
 
-//-----------GET FUNCTION ROUTE-------------
-//route for adding cake details
-// router.get('/acd', function (req, res) {
-//     res.render('admin/addcake');
-// });
-router.get('/acd', adminController.getflavour);
+
+//-------FLAVOUR ROUTE
+//GET
 router.get('/af', function(req, res) {
     res.render('admin/addflavour');
 });
-//-----------END OF GET FUNCTION ROUTE------
-//flavour 
 router.get('/flid/:flname', adminController.returnFlavourId);
-
-
+//
+//POST
+router.post('/flavourAdd', adminController.addFlavour,
+    function(req, res, next) {
+        res.render("admin/addflavour", { "message": "Flavour data successfully saved" })
+    }
+);
+//
+//----------END FLAVOUR ROUTE
 
 
 
 //-----------POST FUNCTION ROUTE-------------
 
+router.get('/cdetail', adminController.getAllCakeDetail);
+router.get('/acd', adminController.getflavour);
 router.post('/acake', function(req, res) {
     adminController.upload(req, res, (err) => {
         if (err) {
@@ -47,13 +51,6 @@ router.post('/acake', function(req, res) {
     });
 });
 
-router.post('/flavourAdd', adminController.addFlavour,
-    function(req, res, next) {
-        res.render("admin/addflavour", { "message": "Flavour data successfully saved" })
-
-
-    }
-);
 
 router.post('/cakeAdd', adminController.upload, adminController.addCake, function(req, res, next) {
 
