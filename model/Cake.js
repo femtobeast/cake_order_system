@@ -1,3 +1,4 @@
+
 var mysequelize = require("../config/databaseConfig");
 var cake = mysequelize.sequelize.define(
     "tblcake",
@@ -70,5 +71,6 @@ cake
     .catch(function (err) {
         console.log("err in creating table");
     });
+
 
 module.exports = { cake };

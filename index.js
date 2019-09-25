@@ -1,3 +1,4 @@
+
 const express = require("express"); //server framework
 const bodyparser = require("body-parser");//packages body-parser
 const app = express(); //express method 
@@ -39,6 +40,11 @@ app.use((err, req, res, next) => {
   res.send({ "message": err.message });
 });
 
+
+
+
+
+
 //route for upload folders
 //Serves all the request which includes /images in the url from Images folder
 var publicDir = require('path').join(__filename, '/resources/uploads');
@@ -62,6 +68,7 @@ app.listen(process.env.PORT, () => {
     console.log("server not running on port: " + process.env.PORT)
   }
 });
+
 
 
 

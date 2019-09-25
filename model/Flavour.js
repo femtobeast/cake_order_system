@@ -1,3 +1,4 @@
+
 var mysequelize = require("../config/databaseConfig");
 var flavour = mysequelize.sequelize.define(
     "tblflavour",
@@ -27,5 +28,4 @@ flavour
     .catch(function (err) {
         console.log("err in creating table");
     });
-
 module.exports = { flavour };

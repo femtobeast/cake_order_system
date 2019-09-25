@@ -17,7 +17,7 @@ router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
 router.get('/vc',(req,res)=>{
-    
+    res.render('viewcake');
 })
 // router.get('/config',function(req,res){
 //     // res.sendFile('config.js');
