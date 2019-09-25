@@ -1,4 +1,5 @@
 var usermodel = require("../model/Customer");
+var cakemodel = require("../model/Cake");
 exports.addUser =(req, res, next) =>{
     usermodel.customer.create(
         {
@@ -42,7 +43,6 @@ exports.checkUserEmail = async (req, res, next) => {
         });
 }
 
-const url = 'http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=3a3188bfc5bb7c5d2eff1a4985214289';
 
 var info = {};
 //getting all user 
@@ -71,3 +71,24 @@ exports.getCustomerDetali = (req, res, next) => {
             next({ "status": 500, "message": "no user detail saved" });
         });
 };
+
+
+//cake data reterival
+var cake_arry = [];
+exports.getAllCakeDetail = (req, res, next) => {
+
+    cakemodel.cake.findAll()
+        .then(function (result) {
+            // res.status(200);
+            cake_arry.pop();
+            cake_arry.push(result);
+            // res.json(cake_arry[0])
+            // flavour_arry = JSON.stringify(result);
+            res.render("user_dashboard", { cdata: cake_arry[0] });
+            // console.log(JSON.stringify(result))
+            // res.json(result);
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+}
