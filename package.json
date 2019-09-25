@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "win": "SET PORT=1234 && node index.js",
+    "win": "SET PORT=1234 && nodemon index.js",
     "start": "PORT=1234 NODE_ENV=dev nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

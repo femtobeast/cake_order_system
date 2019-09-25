@@ -25,6 +25,20 @@ app.use(express.static('./resources'));
 // app.use(express.static('resources'));
 // app.use(express.static('route'));
 
+function ignoreFavicon(req, res, next) {
+  if (req.originalUrl == './favicon.ico') {
+    res.status(204).json({ nope: true });
+
+  } else if (req.originalUrl == '/map-red.png') {
+    res.status(204).json({ nope: true });
+  } else if (req.originalUrl == '/Roboto-Bold.woff2') {
+    res.status(204).json({ nope: true });
+  } else {
+    next();
+  }
+}
+app.use(ignoreFavicon);
+
 
 //----route defination
 app.use("/user", userRoute);
