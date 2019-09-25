@@ -35,7 +35,27 @@ var cake = mysequelize.sequelize.define(
         descriptions: {
             type: mysequelize.Sequelize.STRING,
             allowNull: true
-        }
+        },
+        flavour_type: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cake_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        cake_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        serves: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        version: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
     },
     {
         freezeTableName: true,

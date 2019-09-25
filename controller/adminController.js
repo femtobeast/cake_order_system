@@ -1,7 +1,9 @@
 const multer = require('multer');
 const path = require('path');
 var cakemodel = require("../model/Cake");
+
 var flavourmodel = require("../model/Flavour");
+var database = require("../config/databaseConfig")
 
 
 //setting storage engine
@@ -44,8 +46,7 @@ function addFlavour(req, res, next) {
     console.log(req.body)
     flavourmodel.flavour.create(
         {
-            flavour_name: req.body.flavourname,
-            flavour_type: req.body.flavourtype
+            flavour_name: req.body.flavourname
         })
 
         .then(function (result) {
@@ -110,24 +111,58 @@ function getflavour(req, res, next) {
 
 // }
 
+var fid;
 function addCake(req, res, next) {
-    cakemodel.cake.create({
-        cake_name: req.body.cakename,
-        pound: req.body.size,
-        cake_image: req.file.filename,
-        flavour_id: "1",
-        descriptions: req.body.desc,
-
-    })
-        .then(function (result) {
-            { fdata: flavour_arry[0] }
+    //id reterive 
+    flavourmodel.flavour.findOne({
+        attributes: ['flavour_id'],
+        where: { flavour_name: req.body.flavourname }
+    }).then(function (result) {
+        res.status(200)
+        fid = result.flavour_id;
+        //addcake
+        cakemodel.cake.create({
+            cake_name: req.body.cakename,
+            pound: req.body.size,
+            cake_image: req.file.filename,
+            flavour_type: req.body.flavourtype,
+            flavour_id: fid,
+            descriptions: req.body.desc,
+            cake_price: req.body.price,
+            version: req.body.version,
+            serves: req.body.serve
+        }).then(function (result) {
+            // { fdata: flavour_arry[0] }
             next()
         })
-        .catch(function (err) {
-
-            console.log(err);
-        })
+    }).catch(function (err) {
+        console.log(err);
+    })
 };
+
+
+
+
+
+
+var cake_arry = [];
+function getcake(req, res, next) {
+    cakemodel.cake.findAll()
+        .then(function (result) {
+            res.status(200);
+            cake_arry.pop();
+            cake_arry.push(result);
+            res.render("admin/vc", { fdata: cake_arry[0] });
+
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+}
+
+
+
+
 module.exports = {
     upload,
     addFlavour,

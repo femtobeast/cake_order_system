@@ -12,9 +12,13 @@ const path = require("path");
 router.get('/acd', adminController.getflavour);
 
 
+
 router.get('/af', function (req, res) {
     res.render('admin/addflavour');
 });
+
+// router.get('/vc', adminController.getcake);
+
 //-----------END OF GET FUNCTION ROUTE------
 
 
@@ -61,6 +65,9 @@ router.post('/cakeAdd', adminController.upload, adminController.addCake, functio
     res.redirect("http://localhost:1234/admin/acd")
 });
 //-----------END OF POST FUNCTION ROUTE-------------
+
+
+
 
 
 module.exports = router;
