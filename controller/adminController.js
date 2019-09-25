@@ -7,7 +7,7 @@ var flavourmodel = require("../model/Flavour");
 //setting storage engine
 const storage = multer.diskStorage({
     destination: './resources/uploads/',
-    filename: function (req, file, cb) {
+    filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
@@ -32,7 +32,7 @@ function checkFileType(file, cb) {
 const upload = multer({
     storage: storage,
     limit: { fileSize: 1000000 },
-    fileFilter: function (req, file, cb) {
+    fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
 
     },
@@ -42,16 +42,15 @@ const upload = multer({
 //add flavour details information
 function addFlavour(req, res, next) {
     console.log(req.body)
-    flavourmodel.flavour.create(
-        {
-            flavour_name: req.body.flavourname,
-            flavour_type: req.body.flavourtype
-        })
+    flavourmodel.flavour.create({
+        flavour_name: req.body.flavourname,
+        flavour_type: req.body.flavourtype
+    })
 
-        .then(function (result) {
+    .then(function(result) {
             next();
         })
-        .catch(function (err) {
+        .catch(function(err) {
             //to show error if any mistake is occured in addEmployee function.
             //extraNote: whenever we write some thing in next by defaultly it
             //will go to error.
@@ -61,6 +60,7 @@ function addFlavour(req, res, next) {
 
 }
 var flavour_arry = [];
+
 function getflavour(req, res, next) {
     // const favoriteThings = [
     //     "Red Velvet",
@@ -69,7 +69,7 @@ function getflavour(req, res, next) {
 
     // res.render("admin/addcake", { favoriteThings });
     flavourmodel.flavour.findAll()
-        .then(function (result) {
+        .then(function(result) {
             res.status(200);
             flavour_arry.pop();
             flavour_arry.push(result);
@@ -83,7 +83,7 @@ function getflavour(req, res, next) {
             // console.log(JSON.stringify(result))
             // res.json(result);
         })
-        .catch(function (err) {
+        .catch(function(err) {
             console.log(err)
         });
 }
@@ -112,23 +112,46 @@ function getflavour(req, res, next) {
 
 function addCake(req, res, next) {
     cakemodel.cake.create({
-        cake_name: req.body.cakename,
-        pound: req.body.size,
-        cake_image: req.file.filename,
-        flavour_id: "1",
-        descriptions: req.body.desc,
+            cake_name: req.body.cakename,
+            pound: req.body.size,
+            cake_image: req.file.filename,
+            flavour_id: "1",
+            descriptions: req.body.desc,
 
-    })
-        .then(function (result) {
+        })
+        .then(function(result) {
             { fdata: flavour_arry[0] }
             next()
         })
-        .catch(function (err) {
+        .catch(function(err) {
 
             console.log(err);
         })
 };
+
+
+//flavour id reterive
+function returnFlavourId(req, res, next) {
+    console.log(req.params.flname);
+    flavourmodel.flavour.findAll({
+            attributes: ['flavour_id'],
+            where: { flavour_name: req.params.flname }
+        }).then(function(result) {
+            console.log(result.dataValues);
+            if (result.dataValues != "") {
+                res.json(result);
+            } else {
+                next({ "status": 500, "message": "flavour not found" });
+            }
+        })
+        .catch(function(err) {
+            //error handling
+            next({ "status": 500, "message": "flavour not added" });
+        });
+}
+
 module.exports = {
+    returnFlavourId,
     upload,
     addFlavour,
     getflavour,

@@ -1,7 +1,6 @@
 var mysequelize = require("../config/databaseConfig");
 var flavour = mysequelize.sequelize.define(
-    "tblflavour",
-    {
+    "tblflavour", {
         flavour_id: {
             type: mysequelize.Sequelize.BIGINT(10),
             autoIncrement: true,
@@ -11,23 +10,22 @@ var flavour = mysequelize.sequelize.define(
         flavour_name: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
-        },
-        flavour_type: {
-            type: mysequelize.Sequelize.STRING,
-            allowNull: false
         }
-    },
-    {
+        // flavour_type: {
+        //     type: mysequelize.Sequelize.STRING,
+        //     allowNull: false
+        // }
+    }, {
         freezeTableName: true,
         tableName: "tblflavour"
     }
 );
 flavour
     .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
-    .then(function () {
+    .then(function() {
         console.log("flavour table created");
     })
-    .catch(function (err) {
+    .catch(function(err) {
         console.log("err in creating table");
     });
 
