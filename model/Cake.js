@@ -35,7 +35,27 @@ var cake = mysequelize.sequelize.define(
         descriptions: {
             type: mysequelize.Sequelize.STRING,
             allowNull: true
-        }
+        },
+        flavour_type: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cake_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        cake_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        serves: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        version: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
     },
     {
         freezeTableName: true,
@@ -43,7 +63,7 @@ var cake = mysequelize.sequelize.define(
     }
 );
 cake
-    .sync({ force: true }) //first time is true second should be false. repeatedly creating tables new
+    .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
         console.log("user table created");
     })

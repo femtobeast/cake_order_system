@@ -3,7 +3,7 @@ var flavour = mysequelize.sequelize.define(
     "tblflavour",
     {
         flavour_id: {
-            type: mysequelize.Sequelize.BIGINT(10),
+            type: mysequelize.Sequelize.INTEGER(10),
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
@@ -12,10 +12,7 @@ var flavour = mysequelize.sequelize.define(
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
-        flavour_type: {
-            type: mysequelize.Sequelize.STRING,
-            allowNull: false
-        }
+
     },
     {
         freezeTableName: true,
