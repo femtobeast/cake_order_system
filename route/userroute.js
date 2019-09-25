@@ -10,7 +10,7 @@ router.get('/login', function (req, res) {
 router.get('/register', function (req, res) {
     res.render('register');
 });
-router.get('/dashboard', function (req, res) {
+router.get('/dashboard', UserController.getAllCakeDetail, function (req, res) {
     res.render('user_dashboard');
 });
 router.get('/cp', function (req, res) {

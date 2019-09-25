@@ -45,10 +45,10 @@ var cake = mysequelize.sequelize.define(
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
         },
-        cake_price: {
-            type: mysequelize.Sequelize.INTEGER,
-            allowNull: false
-        },
+        // cake_price: {
+        //     type: mysequelize.Sequelize.INTEGER,
+        //     allowNull: false
+        // },
         serves: {
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
