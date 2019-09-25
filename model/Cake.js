@@ -1,6 +1,8 @@
+
 var mysequelize = require("../config/databaseConfig");
 var cake = mysequelize.sequelize.define(
-    "tblcake", {
+    "tblcake",
+    {
         cake_id: {
             type: mysequelize.Sequelize.BIGINT(10),
             autoIncrement: true,
@@ -15,10 +17,10 @@ var cake = mysequelize.sequelize.define(
         //     type: mysequelize.Sequelize.STRING,
         //     allowNull: false
         // },
-        flavourtype: {
-            type: mysequelize.Sequelize.STRING,
-            allowNull: false
-        },
+        // flavourtype: {
+        //     type: mysequelize.Sequelize.STRING,
+        //     allowNull: false
+        // },
         pound: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
@@ -34,19 +36,41 @@ var cake = mysequelize.sequelize.define(
         descriptions: {
             type: mysequelize.Sequelize.STRING,
             allowNull: true
-        }
-    }, {
+        },
+        flavour_type: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        cake_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        cake_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        serves: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        version: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+    },
+    {
         freezeTableName: true,
         tableName: "tblcake"
     }
 );
 cake
     .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
-    .then(function() {
+    .then(function () {
         console.log("cake table created");
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.log("err in creating table");
     });
+
 
 module.exports = { cake };

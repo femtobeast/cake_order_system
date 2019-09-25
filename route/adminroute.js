@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const adminController = require("../controller/adminController");
@@ -57,6 +58,33 @@ router.post('/cakeAdd', adminController.upload, adminController.addCake, functio
     res.redirect("http://localhost:1234/admin/acd")
 });
 //-----------END OF POST FUNCTION ROUTE-------------
+
+
+
+//-----------GET FUNCTION ROUTE-------------
+//route for adding cake details
+// router.get('/acd', function (req, res) {
+//     res.render('admin/addcake');
+// });
+router.get('/acd', adminController.getflavour);
+
+
+router.get('/vc', adminController.getcake);
+
+//-----------END OF GET FUNCTION ROUTE------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;

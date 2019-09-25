@@ -1,3 +1,4 @@
+
 const express = require("express"); //server framework
 const bodyparser = require("body-parser");//packages body-parser
 const app = express(); //express method 
@@ -41,6 +42,23 @@ app.use((err, req, res, next) => {
 
 
 
+
+
+
+//route for upload folders
+//Serves all the request which includes /images in the url from Images folder
+var publicDir = require('path').join(__filename, '/resources/uploads');
+app.use(express.static(publicDir));
+
+app.use(express.static('public'));
+app.use('/upload', express.static(__dirname + '/resources/uploads'));
+app.get("/upload", function (req, res, next) {
+  res.send(publicDir)
+})
+//end of route for upload folders
+
+
+
 // const port =1234;//set port
 // curl -X GET http://localhost:1234/user/login -v
 app.listen(process.env.PORT, () => {
@@ -50,4 +68,8 @@ app.listen(process.env.PORT, () => {
     console.log("server not running on port: " + process.env.PORT)
   }
 });
+
+
+
+
 module.exports = app;
