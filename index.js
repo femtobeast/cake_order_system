@@ -45,17 +45,7 @@ app.use((err, req, res, next) => {
 
 
 
-//route for upload folders
-//Serves all the request which includes /images in the url from Images folder
-var publicDir = require('path').join(__filename, '/resources/uploads');
-app.use(express.static(publicDir));
 
-app.use(express.static('public'));
-app.use('/upload', express.static(__dirname + '/resources/uploads'));
-app.get("/upload", function (req, res, next) {
-  res.send(publicDir)
-})
-//end of route for upload folders
 
 
 
