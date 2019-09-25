@@ -152,7 +152,7 @@ function getcake(req, res, next) {
             res.status(200);
             cake_arry.pop();
             cake_arry.push(result);
-            res.render("admin/vc", { fdata: cake_arry[0] });
+            res.render('admin/viewcake', { fdata: cake_arry[0] });
 
         })
         .catch(function (err) {
@@ -167,6 +167,7 @@ module.exports = {
     upload,
     addFlavour,
     getflavour,
-    addCake
+    addCake,
+    getcake
 
 };
