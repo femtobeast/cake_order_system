@@ -17,6 +17,7 @@
   margin-top: -8.33333333px;
   width: 5px;
   height: 35px;
+  animation: in 50ms 10s ease-out forwards;
   -webkit-transform: translateY(-300px);
           transform: translateY(-300px);
   -webkit-backface-visibility: hidden;

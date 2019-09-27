@@ -7,13 +7,15 @@
     <meta name="google-signin-client_id"
         content="915969573855-vjr1qlcc9pnevsvp0gnlc4lg5jqk508o.apps.googleusercontent.com">
     <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <!-- Font awesome -->
+    <link href="/dashboard/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/cake.css">
     <title>YummyCake | Login</title>
 </head>
 
 <body>
-    <!-- <div class="container"> -->
+    <div class="container">
         <div class="logincontainer">
             <div class="velas">
                 <div class="fuego"></div>
@@ -131,7 +133,6 @@
 		C177.667,459.569,177.666,475.571,173.667,475.571z
                           " />
                 </path>
-                <!-- #fefae9 -->
                 <path fill="#fefae9" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
 	c0-5.143,0-15.427,0-20.568c0-7.333,0-21.998,0-29.33c0-5.523,0-16.569,0-22.092c0-3.295,0-9.885,0-13.181
 	C95.188,2.551,97.353,0,100,0c2.648,0,4.812,2.551,4.812,5.669c0,3.248,0,9.743,0,12.991c0,5.428,0,16.284,0,21.711
@@ -184,15 +185,20 @@
             </svg>
 
             <div class="wrapper">
-                <div class="container">
+                <div class="wrapper-container">
+                        <span style="color: #ff6666;font-size: 1em;" class="fa fa-birthday-cake"></span>
                     <div class="text">
-                        <h1>YUMMY CAKE | LOGIN</h1>
+
+                        <h1><span style="color: #ff6666">YUMMYCAKE</span> | LOGIN</h1>
                         <p>Happy Birthday!!!</p>
                     </div>
 
                     <form class="form">
-                        <input type="text" placeholder="example@gmail.com">
-                        <input type="password" placeholder="*********">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="example@gmail.com">
+                        </div>
+                        <div class="form-group"><input type="password" class="form-control" placeholder="*********">
+                        </div>
                         <button type="submit" id="login-button">Login</button>
 
                     </form>
@@ -201,22 +207,18 @@
                 </div>
             </div>
         </div>
-    <!-- </div> -->
-    <!-- <ul class="bg-bubbles">
+    </div>
+
+    <ul class="bg-bubbles">
         <li></li>
         <li></li>
         <li></li>
         <li></li>
         <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul> -->
+    </ul>
 </body>
 <script data-main="/js/custom/config.js" src="/js/library/requirejs.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
 <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
 <!-- <script src="/js/library/jquery-3.3.0.min.js"></script> -->
 <script src="/js/library/googleAuth.js"></script>
