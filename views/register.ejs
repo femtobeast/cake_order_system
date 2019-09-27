@@ -8,7 +8,7 @@
     <meta name="luciplus_group" content="yummybakery">
     <meta name="keywords" content="Yummy Bakery">
     <!-- Title Page-->
-    <title>Registration page</title>
+    <title>YummyCake | Registration</title>
     <!-- Icons font CSS-->
     <link href="/register/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="/register/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -25,12 +25,17 @@
 </head>
 
 <body>
+    
     <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+        
         <div class="wrapper wrapper--w960">
             <div class="card card-2">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title">Registration Info</h2>
+                    <h2 class="title" >
+                        <span style="color: #ff6666;font-size: 1em;" class="fa fa-birthday-cake"></span>
+                        Registration Info
+                    </h2>
                     <form method="POST" action="/user/registerAdd">
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="First Name" name="firstname"
@@ -42,7 +47,7 @@
                         </div>
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="Address" name="address" id="address">
-                        </div>
+                        </div>   
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="Phone Number" name="phone"
                                 id="phone">
@@ -100,10 +105,24 @@
                 <p><%= message %></p>
                 <% } %>
             </div>
+         
         </div>
     </div>
-
+   <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
     <!-- Jquery JS-->
+
     <script src="/register/vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
     <script src="/register/vendor/select2/select2.min.js"></script>
