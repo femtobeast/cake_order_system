@@ -149,7 +149,7 @@ form input {
   display: block;
   text-align: center;
   font-size: 18px;
-  color: white;
+  color: #000;
   transition-duration: 0.25s;
   font-weight: 300;
 }
@@ -161,7 +161,7 @@ form input:hover {
 form input:focus {
   background-color: white;
   width: 300px;
-  color: #53e3a6;
+  /* color: #53e3a6; */
 }
 
 form button {
@@ -199,7 +199,8 @@ form button:hover {
   display: block;
   width: 40px;
   height: 40px;
-  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
   bottom: -160px;
   -webkit-animation: square 25s infinite;
   animation: square 25s infinite;
