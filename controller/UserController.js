@@ -1,6 +1,7 @@
 var usermodel = require("../model/Customer");
 var cakemodel = require("../model/Cake");
-exports.addUser =(req, res, next) =>{
+const { check, validationResult } = require('express-validator');
+exports.addUser = (req, res, next) => {
     usermodel.customer.create(
         {
             cust_email: req.body.email,
@@ -51,7 +52,7 @@ exports.getCustomerDetali = (req, res, next) => {
     //     const info = JSON.parse(body);
     //     res.render('user_dashboard', { info });
     // });
-   
+
     usermodel.customer.findAll({})
         .then(function (result) {
             // console.log(result[0].cust_id);
@@ -92,3 +93,45 @@ exports.getAllCakeDetail = (req, res, next) => {
             console.log(err)
         });
 }
+
+
+exports.validate = (method) => {
+    switch (method) {
+        case 'validateuserdata': {
+            return [
+                check('username').exists().isLength({ min: 5 }).trim().escape().withMessage('Name must have more than 5 characters'),
+                // expect sunday and saturday
+                check('weekday', 'Choose a weekday').optional().not().isIn(['Sunday', 'Saturday']),
+                // username must be an email
+                check('email', 'Your email is not valid').not().isEmpty().isEmail().normalizeEmail(),
+                // password must be at least 5 chars long
+                check('password', 'your password must be at least 8 characters long').isLength({ min: 5 }),
+                //confirm password
+                check('confirmPassword', 'Passwords do not match').custom((value, { req }) => (value === req.body.password)),
+                check('age', 'not avalid age').isNumeric()
+            ]
+        }
+    }
+}
+exports.validateuserdata = async (req, res, next) => {
+    try {
+
+        // Finds the validation errors in this request and wraps them in an object with handy functions
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        var user = {
+            username: req.body.username,
+            weekday: req.body.weekday,
+            email: req.body.email,
+            password: req.body.password,
+            age: req.body.age
+        }
+        res.json(user);
+    } catch (err) {
+        return next(err)
+    }
+}
+
