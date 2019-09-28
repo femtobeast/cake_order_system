@@ -89,6 +89,16 @@ app.use(ignoreFavicon);
 
 
 //----route defination
+app.get("/", (req, res) => {
+  const wt = "Yummy Cake";
+  const redirect = [{
+    title:"WARNING!!! Redirect to login: [server address: localhost:1234/, port: 1234]",
+    login:"http://localhost:1234/user/login",
+    subtitle:"this is root page!!!"
+  }];
+  console.log(redirect)
+  res.render('welcome', { wt,redirect });
+});
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 

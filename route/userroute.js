@@ -5,6 +5,7 @@ const path = require('path')
 
 
 //---------GET FUNCTION PAGES ROUTE
+
 router.get('/login', function (req, res) {
     res.render('userlogin');
 });
