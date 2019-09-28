@@ -11,18 +11,29 @@
 <body>
   <div class="container">
     <div class="wrapper">
-    <h1>Welcome to <span><%= wt %></span></h1>
+      <h1>Welcome to <span><%= wt %></span></h1>
+    </div>
+
+    <div class="list-group">
+      <% redirect.forEach((result) => { %>
+      <a href="<%= result.login %>"> <button type="submit" class="btn btn-warning"> Login</button></a>
+      <h4 class="list-group-item-heading"><%= result.title %></h4>
+      <p class="list-group-item-text"><%= result.subtitle %></p>
+
+      <% }) %>
+    </div>
   </div>
+  <% if(typeof userId !== 'undefined') { %>
+  <a href="/home">Home Test</a>
+  <form method="POST" action="/logout">
+    <button>Logout</button>
+  </form>
+  <% }else{ %>
+  <a href="/register">Register Test</a>
+  <a href="/login">Login Test</a>
+  <% } %>
 
-  <div class="list-group">
-    <% redirect.forEach((result) => { %>  
-    <a href="<%= result.login %>">  <button type="submit" class="btn btn-warning"> Login</button></a>
-     
-    <h4 class="list-group-item-heading"><%= result.title %></h4>
-    <p class="list-group-item-text"><%= result.subtitle %></p>
 
-    <% }) %>
-  </div></div>
 </body>
 
 </html>

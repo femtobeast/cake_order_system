@@ -4,11 +4,7 @@ const bodyparser = require("body-parser");//packages body-parser
 const app = express(); //express method 
 const path = require("path");
 const cookieParser = require('cookie-parser');
-
 var expressSession = require('express-session');
-
-
-
 //--------------------------------------
 const userRoute = require('./route/userroute');//userroute for url path
 const adminRoute = require('./route/adminroute');//adminroute url
@@ -22,8 +18,8 @@ app.use((req, res, next) => {
   next();
 });
 // app.engine('ejs',ejs({
-//   extname:'ejs',defaultLayout:'layout',layoutDir:__dirname+'/views',
-// }))
+  //   extname:'ejs',defaultLayout:'layout',layoutDir:__dirname+'/views',
+  // }))
 app.set("views", __dirname + "/views");//set view folder
 app.set("view engine", "ejs");//set the view engine as ejs
 app.use(bodyparser.urlencoded({ extended: true })); //multipart data for image video giving true
@@ -31,45 +27,243 @@ app.use(bodyparser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "resources")));//hosting public folder 
 // app.use(check());
+
+// const TWO_HOURS = 1000 * 10;
+const TWO_HOURS = 1000*60*60*1; 
+const {
+  PORT = process.env.PORT,
+  SESS_NAME = 'sid',
+  SESS_SECRET = 'max',
+  NODE_ENV = 'development',
+  SESS_LIFETIME = TWO_HOURS
+} = process.env
+const IN_PROD = NODE_ENV === 'production'
+const users = [
+  { id: 1, name: 'Rishav', email: 'reshav@gmail.com', password: 'rishav' },
+  { id: 2, name: 'Maskey', email: 'maskey@gmail.com', password: 'secret' },
+  { id: 3, name: 'Apple', email: 'apple@gmail.com', password: 'secret' }
+]
 app.use(expressSession({
+  // genid: function (req) {
+  //   return i++ // use UUIDs for session IDs
+  // },
+  name: SESS_NAME,
+  resave: false,
   secret: 'max',
   saveUninitialized: false,
-  resave: false
+  cookie: { maxAge: SESS_LIFETIME, sameSite: true, secure: IN_PROD }
 }))
+//JSON object to be added to cookie 
+let student = {
+  name: "Ritik",
+  Age: "18"
+}
 
-// app.post('/check', [
-//   check('username').exists().isLength({ min: 5 }).trim().escape().withMessage('Name must have more than 5 characters'),
-//   // expect sunday and saturday
-//   check('weekday', 'Choose a weekday').optional().not().isIn(['Sunday', 'Saturday']),
-//   // username must be an email
-//   check('email', 'Your email is not valid').not().isEmpty().isEmail().normalizeEmail(),
-//   // password must be at least 5 chars long
-//   check('password', 'your password must be at least 8 characters long').isLength({ min: 5 }),
-//   //confirm password
-//   check('confirmPassword', 'Passwords do not match').custom((value, { req }) => (value === req.body.password)),
-//   check('age','not avalid age').isNumeric()
-// ],(req, res) => {
-//   // Finds the validation errors in this request and wraps them in an object with handy functions
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     return res.status(422).json({ errors: errors.array() });
-//   }
+//Route for adding cookie 
+app.get('/setuser', (req, res) => {
+  res.cookie("student", users);
+  res.send('user data added to cookie');
+});
+//Iterate users data from cookie 
+app.get('/getuser', (req, res) => {
+  //shows all the cookies 
+  res.send(req.cookies.student);
+});
 
-//   var user = {
-//     username: req.body.username,
-//     weekday: req.body.weekday,
-//     email: req.body.email,
-//     password: req.body.password,
-//     age:req.body.age
-//   }
-//   res.json(user);
-// });
-//-----------------------------
+const redirectToLogin = (req, res, next) => {
+  if (!req.session.userId) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+}
+
+const redirectToHome = (req, res, next) => {
+  if (req.session.userId) {
+    res.redirect('/home');
+  } else {
+    next();
+  }
+}
+app.use((req, res, next) => {
+  const { userId } = req.session;
+  if (userId) {
+    res.locals.user = users.find(
+      user => user.id === userId
+    )
+  }
+  next();
+})
+
+//----route defination
+app.get("/", (req, res) => {
+  const { userId } = req.session;
+  console.log(userId)
+  const wt = "Yummy Cake";
+  const redirect = [{
+    title: "WARNING!!! Redirect to login: [server address: localhost:1234/, port: 1234]",
+    login: "http://localhost:1234/user/login",
+    subtitle: "this is root page!!!"
+    // userid: `${userId}`
+  }];
+  res.render('welcome', { wt, redirect, userId });
+  // var sess = req.session;
+  // if (sess.views) {
+  //   sess.views++
+  //   res.setHeader('Content-Type', 'text/html');
+  //   res.write('<p>' + sess.views + '</p>');
+  //   res.write('<p>expries in ' + (sess.cookie.maxAge / 1000) + 's</p>');
+  //   res.end();
+  // } else {
+  //   sess.views = 1;
+  //   res.end('Welcome to the session demo.refresh!!!' + req.sessionID)
+  // }
+
+});
 
 
-// app.use(express.static('./resources'));
-// app.use(express.static('resources'));
-// app.use(express.static('route'));
+
+app.get('/home', redirectToLogin, (req, res) => {
+  const {user} = res.locals;
+  // const user = users.find(user => user.id === req.session.userId)
+console.log(req.sessionID)
+  res.send(`
+  <h1>Home</h1>
+  <a href="/"> Main </a>
+  <ul>
+  <li>Name: ${user.name}</li>
+  <li>Email: ${user.email}</li>
+  <form method="POST" action="/logout">
+    <button>Logout</button>
+  </form>
+  </ul>`
+  );
+})
+app.get('/profile', redirectToLogin, (req, res) => {
+  // const user = users.find(user => user.id === req.session.userId)
+  const {user} = res.locals;
+  res.json(user)
+
+})
+app.get('/login', redirectToHome, (req, res) => {
+  res.send(`
+  <h1>Login</h1>
+  <form method="post" action="/login">
+  <input type="email" name="email" placeHolder="email" required />
+  <input type="password" name="password" placeHolder="password" required />
+  <input type="submit" />
+  </form>
+  <a href="/register">Register</a>
+  `);
+})
+app.get('/register', redirectToHome, (req, res) => {
+  res.send(`
+  <h1>Register</h1>
+  <form method="post" action="/register">
+  <input type="text" name="name" placeHolder="name" required />
+  <input type="email" name="email" placeHolder="email" required />
+  <input type="password" name="password" placeHolder="password" required />
+  <input type="submit" />
+  </form>
+  <a href="/login">Login</a>
+
+  `);
+})
+
+app.post('/login', redirectToHome, (req, res) => {
+  const { email, password } = req.body;
+  if (email && password) {
+    const user = users.find(
+      user => user.email === email && user.password === password
+    )
+    console.log(user);
+    if (user) {
+      req.session.userId = user.id;
+      return res.redirect('/home');
+    }
+  }
+
+})
+app.post('/register', redirectToHome, (req, res) => {
+  const { name, email, password } = req.body;
+ 
+  if (name && email && password) {
+    const exists = users.some(
+      user => user.email === email
+    )
+    if (!exists) {
+      const user = {
+        id: users.length + 1,
+        name,
+        email,
+        password
+      }
+      users.push(user);
+      req.session.userId = user.id
+      return res.redirect('/home')
+
+    }
+  }
+  res.redirect('/register');
+
+})
+app.post('/logout', redirectToLogin, (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.redirect('/home');
+    }
+    res.clearCookie(SESS_NAME);
+    res.redirect('/login')
+
+  })
+})
+
+
+
+
+
+
+
+
+
+app.use("/user", userRoute);
+app.use("/admin", adminRoute);
+
+
+
+//---error defining 
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  if (err.status >= 100 && err.status < 600) res.status(err.status);
+  else res.status(500);
+  res.send({ "message": err.message });
+});
+//--------------------------
+
+
+function redirectToWelcomePage(req, res) {
+  const wt = "Yummy Cake";
+  const redirect = [{
+    title: "WARNING!!! Redirect to login: [server address: localhost:1234/, port: 1234]",
+    login: "http://localhost:1234/user/login",
+    subtitle: "this is root page!!!"
+  }];
+  res.render('welcome', { wt, redirect });
+}
+
+//route for upload folders
+//Serves all the request which includes /images in the url from Images folder
+var publicDir = require('path').join(__filename, '/resources/uploads');
+app.use(express.static(publicDir));
+
+app.use(express.static('public'));
+app.use('/upload', express.static(__dirname + '/resources/uploads'));
+app.get("/upload", function (req, res, next) {
+  res.send(publicDir)
+})
+//end of route for upload folders
+
+
 
 //ignore favicon problem
 function ignoreFavicon(req, res, next) {
@@ -88,59 +282,15 @@ app.use(ignoreFavicon);
 //----------------------------------------------
 
 
-//----route defination
-app.get("/", (req, res) => {
-  const wt = "Yummy Cake";
-  const redirect = [{
-    title:"WARNING!!! Redirect to login: [server address: localhost:1234/, port: 1234]",
-    login:"http://localhost:1234/user/login",
-    subtitle:"this is root page!!!"
-  }];
-  console.log(redirect)
-  res.render('welcome', { wt,redirect });
-});
-app.use("/user", userRoute);
-app.use("/admin", adminRoute);
-
-
-
-//---error defining 
-app.use((err, req, res, next) => {
-  res.locals.error = err;
-  if (err.status >= 100 && err.status < 600) res.status(err.status);
-  else res.status(500);
-  res.send({ "message": err.message });
-});
-//--------------------------
-
-
-
-
-
-//route for upload folders
-//Serves all the request which includes /images in the url from Images folder
-var publicDir = require('path').join(__filename, '/resources/uploads');
-app.use(express.static(publicDir));
-
-app.use(express.static('public'));
-app.use('/upload', express.static(__dirname + '/resources/uploads'));
-app.get("/upload", function (req, res, next) {
-  res.send(publicDir)
-})
-//end of route for upload folders
-
-
-
 // const port =1234;//set port
 // curl -X GET http://localhost:1234/user/login -v
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   try {
-    console.log("server running on port: " + process.env.PORT)
+    console.log(`server running on port:  ${PORT}`)
   } catch (err) {
-    console.log("server not running on port: " + process.env.PORT)
+    console.log(`server not running on port:  ${PORT} `)
   }
 });//port listen function
-
 
 
 

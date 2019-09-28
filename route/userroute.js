@@ -63,3 +63,33 @@ module.exports = router;
 //     });
 //     console.log(JSON.stringify(projectedWallet));        
 //   });
+
+
+// app.post('/check', [
+//   check('username').exists().isLength({ min: 5 }).trim().escape().withMessage('Name must have more than 5 characters'),
+//   // expect sunday and saturday
+//   check('weekday', 'Choose a weekday').optional().not().isIn(['Sunday', 'Saturday']),
+//   // username must be an email
+//   check('email', 'Your email is not valid').not().isEmpty().isEmail().normalizeEmail(),
+//   // password must be at least 5 chars long
+//   check('password', 'your password must be at least 8 characters long').isLength({ min: 5 }),
+//   //confirm password
+//   check('confirmPassword', 'Passwords do not match').custom((value, { req }) => (value === req.body.password)),
+//   check('age','not avalid age').isNumeric()
+// ],(req, res) => {
+//   // Finds the validation errors in this request and wraps them in an object with handy functions
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//     return res.status(422).json({ errors: errors.array() });
+//   }
+
+//   var user = {
+//     username: req.body.username,
+//     weekday: req.body.weekday,
+//     email: req.body.email,
+//     password: req.body.password,
+//     age:req.body.age
+//   }
+//   res.json(user);
+// });
+//-----------------------------
