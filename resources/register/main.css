@@ -130,7 +130,8 @@ body {
   /* color: #fff; */
   font-weight: 300;
   -webkit-background-size: cover;
-  background: url("/register/images/blur1.jpg ") no-repeat center center fixed;
+  
+  /* background: url("/register/images/blur1.jpg ") no-repeat center center fixed; */
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
@@ -466,7 +467,7 @@ input {
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 37px;
-color: #ff6666;
+  color: #ff6666;
 }
 
 /* ==========================================================================
@@ -474,6 +475,7 @@ color: #ff6666;
      ========================================================================== */
 
 .card {
+  /* background: url("./images/blur1.jpg") top left/cover no-repeat; */
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -493,8 +495,9 @@ color: #ff6666;
 }
 
 .card-2 .card-heading {
-  background: url("./images/cake.jpg") top left/cover no-repeat;
+  background: url("./images/image5.jpg") top right/cover no-repeat;
   width: 29.1%;
+  /* float: left; */
   display: table-cell;
 }
 

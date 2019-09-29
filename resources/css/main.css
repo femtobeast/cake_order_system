@@ -57,7 +57,8 @@ body, html {
   /* color: #fff; */
   font-weight: 300;
   -webkit-background-size: cover;
-  background: url("/register/images/blur1.jpg ") no-repeat center center fixed;
+  background-color: #ea9191;
+  /* background: url("/register/images/blur1.jpg ") no-repeat center center fixed; */
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;

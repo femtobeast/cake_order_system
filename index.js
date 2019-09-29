@@ -17,9 +17,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "content-type,X-Requested-With,authorization,ERR_HTTP_HEADERS_SENT");
   next();
 });
-// app.engine('ejs',ejs({
-  //   extname:'ejs',defaultLayout:'layout',layoutDir:__dirname+'/views',
-  // }))
+
 app.set("views", __dirname + "/views");//set view folder
 app.set("view engine", "ejs");//set the view engine as ejs
 app.use(bodyparser.urlencoded({ extended: true })); //multipart data for image video giving true
@@ -28,8 +26,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "resources")));//hosting public folder 
 // app.use(check());
 
-// const TWO_HOURS = 1000 * 10;
-const TWO_HOURS = 1000*60*60*1; 
+// -- SESSION CODE BELOW START
+const TWO_HOURS = 1000 * 10;
+// const TWO_HOURS = 1000*60*60*1; 
 const {
   PORT = process.env.PORT,
   SESS_NAME = 'sid',
@@ -55,7 +54,7 @@ app.use(expressSession({
 }))
 //JSON object to be added to cookie 
 let student = {
-  name: "Ritik",
+  name: "Rishav",
   Age: "18"
 }
 
@@ -85,6 +84,7 @@ const redirectToHome = (req, res, next) => {
     next();
   }
 }
+
 app.use((req, res, next) => {
   const { userId } = req.session;
   if (userId) {
@@ -121,12 +121,15 @@ app.get("/", (req, res) => {
 
 });
 
-
-
-app.get('/home', redirectToLogin, (req, res) => {
+app.get('/home',(req, res) => {
   const {user} = res.locals;
   // const user = users.find(user => user.id === req.session.userId)
-console.log(req.sessionID)
+console.log(req.session)
+if(req.sessionId){
+console.log('yes')
+}else{
+  console.log('no')
+}
   res.send(`
   <h1>Home</h1>
   <a href="/"> Main </a>
@@ -181,6 +184,7 @@ app.post('/login', redirectToHome, (req, res) => {
       req.session.userId = user.id;
       return res.redirect('/home');
     }
+
   }
 
 })
@@ -218,6 +222,7 @@ app.post('/logout', redirectToLogin, (req, res) => {
   })
 })
 
+//---------SESSION CODE END 
 
 
 
