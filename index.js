@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "resources")));//hosting public fold
 // app.use(check());
 
 // -- SESSION CODE BELOW START
-const TWO_HOURS = 1000 * 10;
+const TWO_HOURS = 1000 * 60;
 // const TWO_HOURS = 1000*60*60*1; 
 const {
   PORT = process.env.PORT,
@@ -86,12 +86,13 @@ const redirectToHome = (req, res, next) => {
 }
 
 app.use((req, res, next) => {
-  const { userId } = req.session;
+  res.locals.session = req.session;
+  const { userId } = res.locals.session ;
   if (userId) {
     res.locals.user = users.find(
       user => user.id === userId
-    )
-  }
+      )
+    }
   next();
 })
 

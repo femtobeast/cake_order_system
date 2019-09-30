@@ -15,19 +15,19 @@ $(document).ready(function () {
         $("#vcakeprice").text(tempCakePrice);
         $("#vcakedesc").text(tempCakeDesc);
         $("#vcakeFtype").text(tempCakeFlavourType);
+       
     });
     $('#men').on('click', '.aa-add-card-btn', function () {
-        aid = $(this)[0].attributes.aid.nodeValue;
+        cartdata = $(this)[0].attributes.cartdata.nodeValue;
 
         var path = "http://localhost:1234/uploads/cakeimage-1569451050010.jpg";
-        var caked = aid.split(',');
+        var caked = cartdata.split(',');
         var tempCakeName = caked[0];//cake_price
         var tempCakeImage = caked[1];//cake_price
         var tempCakePrice = caked[2];//cake_price
         var tempCakeDesc = caked[3];//descriptions
 
 
-        $("#vcakeimg").attr("src", path);
         // var data = [];
         // $(this)
         //     .find('a')

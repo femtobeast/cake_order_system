@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
 const path = require('path')
+const cakeModel = require('../model/Cake')
+const Cart = require('../model/Cart')
 
 
 //---------GET FUNCTION PAGES ROUTE
@@ -18,12 +20,51 @@ router.get('/dashboard', UserController.getAllCakeDetail, function (req, res) {
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-router.get('/vc',(req,res)=>{
+router.get('/vc', (req, res) => {
     res.render('viewcake');
 })
-router.post('/check', UserController.validate('validateuserdata'),UserController.validateuserdata);
-router.get('/gcustomer',UserController.getCustomerDetali);
+router.get('/shopping-cart', (req, res) => {
+    // if (!req.session.cart) {
+    //     return res.render('cartDetail', { product: null })
+    // }
+    var cart = new Cart(req.session.cart);
+    // var cartdata = { products: cart.generateArray() }
+    // var test = {
+    //     item: [{
+    //         name:'rishav'
+    //     }], total: 120
+    // }
+    // res.json(cartdata[0].item);
 
+    res.status(201);
+
+    // res.render('cartDetail', { products: cart})
+    res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.cake_price })
+})
+
+router.post('/check', UserController.validate('validateuserdata'), UserController.validateuserdata);
+router.get('/gcustomer', UserController.getCustomerDetali);
+
+router.get('/add-to-cart/:id', function (req, res, next) {
+    var cakeId = req.params.id;
+    // var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+    cakeModel.cake.findOne({
+        where: { cake_id: cakeId }
+    }).then(function (result) {
+        //  console.log(result.dataValues)
+        cart.add(result.dataValues, result.dataValues.cake_id);
+        req.session.cart = cart;
+        req.session.totalQty = cart.totalQty;
+        // console.log(req.session.cart)
+        res.redirect('/user/dashboard');
+
+    }).catch(function (err) {
+        //error handling
+        next();
+    });
+
+});
 //-----------POST FUNCTION ROUTE-------------
 //adding user data
 router.post('/registerAdd',
@@ -47,6 +88,12 @@ module.exports = router;
 //         "Red Velvet",
 //         "Black Forest"
 //     ];
+
+// res.setHeader('Content-Type', 'text/html');
+    // cartdata.forEach(element => {
+
+    //     res.json(element);
+    // });
 
 //     resp.render('index', { wt, favoriteThings });
 // })
