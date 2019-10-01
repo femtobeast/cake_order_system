@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
 const path = require('path')
+const ejs = require('ejs')
 const cakeModel = require('../model/Cake')
 const Cart = require('../model/Cart')
 
@@ -20,26 +21,26 @@ router.get('/dashboard', UserController.getAllCakeDetail, function (req, res) {
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-router.get('/vc', (req, res) => {
-    res.render('viewcake');
+
+router.get('/csp', (req, res) => {
+    res.render('searchAllCake');
 })
-router.get('/shopping-cart', (req, res) => {
-    // if (!req.session.cart) {
-    //     return res.render('cartDetail', { product: null })
-    // }
+router.get('/shopping-cart', async (req, res) => {
+    if (!req.session.cart) {
+        return res.render('cartDetail', { product: null })
+    }
+    res.status(201);
     var cart = new Cart(req.session.cart);
-    // var cartdata = { products: cart.generateArray() }
+    // var products = cart.generateArray();
     // var test = {
     //     item: [{
     //         name:'rishav'
     //     }], total: 120
     // }
-    // res.json(cartdata[0].item);
-
-    res.status(201);
-
-    // res.render('cartDetail', { products: cart})
-    res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.cake_price })
+    // res.send({ hello: 'world' });
+    // res.json(cart.generateArray());
+    await res.render('cartDetail', { products:cart.generateArray(),totalPrice:cart.totalPrice })
+    // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
 })
 
 router.post('/check', UserController.validate('validateuserdata'), UserController.validateuserdata);
@@ -56,7 +57,7 @@ router.get('/add-to-cart/:id', function (req, res, next) {
         cart.add(result.dataValues, result.dataValues.cake_id);
         req.session.cart = cart;
         req.session.totalQty = cart.totalQty;
-        // console.log(req.session.cart)
+        console.log(req.session.cart)
         res.redirect('/user/dashboard');
 
     }).catch(function (err) {

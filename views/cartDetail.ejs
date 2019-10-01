@@ -1,13 +1,50 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-    <p><%= products %></p>
-    
-</body>
-</html>
+<% include partials/header.ejs %>
+<% include partials/menu.ejs %>
+
+<div class="row">
+    <div async class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <%- if(!products) { %>
+        <% products.forEach(function(data){ %>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge"><%= data.total %></span>
+                <Strong class="title"><%= data.item.cake_name %></strong>
+                <span class="label label-success">$<%= data.item.cake_price %></span>
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-xs dropdown-toogle" type="button">Action<span
+                            class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">-1</a></li>
+                        <li><a href="#">-All</a></li>
+                    </ul>
+
+                </div>
+            </li>
+        </ul>
+        <% }) %>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+       Total <strong style="color: black"><%= products[0].totalPrice %></strong>
+
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <button class="btn btn-success">Checkout</button>
+    </div>
+</div>
+<% }else{ %>
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <h2>No cake data</h2>
+
+    </div>
+</div>
+
+<% } %>
+<% include partials/footer.ejs %>
