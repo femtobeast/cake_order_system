@@ -137,9 +137,10 @@ exports.validateuserdata = async (req, res, next) => {
 }
 
 ///search function for cake detail
+
 exports.searchCakeDetail = async (req, res, next) => {
     mySeq.sequelize.query("SELECT \
-            c.cake_name, c.cake_price, c.pound, c.version, f.flavour_name\
+            c.cake_id,c.cake_name, c.cake_price, c.pound, c.version,c.cake_image, f.flavour_name\
             FROM tblcake c \
             INNER JOIN  tblflavour f\
             on c.flavour_id = f.flavour_id \
@@ -148,7 +149,9 @@ exports.searchCakeDetail = async (req, res, next) => {
             ORDER BY c.pound DESC ",
         { replacements: { cakeN: req.body.cn + '%' }, type: mySeq.sequelize.QueryTypes.SELECT }
     ).then(cakeresult => {
-      res.json(cakeresult)
+ 
+        // res.json(cakeresult)
+        res.render('searchAllCake',{cakeresult})
     })
 }
 
