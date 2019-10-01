@@ -1,6 +1,10 @@
 var usermodel = require("../model/Customer");
 var cakemodel = require("../model/Cake");
+var flavourmodel = require("../model/Flavour");
 const { check, validationResult } = require('express-validator');
+const mySeq = require('../config/databaseConfig');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 exports.addUser = (req, res, next) => {
     usermodel.customer.create(
         {
@@ -77,7 +81,6 @@ exports.getCustomerDetali = (req, res, next) => {
 //cake data reterival
 var cake_arry = [];
 exports.getAllCakeDetail = (req, res, next) => {
-
     cakemodel.cake.findAll()
         .then(function (result) {
             // res.status(200);
@@ -93,8 +96,6 @@ exports.getAllCakeDetail = (req, res, next) => {
             console.log(err)
         });
 }
-
-
 exports.validate = (method) => {
     switch (method) {
         case 'validateuserdata': {
@@ -135,3 +136,35 @@ exports.validateuserdata = async (req, res, next) => {
     }
 }
 
+///search function for cake detail
+exports.searchCakeDetail = async (req, res, next) => {
+    mySeq.sequelize.query("SELECT \
+            c.cake_name, c.cake_price, c.pound, c.version, f.flavour_name\
+            FROM tblcake c \
+            INNER JOIN  tblflavour f\
+            on c.flavour_id = f.flavour_id \
+            WHERE c.cake_name \
+            LIKE :cakeN \
+            ORDER BY c.pound DESC ",
+        { replacements: { cakeN: req.body.cn + '%' }, type: mySeq.sequelize.QueryTypes.SELECT }
+    ).then(cakeresult => {
+      res.json(cakeresult)
+    })
+}
+
+
+// flavourmodel.flavour.findAll({
+//     attributes: ['flavour_id']
+// }).then(function (flavourResult) {
+//     cakemodel.cake.findAll({
+//         where: {
+//             cake_name:
+//             {
+//                 [Op.like]: req.body.cn + '%'
+//             }
+//         }
+//     }).then(function (cakeResult) {
+//         console.table(flavourResult);
+//     })
+
+// })

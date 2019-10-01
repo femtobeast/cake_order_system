@@ -42,10 +42,8 @@ router.get('/shopping-cart', async (req, res) => {
     await res.render('cartDetail', { products:cart.generateArray(),totalPrice:cart.totalPrice })
     // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
 })
-
 router.post('/check', UserController.validate('validateuserdata'), UserController.validateuserdata);
 router.get('/gcustomer', UserController.getCustomerDetali);
-
 router.get('/add-to-cart/:id', function (req, res, next) {
     var cakeId = req.params.id;
     // var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
@@ -68,14 +66,19 @@ router.get('/add-to-cart/:id', function (req, res, next) {
 });
 //-----------POST FUNCTION ROUTE-------------
 //adding user data
-router.post('/registerAdd',
-    UserController.addUser,
-    function (req, res) {
+router.post('/registerAdd',UserController.addUser,function (req, res) {
         res.status(201);
         res.send({ message: "Registeration Successful!!" });
         // res.render("register", { "message": "User successfully Registered" })
     }
 );
+
+
+//searching cake data
+router.post('/cakeSearchQuery',UserController.searchCakeDetail,function(req,res,next){
+    res.status(201);
+    // res.send({ message: "Registeration Successful!!" });
+})
 
 
 module.exports = router;
