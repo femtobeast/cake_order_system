@@ -1,2 +1,52 @@
 <% include partials/header.ejs %>
 <% include partials/menu.ejs %>
+
+<div class="container">
+    <div class="row">
+        <ul class="aa-product-catg">
+
+            <!-- start single product item -->
+            <li>
+                <figure>
+                    <!-- <%= %> -->
+                    <a class="aa-product-img" href="#"><img
+                            imgagecake="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWTPbXeQy0Sy6xCbSwL_Vc4oQtMS-UNkUPOwRb3TxWHKKNlZ5Ycg"
+                            height="300" width="250"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWTPbXeQy0Sy6xCbSwL_Vc4oQtMS-UNkUPOwRb3TxWHKKNlZ5Ycg"
+                            + alt="polo shirt img"></a>
+                    <a class="aa-add-card-btn" href="/user/add-to-cart/"><span class="fa fa-shopping-cart"></span>Add To
+                        Cart</a>
+                    <!-- cartdata='user=[data.cake_id,data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type] ' -->
+                    <figcaption>
+                        <h4 class="aa-product-title">
+                            <a href="#">
+                              Cake
+                            </a>
+                        </h4>
+                        <span class="aa-product-price">Rs dfgd</span><span
+                            class="aa-product-price"><del>Rs-65.50</del></span>
+                    </figcaption>
+                </figure>
+                <div class="aa-product-hvr-content">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span
+                            class="fa fa-heart-o"></span></a>
+                    <a href="#" id="quickViewBtn" data-toggle2="tooltip" data-placement="top" title="Quick View"
+                        data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                </div>
+                <!-- product badge -->
+                <span class="aa-badge aa-sale" href="#">SALE!</span>
+            </li>
+           
+        </ul>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-6">one</div>
+        <div class="col-md-6">two</div>
+    </div> -->
+</div>
+
+
+
+
+
+<% include partials/footer.ejs %>

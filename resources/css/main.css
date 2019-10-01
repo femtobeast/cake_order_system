@@ -320,4 +320,22 @@ form button:hover {
   /* filter: blur(2px);
   -webkit-filter: blur(2px); */
   /* background-position: center; */
+
+
+  /* image design background
+    min-height: 100vh;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: poppins,sans-serif;
+    background: url(../images/Search_001.png);
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto;
+    background-size: cover;
+    background-position: center center;
+    padding: 15px; */
 }
