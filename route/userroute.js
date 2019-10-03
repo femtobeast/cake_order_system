@@ -8,7 +8,6 @@ const Cart = require('../model/Cart')
 
 
 //---------GET FUNCTION PAGES ROUTE
-
 router.get('/login', function (req, res) {
     res.render('userlogin');
 });
@@ -21,9 +20,13 @@ router.get('/dashboard', UserController.getAllCakeDetail, function (req, res) {
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-
 router.get('/csp', (req, res) => {
+    
     res.render('searchAllCake');
+})
+router.get('/item', (req, res) => {
+
+    res.render('itemDetail');
 })
 router.get('/shopping-cart', async (req, res) => {
     if (!req.session.cart) {
@@ -54,8 +57,8 @@ router.get('/add-to-cart/:id', function (req, res, next) {
         //  console.log(result.dataValues)
         cart.add(result.dataValues, result.dataValues.cake_id);
         req.session.cart = cart;
-        req.session.totalQty = cart.totalQty;
-        console.log(req.session.cart)
+        req.session.totalCart = cart.totalQty;
+        // console.log(req.session.cart)
         res.redirect('/user/dashboard');
 
     }).catch(function (err) {
@@ -72,7 +75,6 @@ router.post('/registerAdd',UserController.addUser,function (req, res) {
         // res.render("register", { "message": "User successfully Registered" })
     }
 );
-
 
 //searching cake data
 router.post('/cakeSearchQuery',UserController.searchCakeDetail,function(req,res,next){

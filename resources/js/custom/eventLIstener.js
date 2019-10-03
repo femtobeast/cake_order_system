@@ -1,5 +1,9 @@
-$(document).ready(function () {
+var tempCakeId;
+
+define(['jquery', 'api_url'], function ($, main) {
+
     $('.aa-product-hvr-content').on('click', '#quickViewBtn', function () {
+
         aid = $(this)[0].attributes.aid.nodeValue;
 
         var path = "http://localhost:1234/uploads/";
@@ -9,23 +13,42 @@ $(document).ready(function () {
         var tempCakePrice = caked[2];//cake_price
         var tempCakeDesc = caked[3];//descriptions
         var tempCakeFlavourType = caked[4];//descriptions
+        tempCakeId = caked[5];//descriptions
 
         $("#vcakeimg").attr("src", path + tempCakeImage);
         $("#vcakename").text(tempCakeName);
         $("#vcakeprice").text(tempCakePrice);
         $("#vcakedesc").text(tempCakeDesc);
         $("#vcakeFtype").text(tempCakeFlavourType);
-       
     });
-    $('#men').on('click', '.aa-add-card-btn', function () {
-        cartdata = $(this)[0].attributes.cartdata.nodeValue;
 
-        var path = "http://localhost:1234/uploads/cakeimage-1569451050010.jpg";
-        var caked = cartdata.split(',');
-        var tempCakeName = caked[0];//cake_price
-        var tempCakeImage = caked[1];//cake_price
-        var tempCakePrice = caked[2];//cake_price
-        var tempCakeDesc = caked[3];//descriptions
+    $('.aa-prod-view-bottom').on('click', '#quickAddToCart', function () {     
+        $.ajax({
+            url: "http://localhost:1234/user/add-to-cart/" + tempCakeId,
+            method: "GET",
+            dataType: "json",
+            // headers: { authorization: "Bearer " + window.localStorage.getItem('token') },
+            success: function (result, status) {
+             alert('success')
+            },
+            error: function (jqXHR, status) {
+             window.location.href = '/user/dashboard'
+            }
+        });
+    });
+});
+
+// $(document).ready(function () {
+
+    // $('#men').on('click', '.aa-add-card-btn', function () {
+    //     cartdata = $(this)[0].attributes.cartdata.nodeValue;
+
+    //     var path = "http://localhost:1234/uploads/cakeimage-1569451050010.jpg";
+    //     var caked = cartdata.split(',');
+    //     var tempCakeName = caked[0];//cake_price
+    //     var tempCakeImage = caked[1];//cake_price
+    //     var tempCakePrice = caked[2];//cake_price
+    //     var tempCakeDesc = caked[3];//descriptions
 
 
         // var data = [];
@@ -59,6 +82,7 @@ $(document).ready(function () {
 
 
 
-    })
+    // })
 
-});
+// });
+

@@ -23,7 +23,7 @@
             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span
                     class="fa fa-heart-o"></span></a>
             <a href="#"
-                aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type] %>'
+                aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type,data.cake_id] %>'
                 id="quickViewBtn" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal"
                 data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
         </div>
@@ -34,29 +34,6 @@
 </ul>
 <a class="aa-browse-btn" href="/user/csp">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
 <script src="/js/custom/eventListener.js"> </script>
-<script>
-    // $('#men').on('click', '.aa-add-card-btn', function () {
-    //     // console.log($(this)[0].attributes.aid.nodeValue);
-    //     // imgagecake = $(this)[0].attributes.aid.nodeValue;
-    //     aid = $(this)[0].attributes.aid.nodeValue;
-    //     // var data = [];
-    //     // $(this)
-    //     //     .find('a')
-    //     //     .each(function () {
-    //     //         var $this = $(this);
-    //     //         // Collect the data with the id and value
-    //     //         data.push({
-    //     //             id: $this.data('id'),
-    //     //             value: $this.val()
-    //     //         });
-    //     //     });
-    //     var caked = aid.split(',');
-    //     for (i = 0; i < caked.length; i++) {
-    //         console.log(caked[i])
-    //     } 
-    //         alert(aid);
-    // })
 
-</script>
 
 <!-- $(selector).on(event, childSelector, data, function, map) -->

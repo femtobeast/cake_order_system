@@ -32,7 +32,7 @@ const TWO_HOURS = 1000 * 60;
 const {
   PORT = process.env.PORT,
   SESS_NAME = 'sid',
-  SESS_SECRET = 'max',
+  SESS_SECRET = 'JHGF>,./?;;LJ8#$?,KL:>>>,,KJJJDHE',
   NODE_ENV = 'development',
   SESS_LIFETIME = TWO_HOURS
 } = process.env
