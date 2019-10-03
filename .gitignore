@@ -46,6 +46,10 @@ build/Release
 # Dependency directories
 node_modules/
 
+#img
+resources/img/
+resources/dashboard/img
+
 # Optional npm cache directory
 .npm
 
