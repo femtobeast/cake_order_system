@@ -9,7 +9,7 @@ exports.addUser = (req, res, next) => {
     usermodel.customer.create(
         {
             cust_email: req.body.email,
-            cust_password: req.body.password,
+            cust_password: req.myhash,
             cust_phone: req.body.phone,
             cust_dob: req.body.birthday,
             cust_address: req.body.address,

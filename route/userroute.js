@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
-const path = require('path')
-const ejs = require('ejs')
+const Auth = require('../controller/Authentication')
 const cakeModel = require('../model/Cake')
 const Cart = require('../model/Cart')
 
@@ -21,7 +20,7 @@ router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
 router.get('/csp', (req, res) => {
-    
+
     res.render('searchAllCake');
 })
 router.get('/item', (req, res) => {
@@ -42,7 +41,7 @@ router.get('/shopping-cart', async (req, res) => {
     // }
     // res.send({ hello: 'world' });
     // res.json(cart.generateArray());
-    await res.render('cartDetail', { products:cart.generateArray(),totalPrice:cart.totalPrice })
+    await res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.totalPrice })
     // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
 })
 router.post('/check', UserController.validate('validateuserdata'), UserController.validateuserdata);
@@ -67,20 +66,26 @@ router.get('/add-to-cart/:id', function (req, res, next) {
     });
 
 });
-//-----------POST FUNCTION ROUTE-------------
-//adding user data
-router.post('/registerAdd',UserController.addUser,function (req, res) {
+//-----------POST METHOD ROUTER-------------------
+//-- ADDING USER POST METHOD
+router.post('/registerAdd',
+    Auth.passwordHashGenerate,
+    UserController.checkUserEmail,
+    UserController.addUser, function (req, res) {
         res.status(201);
         res.send({ message: "Registeration Successful!!" });
         // res.render("register", { "message": "User successfully Registered" })
-    }
-);
+    });
 
-//searching cake data
-router.post('/cakeSearchQuery',UserController.searchCakeDetail,function(req,res,next){
+//-- SEARCHING CAKE DETAIL POST METHOD
+router.post('/cakeSearchQuery', UserController.searchCakeDetail, function (req, res, next) {
     res.status(201);
-    // res.send({ message: "Registeration Successful!!" });
 })
+
+//-- LOGIN POST METHOD
+router.post('/sendLogin', Auth.loginValidation, Auth.generateJwtToken, function (req, res, next) {
+
+});
 
 
 module.exports = router;

@@ -19,7 +19,7 @@ exports.passwordHashGenerate = async (req, res, next) => {
 
 //--LOGIN VALIDATION 
 exports.loginValidation = (req, res, next) => {
-    console.table(req.body)
+
    CustomerModel.customer.findOne({
         attributes: [
             'cust_password',
@@ -27,43 +27,44 @@ exports.loginValidation = (req, res, next) => {
         ],
         where: { cust_email: req.body.cust_email }
     }).then(function (result) {
-            if (result != null) {
-                bcrypt.compare(req.body.password, result.dataValues.cust_password, function (err, res) {
-                    if (res) {
-                        next();
-                    } else {
-                        next({ "status": 409, "message": "Password didnot match" });
-                    }
-                });
-            } else {
-                next({ status: 409, "message": "Not matched" });
-            }
+        console.log(result)
+            // if (result != null) {
+            //     bcrypt.compare(req.body.password, result.dataValues.cust_password, function (err, res) {
+            //         if (res) {
+            //             next();
+            //         } else {
+            //             next({ "status": 409, "message": "Password didnot match" });
+            //         }
+            //     });
+            // } else {
+            //     next({ status: 409, "message": "Not matched" });
+            // }
         })
         .catch(function (err) {
-            console.log(err);
+            // console.log(err);
             next({ status: 409, "message": " Email not found" });
         })
 }
 //-----------------------------------------------------
 //--GENERATE TOKEN 
 exports.generateJwtToken = (req, res, next) => {
-    jwt.sign({
-        username: req.body.cust_email,
-        accessLevel: 'superadmin'
-    }, 'this-is-secret-key', {
-        expiresIn: "2h"
-    },
-        function (err, token) {
-            if (err != null || undefined) {
-                console.log(err)
-                next({ "status": 401, "message": "Unauthorized token" })
-            } else {
-                req.genToken = token;
-                next();
-                // console.log(token)	
-            }
-        }
-    )
+    // jwt.sign({
+    //     username: req.body.cust_email,
+    //     accessLevel: 'superadmin'
+    // }, 'this-is-secret-key', {
+    //     expiresIn: "2h"
+    // },
+    //     function (err, token) {
+    //         if (err != null || undefined) {
+    //             console.log(err)
+    //             next({ "status": 401, "message": "Unauthorized token" })
+    //         } else {
+    //             req.genToken = token;
+    //             next();
+    //             // console.log(token)	
+    //         }
+    //     }
+    // )
     
 }
 // -----------------------------------------------------
