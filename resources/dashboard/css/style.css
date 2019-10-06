@@ -4560,3 +4560,18 @@ img {
     border: 1px solid #4dd0e1;
     box-shadow: 0 0 0 1px #4dd0e1;
 }
+
+/* // -----------custom csss */
+
+.msgdiv {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-color: #f66;
+    border-radius: 7px;
+}
+
+.msgdiv p {
+    font-size: 1em;
+    color: white;
+}
