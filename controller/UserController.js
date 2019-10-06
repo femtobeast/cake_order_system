@@ -4,6 +4,8 @@ var flavourmodel = require("../model/Flavour");
 const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
 const Sequelize = require('sequelize');
+const moment = require('moment');
+
 const Op = Sequelize.Op;
 
 //USER REGISTRATION FUNCTION ----------------
@@ -19,7 +21,7 @@ exports.addUser = (req, res, next) => {
             cust_email: req.body.email,
             cust_password: req.myhash,
             cust_phone: req.body.phone,
-            cust_dob: req.body.birthday,
+            cust_dob: moment.utc(req.body.birthday, 'YYYY-MM-DD'),
             cust_address: req.body.address,
             cust_gender: req.body.gender,
             cust_fname: req.body.firstname,
