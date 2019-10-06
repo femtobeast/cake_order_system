@@ -5,8 +5,8 @@ var mySeq = require("../config/databaseConfig");
 
 //--PASSWORD ENCRYPTION 
 var saltRounds = 15;
-exports.passwordHashGenerate = async (req, res, next) => {
-    console.log(req.body.password);
+exports.passwordHashGenerate =async (req, res, next) => {
+   
     await Bcrypt.hash(req.body.password, saltRounds)
         .then(function (hash) {
             req.myhash = hash;

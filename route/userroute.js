@@ -27,6 +27,10 @@ router.get('/item', (req, res) => {
 
     res.render('itemDetail');
 })
+router.get('/cart', (req, res) => {
+
+    res.render('cartView');
+})
 router.get('/shopping-cart', async (req, res) => {
     if (!req.session.cart) {
         return res.render('cartDetail', { product: null })
@@ -67,7 +71,7 @@ router.get('/add-to-cart/:id', function (req, res, next) {
 
 });
 //-----------POST METHOD ROUTER-------------------
-//-- ADDING USER POST METHOD
+//-- ADDING CUSTOMER POST METHOD
 router.post('/registerAdd',
     Auth.passwordHashGenerate,
     UserController.checkUserEmail,
@@ -83,7 +87,9 @@ router.post('/cakeSearchQuery', UserController.searchCakeDetail, function (req, 
 })
 
 //-- LOGIN POST METHOD
-router.post('/sendLogin', Auth.loginValidation, Auth.generateJwtToken, function (req, res, next) {
+router.post('/sendLogin',
+ Auth.loginValidation,
+  Auth.generateJwtToken, function (req, res, next) {
 
 });
 

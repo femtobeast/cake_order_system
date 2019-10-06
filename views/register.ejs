@@ -1,45 +1,61 @@
 <% include partials/header.ejs %>
 <link href="/register/main.css" rel="stylesheet" type="text/css" media="all">
 <link href="/css/cake.css" rel="stylesheet" type="text/css" media="all">
+
 <body style="background-color: #ea9191;">
-    
+
     <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
-        
+
         <div class="wrapper wrapper--w960">
             <div class="card card-2">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title" >
+                    <h2 class="title">
                         <span style="color: #ff6666;font-size: 1em;" class="fa fa-birthday-cake"></span>
                         Registration Info
                     </h2>
                     <form method="POST" action="/user/registerAdd">
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="First Name" name="firstname"
-                                id="firstname">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Last Name" name="lastname"
-                                id="lastname">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Address" name="address" id="address">
-                        </div>   
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Phone Number" name="phone"
-                                id="phone">
-                        </div>
-                        <div class="row row-space">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="First Name" name="firstname"
+                                        id="firstname">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Last Name" name="lastname"
+                                        id="lastname">
+                                </div>
+                            </div>
 
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Address" name="address"
+                                        id="address">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Phone Number" name="phone"
+                                        id="phone">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2 js-datepicker" type="text" placeholder="Birthdate"
                                         name="birthday" id="dob">
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
-
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Email" name="email"
+                                        id="email">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="gender" id="gender">
@@ -52,37 +68,44 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Email" name="email" id="email">
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2" type="password" placeholder="password" name="password"
                                         id="password">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2" type="password" placeholder="Confirm Password"
-                                        name="cpassword">
-                                </div>
+                                        name="cpassword" id="cpwd">
+                                </div><span id='message'></span>
                             </div>
+
+                            
+
+
+
+                          
                         </div>
+
+
+
+
+
 
                         <div class="p-t-30">
                             <button class="btn btn--radius btn--green" type="submit">Register</button>
                         </div>
+
+
                     </form>
                 </div>
                 <% if(typeof message !== 'undefined') { %>
                 <p><%= message %></p>
                 <% } %>
             </div>
-         
+
         </div>
     </div>
     <div class="bgcover">
@@ -103,4 +126,12 @@
 
     <!-- Main JS-->
     <script src="/register/js/global.js"></script>
+    <script>
+        $('#password, #cpwd').on('keyup', function () {
+            if ($('#password').val() == $('#cpwd').val()) {
+                $('#message').html('Matched').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+    </script>
     <% include partials/footer.ejs %>

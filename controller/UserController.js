@@ -5,35 +5,36 @@ const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+
+//USER REGISTRATION FUNCTION ----------------
 exports.addUser = (req, res, next) => {
-    usermodel.customer.create(
-        {
-            cust_email: req.body.email,
-            cust_password: req.myhash,
-            cust_phone: req.body.phone,
-            cust_dob: req.body.birthday,
-            cust_address: req.body.address,
-            cust_gender: req.body.gender,
-            cust_fname: req.body.firstname,
-            cust_lname: req.body.lastname
-        })
-        .then(function (result) {
-            next();
-        })
-        .catch(function (err) {
-            //to show error if any mistake is occured in addEmployee function.
-            //extraNote: whenever we write some thing in next by defaultly it
-            //will go to error.
-            next({ "status": 500, "message": "Something went wrong" });
-            console.log(err)
-        })
+    // usermodel.customer.create(
+    //     {
+    //         cust_email: req.body.email,
+    //         cust_password: req.myhash,
+    //         cust_phone: req.body.phone,
+    //         cust_dob: req.body.birthday,
+    //         cust_address: req.body.address,
+    //         cust_gender: req.body.gender,
+    //         cust_fname: req.body.firstname,
+    //         cust_lname: req.body.lastname
+    //     })
+    //     .then(function (result) {
+    //         next();
+    //     })
+    //     .catch(function (err) {
+    //         //to show error if any mistake is occured in addEmployee function.
+    //         //extraNote: whenever we write some thing in next by defaultly it
+    //         //will go to error.
+    //         next({ "status": 500, "message": "Something went wrong" });
+    //         console.log(err)
+    //     })
 
 }
 
-
-//checking username in database already exist or not
-exports.checkUserEmail = async (req, res, next) => {
-    await cm.customer.findOne({
+//CHECKING USER CUSTOMER EMAIL INTO DATABASE--------------
+exports.checkUserEmail =  (req, res, next) => {
+     usermodel.customer.findOne({
         where: { cust_email: req.body.email }
     })
         .then(function (result) {
@@ -49,8 +50,8 @@ exports.checkUserEmail = async (req, res, next) => {
 }
 
 
+//--GETTING CUSTOMER DETAIL----------------
 var info = {};
-//getting all user 
 exports.getCustomerDetali = (req, res, next) => {
     // request(url, function (error, response, body) {
     //     const info = JSON.parse(body);
@@ -76,9 +77,7 @@ exports.getCustomerDetali = (req, res, next) => {
             next({ "status": 500, "message": "no user detail saved" });
         });
 };
-
-
-//cake data reterival
+//-- RETERIVE ALL CAKE DETAIL----------------
 var cake_arry = [];
 exports.getAllCakeDetail = (req, res, next) => {
     cakemodel.cake.findAll()
@@ -96,6 +95,27 @@ exports.getAllCakeDetail = (req, res, next) => {
             console.log(err)
         });
 }
+
+//--SEARCH CAKE DETAIL FUNCTION FROM DATABASE
+exports.searchCakeDetail = async (req, res, next) => {
+    mySeq.sequelize.query("SELECT \
+                    c.cake_id,c.cake_name, c.cake_price, c.pound, c.version,c.cake_image, f.flavour_name\
+                    FROM tblcake c \
+                    INNER JOIN  tblflavour f\
+                    on c.flavour_id = f.flavour_id \
+                    WHERE c.cake_name \
+                    LIKE :cakeN \
+                    ORDER BY c.pound DESC ",
+        { replacements: { cakeN: req.body.cn + '%' }, type: mySeq.sequelize.QueryTypes.SELECT }
+    ).then(cakeresult => {
+
+        // res.json(cakeresult)
+        res.render('searchAllCake', { cakeresult })
+    })
+}
+
+
+//VALIDATION OF CUSTOMER DETAIL FUNCTION
 exports.validate = (method) => {
     switch (method) {
         case 'validateuserdata': {
@@ -114,6 +134,7 @@ exports.validate = (method) => {
         }
     }
 }
+//VALIDATION OF CUSTOMER DETAIL FUNCTION
 exports.validateuserdata = async (req, res, next) => {
     try {
 
@@ -136,38 +157,4 @@ exports.validateuserdata = async (req, res, next) => {
     }
 }
 
-///search function for cake detail
 
-exports.searchCakeDetail = async (req, res, next) => {
-    mySeq.sequelize.query("SELECT \
-            c.cake_id,c.cake_name, c.cake_price, c.pound, c.version,c.cake_image, f.flavour_name\
-            FROM tblcake c \
-            INNER JOIN  tblflavour f\
-            on c.flavour_id = f.flavour_id \
-            WHERE c.cake_name \
-            LIKE :cakeN \
-            ORDER BY c.pound DESC ",
-        { replacements: { cakeN: req.body.cn + '%' }, type: mySeq.sequelize.QueryTypes.SELECT }
-    ).then(cakeresult => {
- 
-        // res.json(cakeresult)
-        res.render('searchAllCake',{cakeresult})
-    })
-}
-
-
-// flavourmodel.flavour.findAll({
-//     attributes: ['flavour_id']
-// }).then(function (flavourResult) {
-//     cakemodel.cake.findAll({
-//         where: {
-//             cake_name:
-//             {
-//                 [Op.like]: req.body.cn + '%'
-//             }
-//         }
-//     }).then(function (cakeResult) {
-//         console.table(flavourResult);
-//     })
-
-// })

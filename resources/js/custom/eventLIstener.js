@@ -16,6 +16,7 @@ define(['jquery', 'api_url'], function ($, main) {
         tempCakeId = caked[5];//descriptions
 
         $("#vcakeimg").attr("src", path + tempCakeImage);
+        $("#lens_img").attr("data-lens-image", path + tempCakeImage);
         $("#vcakename").text(tempCakeName);
         $("#vcakeprice").text(tempCakePrice);
         $("#vcakedesc").text(tempCakeDesc);
