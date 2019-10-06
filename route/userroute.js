@@ -3,8 +3,7 @@ const router = express.Router();
 const UserController = require("../controller/UserController");
 const Auth = require('../controller/Authentication')
 const cakeModel = require('../model/Cake')
-const Cart = require('../model/Cart')
-
+const Cart = require('../model/Cart');
 
 //---------GET FUNCTION PAGES ROUTE
 router.get('/login', function (req, res) {
@@ -28,7 +27,6 @@ router.get('/item', (req, res) => {
     res.render('itemDetail');
 })
 router.get('/cart', (req, res) => {
-
     res.render('cartView');
 })
 router.get('/shopping-cart', async (req, res) => {
@@ -48,7 +46,7 @@ router.get('/shopping-cart', async (req, res) => {
     await res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.totalPrice })
     // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
 })
-router.post('/check', UserController.validate('validateuserdata'), UserController.validateuserdata);
+router.post('/check', UserController.validateCustomerDetail('addUser'), UserController.validateuserdata);
 router.get('/gcustomer', UserController.getCustomerDetali);
 router.get('/add-to-cart/:id', function (req, res, next) {
     var cakeId = req.params.id;
@@ -73,13 +71,10 @@ router.get('/add-to-cart/:id', function (req, res, next) {
 //-----------POST METHOD ROUTER-------------------
 //-- ADDING CUSTOMER POST METHOD
 router.post('/registerAdd',
-    Auth.passwordHashGenerate,
-    UserController.checkUserEmail,
-    UserController.addUser, function (req, res) {
-        res.status(201);
-        res.send({ message: "Registeration Successful!!" });
-        // res.render("register", { "message": "User successfully Registered" })
-    });
+UserController.validateCustomerDetail('addUser'),
+Auth.passwordHashGenerate,
+UserController.checkUserEmail,
+    UserController.addUser);
 
 //-- SEARCHING CAKE DETAIL POST METHOD
 router.post('/cakeSearchQuery', UserController.searchCakeDetail, function (req, res, next) {

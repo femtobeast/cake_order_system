@@ -8,42 +8,43 @@ const Op = Sequelize.Op;
 
 //USER REGISTRATION FUNCTION ----------------
 exports.addUser = (req, res, next) => {
-    // usermodel.customer.create(
-    //     {
-    //         cust_email: req.body.email,
-    //         cust_password: req.myhash,
-    //         cust_phone: req.body.phone,
-    //         cust_dob: req.body.birthday,
-    //         cust_address: req.body.address,
-    //         cust_gender: req.body.gender,
-    //         cust_fname: req.body.firstname,
-    //         cust_lname: req.body.lastname
-    //     })
-    //     .then(function (result) {
-    //         next();
-    //     })
-    //     .catch(function (err) {
-    //         //to show error if any mistake is occured in addEmployee function.
-    //         //extraNote: whenever we write some thing in next by defaultly it
-    //         //will go to error.
-    //         next({ "status": 500, "message": "Something went wrong" });
-    //         console.log(err)
-    //     })
+    try {
+    //     // Finds the validation errors in this request and wraps them in an object with handy functions
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        res.json(req.body);
+        usermodel.customer.create({
+            cust_email: req.body.email,
+            cust_password: req.myhash,
+            cust_phone: req.body.phone,
+            cust_dob: req.body.birthday,
+            cust_address: req.body.address,
+            cust_gender: req.body.gender,
+            cust_fname: req.body.firstname,
+            cust_lname: req.body.lastname
+        }).then(function (result) {
+            next();
+        }).catch(function (err) {
+            next({ "status": 500, "message": "Something went wrong catch" });
+            console.log(err)
+        })
+    } catch (err) {
+        return next({ "status": 500, "message": "Something went wrong try catch" });
+    }
 
 }
 
 //CHECKING USER CUSTOMER EMAIL INTO DATABASE--------------
-exports.checkUserEmail =  (req, res, next) => {
-     usermodel.customer.findOne({
+exports.checkUserEmail = (req, res, next) => {
+    usermodel.customer.findOne({
         where: { cust_email: req.body.email }
-    })
-        .then(function (result) {
-            console.log(result.dataValues);
-            if (result.dataValues != "") {
-                next({ "status": 409, "message": 'email already exists' })
+    }).then(function (result) {
+          if (result.dataValues != "") {
+                next({ "status": 409, "message": result.dataValues.cust_email+' | email already exists' })
             }
-        })
-        .catch(function (err) {
+        }).catch(function (err) {
             //error handling
             next();
         });
@@ -116,20 +117,25 @@ exports.searchCakeDetail = async (req, res, next) => {
 
 
 //VALIDATION OF CUSTOMER DETAIL FUNCTION
-exports.validate = (method) => {
+exports.validateCustomerDetail = (method) => {
     switch (method) {
-        case 'validateuserdata': {
+        case 'addUser': {
             return [
-                check('username').exists().isLength({ min: 5 }).trim().escape().withMessage('Name must have more than 5 characters'),
-                // expect sunday and saturday
-                check('weekday', 'Choose a weekday').optional().not().isIn(['Sunday', 'Saturday']),
                 // username must be an email
-                check('email', 'Your email is not valid').not().isEmpty().isEmail().normalizeEmail(),
-                // password must be at least 5 chars long
-                check('password', 'your password must be at least 8 characters long').isLength({ min: 5 }),
-                //confirm password
+                check('email', 'Your email is not valid').not().isEmpty().isEmail().normalizeEmail().withMessage('email incorrect'),
+                check('password', 'your password must be at least 5 characters long').isLength({ min: 5 }).not().isIn(['12345', 'password', '54321']).withMessage('Do not use a common word as the password'),
                 check('confirmPassword', 'Passwords do not match').custom((value, { req }) => (value === req.body.password)),
-                check('age', 'not avalid age').isNumeric()
+                check('phone', 'not a valid phone number').isNumeric(),
+                check('birthday', 'date cannot be empty').not().isEmpty(),
+                check('address', 'address cannot be empty').not().isEmpty(),
+                check('gender','gender has invalid value').isIn(['Male', 'Female', 'Other']),
+                check('firstname', 'gender cannot be empty').not().isEmpty(),
+                check('lastname', 'gender cannot be empty').not().isEmpty(),
+
+                // check('username').exists().isLength({ min: 5 }).trim().escape().withMessage('Name must have more than 5 characters'),
+                // expect sunday and saturday
+                // check('weekday', 'Choose a weekday').optional().not().isIn(['Sunday', 'Saturday']),
+                // check('age', 'not avalid age').isNumeric()
             ]
         }
     }
@@ -137,7 +143,6 @@ exports.validate = (method) => {
 //VALIDATION OF CUSTOMER DETAIL FUNCTION
 exports.validateuserdata = async (req, res, next) => {
     try {
-
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
