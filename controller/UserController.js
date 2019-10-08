@@ -62,7 +62,6 @@ exports.checkUserEmail = (req, res, next) => {
 
 }
 
-
 //--GETTING CUSTOMER DETAIL----------------
 var info = {};
 exports.getCustomerDetali = (req, res, next) => {
@@ -75,7 +74,7 @@ exports.getCustomerDetali = (req, res, next) => {
         .then(function (result) {
             // console.log(result[0].cust_id);
             if (result.dataValues != "") {
-                res.render('user_dashboard', {
+                res.render('/', {
                     info: result
                 });
                 // var carray = JSON.parse(result);
@@ -105,7 +104,7 @@ exports.getAllCakeDetail = (req, res, next) => {
             // res.json(result);
         })
         .catch(function (err) {
-            console.log(err)
+            next({ "status": 500, "message": err });
         });
 }
 
@@ -173,5 +172,4 @@ exports.validateuserdata = async (req, res, next) => {
         return next(err)
     }
 }
-
 

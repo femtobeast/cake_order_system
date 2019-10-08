@@ -42,7 +42,7 @@
     <!-- Vendor CSS-->
     <link href="/register/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="/register/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-  
+
 
 
 </head>
@@ -79,11 +79,20 @@
                             <!-- / header top left -->
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
-                                    <li><a href="account.html">My Account</a></li>
-                                    <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
-                                    <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
-                                    <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="http://localhost:1234/user/login">Login</a></li>
+                                    <% if(typeof session.customerEmail !== 'undefined') { %>
+                                        <li><a href="account.html">My Account</a></li>
+                                        <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
+                                        <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
+                                        <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                                        <li class="hidden-xs"><a href="/user/logout">Logout</a></li>
+                                        <li><a href="/user/dashboard"><%- session.customerEmail %></a></li>
+                                    <!-- <form method="POST" action="/logout">
+                                        <button>Logout</button>
+                                    </form> -->
+                                    <% }else{ %>
+                                    <li class="hidden-xs"><a href="/register">Register Test</a></li>
+                                    <li><a href="/user/login">Login</a></li>
+                                    <% } %>
                                 </ul>
                             </div>
                         </div>

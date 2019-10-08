@@ -29,9 +29,8 @@ define(['jquery', 'api_url'], function ($, main) {
             dataType: "json",
             data: JSON.stringify(customerData),
             success: function (result, status) {
-                console.log(result.message)
-                $('#errors').html(result.message);
-                //    alert(result + " success register")
+                $('#errors').html(result.message+": Please refresh or login for checkout.");
+
 
             },
             error: function (err, status) {
