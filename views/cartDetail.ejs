@@ -1,51 +1,99 @@
 <% include partials/header.ejs %>
 <% include partials/menu.ejs %>
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="/dashboard/img/cover/cover2.png" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>Cart Page</h2>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Cart</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / catg header banner section -->
 
-<% if(locals.products) { %>
-<div class="row">
-    <div  class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <% products.forEach(function(data){ %>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <span class="badge"><%= data.qty %></span>
-                <Strong class="title"><%= data.item.cake_name %></strong>
-                <span class="label label-success">$<%= data.item.cake_price %></span>
-                <div class="btn-group">
-                    <button class="btn btn-primary btn-xs dropdown-toogle" type="button">Action<span
-                            class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">-1</a></li>
-                        <li><a href="#">-All</a></li>
-                    </ul>
-
+<!-- Cart view section -->
+<section id="cart-view">
+    <div class="container">
+        <% if(locals.products) { %>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+                        <form action="">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% products.forEach(function(data){ %>
+                                        <tr>
+                                            <td><a class="remove" href="#">
+                                                    <fa class="fa fa-close"></fa>
+                                                </a></td>
+                                            <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="#"><%= data.item.cake_name %></a></td>
+                                            <td><span>Rs: <%= data.item.cake_price %></span> * <span>
+                                                    <%= data.qty %></span></td>
+                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
+                                            <td>Rs: <%= data.totalPrice %></td>
+                                        </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <!-- Cart Total view -->
+                        <div class="cart-view-total">
+                            <h4>Cart Totals</h4>
+                            <table class="aa-totals-table">
+                                <tbody>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>Rs: <%= totalPrice %></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td>Rs: <%= totalPrice %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="#" class="aa-cart-view-btn">Proced to Checkout</a>
+                        </div>
+                        <% }else{ %>
+                        <div class="cart-view-area">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Cart</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><h4>Your cart is empty. You have no any cake to order!!!</h4></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
-            </li>
-        </ul>
-        <% }) %>
-
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-       Total <strong style="color: black"><%= totalPrice %></strong>
-
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <button class="btn btn-success">Checkout</button>
-    </div>
-</div>
-<% }else{ %>
-<div class="row">
-    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-        <h2>No cake data</h2>
-
-    </div>
-</div> 
-
-<% } %>
+</section>
+<!-- / Cart view section -->
 <% include partials/footer.ejs %>
