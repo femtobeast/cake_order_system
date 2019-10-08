@@ -3,7 +3,7 @@ const router = express.Router();
 const UserController = require("../controller/UserController");
 const Auth = require('../controller/Authentication')
 const cakeModel = require('../model/Cake')
-const Cart = require('../model/Cart');
+const CartController = require('../controller/CartController');
 
 //---------GET FUNCTION PAGES ROUTE
 router.get('/login',Auth.redirectToHome, function (req, res) {
@@ -29,37 +29,14 @@ router.get('/item', (req, res) => {
 router.get('/cart', (req, res) => {
     res.render('cartView');
 })
-router.get('/shopping-cart', async (req, res) => {
- 
-    if (!req.cookies.carttemp) {
-        return res.render('cartDetail', { product: null })
-    }
-    res.status(201);
-    var cart = new Cart(req.cookies.carttemp);  
-    await res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.totalPrice })
-    // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
+router.get('/shopping-cart', (req, res) => {
 })
+router.get('/add-to-cart/:id', function (req, res, next) {
+  
+});
 router.post('/check', UserController.checkUserEmail);
 router.get('/gcustomer', UserController.getCustomerDetali);
-router.get('/add-to-cart/:id', function (req, res, next) {
-    var cakeId = req.params.id;
-    // var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
-    var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
-    cakeModel.cake.findOne({
-        where: { cake_id: cakeId }
-    }).then(function (result) {
-        cart.add(result.dataValues, result.dataValues.cake_id);
-        res.cookie("carttemp", cart);
-        // req.session.cart = cart;
-        // req.session.totalCart = cart.totalQty;
-        res.redirect('/user/dashboard');
 
-    }).catch(function (err) {
-        //error handling
-        next();
-    });
-
-});
 //-----------POST METHOD ROUTER-------------------
 //-- ADDING CUSTOMER POST METHOD
 router.post('/registerAdd',
@@ -91,22 +68,4 @@ router.get('/logout', Auth.redirectToLogin, (req, res) => {
 
     })
 })
-
-//JSON object to be added to cookie 
-let student = {
-    name: "Rishav",
-    Age: "18"
-}
-
-//Route for adding cookie 
-router.get('/setuser', (req, res) => {
-    res.cookie("student", student);
-    res.send('user data added to cookie');
-});
-//Iterate users data from cookie 
-router.get('/getuser', (req, res) => {
-    //shows all the cookies 
-    res.send(req.cookies.student);
-});
-
 module.exports = router;

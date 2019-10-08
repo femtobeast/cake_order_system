@@ -58,6 +58,10 @@ app.use((req, res, next) => {
   }
   next();
 })
+app.use(function (req, res, next) {
+  res.locals.carttemp = req.cookies.carttemp;
+  next();
+});
 //----route defination
 app.get("/", (req, res) => {
   const { userId } = req.session;
