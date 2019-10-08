@@ -7,7 +7,9 @@ const Cart = require('../model/Cart');
 
 //---------GET FUNCTION PAGES ROUTE
 router.get('/login', function (req, res) {
-    res.render('userlogin');
+   
+        res.render('userLogin');
+
 });
 router.get('/register', function (req, res) {
     res.render('register');
@@ -46,7 +48,7 @@ router.get('/shopping-cart', async (req, res) => {
     await res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.totalPrice })
     // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
 })
-router.post('/check', UserController.validateCustomerDetail('addUser'), UserController.validateuserdata);
+router.post('/check', UserController.checkUserEmail);
 router.get('/gcustomer', UserController.getCustomerDetali);
 router.get('/add-to-cart/:id', function (req, res, next) {
     var cakeId = req.params.id;
@@ -74,7 +76,7 @@ router.post('/registerAdd',
 UserController.validateCustomerDetail('addUser'),
 Auth.passwordHashGenerate,
 UserController.checkUserEmail,
-    UserController.addUser);
+UserController.addUser);
 
 //-- SEARCHING CAKE DETAIL POST METHOD
 router.post('/cakeSearchQuery', UserController.searchCakeDetail, function (req, res, next) {

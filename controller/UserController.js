@@ -11,27 +11,36 @@ const Op = Sequelize.Op;
 //USER REGISTRATION FUNCTION ----------------
 exports.addUser = (req, res, next) => {
     try {
-    //     // Finds the validation errors in this request and wraps them in an object with handy functions
+        // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
+            // res.json( {error:errors.array()[0].msg});      
+            // return next({ "status": 409, "message": res.json(errors.array()) }) 
+            //  res.redirect('/user/register')
+            // res.json({ errors: errors.array() });
+            return res.status(422).jsonp(errors.array());
+            //  next({ "status": 422, "message": errors.array()})
+   
+         
+        } else {
+            usermodel.customer.create({
+                cust_email: req.body.email,
+                cust_password: req.myhash,
+                cust_phone: req.body.phone,
+                cust_dob: moment.utc(req.body.birthday, 'YYYY-MM-DD'),
+                cust_address: req.body.address,
+                cust_gender: req.body.gender,
+                cust_fname: req.body.firstname,
+                cust_lname: req.body.lastname
+            }).then(function (result) {
+                res.send({ message: "Registration Successfull!!!" });                
+            }).catch(function (err) {
+                next({ "status": 500, "message": err });
+                console.log(err)
+            })
         }
-        res.json(req.body);
-        usermodel.customer.create({
-            cust_email: req.body.email,
-            cust_password: req.myhash,
-            cust_phone: req.body.phone,
-            cust_dob: moment.utc(req.body.birthday, 'YYYY-MM-DD'),
-            cust_address: req.body.address,
-            cust_gender: req.body.gender,
-            cust_fname: req.body.firstname,
-            cust_lname: req.body.lastname
-        }).then(function (result) {
-            next();
-        }).catch(function (err) {
-            next({ "status": 500, "message": "Something went wrong catch" });
-            console.log(err)
-        })
+
+
     } catch (err) {
         return next({ "status": 500, "message": "Something went wrong try catch" });
     }
@@ -40,16 +49,17 @@ exports.addUser = (req, res, next) => {
 
 //CHECKING USER CUSTOMER EMAIL INTO DATABASE--------------
 exports.checkUserEmail = (req, res, next) => {
+    // console.log(req.body)
     usermodel.customer.findOne({
         where: { cust_email: req.body.email }
     }).then(function (result) {
-          if (result.dataValues != "") {
-                next({ "status": 409, "message": result.dataValues.cust_email+' | email already exists' })
-            }
-        }).catch(function (err) {
-            //error handling
-            next();
-        });
+        if (result.dataValues != "") {
+            next({ "status": 409, "message": result.dataValues.cust_email + ' | email already exists' })
+        }
+    }).catch(function(err){
+        next();
+    })
+
 }
 
 
@@ -126,11 +136,11 @@ exports.validateCustomerDetail = (method) => {
                 // username must be an email
                 check('email', 'Your email is not valid').not().isEmpty().isEmail().normalizeEmail().withMessage('email incorrect'),
                 check('password', 'your password must be at least 5 characters long').isLength({ min: 5 }).not().isIn(['12345', 'password', '54321']).withMessage('Do not use a common word as the password'),
-                check('confirmPassword', 'Passwords do not match').custom((value, { req }) => (value === req.body.password)),
+                check('cpassword', 'Passwords do not match').custom((value, { req }) => (value === req.body.password)),
                 check('phone', 'not a valid phone number').isNumeric(),
                 check('birthday', 'date cannot be empty').not().isEmpty(),
                 check('address', 'address cannot be empty').not().isEmpty(),
-                check('gender','gender has invalid value').isIn(['Male', 'Female', 'Other']),
+                check('gender', 'gender has invalid value').isIn(['Male', 'Female', 'Other']),
                 check('firstname', 'gender cannot be empty').not().isEmpty(),
                 check('lastname', 'gender cannot be empty').not().isEmpty(),
 

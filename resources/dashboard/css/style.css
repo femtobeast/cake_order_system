@@ -4575,3 +4575,17 @@ img {
     font-size: 1em;
     color: white;
 }
+
+.error-group {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-color: #f66;
+    border-radius: 7px;
+    /* padding: 5px; */
+}
+
+.error-group p {
+    font-size: 1em;
+    color: white;
+}

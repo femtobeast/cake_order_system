@@ -4,7 +4,9 @@ requirejs.config({
         bootstrap: 'bootstrap.min',
         jquery: 'jquery-3.3.0.min',
         api_url: 'apiurl',
-        OAuth: 'googleAuth'
-    }
-
+        OAuth: 'googleAuth',
+        backbone:'backbone-min'
+    },
+    waitSeconds: 200
 });
+

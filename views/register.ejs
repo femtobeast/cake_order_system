@@ -14,7 +14,7 @@
                         <span style="color: #ff6666;font-size: 1em;" class="fa fa-birthday-cake"></span>
                         Registration Info
                     </h2>
-                    <form method="POST" action="/user/registerAdd">
+                    <form method="POST" id="registerForm">
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
@@ -83,16 +83,14 @@
                             </div>
                         </div>
 
-
-                        <div class="p-t-30">
-                            <button class="btn btn--radius btn--green" type="submit">Register</button>
-                        </div>
-
                     </form>
-                    <div class="msgdiv"> 
-                        <% if(typeof message !== 'undefined') { %>
-                        <p><%= message %></p>
-                        <% } %>
+                    <div class="p-t-30">
+                        <button class="btn btn--radius btn--green" id="btnRegister" type="submit">Register</button>
+                    </div>
+
+                    
+                    <div class="error-group">    <p id="msg"></p>
+                        <ul id="errors"></ul>
                     </div>
                 </div>
 
@@ -108,6 +106,7 @@
         <div class="ballon"></div>
         <div class="ballon"></div>
     </div>
+
     <!-- Jquery JS-->
 
     <script src="/register/vendor/jquery/jquery.min.js"></script>

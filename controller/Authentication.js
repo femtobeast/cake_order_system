@@ -19,7 +19,7 @@ exports.passwordHashGenerate =async (req, res, next) => {
 
 //--LOGIN VALIDATION 
 exports.loginValidation = (req, res, next) => {
-
+    
    CustomerModel.customer.findOne({
         attributes: [
             'cust_password',

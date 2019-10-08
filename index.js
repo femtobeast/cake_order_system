@@ -4,7 +4,8 @@ const bodyparser = require("body-parser");//packages body-parser
 const app = express(); //express method 
 const path = require("path");
 const cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
+const expressSession = require('express-session');
+const flash = require('express-flash');
 //--------------------------------------
 const userRoute = require('./route/userroute');//userroute for url path
 const adminRoute = require('./route/adminroute');//adminroute url
@@ -22,9 +23,7 @@ app.set("views", __dirname + "/views");//set view folder
 app.set("view engine", "ejs");//set the view engine as ejs
 app.use(bodyparser.urlencoded({ extended: true })); //multipart data for image video giving true
 app.use(bodyparser.json());
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "resources")));//hosting public folder 
-// app.use(check());
 
 // -- SESSION CODE BELOW START
 const TWO_HOURS = 1000 * 60;
@@ -42,6 +41,7 @@ const users = [
   { id: 2, name: 'Maskey', email: 'maskey@gmail.com', password: 'secret' },
   { id: 3, name: 'Apple', email: 'apple@gmail.com', password: 'secret' }
 ]
+app.use(cookieParser());
 app.use(expressSession({
   // genid: function (req) {
   //   return i++ // use UUIDs for session IDs
@@ -52,6 +52,7 @@ app.use(expressSession({
   saveUninitialized: false,
   cookie: { maxAge: SESS_LIFETIME, sameSite: true, secure: IN_PROD }
 }))
+app.use(flash());
 //JSON object to be added to cookie 
 let student = {
   name: "Rishav",
@@ -87,14 +88,19 @@ const redirectToHome = (req, res, next) => {
 
 app.use((req, res, next) => {
   res.locals.session = req.session;
-  const { userId } = res.locals.session ;
+  const { userId } = res.locals.session;
   if (userId) {
     res.locals.user = users.find(
       user => user.id === userId
-      )
-    }
+    )
+  }
   next();
 })
+
+// app.use(function (err, req, res, next) {
+//   return res.status(404).send({ status: 500, message: err.message, type: req.url });
+// });
+
 
 //----route defination
 app.get("/", (req, res) => {
@@ -122,15 +128,15 @@ app.get("/", (req, res) => {
 
 });
 
-app.get('/home',(req, res) => {
-  const {user} = res.locals;
+app.get('/home', (req, res) => {
+  const { user } = res.locals;
   // const user = users.find(user => user.id === req.session.userId)
-console.log(req.session)
-if(req.sessionId){
-console.log('yes')
-}else{
-  console.log('no')
-}
+  console.log(req.session)
+  if (req.sessionId) {
+    console.log('yes')
+  } else {
+    console.log('no')
+  }
   res.send(`
   <h1>Home</h1>
   <a href="/"> Main </a>
@@ -145,7 +151,7 @@ console.log('yes')
 })
 app.get('/profile', redirectToLogin, (req, res) => {
   // const user = users.find(user => user.id === req.session.userId)
-  const {user} = res.locals;
+  const { user } = res.locals;
   res.json(user)
 
 })
@@ -191,7 +197,7 @@ app.post('/login', redirectToHome, (req, res) => {
 })
 app.post('/register', redirectToHome, (req, res) => {
   const { name, email, password } = req.body;
- 
+
   if (name && email && password) {
     const exists = users.some(
       user => user.email === email
@@ -236,13 +242,12 @@ app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 
 
-
 //---error defining 
 app.use((err, req, res, next) => {
   res.locals.error = err;
   if (err.status >= 100 && err.status < 600) res.status(err.status);
   else res.status(500);
-  res.send({ "message": err.message });
+  res.send({ "status": err.status, "message": err.message });
 });
 //--------------------------
 

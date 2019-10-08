@@ -138,10 +138,12 @@
 <!-- Custom js -->
 <script src="/dashboard/js/custom.js"></script>
 
-<script data-main="/js/custom/config.js" src="/js/library/requirejs.js"></script>
+<script src="/js/library/requirejs.js"></script>
+<script src="/js/custom/config.js"></script> <!--//data-main='/js/custom/config.js' -->
 <script>
     require(['/js/custom/config.js'], function () {
         require(['/js/custom/eventListener.js']);
+         require(['/js/custom/datatransaction.js']);
     })
 </script>
 
