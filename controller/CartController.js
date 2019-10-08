@@ -1,26 +1,31 @@
 
 const Cart = require('../model/Cart');
+const cakeModel = require('../model/Cake');
 
-exports.addToCart = (req,res,next)=>{
+exports.addToCart = (req, res, next) => {
     var cakeId = req.params.id;
-    // var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
     var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
-    cakeModel.cake.findOne({
-        where: { cake_id: cakeId }
-    }).then(function (result) {
-        cart.add(result.dataValues, result.dataValues.cake_id);
-        res.cookie("carttemp", cart);
-        // req.session.cart = cart;
-        // req.session.totalCart = cart.totalQty;
-        res.redirect('/user/dashboard');
+    if (cakeId) {
+        // var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
 
-    }).catch(function (err) {
-        //error handling
-        next();
-    });
+        cakeModel.cake.findOne({
+            where: { cake_id: cakeId }
+        }).then(function (result) {
+            cart.add(result.dataValues, result.dataValues.cake_id);
+            res.cookie("carttemp", cart);
+            // req.session.cart = cart;
+            // req.session.totalCart = req.cookies.carttemp.totalQty;
+            res.redirect('/user/dashboard');
+
+        }).catch(function (err) {
+            //error handling
+            next();
+        });
+    }
+
 
 }
-exports.shoppingCart = (req,res,next)=>{
+exports.shoppingCart = async (req, res, next) => {
     console.log(res.locals.carttemp)
     if (!req.cookies.carttemp) {
         return res.render('cartDetail', { product: null })

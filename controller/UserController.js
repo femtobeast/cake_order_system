@@ -99,7 +99,7 @@ exports.getAllCakeDetail = (req, res, next) => {
             cake_arry.push(result);
             // res.json(cake_arry[0])
             // flavour_arry = JSON.stringify(result);
-            res.render("user_dashboard", { cdata: cake_arry[0] });
+            res.render("user_dashboard", { cdata: cake_arry[0] ,status:false});
             // console.log(JSON.stringify(result))
             // res.json(result);
         })

@@ -111,10 +111,10 @@
                             <!-- logo  -->
                             <div class="aa-logo">
                                 <!-- Text based logo -->
-                                <a href="index.html">
+                                <a href="/user/dashboard">
 
                                     <span class="fa fa-birthday-cake"></span>
-                                    <p>Yummy<strong>Bakery</strong> <span>Your Shopping Partner</span></p>
+                                    <p>Yummy<strong>CAKE</strong> <span>Your Cake Partner</span></p>
                                 </a>
                                 <!-- img based logo -->
                                 <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
@@ -122,11 +122,14 @@
                             <!-- / logo  -->
                             <!-- cart box -->
                             <div class="aa-cartbox">
+                               <% if(locals.carttemp){ %>
                                 <a class="aa-cart-link" href="/user/shopping-cart">
                                     <span class="fa fa-shopping-basket"></span>
                                     <span class="aa-cart-title">SHOPPING CART</span>
-                                    <span class="aa-cart-notify"><%- locals.carttemp.totalQty %></span>
-                                </a>
+                                    <span class="aa-cart-notify">
+                                        <%= locals.carttemp.totalQty %></span>
+                                    </a>
+                                <% }%>
                                 <div class="aa-cartbox-summary">
                                     <ul>
                                         <li>

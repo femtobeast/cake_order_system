@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
 const Auth = require('../controller/Authentication')
-const cakeModel = require('../model/Cake')
 const CartController = require('../controller/CartController');
 
 //---------GET FUNCTION PAGES ROUTE
@@ -29,11 +28,8 @@ router.get('/item', (req, res) => {
 router.get('/cart', (req, res) => {
     res.render('cartView');
 })
-router.get('/shopping-cart', (req, res) => {
-})
-router.get('/add-to-cart/:id', function (req, res, next) {
-  
-});
+router.get('/shopping-cart',CartController.shoppingCart)
+router.get('/add-to-cart/:id',CartController.addToCart)
 router.post('/check', UserController.checkUserEmail);
 router.get('/gcustomer', UserController.getCustomerDetali);
 

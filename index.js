@@ -51,6 +51,7 @@ app.use(expressSession({
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.session = req.session;
+  res.locals.carttemp = req.cookies.carttemp;
   const { customerId,customerEmail,token } = res.locals.session;
   if (token) {
     res.locals.custid = customerId;
