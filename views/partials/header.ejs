@@ -80,12 +80,12 @@
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
                                     <% if(typeof session.customerEmail !== 'undefined') { %>
-                                        <li><a href="account.html">My Account</a></li>
-                                        <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
-                                        <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
-                                        <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-                                        <li class="hidden-xs"><a href="/user/logout">Logout</a></li>
-                                        <li><a href="/user/dashboard"><%- session.customerEmail %></a></li>
+                                    <li><a href="/user/dashboard" style="color: green;"><%- session.customerEmail %></a></li>
+                                    <li><a href="account.html">My Account</a></li>
+                                    <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
+                                    <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
+                                    <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                                    <li class="hidden-xs"><a href="/user/logout">Logout</a></li>
                                     <!-- <form method="POST" action="/logout">
                                         <button>Logout</button>
                                     </form> -->

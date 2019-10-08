@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "resources")));//hosting public fold
 
 // -- SESSION CODE BELOW START
 // const TWO_HOURS = 1000 * 60;
-const TWO_HOURS = 1000*60*60*24; 
+const TWO_HOURS = 1000 * 60 * 60 * 24;
 const {
   PORT = process.env.PORT,
   SESS_NAME = 'sid',
@@ -49,27 +49,15 @@ app.use(expressSession({
   cookie: { maxAge: SESS_LIFETIME, sameSite: true, secure: IN_PROD }
 }))
 app.use(flash());
-//JSON object to be added to cookie 
-let student = {
-  name: "Rishav",
-  Age: "18"
-}
-
-//Route for adding cookie 
-app.get('/setuser', (req, res) => {
-  res.cookie("student", users);
-  res.send('user data added to cookie');
-});
-//Iterate users data from cookie 
-app.get('/getuser', (req, res) => {
-  //shows all the cookies 
-  res.send(req.cookies.student);
-});
-// app.use(function (err, req, res, next) {
-//   return res.status(404).send({ status: 500, message: err.message, type: req.url });
-// });
-
-
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  const { customerId,customerEmail,token } = res.locals.session;
+  if (token) {
+    res.locals.custid = customerId;
+    res.locals.custemail = customerEmail;
+  }
+  next();
+})
 //----route defination
 app.get("/", (req, res) => {
   const { userId } = req.session;
@@ -82,10 +70,11 @@ app.get("/", (req, res) => {
   }];
   res.render('welcome', { wt, redirect, userId });
 });
-//---------SESSION CODE END 
 
+//---------SESSION CODE END 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
+
 
 //---error defining 
 app.use((err, req, res, next) => {
@@ -94,6 +83,7 @@ app.use((err, req, res, next) => {
   else res.status(500);
   return res.send({ "status": err.status, "message": err.message });
 });
+//--------------------------
 
 //route for upload folders
 //Serves all the request which includes /images in the url from Images folder
@@ -105,8 +95,6 @@ app.get("/upload", function (req, res, next) {
   res.send(publicDir)
 })
 //end of route for upload folders
-
-
 
 //ignore favicon problem
 function ignoreFavicon(req, res, next) {

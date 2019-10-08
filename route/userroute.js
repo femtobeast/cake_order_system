@@ -30,11 +30,12 @@ router.get('/cart', (req, res) => {
     res.render('cartView');
 })
 router.get('/shopping-cart', async (req, res) => {
-    if (!req.session.cart) {
+ 
+    if (!req.cookies.carttemp) {
         return res.render('cartDetail', { product: null })
     }
     res.status(201);
-    var cart = new Cart(req.session.cart);
+    var cart = new Cart(req.cookies.carttemp);  
     await res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.totalPrice })
     // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
 })
@@ -43,15 +44,14 @@ router.get('/gcustomer', UserController.getCustomerDetali);
 router.get('/add-to-cart/:id', function (req, res, next) {
     var cakeId = req.params.id;
     // var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
-    var cart = new Cart(req.session.cart ? req.session.cart : {});
+    var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
     cakeModel.cake.findOne({
         where: { cake_id: cakeId }
     }).then(function (result) {
-        //  console.log(result.dataValues)
         cart.add(result.dataValues, result.dataValues.cake_id);
-        req.session.cart = cart;
-        req.session.totalCart = cart.totalQty;
-        // console.log(req.session.cart)
+        res.cookie("carttemp", cart);
+        // req.session.cart = cart;
+        // req.session.totalCart = cart.totalQty;
         res.redirect('/user/dashboard');
 
     }).catch(function (err) {
@@ -91,5 +91,22 @@ router.get('/logout', Auth.redirectToLogin, (req, res) => {
 
     })
 })
+
+//JSON object to be added to cookie 
+let student = {
+    name: "Rishav",
+    Age: "18"
+}
+
+//Route for adding cookie 
+router.get('/setuser', (req, res) => {
+    res.cookie("student", student);
+    res.send('user data added to cookie');
+});
+//Iterate users data from cookie 
+router.get('/getuser', (req, res) => {
+    //shows all the cookies 
+    res.send(req.cookies.student);
+});
 
 module.exports = router;
