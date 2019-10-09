@@ -35,21 +35,26 @@
                                             <th>Product</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
-                                            <th>Total</th>
+                                            <th>Item Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% products.forEach(function(data){ %>
+                                        <input value="<%= products.length %>" type="hidden" id="itemArrLength">
+                                        <% var i =1; var j=1; products.forEach(function(data){ %>
                                         <tr>
                                             <td><a class="remove" href="#">
                                                     <fa class="fa fa-close"></fa>
                                                 </a></td>
                                             <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
                                             <td><a class="aa-cart-title" href="#"><%= data.item.cake_name %></a></td>
-                                            <td><span>Rs: <%= data.item.cake_price %></span> * <span>
-                                                    <%= data.qty %></span></td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>Rs: <%= data.totalPrice %></td>
+                                            <td>Rs: <span class="price"><%= data.item.cake_price %></span></td>
+                                            <td>
+                                                <input id="qnt_<%= i++ %>" data-price="<%= data.item.cake_price %>"
+                                                    class="aa-cart-quantity" name="qty" minlength="10" 
+                                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                    maxlength="10" type="text" size="10" value="<%= data.qty %>">
+                                            </td>
+                                            <td>Rs:<span id="itemtotal_<%= j++ %>"><%= data.totalPrice %></span></td>
                                         </tr>
                                         <% }) %>
                                     </tbody>
@@ -63,11 +68,12 @@
                                 <tbody>
                                     <tr>
                                         <th>Subtotal</th>
-                                        <td>Rs: <%= totalPrice %></td>
+                                        <td>Rs:<span id="subtotal"> <%= totalPrice %></span></td>
                                     </tr>
                                     <tr>
-                                        <th>Total</th>
-                                        <td>Rs: <%= totalPrice %></td>
+                                        <th>FInal Total</th>
+                                        <td>Rs: <span id="finalTotal"><%= totalPrice %></span></td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -83,7 +89,9 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><h4>Your cart is empty. You have no any cake to order!!!</h4></td>
+                                        <td>
+                                            <h4>Your cart is empty. You have no any cake to order!!!</h4>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
