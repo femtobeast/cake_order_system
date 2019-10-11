@@ -1,12 +1,11 @@
-<ul class="aa-product-catg">
-    
+<ul class="aa-product-catg">    
     <!-- start single product item -->
     <% cdata.forEach(function(data){ %>
     <li>
         <figure>
             <!-- <%= %> -->
             <a class="aa-product-img" href="#"><img imgagecake="<%=data.cake_image %>" height="300" width="250"
-                    src="http://localhost:1234/uploads/<%=data.cake_image %>" + alt="polo shirt img"></a>
+                    src="/uploads/<%=data.cake_image %>" + alt="polo shirt img"></a>
             <a class="aa-add-card-btn" href="/user/add-to-cart/<%=data.cake_id %>"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
             <!-- cartdata='user=[data.cake_id,data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type] ' -->
             <figcaption>
@@ -23,7 +22,7 @@
             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span
                     class="fa fa-heart-o"></span></a>
             <a href="#"
-                aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type,data.cake_id] %>'
+                aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type,data.cake_id,data.pound,data.serves] %>'
                 id="quickViewBtn" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal"
                 data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
         </div>
@@ -33,7 +32,5 @@
     <%})%>
 </ul>
 <a class="aa-browse-btn" href="/user/csp">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
-<script src="/js/custom/eventListener.js"> </script>
-
 
 <!-- $(selector).on(event, childSelector, data, function, map) -->

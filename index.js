@@ -26,14 +26,13 @@ app.use(bodyparser.json());
 app.use(express.static(path.join(__dirname, "resources")));//hosting public folder 
 
 // -- SESSION CODE BELOW START
-// const TWO_HOURS = 1000 * 60;
-const TWO_HOURS = 1000 * 60 * 60 * 24;
+const HOURS = 1000 * 60 * 60 * 24;
 const {
   PORT = process.env.PORT,
   SESS_NAME = 'sid',
   SESS_SECRET = 'JHGF>,./?;;LJ8#$?,KL:>>>,,KJJJDHE',
   NODE_ENV = 'development',
-  SESS_LIFETIME = TWO_HOURS
+  SESS_LIFETIME = HOURS
 } = process.env
 const IN_PROD = NODE_ENV === 'production'
 
@@ -59,10 +58,10 @@ app.use((req, res, next) => {
   }
   next();
 })
-app.use(function (req, res, next) {
-  res.locals.carttemp = req.cookies.carttemp;
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.locals.carttemp = req.cookies.carttemp;
+//   next();
+// });
 //----route defination
 app.get("/", (req, res) => {
   const { userId } = req.session;

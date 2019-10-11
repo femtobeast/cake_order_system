@@ -1,6 +1,6 @@
 
 var mysequelize = require("../config/databaseConfig");
-var flavour = mysequelize.sequelize.define(
+ flavour = mysequelize.sequelize.define(
     "tblflavour",
     {
         flavour_id: {
@@ -15,7 +15,12 @@ var flavour = mysequelize.sequelize.define(
         },
 
     },
-    {
+     {
+        //  underscored: true, //fore foreign key
+        //  name: {
+        //      singular: 'tblflavour',
+        //      plural: 'tblflavours',
+        //  },
         freezeTableName: true,
         tableName: "tblflavour"
     }

@@ -1,12 +1,13 @@
-var usermodel = require("../model/Customer");
-var cakemodel = require("../model/Cake");
-var flavourmodel = require("../model/Flavour");
+const usermodel = require("../model/Customer");
+const cakemodel = require("../model/Cake");
+const flavourmodel = require("../model/Flavour");
 const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
 const Sequelize = require('sequelize');
 const moment = require('moment');
-
 const Op = Sequelize.Op;
+const cakeArrTemp = [];
+
 
 //USER REGISTRATION FUNCTION ----------------
 exports.addUser = (req, res, next) => {
@@ -20,8 +21,8 @@ exports.addUser = (req, res, next) => {
             // res.json({ errors: errors.array() });
             return res.status(422).jsonp(errors.array());
             //  next({ "status": 422, "message": errors.array()})
-   
-         
+
+
         } else {
             usermodel.customer.create({
                 cust_email: req.body.email,
@@ -33,7 +34,7 @@ exports.addUser = (req, res, next) => {
                 cust_fname: req.body.firstname,
                 cust_lname: req.body.lastname
             }).then(function (result) {
-                res.send({ message: "Registration Successfull!!!" });                
+                res.send({ message: "Registration Successfull!!!" });
             }).catch(function (err) {
                 next({ "status": 500, "message": err });
                 console.log(err)
@@ -56,7 +57,7 @@ exports.checkUserEmail = (req, res, next) => {
         if (result.dataValues != "") {
             next({ "status": 409, "message": result.dataValues.cust_email + ' | email already exists' })
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         next();
     })
 
@@ -89,23 +90,65 @@ exports.getCustomerDetali = (req, res, next) => {
             next({ "status": 500, "message": "no user detail saved" });
         });
 };
-//-- RETERIVE ALL CAKE DETAIL----------------
+//-- RETERIVE ALL CAKE DETAIL BUT LIMIT----------------
 var cake_arry = [];
 exports.getAllCakeDetail = (req, res, next) => {
-    cakemodel.cake.findAll()
+    cakemodel.cake.findAll({
+        offset: 0, limit: 12
+    })
         .then(function (result) {
             // res.status(200);
             cake_arry.pop();
             cake_arry.push(result);
-            // res.json(cake_arry[0])
-            // flavour_arry = JSON.stringify(result);
-            res.render("user_dashboard", { cdata: cake_arry[0] ,status:false});
-            // console.log(JSON.stringify(result))
-            // res.json(result);
+            res.render("user_dashboard", { cdata: cake_arry[0] });
         })
         .catch(function (err) {
             next({ "status": 500, "message": err });
         });
+}
+
+//BROWSE ALL CAKE FOR SELECTING
+exports.browseAllCakeProduct = (req, res, next) => {
+    cakemodel.cake.findAll()
+        .then(function (result) {
+            res.status(200);
+            cakeArrTemp.pop(result);//Store all cake detail temp
+            cakeArrTemp.push(result);//Store all cake detail temp
+            next();
+            // res.render("user_dashboard", { cdata: cake_arry[0] });
+        })
+        .catch(function (err) {
+            next({ "status": 500, "message": err });
+        });
+}
+
+//SELECT CAKE DETAIL BY ID
+exports.selectCakeById = (req, res, next) => {
+    mySeq.sequelize.query(`SELECT 
+        c.cake_name,c.descriptions,c.cake_image,
+        c.serves,cake_price,c.pound,c.version,f.flavour_name
+        FROM tblcake c 
+        INNER JOIN  tblflavour f
+        on c.flavour_id = f.flavour_id 
+        WHERE c.cake_id =:cake_id;`,
+        { replacements: { cake_id: req.params.id }, type: mySeq.sequelize.QueryTypes.SELECT })
+        .then(result => {
+            res.status(200);
+            // res.json(result);
+            res.render('viewDetails', { cdata: result })
+        }).catch(err => {
+            next({ "status": 500, "message": "counting user invalid" });
+
+        })
+}
+
+exports.getArrayCake = (req, res, next) => {
+    res.status(200);
+    res.json(cakeArrTemp[0]);
+    // const filteredItem = cakeArrTemp[0].find((item) => {
+    //     return item.dataValues.cake_name === "Apple Cake ";
+    // })
+    res.json(filteredItem);
 }
 
 //--SEARCH CAKE DETAIL FUNCTION FROM DATABASE
@@ -173,3 +216,11 @@ exports.validateuserdata = async (req, res, next) => {
     }
 }
 
+
+// User.hasMany(Channels, { foreignKey: 'channel_fk', as: 'channels' });
+
+// models.users.findAll({
+//     include: [{ model: models.channels, as: 'channels' }]
+// }).then(function (result) {
+//     console.log(JSON.stringify(result));
+// });

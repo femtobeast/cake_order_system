@@ -1,5 +1,6 @@
 
 var mysequelize = require("../config/databaseConfig");
+var FlavourModel = require("../model/Flavour");
 var cake = mysequelize.sequelize.define(
     "tblcake",
     {
@@ -13,14 +14,6 @@ var cake = mysequelize.sequelize.define(
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
-        // flavourname: {
-        //     type: mysequelize.Sequelize.STRING,
-        //     allowNull: false
-        // },
-        // flavourtype: {
-        //     type: mysequelize.Sequelize.STRING,
-        //     allowNull: false
-        // },
         pound: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
@@ -45,10 +38,6 @@ var cake = mysequelize.sequelize.define(
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
         },
-        // cake_price: {
-        //     type: mysequelize.Sequelize.INTEGER,
-        //     allowNull: false
-        // },
         serves: {
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
@@ -59,10 +48,16 @@ var cake = mysequelize.sequelize.define(
         },
     },
     {
+        // underscored: true, //for foreign key
+        // name: {
+        //     singular: 'tblcake',
+        //     plural: 'tblcakes',
+        // },
         freezeTableName: true,
         tableName: "tblcake"
     }
 );
+// cake.belongsTo(FlavourModel.flavour); //creating relation for foreign key
 cake
     .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {

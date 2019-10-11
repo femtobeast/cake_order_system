@@ -1,11 +1,4 @@
-define(['jquery', 'api_url'], function ($, main) {
-
-    //LOGIN AJAX 
-    $('#loginbtn').on('click', function () {
-        alert(BASE_URL)
-
-    });
-
+require(['jquery', 'api_url'], function ($, main) {
 
     //REGISTER AJAX 
     $('#btnRegister').on('click', function () {
@@ -29,7 +22,7 @@ define(['jquery', 'api_url'], function ($, main) {
             dataType: "json",
             data: JSON.stringify(customerData),
             success: function (result, status) {
-                $('#errors').html(result.message+": Please refresh or login for checkout.");
+                $('#errors').html(result.message + ": Please refresh or login for checkout.");
 
 
             },
@@ -50,44 +43,38 @@ define(['jquery', 'api_url'], function ($, main) {
 
     });
 
-
-});
-$('#email').on('keyup', function (e) {
-    e.preventDefault();
-    // if (e.which == 13) {
-
-    var customerData = {
-        email: document.getElementsByName('email')[0].value
-    }
-
-    $.ajax({
-        url: checkEmail,
-        method: "POST",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify(customerData),
-        success: function (result, status) {
-
-        },
-        error: function (err, status) {
-            if (err.status == '404') {
-                $('#msg').html('');
-            } else {
-                $('#msg').html(err.responseJSON.message);
-
-            }
+    //CHECKING EMAIL WHILE TYPING
+    $('#email').on('keyup', function (e) {
+        e.preventDefault();
+        // if (e.which == 13) {
+        var customerData = {
+            email: document.getElementsByName('email')[0].value
         }
+
+        $.ajax({
+            url: checkEmail,
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(customerData),
+            success: function (result, status) {
+
+            },
+            error: function (err, status) {
+                if (err.status == '404') {
+                    $('#msg').html('');
+                } else {
+                    $('#msg').html(err.responseJSON.message);
+
+                }
+            }
+        });
+        // }
+
     });
-    // }
+
 
 });
 function redirectPage(path) {
     return window.location.href = path;;
 }
-// (function() {
-//     document.body.addEventListener("load", function onBodyLoaded() {
-//         require(["two"], function(two) {
-//             two.value();
-//         });
-//     });
-// }());

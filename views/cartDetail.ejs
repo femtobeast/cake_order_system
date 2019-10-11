@@ -26,6 +26,9 @@
                 <div class="cart-view-area">
                     <div class="cart-view-table">
                         <form action="">
+                            <a class="remove" href="/user/logoutCart">
+                                <fa class=" fa fa-close">Delete All</fa>
+                            </a>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -42,15 +45,21 @@
                                         <input value="<%= products.length %>" type="hidden" id="itemArrLength">
                                         <% var i =1; var j=1; products.forEach(function(data){ %>
                                         <tr>
-                                            <td><a class="remove" href="#">
-                                                    <fa class="fa fa-close"></fa>
-                                                </a></td>
+                                            <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Remove</button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="/user/reduce/<%= data.item.cake_id%>">-1 Item</a></li>
+                                                    <li><a href="/user/removeItem/<%= data.item.cake_id%>">Remove All Item</a></li>
+                                                </ul>
+                                            </div>
+                                            </td>
                                             <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
                                             <td><a class="aa-cart-title" href="#"><%= data.item.cake_name %></a></td>
                                             <td>Rs: <span class="price"><%= data.item.cake_price %></span></td>
                                             <td>
                                                 <input id="qnt_<%= i++ %>" data-price="<%= data.item.cake_price %>"
-                                                    class="aa-cart-quantity" name="qty" minlength="10" 
+                                                    class="aa-cart-quantity" name="qty" minlength="10"
                                                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                                     maxlength="10" type="text" size="10" value="<%= data.qty %>">
                                             </td>
@@ -80,22 +89,12 @@
                             <a href="#" class="aa-cart-view-btn">Proced to Checkout</a>
                         </div>
                         <% }else{ %>
-                        <div class="cart-view-area">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Product Cart</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <h4>Your cart is empty. You have no any cake to order!!!</h4>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-md-10">
+                            <h1>Product Cart!!! <img width="200" height="auto" src="/dashboard/img/cartempty1.png"></h1>
+                            <hr>
+                            <h4>Your cart is empty. You have no any cake to order!!!</h4>
                         </div>
+
                         <% } %>
                     </div>
                 </div>

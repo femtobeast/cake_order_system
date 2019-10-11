@@ -5,33 +5,24 @@ const Auth = require('../controller/Authentication')
 const CartController = require('../controller/CartController');
 
 //---------GET FUNCTION PAGES ROUTE
-router.get('/login',Auth.redirectToHome, function (req, res) {
-    res.render('userLogin');
-});
-router.get('/register', function (req, res) {
-    res.render('register');
-});
-router.get('/dashboard', UserController.getAllCakeDetail, function (req, res) {
-
-});
+router.get('/login',Auth.redirectToHome, (req, res)=>res.render('userLogin'));
+router.get('/register', (req, res)=> res.render('register'));
+router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
 router.get('/csp', (req, res) => {
+    res.render('viewDetails');
+})
+router.get('/vp/:id',UserController.selectCakeById);
+router.get('/shopping-cart',CartController.shoppingCart)//DISPLAY CART DETAIL FOR CHECKOUT: CART FUNCTION
+router.get('/add-to-cart/:id', CartController.addToCart)//ADD-TO-CART: CART FUNCTION
+router.get('/reduce/:id', CartController.deleteItemByOne)//REDUCE ITEM BY ONE: CART FUNCTION
+router.get('/removeItem/:id',CartController.removeItem)//REMOVE ITEM FROM CART: CART FUNCTION
 
-    res.render('searchAllCake');
-})
-router.get('/item', (req, res) => {
-
-    res.render('itemDetail');
-})
-router.get('/cart', (req, res) => {
-    res.render('cartView');
-})
-router.get('/shopping-cart',CartController.shoppingCart)
-router.get('/add-to-cart/:id',CartController.addToCart)
 router.post('/check', UserController.checkUserEmail);
 router.get('/gcustomer', UserController.getCustomerDetali);
+router.get('/carr', UserController.browseAllCakeProduct, UserController.getArrayCake);
 
 //-----------POST METHOD ROUTER-------------------
 //-- ADDING CUSTOMER POST METHOD
@@ -40,20 +31,20 @@ router.post('/registerAdd',
     Auth.passwordHashGenerate,
     UserController.checkUserEmail,
     UserController.addUser);
-
 //-- SEARCHING CAKE DETAIL POST METHOD
-router.post('/cakeSearchQuery', UserController.searchCakeDetail, function (req, res, next) {
-    res.status(201);
+router.post('/cakeSearchQuery', UserController.searchCakeDetail,(req, res, next)=>res.status(201));
+//-- LOGIN POST METHOD // const data = [req.session.customerEmail, req.session.customerId, req.session.token];
+router.post('/sendLogin',Auth.loginValidation,Auth.generateJwtToken, (req, res, next)=> res.redirect('/user/dashboard'));
+router.get('/logoutCart', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/user/dashboard');
+        }
+        res.clearCookie('carttemp');
+        res.redirect('/user/shopping-cart')
+
+    })
 })
-
-//-- LOGIN POST METHOD
-router.post('/sendLogin',
-    Auth.loginValidation,
-    Auth.generateJwtToken, function (req, res, next) {
-        const data = [req.session.customerEmail, req.session.customerId, req.session.token];
-        res.redirect('/user/dashboard')
-    });
-
 router.get('/logout', Auth.redirectToLogin, (req, res) => {
     req.session.destroy(err => {
         if (err) {
