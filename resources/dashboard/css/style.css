@@ -4590,3 +4590,20 @@ img {
     font-size: 1em;
     color: white;
 }
+
+.loginbtn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    background-color: #53e3a6;
+    border: 0;
+    padding: 10px 15px;
+    color: #3c3c3c;
+    border-radius: 3px;
+    width: 25%;
+    cursor: pointer;
+    font-size: 1em;
+    transition-duration: 0.25s;
+    height: auto;
+}

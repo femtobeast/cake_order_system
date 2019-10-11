@@ -124,8 +124,8 @@ exports.browseAllCakeProduct = (req, res, next) => {
 
 //SELECT CAKE DETAIL BY ID
 exports.selectCakeById = (req, res, next) => {
-    mySeq.sequelize.query(`SELECT 
-        c.cake_name,c.descriptions,c.cake_image,
+    mySeq.sequelize.query(`SELECT c.cake_id,
+        c.cake_name,c.descriptions,c.cake_image,c.flavour_type,
         c.serves,cake_price,c.pound,c.version,f.flavour_name
         FROM tblcake c 
         INNER JOIN  tblflavour f
@@ -137,7 +137,7 @@ exports.selectCakeById = (req, res, next) => {
             // res.json(result);
             res.render('viewDetails', { cdata: result })
         }).catch(err => {
-            next({ "status": 500, "message": "counting user invalid" });
+            next({ "status": 500, "message": err});
 
         })
 }
