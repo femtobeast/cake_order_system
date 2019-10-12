@@ -170,7 +170,8 @@ form button {
   -moz-appearance: none;
   appearance: none;
   outline: 0;
-  background-color: #53e3a6;
+  /* background-color: #53e3a6; */
+  background-color: #39ccd0;
   border: 0;
   padding: 10px 15px;
   color: #fff;
@@ -182,7 +183,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #38e09a;
+  background-color: #f66;
 }
 
 .bg-bubbles {
@@ -320,8 +321,6 @@ form button:hover {
   /* filter: blur(2px);
   -webkit-filter: blur(2px); */
   /* background-position: center; */
-
-
   /* image design background
     min-height: 100vh;
     display: -ms-flexbox;

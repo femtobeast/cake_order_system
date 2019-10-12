@@ -11,6 +11,9 @@ router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct,(req,res)=>{
     res.render('product');
 });
+router.get('/checkout', function (req, res) {
+    res.render('checkout');
+});
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });

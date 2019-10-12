@@ -31,7 +31,7 @@
 body {
     background-color: #ffffff;
     font-family: "Lato", sans-serif;
-    color: #333333;
+    color: #424040;
     font-size: 16px;
     overflow-x: hidden;
 }
@@ -50,7 +50,7 @@ ul {
 
 a {
     text-decoration: none;
-    color: #333333;
+    color: #424040;
 }
 
 a:hover, a:focus {
@@ -410,6 +410,12 @@ img {
     margin-top: 4px;
 }
 
+#aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo img {
+    width: 60px;
+    height: 60px;
+    float: right;
+}
+
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-logo a {
     font-family: "Raleway", sans-serif;
     font-size: 28px;
@@ -681,6 +687,7 @@ img {
     display: inline;
     float: left;
     width: 100%;
+    background: #424040;
 }
 
 #menu .menu-area {
@@ -2764,8 +2771,8 @@ img {
 }
 
 #checkout .checkout-area .checkout-left .panel-group .panel-default .panel-heading .panel-title {
-    font-size: 18px;
-    padding: 20px 15px;
+    font-size: 15px;
+    padding: 5px 5px;
 }
 
 #checkout .checkout-area .checkout-left .panel-group .panel-default .panel-heading .panel-title a {
@@ -4702,6 +4709,7 @@ img {
     color: #eee;
     background: #ff5a84;
 }
+
 /* ///end slider css range */
 
 /* // -----------custom csss */
@@ -4738,7 +4746,8 @@ img {
     -moz-appearance: none;
     appearance: none;
     outline: 0;
-    background-color: #53e3a6;
+    /* background-color: #53e3a6; */
+    background-color: #39ccd0;
     border: 0;
     padding: 10px 15px;
     color: #3c3c3c;
@@ -4748,4 +4757,27 @@ img {
     font-size: 1em;
     transition-duration: 0.25s;
     height: auto;
+}
+
+.loginbtn:hover {
+    background-color: #f66;
+}
+
+.nib {
+    display: block;
+    padding: 16px 20px;
+    background: #424040;
+    color: white;
+    position: relative;
+}
+
+.nib:before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #424040;
+    left: 20px;
+    bottom: -7px;
+    transform: rotate(45deg);
 }

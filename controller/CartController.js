@@ -50,14 +50,15 @@ exports.removeItem = (req, res, next) => {
     var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
     cart.removeItem(productId);
     res.cookie("carttemp", cart);
-    req.session.destroy(err => {
-        if (err) {
-            return res.redirect('/user/dashboard');
-        }
-        res.clearCookie('carttemp');
-        res.redirect('/user/shopping-cart')
+    res.redirect("/user/shopping-cart")
+    // req.session.destroy(err => {
+    //     if (err) {
+    //         return res.redirect('/user/dashboard');
+    //     }
+    //     res.clearCookie('carttemp');
+    //     res.redirect('/user/shopping-cart')
 
-    })
+    // })
 
 
 }

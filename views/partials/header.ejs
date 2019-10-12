@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Yummybakery | Home</title>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <!-- Font awesome -->
     <link href="/dashboard/css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -46,11 +46,14 @@
 
 </head>
 
-<body onload="StartWarningTimer();" onmousemove="ResetTimeOutTimer();">
+<body onload="" onmousemove="">
     <!-- wpf loader Two -->
     <!-- <div id="wpf-loader-two">
         <div class="wpf-loader-two-inner">
             <span>Loading</span>
+              <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span> 
+          
         </div>
     </div> -->
     <!-- / wpf loader Two -->
@@ -81,10 +84,10 @@
                                     <% if(typeof session.customerEmail !== 'undefined') { %>
                                     <li><a href="/user/dashboard" style="color: green;"><%- session.customerEmail %></a>
                                     </li>
-                                    <li><a href="account.html">My Account</a></li>
-                                    <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
-                                    <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
-                                    <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="/user/profile">My Account</a></li>
+                                    <!-- <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li> -->
+                                    <li class="hidden-xs"><a href="/user/shopping-cart">My Cart</a></li>
+                                    <li class="hidden-xs"><a href="/user/checkout">Checkout</a></li>
                                     <li class="hidden-xs"><a href="/user/logout">Logout</a></li>
                                     <!-- <form method="POST" action="/logout">
                                         <button>Logout</button>
@@ -112,10 +115,8 @@
                             <div class="aa-logo">
                                 <!-- Text based logo -->
                                 <a href="/user/dashboard">
-
-                                    <span class="fa fa-birthday-cake"></span>
-                                    <p>Yummy<strong>CAKE</strong> <span>Your Cake Partner</span></p>
-                                </a>
+                                    <!-- <span class="fa fa-birthday-cake"> </span> -->
+                                   <span><img src="/dashboard/img/cover/logo1.png"></span><p>Yummy<strong>CAKE</strong> <span>Your Cake Partner</span></p></a>
                                 <!-- img based logo -->
                                 <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
                             </div>
@@ -124,8 +125,9 @@
                             <div class="aa-cartbox">
                                 <% if(locals.carttemp){ %>
                                 <a class="aa-cart-link" href="/user/shopping-cart">
-                                    <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">SHOPPING CART</span>
+                                    <!-- <span class="fa fa-shopping-basket"></span> -->
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                    <span class="aa-cart-title">Basket (CART)</span>
                                     <span class="aa-cart-notify">
                                         <%= locals.carttemp.totalQty %></span>
                                 </a>
@@ -151,21 +153,7 @@
         </div>
         <!-- / header bottom  -->
     </header>
-    <a href="" data-toggle="modal" data-target="#timeout">Login</a>
-    <div class="modal fade" id="timeout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="container">
-            <div class="msgdiv">
-                <h1>
-                    Session About To Timeout</h1>
-                <p>
-                    You will be automatically logged out in 1 minute.<br />
-                    To remain logged in move your mouse over this window.</p>
-            </div>
-        </div>
 
-
-    </div>
 </body>
 <!-- Jquery JS-->
 
