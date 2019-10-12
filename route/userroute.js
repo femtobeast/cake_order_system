@@ -8,6 +8,9 @@ const CartController = require('../controller/CartController');
 router.get('/login',Auth.redirectToHome, (req, res)=>res.render('userLogin'));
 router.get('/register', (req, res)=> res.render('register'));
 router.get('/dashboard', UserController.getAllCakeDetail);
+router.get('/product',(req,res)=>{
+    res.render('product');
+});
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });

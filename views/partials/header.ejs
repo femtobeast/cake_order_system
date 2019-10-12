@@ -43,18 +43,16 @@
     <!-- Vendor CSS-->
     <link href="/register/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="/register/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-
-
-
+    
 </head>
 
 <body>
     <!-- wpf loader Two -->
     <!-- <div id="wpf-loader-two">
-    <div class="wpf-loader-two-inner">
-        <span>Loading</span>
-    </div>
-</div> -->
+        <div class="wpf-loader-two-inner">
+            <span>Loading</span>
+        </div>
+    </div> -->
     <!-- / wpf loader Two -->
     <!-- SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
@@ -81,7 +79,8 @@
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
                                     <% if(typeof session.customerEmail !== 'undefined') { %>
-                                    <li><a href="/user/dashboard" style="color: green;"><%- session.customerEmail %></a></li>
+                                    <li><a href="/user/dashboard" style="color: green;"><%- session.customerEmail %></a>
+                                    </li>
                                     <li><a href="account.html">My Account</a></li>
                                     <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                                     <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
@@ -123,15 +122,15 @@
                             <!-- / logo  -->
                             <!-- cart box -->
                             <div class="aa-cartbox">
-                               <% if(locals.carttemp){ %>
+                                <% if(locals.carttemp){ %>
                                 <a class="aa-cart-link" href="/user/shopping-cart">
                                     <span class="fa fa-shopping-basket"></span>
                                     <span class="aa-cart-title">SHOPPING CART</span>
                                     <span class="aa-cart-notify">
                                         <%= locals.carttemp.totalQty %></span>
-                                    </a>
+                                </a>
                                 <% }%>
-                                
+
                             </div>
                             <!-- / cart box -->
                             <!-- search box -->
