@@ -4,12 +4,12 @@ $(function () {
     $('input[type="range"]').rangeslider({
         polyfill: false,
         onInit: function () {
-            $('.header .pull-right').text($('input[type="range"]').val() + 'K');
+            $('.header .pull-right').text('Rs: '+$('input[type="range"]').val());
         },
         onSlide: function (position, value) {
             //console.log('onSlide');
             //console.log('position: ' + position, 'value: ' + value);
-            $('.header .pull-right').text(value + 'K');
+            $('.header .pull-right').text('Rs: '+value);
         },
         onSlideEnd: function (position, value) {
             //console.log('onSlideEnd');

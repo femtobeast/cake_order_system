@@ -114,8 +114,8 @@ exports.browseAllCakeProduct = (req, res, next) => {
             res.status(200);
             cakeArrTemp.pop(result);//Store all cake detail temp
             cakeArrTemp.push(result);//Store all cake detail temp
-            next();
-            // res.render("user_dashboard", { cdata: cake_arry[0] });
+            console.log(cakeArrTemp[0])
+            res.render("product", { cdata: result });
         })
         .catch(function (err) {
             next({ "status": 500, "message": err });
