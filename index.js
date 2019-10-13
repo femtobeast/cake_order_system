@@ -1,3 +1,4 @@
+// color code- #f66 | text color - #424040  |  normal- #fff
 
 const express = require("express"); //server framework
 const bodyparser = require("body-parser");//packages body-parser

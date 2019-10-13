@@ -102,7 +102,7 @@ exports.redirectToLogin = (req, res, next) => {
 
 //REDIRECT TO DASHBOARD IF LOGED IN
 exports.redirectToHome = (req, res, next) => {
-    console.log(req.session.token + " redirect to home")
+    console.log(req.session.token + " not authenticate | token not generated")
     if (req.session.token) {
         res.redirect('/user/dashboard');
     } else {
