@@ -4834,7 +4834,7 @@ img {
 }
 
 .card_item {
-   margin: 10px;
+    margin: 10px;
 }
 
 .card_title {
@@ -4878,4 +4878,127 @@ img {
     .breakpoint {
         max-width: 24%;
     }
+}
+
+select#shape_select option[value="Square"] {
+    background-image: url("../img/cakeimg/square.png");
+}
+
+select#shape_select option[value="Heart"] {
+    background-image: url("../img/cakeimg/heart.png");
+}
+
+select#shape_select option[value="Round"] {
+    background-image: url("../img/cakeimg/round.png");
+}
+
+/* HIDE RADIO */
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* IMAGE STYLES */
+
+[type=radio]+img {
+    cursor: pointer;
+}
+
+/* CHECKED STYLES */
+
+[type=radio]:checked+img {
+    outline: 4px solid rgb(101, 155, 30);
+}
+
+.shapediv {
+    text-align: center;
+    padding: 10px;
+}
+
+.pbtn {
+    background-color: #39ccd0;
+    ;
+    color: #3c3c3c;
+    ;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    cursor: pointer;
+    transition-duration: 0.25s;
+}
+
+.pbtn:hover {
+    background-color: #f66;
+}
+
+/* ///steppers css */
+
+.plandiv {
+    /* background-color: #f66; */
+    margin: 100px auto;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+
+.tab {
+    display: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+
+.step.finish {
+    background-color: #4CAF50;
 }

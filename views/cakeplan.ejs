@@ -1,120 +1,90 @@
-
-    <!-- Materializecss compiled and minified CSS -->
-    <link rel="stylesheet" href="/css/material.min.css">
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/materialize-stepper@2.1.4/materialize-stepper.css" rel="stylesheet">
-
-    <script src="/js/library/jquery-3.3.0.min.js"></script>
-    <!-- Materializecss compiled and minified JavaScript -->
-    <script src="/js/library/material.min.js"></script>
-    <!-- jQueryValidation Plugin -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<% include partials/header.ejs %>
+<% include partials/menu.ejs %>
 
 
-<body class="container" >
-    <form>
-        <ul class="stepper parallel horizontal">
-            <li class="step active">
-                <div class="step-title waves-effect waves-dark">Step 1</div>
-                <div class="step-content">
-                    <div class="row">
-                        <div class='faorm-field col s12'>
-                            <p>Step with custom validation</p>
-                            <span>For this step we want to have a custom validator that checks if if at least one
-                                checkbox is checked</span>
-                            <p>
-                                <input name='checkbox1' type="checkbox" class="filled-in" id="checkbox1"
-                                    value='checkbox1' />
-                                <label for="checkbox1">Checkbox 1</label>
-                            </p>
-                            <p>
-                                <input name='checkbox2' type="checkbox" class="filled-in" id="checkbox2"
-                                    value='checkbox2' />
-                                <label for="checkbox2">Checkbox 2</label>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="step-actions">
-                        <button class="waves-effect waves-dark btn next-step"
-                            data-validator="validateStepOne">CONTINUE</button>
-                        <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
-                    </div>
+<div class="container">
+    <div class="col-md-12">
+        <div class="plandiv">
+            <form>
+                <h1>Plan your cake | Fill all the detail provided</h1>
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">
+                    <label>Number of people to serve.</label>
+                    <p><input placeholder="serve number" oninput="this.className = ''" name="serven"></p>
                 </div>
-            </li>
-            <li class="step">
-                <div class="step-title waves-effect waves-dark">Step 2</div>
-                <div class="step-content">
-                    <div class="row">
-                        <div class='form-field col s12'>
-                            <p>Step with no custom validation</p>
-                            <div class="input-field col s12">
-                                <input type="text" name="textfield" class="required validate" />
-                                <label for="textfield">Random textfield</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step-actions">
-                        <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-                        <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
-                    </div>
+                <div class="tab">
+                    <label>Number of pound.</label>
+                    <p><input placeholder="example 1" oninput="this.className = ''" name="pound"></p>
                 </div>
-            </li>
-            <li class="step">
-                    <div class="step-title waves-effect waves-dark">Step 2</div>
-                    <div class="step-content">
-                        <div class="row">
-                            <div class='form-field col s12'>
-                                <p>Step with no custom validation</p>
-                                <div class="input-field col s12">
-                                    <input type="text" name="textfield" class="required validate" />
-                                    <label for="textfield">Random textfield</label>
+                <div class="tab">
+                    <label>Number of tier.</label>
+                    <p><input placeholder="example 1" oninput="this.className = ''" name="pound"></p>
+                </div>
+                <div class="tab">
+                        <div class="budget-wrap">
+                            <div class="budget">
+                                <div class="header">
+                                    <div class="title clearfix">Set your budget! <span class="pull-right"></span>
+                                    </div>
                                 </div>
+                                <div class="content">
+                                    <input id="rangevalue" type="range" min="1" max="5000" value="500" data-rangeslider>
+                                </div>
+    
                             </div>
                         </div>
-                        <div class="step-actions">
-                            <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-                            <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
-                        </div>
                     </div>
-                </li>
-            <li class="step">
-                <div class="step-title waves-effect waves-dark">Step 3</div>
-                <div class="step-content">
-                    <div class="row">
-                        <div class='form-field'>
-                            <p>Step with feedback and custom validation</p>
-                            <p>
-                                <input name='checkbox3' type="checkbox" class="filled-in" id="checkbox3"
-                                    value='checkbox3' />
-                                <label for="checkbox3">Checkbox 3</label>
-                            </p>
-                            <p>
-                                <input name='checkbox4' type="checkbox" class="filled-in" id="checkbox4"
-                                    value='checkbox4' />
-                                <label for="checkbox4">Checkbox 4</label>
-                            </p>
-                        </div>
-                        <div class="input-field col s12">
-                            <input type="text" id="textfield2" name="textfield2" class="required validate" />
-                            <label for="textfield2">This field should contain the word materialize</label>
-                        </div>
-                    </div>
-                    <div class="step-actions">
-                        <button class="waves-effect waves-dark btn next-step" data-feedback="nextStepThreeHandler"
-                            data-validator="validateStepThree">SUBMIT</button>
-                        <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                <div class="tab">
+                    <label>Eggless?</label>
+                    <div class="form-group">
+                        <select class="form-control" id="sel1" oninput="this.className = ''">
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
                     </div>
                 </div>
-            </li>
+                <div class="tab">
+                    <label>Any sepecific shape of cake?</label>
+                       <div class="shapediv">
+                            <div class="col-md-5">
+                                    <label>
+                                        <input oninput="this.className = ''" type="radio" name="test" value="small" checked>
+                                        <img height="auto" width="50" src="/dashboard/img/cakeimg/square.png">
+                                    </label>
         
-        </ul>
-    </form>
-    <script src="/js/library/steppers.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.stepper').activateStepper();
-        })
-
-      </script>
-</body>
+                                    <label>
+                                        <input oninput="this.className = ''" type="radio" name="test" value="big">
+                                        <img height="auto" width="50" src="/dashboard/img/cakeimg/heart.png">
+                                    </label>
+                                    <label>
+                                        <input oninput="this.className = ''" type="radio" name="test" value="big">
+                                        <img height="auto" width="50" src="/dashboard/img/cakeimg/round.png">
+                                    </label>
+                                </div>
+                       </div>
+                </div>
+              
+                <div class="tab">Login Info:
+                    <label>Select any occasions | to order your special cake.</label>
+                </div>
+                <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" class="pbtn" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button type="button" class="pbtn" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<% include partials/footer.ejs %>
+<script src="/js/library/steppers.js"></script>
