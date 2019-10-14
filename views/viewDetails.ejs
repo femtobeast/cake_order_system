@@ -103,6 +103,12 @@
                                     <div class="aa-prod-view-bottom">
                                         <a class="aa-add-to-cart-btn" href="/user/add-to-cart/<%=data.cake_id %>"><i class="fas fa-cart-plus"></i>Add To
                                             Cart</a>
+                                            <span class="aa-prod-category">
+                                                Total: <span id="vcakeServe">
+                                                    Rs: <% if(locals.carttemp){ var tempprice = locals.carttemp.totalPrice } %>
+                                                    <%= tempprice %>
+                                                </span>
+                                            </span>
                                         <!-- <a class="aa-add-to-cart-btn" href="#">Wishlist</a> -->
                                         <!-- <a class="aa-add-to-cart-btn" href="#">Compare</a> -->
                                     </div>

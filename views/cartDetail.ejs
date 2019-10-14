@@ -21,6 +21,7 @@
 <section id="cart-view">
     <div class="container">
         <% if(locals.products) { %>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="cart-view-area">
@@ -46,15 +47,19 @@
                                         <% var i =1; var j=1; products.forEach(function(data){ %>
                                         <tr>
                                             <td>
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Remove</button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="/user/reduce/<%= data.item.cake_id%>">-1 Item</a></li>
-                                                    <li><a href="/user/removeItem/<%= data.item.cake_id%>">Remove This Row</a></li>
-                                                </ul>
-                                            </div>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary btn-xs dropdown-toggle" type="button"
+                                                        data-toggle="dropdown">Remove</button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="/user/reduce/<%= data.item.cake_id%>">-1 Item</a>
+                                                        </li>
+                                                        <li><a href="/user/removeItem/<%= data.item.cake_id%>">Remove
+                                                                This Row</a></li>
+                                                    </ul>
+                                                </div>
                                             </td>
-                                            <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
+                                            <td><a href="#"><img src="/uploads/<%= data.item.cake_image %>"
+                                                        alt="img"></a></td>
                                             <td><a class="aa-cart-title" href="#"><%= data.item.cake_name %></a></td>
                                             <td>Rs: <span class="price"><%= data.item.cake_price %></span></td>
                                             <td>
@@ -86,7 +91,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="aa-cart-view-btn">Proced to Checkout</a>
+                            <a href="/user/checkout" class="aa-cart-view-btn">Proced to Checkout</a>
                         </div>
                         <% }else{ %>
                         <div class="col-md-10">

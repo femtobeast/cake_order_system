@@ -1,6 +1,5 @@
 const usermodel = require("../model/Customer");
 const cakemodel = require("../model/Cake");
-const flavourmodel = require("../model/Flavour");
 const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
 const Sequelize = require('sequelize');

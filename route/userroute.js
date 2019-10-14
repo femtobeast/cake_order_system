@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
+const OrderController = require("../controller/OrderController");
 const Auth = require('../controller/Authentication')
 const CartController = require('../controller/CartController');
 
@@ -11,20 +12,25 @@ router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct,(req,res)=>{
     res.render('product');
 });
-router.get('/checkout', function (req, res) {
-    res.render('checkout');
+router.get('/checkout', CartController.orderDetail, function (req, res) {
+
 });
+router.get('/cplan', function (req, res) {
+    res.render('cakeplan');
+});
+
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-router.get('/csp', (req, res) => {
-    res.render('viewDetails');
+router.get('/order', (req, res) => {
+    res.render('orderDetail');
 })
 router.get('/vp/:id',UserController.selectCakeById);
 router.get('/shopping-cart',CartController.shoppingCart)//DISPLAY CART DETAIL FOR CHECKOUT: CART FUNCTION
 router.get('/add-to-cart/:id', CartController.addToCart)//ADD-TO-CART: CART FUNCTION
 router.get('/reduce/:id', CartController.deleteItemByOne)//REDUCE ITEM BY ONE: CART FUNCTION
-router.get('/removeItem/:id',CartController.removeItem)//REMOVE ITEM FROM CART: CART FUNCTION
+router.get('/removeItem/:id', CartController.removeItem)//REMOVE ITEM FROM CART: CART FUNCTION
+router.get('/removeItemCheckout/:id',CartController.removeItemCheckout)//REMOVE ITEM FROM CART: CART FUNCTION
 
 router.post('/check', UserController.checkUserEmail);
 router.get('/gcustomer', UserController.getCustomerDetali);

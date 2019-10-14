@@ -108,16 +108,8 @@
         <div class="ballon"></div>
     </div>
 
-    <!-- Jquery JS-->
+    
 
-    <script src="/register/vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="/register/vendor/select2/select2.min.js"></script>
-    <script src="/register/vendor/datepicker/moment.min.js"></script>
-    <script src="/register/vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="/register/js/global.js"></script>
     <script>
         $('#password, #cpwd').on('keyup', function () {
             if ($('#password').val() == $('#cpwd').val()) {
@@ -125,5 +117,4 @@
             } else
                 $('#message').html('Not Matching').css('color', 'red');
         });
-    </script>
-    <% include partials/footer.ejs %>
+    </script><% include partials/footer.ejs %> 

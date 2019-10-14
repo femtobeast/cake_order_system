@@ -28,6 +28,12 @@
 
 /* BASE - Base tyles, Variables, Mixins, etc. */
 
+/* Design */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #ffffff;
     font-family: sans-serif;
@@ -4780,4 +4786,96 @@ img {
     left: 20px;
     bottom: -7px;
     transform: rotate(45deg);
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cards_item {
+    display: flex;
+    padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+    .cards_item {
+        width: 50%;
+    }
+}
+
+@media (min-width: 56rem) {
+    .cards_item {
+        width: 33.3333%;
+    }
+}
+
+.card {
+    background-color: white;
+    border-radius: 1.15rem;
+    /* box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25); */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card_content {
+    padding: 1rem;
+    /* background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%); */
+    background: #424040;
+}
+
+.card_item {
+   margin: 10px;
+}
+
+.card_title {
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin: 0px;
+}
+
+.card_text {
+    color: #ffffff;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+}
+
+.made_by {
+    font-weight: 400;
+    font-size: 13px;
+    margin-top: 35px;
+    text-align: center;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 420px) {
+    /* Two columns for tablets */
+    .breakpoint {
+        max-width: 48%;
+    }
+}
+
+@media (min-width: 760px) {
+    /* Four columns for large devices */
+    .breakpoint {
+        max-width: 24%;
+    }
 }

@@ -13,7 +13,7 @@ exports.addToCart = (req, res, next) => {
         }).then(function (result) {
             cart.add(result.dataValues, result.dataValues.cake_id);
             res.cookie("carttemp", cart, { maxAge: HOURS, httpOnly: true });
-            
+
             // req.session.cart = cart;
             // req.session.totalCart = req.cookies.carttemp.totalQty;
             res.redirect('/user/dashboard');
@@ -26,39 +26,45 @@ exports.addToCart = (req, res, next) => {
 
 
 }
+
 exports.shoppingCart = async (req, res, next) => {
+    await renderCartDetail(req,res,'cartDetail');
+
+}
+exports.orderDetail = async (req, res, next) => {
+   await renderCartDetail(req,res,'checkout');
+}
+
+ function renderCartDetail(req,res,renderpage) {
     console.log(res.locals.carttemp)
     if (!req.cookies.carttemp) {
-        return res.render('cartDetail', { product: null })
+        return res.render(renderpage, { product: null })
     }
     res.status(201);
     var cart = new Cart(req.cookies.carttemp);
-    await res.render('cartDetail', { products: cart.generateArray(), totalPrice: cart.totalPrice })
-    // res.render('cartDetail', { products:cart.generateArray(), totalPrice: cart.totalPrice})
+     res.render(renderpage, { products: cart.generateArray(), totalPrice: cart.totalPrice })
+
 }
 
-exports.deleteItemByOne = (req,res,next)=>{
+exports.deleteItemByOne = (req, res, next) => {
     var productId = req.params.id;
-    var cart =  new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
+    var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
     cart.reduceByOne(productId);
     res.cookie("carttemp", cart);
     res.redirect("/user/shopping-cart")
 
 }
-exports.removeItem = (req, res, next) => {
+exports.removeItem = async(req, res, next) => {
+ await removeItem(req,res,'/user/shopping-cart')
+}
+exports.removeItemCheckout = async (req, res, next) => {
+   await removeItem(req,res,'/user/checkout')
+}
+
+function removeItem(req,res,page) {
     var productId = req.params.id;
     var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
     cart.removeItem(productId);
     res.cookie("carttemp", cart);
-    res.redirect("/user/shopping-cart")
-    // req.session.destroy(err => {
-    //     if (err) {
-    //         return res.redirect('/user/dashboard');
-    //     }
-    //     res.clearCookie('carttemp');
-    //     res.redirect('/user/shopping-cart')
-
-    // })
-
-
+    res.redirect(page);
 }
