@@ -6,7 +6,6 @@
 <body style="background-color: #ea9191;">
 
     <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
-
         <div class="wrapper wrapper--w960">
             <div class="card card-2">
                 <div class="card-heading"></div>
@@ -29,7 +28,6 @@
                                         id="lastname">
                                 </div>
                             </div>
-
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2" type="text" placeholder="Address" name="address"
@@ -59,6 +57,7 @@
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
+                                        <input id="selectgender" type="hidden" value="male">
                                         <select name="gender" id="gender">
                                             <option disabled="disabled" selected="selected">Gender</option>
                                             <option>Male</option>
@@ -69,7 +68,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2" type="password" placeholder="password" name="password"
@@ -83,21 +81,18 @@
                                 </div><span id='message'></span>
                             </div>
                         </div>
-
                     </form>
+
                     <div class="p-t-30">
                         <button class="btn btn--radius btn--green" id="btnRegister" type="submit">Register</button>
                     </div>
 
-                    
-                    <div class="error-group">    
+                    <div class="error-group">
                         <p id="msg"></p>
                         <ul id="errors"></ul>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
     <div class="bgcover">
@@ -108,9 +103,6 @@
         <div class="ballon"></div>
         <div class="ballon"></div>
     </div>
-
-    
-
     <script>
         $('#password, #cpwd').on('keyup', function () {
             if ($('#password').val() == $('#cpwd').val()) {
@@ -118,4 +110,5 @@
             } else
                 $('#message').html('Not Matching').css('color', 'red');
         });
-    </script><% include partials/footer.ejs %> 
+    </script>
+    <% include partials/footer.ejs %>

@@ -4894,7 +4894,7 @@ select#shape_select option[value="Round"] {
 
 /* HIDE RADIO */
 
-[type=radio] {
+.rdbtn {
     position: absolute;
     opacity: 0;
     width: 0;
@@ -4903,13 +4903,13 @@ select#shape_select option[value="Round"] {
 
 /* IMAGE STYLES */
 
-[type=radio]+img {
+.rdbtn+img {
     cursor: pointer;
 }
 
 /* CHECKED STYLES */
 
-[type=radio]:checked+img {
+.rdbtn:checked+img {
     outline: 4px solid rgb(101, 155, 30);
 }
 
@@ -4944,7 +4944,7 @@ select#shape_select option[value="Round"] {
     min-width: 300px;
 }
 
-input {
+.pinput {
     padding: 10px;
     width: 100%;
     font-size: 17px;

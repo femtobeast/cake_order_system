@@ -23,8 +23,6 @@ require(['jquery', 'api_url'], function ($, main) {
             data: JSON.stringify(customerData),
             success: function (result, status) {
                 $('#errors').html(result.message + ": Please refresh or login for checkout.");
-
-
             },
             error: function (err, status) {
 

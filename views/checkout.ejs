@@ -95,7 +95,6 @@
                                                         href="#collapseThree">
                                                         Review and Confirm Your Order
                                                         <% if(locals.carttemp){ var tempprice = locals.carttemp.totalPrice } %>
-
                                                     </a>
                                                 </h4>
                                             </div>
@@ -260,9 +259,9 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                              <label for="sel1">Select Delivery Date</label>  <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar">    </i>
-                                                             
-                                                                    <input class="input--style-2 js-datepicker form-control"
+                                                              <label for="sel1">Select Delivery Date</label> 
+                                                               <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"> </i>
+                                                             <input class="input--style-2 js-datepicker form-control"
                                                                         type="text" placeholder="Birthdate"
                                                                         name="birthday" id="dob">
                                                             </div>
@@ -290,6 +289,7 @@
                                     </div>
                                     <h4>Payment Method</h4>
                                     <div class="aa-payment-method">
+                                        
                                         <label for="cashdelivery"><input type="radio" id="cashdelivery"
                                                 name="optionsRadios"> Cash on Delivery </label>
                                         <label for="paypal"><input type="radio" id="paypal" name="optionsRadios"

@@ -10,34 +10,35 @@
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
                     <label>Number of people to serve.</label>
-                    <p><input placeholder="serve number" oninput="this.className = ''" name="serven"></p>
+                    <p><input placeholder="serve number" class="pinput" name="serven"></p>
                 </div>
                 <div class="tab">
                     <label>Number of pound.</label>
-                    <p><input placeholder="example 1" oninput="this.className = ''" name="pound"></p>
+                    <p><input placeholder="example 1" class="pinput" name="pound"></p>
                 </div>
                 <div class="tab">
                     <label>Number of tier.</label>
-                    <p><input placeholder="example 1" oninput="this.className = ''" name="pound"></p>
+                    <p><input placeholder="example 1" class="pinput" name="pound"></p>
                 </div>
                 <div class="tab">
-                        <div class="budget-wrap">
-                            <div class="budget">
-                                <div class="header">
-                                    <div class="title clearfix">Set your budget! <span class="pull-right"></span>
-                                    </div>
+                    <div class="budget-wrap">
+                        <div class="budget">
+                            <div class="header">
+                                <div class="title clearfix">Set your budget! <span class="pull-right"></span>
                                 </div>
-                                <div class="content">
-                                    <input id="rangevalue" type="range" min="1" max="5000" value="500" data-rangeslider>
-                                </div>
-    
                             </div>
+                            <div class="content">
+                                <input id="rangevalue" class="pinput" type="range" min="1" max="5000" value="500"
+                                    data-rangeslider>
+                            </div>
+
                         </div>
                     </div>
+                </div>
                 <div class="tab">
                     <label>Eggless?</label>
                     <div class="form-group">
-                        <select class="form-control" id="sel1" oninput="this.className = ''">
+                        <select class="form-control" id="sel1">
                             <option>Yes</option>
                             <option>No</option>
                         </select>
@@ -45,25 +46,37 @@
                 </div>
                 <div class="tab">
                     <label>Any sepecific shape of cake?</label>
-                       <div class="shapediv">
-                            <div class="col-md-5">
-                                    <label>
-                                        <input oninput="this.className = ''" type="radio" name="test" value="small" checked>
-                                        <img height="auto" width="50" src="/dashboard/img/cakeimg/square.png">
-                                    </label>
-        
-                                    <label>
-                                        <input oninput="this.className = ''" type="radio" name="test" value="big">
-                                        <img height="auto" width="50" src="/dashboard/img/cakeimg/heart.png">
-                                    </label>
-                                    <label>
-                                        <input oninput="this.className = ''" type="radio" name="test" value="big">
-                                        <img height="auto" width="50" src="/dashboard/img/cakeimg/round.png">
-                                    </label>
-                                </div>
-                       </div>
+                    <div class="shapediv">
+                        <div class="col-md-5">
+                            <label>
+                                <input class="rdbtn" type="radio" name="test" value="square" checked>
+                                <img height="auto" width="50" src="/dashboard/img/cakeimg/square.png">
+                            </label>
+                            <label>
+                                <input class="rdbtn" type="radio" name="test" value="heart">
+                                <img height="auto" width="50" src="/dashboard/img/cakeimg/heart.png">
+                            </label>
+                            <label>
+                                <input class="rdbtn" type="radio" name="test" value="round">
+                                <img height="auto" width="50" src="/dashboard/img/cakeimg/round.png">
+                            </label>
+                        </div>
+                        <script>
+                            var f = document.querySelector('input[name="test"]:checked').value;
+                            alert(f)
+                                (function () {
+                                    var radios = document.getElementsByName('test');
+                                    for (var i = 0; i < radios.length; i++) {
+                                        radios[i].onclick = function () {
+
+                                            // document.getElementById('choiceLabel').innerText = this.value;
+                                        }
+                                    }
+                                })();                       
+                        </script>
+                    </div>
                 </div>
-              
+
                 <div class="tab">Login Info:
                     <label>Select any occasions | to order your special cake.</label>
                 </div>

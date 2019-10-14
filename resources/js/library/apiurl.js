@@ -1,8 +1,8 @@
 BASE_URL = "http://localhost:1234/";
 
-imagePath = BASE_URL+ "uploads/"
+imagePath = "/uploads/"
 
-addCustomerByGoogleUser = BASE_URL + "user/registerAdd/";
+addCustomerByGoogleUser = "/user/registerAdd/";
 
 checkEmail = BASE_URL + "user/check/";
 

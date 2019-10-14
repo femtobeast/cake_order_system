@@ -43,11 +43,7 @@ var order = mysequelize.sequelize.define(
         },
         order_status: {
             type: mysequelize.Sequelize.ENUM,
-            values: ['pending', 'confirmed']
-        },
-        delivery_status: {
-            type: mysequelize.Sequelize.ENUM,
-            values: ['pending', 'Delivered']
+            values: [ 'notapproval','complete','progress','delivered']
         },
         delivery_option: {
             type: mysequelize.Sequelize.ENUM,
@@ -78,7 +74,7 @@ var order = mysequelize.sequelize.define(
 );
 
 order
-    .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
+    .sync({ force: true }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
         console.log("order table created");
     })

@@ -16,7 +16,7 @@ exports.addToCart = (req, res, next) => {
 
             // req.session.cart = cart;
             // req.session.totalCart = req.cookies.carttemp.totalQty;
-            res.redirect('/user/dashboard');
+            res.redirect('/user/shopping-cart');
 
         }).catch(function (err) {
             //error handling
@@ -54,7 +54,8 @@ exports.deleteItemByOne = (req, res, next) => {
     res.redirect("/user/shopping-cart")
 
 }
-exports.removeItem = async(req, res, next) => {
+exports.removeItem = async (req, res, next) => {
+    
  await removeItem(req,res,'/user/shopping-cart')
 }
 exports.removeItemCheckout = async (req, res, next) => {

@@ -63,10 +63,12 @@
                                             <td><a class="aa-cart-title" href="#"><%= data.item.cake_name %></a></td>
                                             <td>Rs: <span class="price"><%= data.item.cake_price %></span></td>
                                             <td>
+                                                <a class="aa-add-card-btn" href="/user/reduce/<%= data.item.cake_id%>"><i class="fas fa-minus"></i></a>
                                                 <input id="qnt_<%= i++ %>" data-price="<%= data.item.cake_price %>"
                                                     class="aa-cart-quantity" name="qty" minlength="10"
                                                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                                    maxlength="10" type="text" size="10" value="<%= data.qty %>">
+                                                    maxlength="10" type="text" readonly value="<%= data.qty %>">
+                                                    <a class="aa-add-card-btn" href="/user/add-to-cart/<%=data.item.cake_id %>"><i class="fas fa-plus"></i></a>
                                             </td>
                                             <td>Rs:<span id="itemtotal_<%= j++ %>"><%= data.totalPrice %></span></td>
                                         </tr>
