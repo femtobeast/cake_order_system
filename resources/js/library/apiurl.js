@@ -4,9 +4,11 @@ imagePath = "/uploads/"
 
 addCustomerByGoogleUser = "/user/registerAdd/";
 
-checkEmail = BASE_URL + "user/check/";
+checkEmail = "/user/check/";
 
 viewDetailURL = "/user/vp/";
+
+addFeedbackURL = "/user/sendFeedback/";
 
 
 "/user/login"

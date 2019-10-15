@@ -47,6 +47,9 @@ router.post('/registerAdd',
 router.post('/cakeSearchQuery', UserController.searchCakeDetail,(req, res, next)=>res.status(201));
 //-- LOGIN POST METHOD // const data = [req.session.customerEmail, req.session.customerId, req.session.token];
 router.post('/sendLogin',Auth.loginValidation,Auth.generateJwtToken, (req, res, next)=> res.redirect('/user/dashboard'));
+router.post('/sendFeedback',UserController.addFeedback)
+
+//------------------------------------------
 router.get('/logoutCart', (req, res) => {
     req.session.destroy(err => {
         if (err) {

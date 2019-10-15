@@ -52,5 +52,32 @@ define(['jquery', 'api_url'], function ($, main) {
         document.getElementById("finalTotal").innerHTML = total;
 
     })
+
+
+
+    ///FEEDBACK ADD    
+    $('#fdbtn').on('click', function () {        
+        var feedbackData = {
+            desc: $('#feedbackdesc').val(),
+            email: $('#femail').val(),
+            cid: $('#cakeid').val(),          
+        }
+        console.table(feedbackData);
+        $.ajax({
+            url: "http://localhost:1234/user/sendFeedback/",
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(feedbackData),
+            success: function (result, status) {
+                alert('added')
+              console.log(result)
+            },
+            error: function (err, status) {
+                console.log(err)
+            }
+        });
+
+    });
 });
 

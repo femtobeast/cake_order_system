@@ -11,6 +11,7 @@ var customer = mysequelize.sequelize.define(
     },
     cust_email: {
         type: mysequelize.Sequelize.STRING,
+        unique: true,
         allowNull: true
     },
     cust_fname: {

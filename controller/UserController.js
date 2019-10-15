@@ -1,5 +1,6 @@
 const usermodel = require("../model/Customer");
 const cakemodel = require("../model/Cake");
+const feedbackmodel = require("../model/Feedback");
 const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
 const Sequelize = require('sequelize');
@@ -136,7 +137,7 @@ exports.selectCakeById = (req, res, next) => {
             // res.json(result);
             res.render('viewDetails', { cdata: result })
         }).catch(err => {
-            next({ "status": 500, "message": err});
+            next({ "status": 500, "message": err });
 
         })
 }
@@ -215,11 +216,24 @@ exports.validateuserdata = async (req, res, next) => {
     }
 }
 
+//------FEEDBACK----------------
+//USER REGISTRATION FUNCTION ----------------
+exports.addFeedback = (req, res, next) => {
+    console.log(req.body)
+    try {
+        // const { desc, email, cid } = req.body;
+        feedbackmodel.feedback.create({
+            feedback_desc: req.body.desc,
+            cust_email: req.body.email,
+            cake_id: req.body.cid
+        }).then(function (result) {
+            res.json({ message: "Feedback added!!!" });
+        }).catch(function (err) {
+            next({ "status": 500, "message": err });
+          
+        })
+    } catch (err) {
+        return next({ "status": 500, "message": err });
+    }
 
-// User.hasMany(Channels, { foreignKey: 'channel_fk', as: 'channels' });
-
-// models.users.findAll({
-//     include: [{ model: models.channels, as: 'channels' }]
-// }).then(function (result) {
-//     console.log(JSON.stringify(result));
-// });
+}

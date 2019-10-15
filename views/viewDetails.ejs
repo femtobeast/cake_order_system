@@ -1,6 +1,7 @@
 <% include partials/header.ejs %>
 <% include partials/menu.ejs %>
 <% cdata.forEach(function(data){ %>
+<% var cid= data.cake_id %>
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
     <img src="/dashboard/img/cover/cover6.png" alt="fashion img">
@@ -71,7 +72,8 @@
                                         <a href="#"><i class="fas fa-square" style="font-size:2em;"></i></a>
                                         <a href="#"><i class="fas fa-circle" style="font-size:2em;"></i></a>
                                         <a href="#"><i class="fas fa-caret-up" style="font-size:2em;"></i></a>
-                                        <a href="#"><i class="fa fa-exclamation-triangl" style="font-size:2em;">Custom</i></a>
+                                        <a href="#"><i class="fa fa-exclamation-triangl"
+                                                style="font-size:2em;">Custom</i></a>
                                     </div>
 
                                     <div class="aa-prod-view-size">
@@ -101,14 +103,16 @@
                                         </span>
                                     </div>
                                     <div class="aa-prod-view-bottom">
-                                        <a class="aa-add-to-cart-btn" href="/user/add-to-cart/<%=data.cake_id %>"><i class="fas fa-cart-plus"></i>Add To
+                                        <a class="aa-add-to-cart-btn" href="/user/add-to-cart/<%=data.cake_id %>"><i
+                                                class="fas fa-cart-plus"></i>Add To
                                             Cart</a>
-                                            <span class="aa-prod-category">
-                                                Total: <span id="vcakeServe">
-                                                    Rs: <% if(locals.carttemp){ var tempprice = locals.carttemp.totalPrice } %>
-                                                    <%= tempprice %>
-                                                </span>
+                                        <span class="aa-prod-category">
+                                            Total: <span id="vcakeServe">
+                                                Rs:
+                                                <% if(locals.carttemp){ var tempprice = locals.carttemp.totalPrice } %>
+                                                <%= tempprice %>
                                             </span>
+                                        </span>
                                         <!-- <a class="aa-add-to-cart-btn" href="#">Wishlist</a> -->
                                         <!-- <a class="aa-add-to-cart-btn" href="#">Compare</a> -->
                                     </div>
@@ -124,7 +128,7 @@
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="description">
+                            <div class="tab-pane fade" id="description">
                                 <p><%= data.descriptions %></p>
                                 <ul>
                                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, culpa!</li>
@@ -136,8 +140,8 @@
                                 </ul>
 
                             </div>
-                            <div class="tab-pane fade " id="review">
-                                <% if(session.customerEmail){ %>
+                            <div class="tab-pane fade in active " id="review">
+                                <% if(!session.customerEmail){ %>
                                 <div class="aa-product-review-area">
                                     <h4>Reviews for <%= data.cake_name %></h4>
                                     <ul class="aa-review-nav">
@@ -166,28 +170,29 @@
 
                                     </ul>
                                     <h4>Add a Feedback</h4>
-
                                     <!-- review form -->
-                                    <form action="" class="aa-review-form">
+                                    <form id="feedbackfrm" class="aa-review-form">
+                                        <input type="hidden" id="cakeid" value="<%= cid %>">
                                         <div class="form-group">
                                             <label for="message">Feedback?</label>
-                                            <textarea class="form-control" rows="3" id="message"></textarea>
+                                            <textarea class="form-control" id="feedbackdesc"></textarea>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email"
+                                            <input type="email" class="form-control" id="femail"
                                                 placeholder="First need to login? You cannot add feedback before login"
                                                 value="<%- session.customerEmail %>">
                                         </div>
-
-                                        <button type="submit" class="btn btn-default aa-review-submit">Submit</button>
                                     </form>
+                                    <button id="fdbtn" class="btn btn-default loginbtn">Submit</button>
                                 </div>
                                 <% }else{ %>
                                 <div style="text-align: center" class="aa-product-review-area">
-                                      <a href="/user/login"> <button type="submit" class="loginbtn" id="login-button">Login</button></a>
-                                   <a href="/user/register"><button type="submit" class="loginbtn" class="btn btn-default aa-review-submit">Register</button></a>
+                                    <a href="/user/login"> <button type="submit" class="loginbtn"
+                                            id="login-button">Login</button></a>
+                                    <a href="/user/register"><button type="submit" class="loginbtn"
+                                            class="btn btn-default aa-review-submit">Register</button></a>
                                 </div>
                                 <% } %>
                             </div>
