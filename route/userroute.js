@@ -1,63 +1,76 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controller/UserController");
-const path = require('path')
+const OrderController = require("../controller/OrderController");
+const Auth = require('../controller/Authentication')
+const CartController = require('../controller/CartController');
 
 //---------GET FUNCTION PAGES ROUTE
-router.get('/login', function (req, res) {
-    res.render('login');
+router.get('/login', Auth.redirectToHome, (req, res) => res.render('userLogin'));
+router.get('/register', (req, res)=> res.render('register'));
+router.get('/dashboard', UserController.getAllCakeDetail);
+router.get('/product', UserController.browseAllCakeProduct,(req,res)=>{
+    res.render('product');
 });
-router.get('/register', function (req, res) {
-    res.render('register');
+router.get('/checkout', CartController.orderDetail, function (req, res) {
+
 });
-router.get('/dashboard', UserController.getAllCakeDetail, function (req, res) {
-    res.render('user_dashboard');
+router.get('/cplan', function (req, res) {
+    res.render('cakeplan');
 });
+
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-router.get('/vc',(req,res)=>{
-    res.render('viewcake');
+router.get('/order',OrderController.getNotApproveOrder, (req, res) => {
+    res.render('orderDetail');
 })
-// router.get('/config',function(req,res){
-//     // res.sendFile('config.js');
-//     res.sendFile(path.join(__dirname, "../config.js"))
-// });
-router.get('/gcustomer',UserController.getCustomerDetali);
+router.get('/vp/:id',UserController.selectCakeById);
+router.get('/shopping-cart',CartController.shoppingCart)//DISPLAY CART DETAIL FOR CHECKOUT: CART FUNCTION
+router.get('/add-to-cart/:id', CartController.addToCart)//ADD-TO-CART: CART FUNCTION
+router.get('/reduce/:id', CartController.deleteItemByOne)//REDUCE ITEM BY ONE: CART FUNCTION
+router.get('/removeItem/:id', CartController.removeItem)//REMOVE ITEM FROM CART: CART FUNCTION
+router.get('/removeItemCheckout/:id',CartController.removeItemCheckout)//REMOVE ITEM FROM CART: CART FUNCTION
 
-//-----------POST FUNCTION ROUTE-------------
-//adding user data
+router.post('/check', UserController.checkUserEmail);
+router.get('/gcustomer', UserController.getCustomerDetali);
+router.get('/carr', UserController.browseAllCakeProduct, UserController.getArrayCake);
+
+//-----------POST METHOD ROUTER-------------------
+//-- ADDING CUSTOMER POST METHOD
 router.post('/registerAdd',
-    UserController.addUser,
-    function (req, res) {
-        res.status(201);
-        res.send({ message: "Registeration Successful!!" });
-        // res.render("register", { "message": "User successfully Registered" })
-    }
-);
+    UserController.validateCustomerDetail('addUser'),
+    Auth.passwordHashGenerate,
+    UserController.checkUserEmail,
+    UserController.addUser);
+//-- SEARCHING CAKE DETAIL POST METHOD
+router.post('/cakeSearchQuery', UserController.searchCakeDetail,(req, res, next)=>res.status(201));
+//-- LOGIN POST METHOD // const data = [req.session.customerEmail, req.session.customerId, req.session.token];
+router.post('/sendLogin', Auth.loginValidation, Auth.generateJwtToken, (req, res, next) => res.send({ status: true }));
+router.post('/sendFeedback',UserController.addFeedback)
+router.post('/sendOrder', OrderController.placeOrder, (req, res) => {
+    res.status(201);
+    res.send({message:"Order Placed !!! Done"});
+});
+//------------------------------------------
+router.get('/logoutCart', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/user/dashboard');
+        }
+        res.clearCookie('carttemp');
+        res.redirect('/user/shopping-cart')
 
+    })
+})
+router.get('/logout', Auth.redirectToLogin, (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/home');
+        }
+        res.clearCookie('sid');
+        res.redirect('/user/dashboard')
 
+    })
+})
 module.exports = router;
-
-// router.get('/login', function (req, resp) {
-//     const wt = "Welcome to Yummy Cake";
-//     const favoriteThings = [
-//         "Red Velvet",
-//         "Black Forest"
-//     ];
-
-//     resp.render('index', { wt, favoriteThings });
-// })
-
-// this.app.post('/profile', (req, res) => {                        
-//     let password = req.body.password;            
-//     let newWallet = operator.createWalletFromPassword(password);
-//     let projectedWallet = projectWallet(newWallet);
-//     res.render('profile.ejs', {
-//       user : req.user,
-
-//       // We are now feeding your EJS template another variable
-//       projectedWallet : JSON.stringify(projectedWallet),
-//     });
-//     console.log(JSON.stringify(projectedWallet));        
-//   });

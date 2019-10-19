@@ -34,7 +34,7 @@ function addCustomerAPI(resp) {
 
     require(['api_url', 'jquery'], function(api_url, jquery) {
 
-        // alert(BASE_URL)
+        alert(BASE_URL)
         var userdetail = {
             firstname: resp.given_name,
             lastname: resp.family_name,

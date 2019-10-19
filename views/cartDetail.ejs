@@ -1,0 +1,117 @@
+<% include partials/header.ejs %>
+<% include partials/menu.ejs %>
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="/dashboard/img/cover/cover2.png" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>Cart Page</h2>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Cart</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / catg header banner section -->
+
+<!-- Cart view section -->
+<section id="cart-view">
+    <div class="container">
+        <% if(locals.products) { %>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+                        <form action="">
+                            <a class="remove" href="/user/logoutCart">
+                                <fa class=" fa fa-close">Delete All</fa>
+                            </a>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Cake Photo</th>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Item Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <input value="<%= products.length %>" type="hidden" id="itemArrLength">
+                                        <% var i =1; var j=1; products.forEach(function(data){ %>
+                                        <tr>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary btn-xs dropdown-toggle" type="button"
+                                                        data-toggle="dropdown">Remove</button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="/user/reduce/<%= data.item.cake_id%>">-1 Item</a>
+                                                        </li>
+                                                        <li><a href="/user/removeItem/<%= data.item.cake_id%>">Remove
+                                                                This Row</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td><a href="#"><img src="/uploads/<%= data.item.cake_image %>"
+                                                        alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="#"><%= data.item.cake_name %></a></td>
+                                            <td>Rs: <span class="price"><%= data.item.cake_price %></span></td>
+                                            <td>
+                                                <a class="aa-add-card-btn"
+                                                    href="/user/reduce/<%= data.item.cake_id%>"><i
+                                                        class="fas fa-minus"></i></a>
+                                                <input id="qnt_<%= i++ %>" data-price="<%= data.item.cake_price %>"
+                                                    class="aa-cart-quantity" name="qty" minlength="10"
+                                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                    maxlength="10" type="text" readonly value="<%= data.qty %>">
+                                                <a class="aa-add-card-btn"
+                                                    href="/user/add-to-cart/<%=data.item.cake_id %>"><i
+                                                        class="fas fa-plus"></i></a>
+                                            </td>
+                                            <td>Rs:<span id="itemtotal_<%= j++ %>"><%= data.totalPrice %></span></td>
+                                        </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <!-- Cart Total view -->
+                        <div class="cart-view-total">
+                            <h4>Cart Totals</h4>
+                            <table class="aa-totals-table">
+                                <tbody>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>Rs:<span id="subtotal"> <%= totalPrice %></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>FInal Total</th>
+                                        <td>Rs: <span id="finalTotal"><%= totalPrice %></span></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="/user/checkout" class="aa-cart-view-btn">Proced to Checkout</a>
+                        </div>
+                        <% }else{ %>
+                        <div class="col-md-10">
+                            <h1>Product Cart!!! <img width="200" height="auto" src="/dashboard/img/cartempty1.png"></h1>
+                            <hr>
+                            <h4>Your cart is empty. You have no any cake to order!!!</h4>
+                        </div>
+
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Cart view section -->
+<% include partials/footer.ejs %>
