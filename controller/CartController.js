@@ -24,9 +24,7 @@ exports.addToCart = (req, res, next) => {
         });
     }
 
-
 }
-
 exports.shoppingCart = async (req, res, next) => {
     await renderCartDetail(req,res,'cartDetail');
 
@@ -34,7 +32,6 @@ exports.shoppingCart = async (req, res, next) => {
 exports.orderDetail = async (req, res, next) => {
    await renderCartDetail(req,res,'checkout');
 }
-
  function renderCartDetail(req,res,renderpage) {
     console.log(res.locals.carttemp)
     if (!req.cookies.carttemp) {
@@ -45,7 +42,6 @@ exports.orderDetail = async (req, res, next) => {
      res.render(renderpage, { products: cart.generateArray(), totalPrice: cart.totalPrice })
 
 }
-
 exports.deleteItemByOne = (req, res, next) => {
     var productId = req.params.id;
     var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
@@ -55,13 +51,11 @@ exports.deleteItemByOne = (req, res, next) => {
 
 }
 exports.removeItem = async (req, res, next) => {
-    
- await removeItem(req,res,'/user/shopping-cart')
+await removeItem(req,res,'/user/shopping-cart')
 }
 exports.removeItemCheckout = async (req, res, next) => {
    await removeItem(req,res,'/user/checkout')
 }
-
 function removeItem(req,res,page) {
     var productId = req.params.id;
     var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});

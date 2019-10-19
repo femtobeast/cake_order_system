@@ -22,7 +22,7 @@ var order = mysequelize.sequelize.define(
             allowNull: false
         },
         order_city: {
-            type: mysequelize.Sequelize.INTEGER,
+            type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
         order_phone: {
@@ -39,6 +39,11 @@ var order = mysequelize.sequelize.define(
         },
         order_total: {
             type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+           
+        },
+        order_cust_id: {
+            type: mysequelize.Sequelize.BIGINT(10),
             allowNull: false
         },
         order_status: {
@@ -57,6 +62,11 @@ var order = mysequelize.sequelize.define(
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
+        paymentM: {
+            type: mysequelize.Sequelize.ENUM,
+            values: ['cashondelivery', 'epay'],
+            allowNull:false
+        },
         cake_id: {
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
@@ -74,7 +84,7 @@ var order = mysequelize.sequelize.define(
 );
 
 order
-    .sync({ force: true }) //first time is true second should be false. repeatedly creating tables new
+    .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
         console.log("order table created");
     })

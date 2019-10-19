@@ -6,7 +6,7 @@ const Auth = require('../controller/Authentication')
 const CartController = require('../controller/CartController');
 
 //---------GET FUNCTION PAGES ROUTE
-router.get('/login',Auth.redirectToHome, (req, res)=>res.render('userLogin'));
+router.get('/login', Auth.redirectToHome, (req, res) => res.render('userLogin'));
 router.get('/register', (req, res)=> res.render('register'));
 router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct,(req,res)=>{
@@ -22,7 +22,7 @@ router.get('/cplan', function (req, res) {
 router.get('/cp', function (req, res) {
     res.render('changePwd');
 });
-router.get('/order', (req, res) => {
+router.get('/order',OrderController.getNotApproveOrder, (req, res) => {
     res.render('orderDetail');
 })
 router.get('/vp/:id',UserController.selectCakeById);
@@ -46,9 +46,12 @@ router.post('/registerAdd',
 //-- SEARCHING CAKE DETAIL POST METHOD
 router.post('/cakeSearchQuery', UserController.searchCakeDetail,(req, res, next)=>res.status(201));
 //-- LOGIN POST METHOD // const data = [req.session.customerEmail, req.session.customerId, req.session.token];
-router.post('/sendLogin',Auth.loginValidation,Auth.generateJwtToken, (req, res, next)=> res.redirect('/user/dashboard'));
+router.post('/sendLogin', Auth.loginValidation, Auth.generateJwtToken, (req, res, next) => res.send({ status: true }));
 router.post('/sendFeedback',UserController.addFeedback)
-
+router.post('/sendOrder', OrderController.placeOrder, (req, res) => {
+    res.status(201);
+    res.send({message:"Order Placed !!! Done"});
+});
 //------------------------------------------
 router.get('/logoutCart', (req, res) => {
     req.session.destroy(err => {

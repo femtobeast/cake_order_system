@@ -1,5 +1,32 @@
 require(['jquery', 'api_url'], function ($, main) {
 
+    hideLoad();
+    //LOGIN AJAX 
+    $('.wrapper-container').on('click', '#login-button', function () {
+        var customerData = {
+            email: $('#cemail').val(),
+            password: $('#cpassword').val()
+        }
+        showLoad();
+        $.ajax({
+            url: loginURL,
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(customerData),
+            success: function (result, status) {
+                holdContent();
+                redirectPage('/user/dashboard')
+                // $('#errors').html(result.message + ": Please refresh or login for checkout.");
+            },
+            error: function (err, status) {
+                holdContent();
+                $('#msg').html(err.responseJSON.message);
+            }
+        });
+
+    });
+
     //REGISTER AJAX 
     $('#btnRegister').on('click', function () {
 
@@ -71,8 +98,63 @@ require(['jquery', 'api_url'], function ($, main) {
 
     });
 
+    //ORDER PLACED 
+    $('#oplacedbtn').on('click', function () {
+        // var p1 = document.querySelector('input[name="p1"]:checked').value;
+        // var paymentM = p1 === 'Cash on Delivery' ? 'cashondelivery' : 'epay';
+        var orderData = {
+            receiverName: $('#receiverName').val(),
+            order_pdate: document.getElementsByName('ddate')[0].value,
+            alias: $('#alias').val(),
+            city: $('#city').val(),
+            mobileno: $('#mobileno').val(),
+            mobileno2: $('#mobileno2').val(),
+            oqty: $('#oqty').val(),
+            ototalprice: $('#ototal').val(),
+            oemail: $('#oemail').val(),
+            order_status: 'notapproval',
+            doption: document.getElementsByName('doption')[0].value,
+            ddate: document.getElementsByName('ddate')[0].value,
+            dlocation: document.getElementsByName('dlocation')[0].value,
+            paymentM: 'cashondelivery',
+            cake_id: $('#cake_id').val(),
+            orderLength: $('#itemarray').val()
+        }
+        console.table(orderData);
+        $.ajax({
+            url: addPlacedOrder,
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(orderData),
+            success: function (result, status) {
+                alert('Order is placed. Will be notify as soon as order is confirmed')
+            },
+            error: function (err, status) {
+                // alert('Order is not placed. ')
+                console.log(err)
+
+            }
+        });
+
+    })
+
 
 });
 function redirectPage(path) {
     return window.location.href = path;;
+}
+
+async function holdContent() {
+    await window.setTimeout(function () {
+        $('#loadingdiv').hide();
+    }, 2000);
+}
+
+function hideLoad() {
+    $('#loadingdiv').hide();
+}
+
+function showLoad() {
+    $('#loadingdiv').show();
 }

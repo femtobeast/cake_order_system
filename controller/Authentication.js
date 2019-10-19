@@ -23,6 +23,9 @@ exports.loginValidation = (req, res, next) => {
     const { email, password } = req.body;
     CustomerModel.customer.findOne({
         attributes: [
+            'cust_fname',
+            'cust_lname',
+            'cust_phone',
             'cust_id',
             'cust_password',
             'cust_email'
@@ -32,10 +35,15 @@ exports.loginValidation = (req, res, next) => {
         if (result != null) {
             Bcrypt.compare(password, result.dataValues.cust_password, function (err, res) {
                 if (res) {
+                    req.session.fname = result.dataValues.cust_fname;
+                    req.session.lname = result.dataValues.cust_lname;
+                    req.session.mobile = result.dataValues.cust_phone;
+
+
                     req.session.customerEmail = result.dataValues.cust_email;
                     req.session.customerId = result.dataValues.cust_id;
                     next();
-                } else {
+                } else {                
                     next({ "status": 409, "message": "Password didnot match" });
                 }
             });

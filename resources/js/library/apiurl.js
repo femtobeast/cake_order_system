@@ -2,6 +2,8 @@ BASE_URL = "http://localhost:1234/";
 
 imagePath = "/uploads/"
 
+loginURL = "/user/sendLogin"
+
 addCustomerByGoogleUser = "/user/registerAdd/";
 
 checkEmail = "/user/check/";
@@ -9,6 +11,8 @@ checkEmail = "/user/check/";
 viewDetailURL = "/user/vp/";
 
 addFeedbackURL = "/user/sendFeedback/";
+
+addPlacedOrder = "/user/sendOrder/";
 
 
 "/user/login"

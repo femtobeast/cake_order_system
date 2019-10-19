@@ -56,13 +56,18 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="input-group">
+
+                                        <select name="gender" id="gender">
+                                                <option disabled="disabled" selected>Gender</option>
+                                                <option id="gmale">Male</option>
+                                                <option>Female</option>
+                                                <option>Other</option>
+                                            </select>
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <input id="selectgender" type="hidden" value="male">
                                         <select name="gender" id="gender">
                                             <option disabled="disabled" selected="selected">Gender</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
+                                            <option id="gmale">Male</option>
+                                            <option id="gfemale">Female</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>

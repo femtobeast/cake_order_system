@@ -1,6 +1,6 @@
 
 var mysequelize = require("../config/databaseConfig");
-var feedback = mysequelize.sequelize.define(
+ feedback = mysequelize.sequelize.define(
     "tblfeedback",
     {
         feedback_id: {
@@ -37,4 +37,4 @@ feedback
     .catch(function (err) {
         console.log("err in creating feedback table");
     });
-module.exports = { flavour };
+module.exports = { feedback };

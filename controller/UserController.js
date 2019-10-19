@@ -169,7 +169,6 @@ exports.searchCakeDetail = async (req, res, next) => {
     })
 }
 
-
 //VALIDATION OF CUSTOMER DETAIL FUNCTION
 exports.validateCustomerDetail = (method) => {
     switch (method) {
@@ -219,21 +218,16 @@ exports.validateuserdata = async (req, res, next) => {
 //------FEEDBACK----------------
 //USER REGISTRATION FUNCTION ----------------
 exports.addFeedback = (req, res, next) => {
-    console.log(req.body)
-    try {
-        // const { desc, email, cid } = req.body;
-        feedbackmodel.feedback.create({
-            feedback_desc: req.body.desc,
-            cust_email: req.body.email,
-            cake_id: req.body.cid
-        }).then(function (result) {
-            res.json({ message: "Feedback added!!!" });
-        }).catch(function (err) {
-            next({ "status": 500, "message": err });
-          
-        })
-    } catch (err) {
-        return next({ "status": 500, "message": err });
-    }
+    
+    // const { desc, email, cid } = req.body;
+    feedbackmodel.feedback.create({
+        feedback_desc: req.body.desc,
+        cust_email: req.body.email,
+        cake_id: req.body.cid
+    }).then(function (result) {
+        res.json({ message: "Feedback added!!!" });
+    }).catch(function (err) {
+        next({ "status": 500, "message": err });
 
+    })
 }

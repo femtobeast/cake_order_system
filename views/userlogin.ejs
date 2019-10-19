@@ -197,27 +197,36 @@
                     <!-- <span style="color: #ff6666;font-size: 1em;" class="fa fa-birthday-cake"></span> -->
                     <div class="text">
                         <h1><span style="color: #ff6666">YUMMYCAKE</span> | LOGIN</h1>
-                        <span style="color: #ff6666">
-                            <a href="/user/dashboard"><i class="fas fa-store"></i>Continue
-                                Shopping<!!!></a>
-                            </span>
-                        <!-- <p>Happy Birthday!!!</p> -->
+                        <a href="/user/dashboard"> <button type="submit" class="shopbtn"><i
+                                    class="fas fa-store"></i>Continue Shopping</button></a>
                     </div>
-                    <div class="error-group">
-                        <p id="msg"></p>
-                    </div>
-                    <form class="form" method="POST" action="/user/sendLogin">
-                        <div class="form-group">
-                            <input id="cemail" type="text" name="email" class="form-control" placeholder="example@gmail.com">
-                        </div>
-                        <div class="form-group"><input id="cpassword" type="password" name="password" class="form-control"
-                                placeholder="*********">
-                        </div>
-                        <button type="submit" id="login-button">Login</button>
 
+                    <!-- /////message -->
+                    <div id="loadingdiv">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    <div style="width:20%;margin: 5px auto;;">
+                        <div class="error-group">
+                            <p id="msg"></p>
+                        </div>
+                    </div>
+
+                    <!-- ////message -->
+                    <form class="form" id="loginfrm">
+                        <div class="form-group">
+                            <input id="cemail" type="text" name="email" class="form-control"
+                                placeholder="example@gmail.com">
+                        </div>
+                        <div class="form-group"><input id="cpassword" type="password" name="password"
+                                class="form-control" placeholder="*********">
+                        </div>
+                  
                     </form>
+                    <button type="submit" class="loginbtn" id="login-button">Login</button>
                     <div class="g-signin2" id="gSignIn" data-onsuccess="onSignIn"></div>
                     <a href="/user/register">Register: For new account</a>
+                 
                 </div>
             </div>
         </div>
@@ -233,27 +242,35 @@
     </div>
 
 </body>
-<script data-main="/js/custom/config.js" src="/js/library/requirejs.js"></script>
-<!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+
+<script src="/js/library/requirejs.js"></script>
+<script src="/js/custom/config.js"></script>
 <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
 <!-- <script src="/js/library/jquery-3.3.0.min.js"></script> -->
 <script src="/js/library/googleAuth.js"></script>
 
 <script>
     require(['/js/custom/config.js'], function () {
-        // require(['/js/custom/datatransaction.js']);
+        require(['/js/custom/datatransaction.js']);
         // require(['/js/library/jquery-3.3.0.min.js']);
         // require(["/js/library/apiurl.js"]);
     })
 </script>
 
-<!-- <script>
-    $("#login-button").click(function (event) {
-        event.preventDefault();
+<script>
+ 
+    // var message = $('.error-group');
+    // if (message.length) {
+    //     setTimeout(function () {
+    //         message.fadeOut('slow');
+    //     }, 2000);
+    // }
+    // $("#login-button").click(function (event) {
+    //     event.preventDefault();
 
-        $('form').fadeOut(500);
-        $('.wrapper').addClass('form-success');
-    });
-    </script> -->
+    //     $('form').fadeOut(500);
+    //     $('.wrapper').addClass('form-success');
+    // });
+</script>
 
 </html>
