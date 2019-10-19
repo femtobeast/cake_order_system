@@ -105,7 +105,7 @@ exports.getAllCakeDetail = (req, res, next) => {
         .catch(function (err) {
             next({ "status": 500, "message": err });
         });
-}
+}///
 
 //BROWSE ALL CAKE FOR SELECTING
 exports.browseAllCakeProduct = (req, res, next) => {

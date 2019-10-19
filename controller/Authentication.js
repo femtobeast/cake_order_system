@@ -42,7 +42,7 @@ exports.loginValidation = (req, res, next) => {
 
                     req.session.customerEmail = result.dataValues.cust_email;
                     req.session.customerId = result.dataValues.cust_id;
-                    next();
+                    next(); //////
                 } else {                
                     next({ "status": 409, "message": "Password didnot match" });
                 }
@@ -102,7 +102,7 @@ exports.verifyToken = function (req, res, next) {
 exports.redirectToLogin = (req, res, next) => {
     console.log(req.session.token + " redirect to login")
     if (!req.session.token) {
-        res.redirect('/user/login');
+        res.redirect('/user/login');//redirect to clone
     } else {
         next();
     }
