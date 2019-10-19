@@ -89,6 +89,8 @@ app.use((err, req, res, next) => {
   return res.send({ "status": err.status, "message": err.message });
 });
 //--------------------------
+
+
 //route for upload folders
 //Serves all the request which includes /images in the url from Images folder
 var publicDir = require('path').join(__filename, '/resources/uploads');
