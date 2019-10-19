@@ -1,118 +1,119 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<% include partials/header.ejs %>
+<% include partials/menu.ejs %>
+<link href="/register/main.css" rel="stylesheet" type="text/css" media="all">
+<link href="/css/cake.css" rel="stylesheet" type="text/css" media="all">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="login page">
-    <meta name="luciplus_group" content="yummybakery">
-    <meta name="keywords" content="Yummy Bakery">
-    <!-- Title Page-->
-    <title>Registration page</title>
-    <!-- Icons font CSS-->
-    <link href="/register/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="/register/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
-        rel="stylesheet">
+<body style="background-color: #ea9191;">
 
-    <!-- Vendor CSS-->
-    <link href="/register/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/register/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="/register/main.css" rel="stylesheet" type="text/css" media="all">
-</head>
-
-<body>
     <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
         <div class="wrapper wrapper--w960">
             <div class="card card-2">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title">Registration Info</h2>
-                    <form method="POST" action="/user/registerAdd">
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="First Name" name="firstname"
-                                id="firstname">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Last Name" name="lastname"
-                                id="lastname">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Address" name="address" id="address">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Phone Number" name="phone"
-                                id="phone">
-                        </div>
-                        <div class="row row-space">
+                    <h2 class="title">
+                        <span style="color: #ff6666;font-size: 1em;" class="fa fa-birthday-cake"></span>
+                        Registration Info
+                    </h2>
+                    <form method="POST" id="registerForm">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="First Name" name="firstname"
+                                        id="firstname">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Last Name" name="lastname"
+                                        id="lastname">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Address" name="address"
+                                        id="address">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Phone Number" name="phone"
+                                        id="phone">
+                                </div>
+                            </div>
 
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2 js-datepicker" type="text" placeholder="Birthdate"
                                         name="birthday" id="dob">
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
-
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
+                                    <input class="input--style-2" type="text" placeholder="Email" name="email"
+                                        id="email">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+
+                                        <select name="gender" id="gender">
+                                                <option disabled="disabled" selected>Gender</option>
+                                                <option id="gmale">Male</option>
+                                                <option>Female</option>
+                                                <option>Other</option>
+                                            </select>
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="gender" id="gender">
                                             <option disabled="disabled" selected="selected">Gender</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
+                                            <option id="gmale">Male</option>
+                                            <option id="gfemale">Female</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="input-group">
-                            <input class="input--style-2" type="text" placeholder="Email" name="email" id="email">
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2" type="password" placeholder="password" name="password"
                                         id="password">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="input--style-2" type="password" placeholder="Confirm Password"
-                                        name="cpassword">
-                                </div>
+                                        name="cpassword" id="cpwd">
+                                </div><span id='message'></span>
                             </div>
                         </div>
-
-                        <div class="p-t-30">
-                            <button class="btn btn--radius btn--green" type="submit">Register</button>
-                        </div>
                     </form>
+
+                    <div class="p-t-30">
+                        <button class="btn btn--radius btn--green" id="btnRegister" type="submit">Register</button>
+                    </div>
+
+                    <div class="error-group">
+                        <p id="msg"></p>
+                        <ul id="errors"></ul>
+                    </div>
                 </div>
-                <% if(typeof message !== 'undefined') { %>
-                <p><%= message %></p>
-                <% } %>
             </div>
         </div>
     </div>
-
-    <!-- Jquery JS-->
-    <script src="/register/vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="/register/vendor/select2/select2.min.js"></script>
-    <script src="/register/vendor/datepicker/moment.min.js"></script>
-    <script src="/register/vendor/datepicker/daterangepicker.js"></script>
-
-    <!-- Main JS-->
-    <script src="/register/js/global.js"></script>
-
-</body>
-
-</html>
+    <div class="bgcover">
+        <div class="ballon"></div>
+        <div class="ballon"></div>
+        <div class="ballon"></div>
+        <div class="ballon"></div>
+        <div class="ballon"></div>
+        <div class="ballon"></div>
+    </div>
+    <script>
+        $('#password, #cpwd').on('keyup', function () {
+            if ($('#password').val() == $('#cpwd').val()) {
+                $('#message').html('Matched').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+    </script>
+    <% include partials/footer.ejs %>

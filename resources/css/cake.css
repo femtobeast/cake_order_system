@@ -1,0 +1,301 @@
+#cake {
+  display: block;
+  position: relative;
+  margin: -10em auto 0 auto;
+}
+
+/* ============================================== Candle
+*/
+
+.velas {
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  top: 228px;
+  left: 50%;
+  margin-left: -2.4px;
+  margin-top: -8.33333333px;
+  width: 5px;
+  height: 35px;
+  animation: in 50ms 10s ease-out forwards;
+  -webkit-transform: translateY(-300px);
+  transform: translateY(-300px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-animation: in 500ms 6s ease-out forwards;
+  animation: in 500ms 6s ease-out forwards;
+}
+
+.velas:after, .velas:before {
+  background: rgba(255, 0, 0, 0.4);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2.22222222px;
+}
+
+.velas:after {
+  top: 25%;
+  left: 0;
+}
+
+.velas:before {
+  top: 45%;
+  left: 0;
+}
+
+/* ============================================== Fire
+*/
+
+.fuego {
+  border-radius: 100%;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -2.6px;
+  width: 6.66666667px;
+  height: 18px;
+}
+
+.fuego:nth-child(1) {
+  -webkit-animation: fuego 2s 6.5s infinite;
+  animation: fuego 2s 6.5s infinite;
+}
+
+.fuego:nth-child(2) {
+  -webkit-animation: fuego 1.5s 6.5s infinite;
+  animation: fuego 1.5s 6.5s infinite;
+}
+
+.fuego:nth-child(3) {
+  -webkit-animation: fuego 1s 6.5s infinite;
+  animation: fuego 1s 6.5s infinite;
+}
+
+.fuego:nth-child(4) {
+  -webkit-animation: fuego 0.5s 6.5s infinite;
+  animation: fuego 0.5s 6.5s infinite;
+}
+
+.fuego:nth-child(5) {
+  -webkit-animation: fuego 0.2s 6.5s infinite;
+  animation: fuego 0.2s 6.5s infinite;
+}
+
+/* ============================================== Animation Fire
+*/
+
+@-webkit-keyframes fuego {
+  0%, 100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    -webkit-transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    -webkit-transform: translateY(-20px) scale(0);
+    transform: translateY(-20px) scale(0);
+  }
+}
+
+@keyframes fuego {
+  0%, 100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    -webkit-transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    -webkit-transform: translateY(-20px) scale(0);
+    transform: translateY(-20px) scale(0);
+  }
+}
+
+@-webkit-keyframes in {
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes in {
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.text {
+  color: #8b6a60;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  /* font-style: italic; */
+  font-weight: bold;
+  text-align: center;
+}
+
+.text h1 {
+  font-size: 2em;
+}
+
+/* //-------------Balloon css--------------------------------- */
+
+.bgcover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.bgcover .ballon {
+  opacity: 0;
+  position: absolute;
+  top: -0.25rem;
+  width: 72px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.bgcover .ballon::before {
+  content: ' ';
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  top: 30%;
+  right: 30%;
+  background-color: rgba(225, 225, 225, 0.3);
+}
+
+.bgcover .ballon::after {
+  content: '▲';
+  position: absolute;
+  font-size: 12px;
+  width: 12px;
+  left: 50%;
+  color: inherit;
+  bottom: -10px;
+  transform: translate(-50%, 0);
+}
+
+.bgcover .ballon:nth-child(1) {
+  left: 28%;
+  background-color: #6f916f;
+  color: green;
+  -webkit-animation: blow 25000ms ease-out infinite;
+  animation: blow 25000ms ease-out infinite;
+  -webkit-animation-delay: 1653ms;
+  animation-delay: 1653ms;
+}
+
+.bgcover .ballon:nth-child(2) {
+  left: 27%;
+  background-color: #f2f245;
+  color: orange;
+  -webkit-animation: blow 25000ms ease-out infinite;
+  animation: blow 25000ms ease-out infinite;
+  -webkit-animation-delay: 9003ms;
+  animation-delay: 9003ms;
+}
+
+.bgcover .ballon:nth-child(3) {
+  left: 56%;
+  background-color: orange;
+  color: orange;
+  -webkit-animation: blow 25000ms ease-out infinite;
+  animation: blow 25000ms ease-out infinite;
+  -webkit-animation-delay: 1206ms;
+  animation-delay: 1206ms;
+}
+
+.bgcover .ballon:nth-child(4) {
+  left: 78%;
+  color: aliceblue;
+  background-color: #c46ad7;
+  -webkit-animation: blow 25000ms ease-out infinite;
+  animation: blow 25000ms ease-out infinite;
+  -webkit-animation-delay: 11003ms;
+  animation-delay: 11003ms;
+}
+
+.bgcover .ballon:nth-child(5) {
+  left: 93%;
+  background-color: pink;
+  color: pink;
+  -webkit-animation: blow 28433ms ease-out infinite;
+  animation: blow 28433ms ease-out infinite;
+  -webkit-animation-delay: 2425ms;
+  animation-delay: 2425ms;
+}
+
+.bgcover .ballon:nth-child(6) {
+  left: 4%;
+  background-color: skyblue;
+  color: skyblue;
+  -webkit-animation: blow 25000ms ease-out infinite;
+  animation: blow 25000ms ease-out infinite;
+  -webkit-animation-delay: 4136ms;
+  animation-delay: 4136ms;
+}
+
+.strip {
+  width: 100%;
+  height: 15%;
+  position: absolute;
+  top: 40%;
+  background-color: #db78e6;
+}
+
+.next {
+  top: 60%;
+  /* background-color: #f35cd9; */
+}
+
+@-webkit-keyframes blow {
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(0, -30vh);
+    transform: translate(0, -30vh);
+  }
+  20%, 90% {
+    opacity: 0.7;
+  }
+  0% {
+    opacity: 0.5;
+    -webkit-transform: translate(0, 100vh);
+    transform: translate(0, 100vh);
+  }
+}
+
+@media all {
+  .body {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+}
+
+@keyframes anime {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+    transform: scale(.7);
+  }
+  90%, 10% {
+    opacity: 1;
+  }
+}

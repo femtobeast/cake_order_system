@@ -24,3 +24,4 @@ truncate tblcustomer;
 -- ALTER TABLE `tbl_emoji_selections`
   -- ADD CONSTRAINT `fk_tbl_emoji_selections_emoji_id` FOREIGN KEY (`emoji_id`) REFERENCES `tbl_emojis` (`emoji_id`),
   -- ADD CONSTRAINT `fk_tbl_emoji_selections_emp_id` FOREIGN KEY (`emp_id`) REFERENCES `tbl_employees` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- <%= (!!locals.foo)?foo:'' %>

@@ -1,0 +1,35 @@
+<ul class="aa-product-catg">    
+    <!-- start single product item -->
+    <% cdata.forEach(function(data){ %>
+    <li>
+        <figure>
+            <!-- <%= %> -->
+            <a class="aa-product-img" href="#"><img imgagecake="<%=data.cake_image %>" height="300" width="250"
+                    src="/uploads/<%=data.cake_image %>" + alt="polo shirt img"></a>
+            <a class="aa-add-card-btn" href="/user/add-to-cart/<%=data.cake_id %>"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+            <!-- cartdata='user=[data.cake_id,data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type] ' -->
+            <figcaption>
+                <h4 class="aa-product-title">
+                    <a href="#">
+                        <%= data.cake_name %>
+                    </a>
+                </h4>
+                <span class="aa-product-price">Rs <%=data.cake_price %></span><span
+                    class="aa-product-price"><del>Rs-65.50</del></span>
+            </figcaption>
+        </figure>
+        <div class="aa-product-hvr-content">
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span
+                    class="fa fa-heart-o"></span></a>
+            <a href="#"
+                aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type,data.cake_id,data.pound,data.serves] %>'
+                id="quickViewBtn" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal"
+                data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+        </div>
+        <!-- product badge -->
+        <span class="aa-badge aa-sale" href="#">SALE!</span>
+    </li>
+    <%})%>
+</ul>
+
+<!-- $(selector).on(event, childSelector, data, function, map) -->
