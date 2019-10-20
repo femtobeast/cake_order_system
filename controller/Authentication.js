@@ -43,7 +43,7 @@ exports.loginValidation = (req, res, next) => {
                     req.session.customerEmail = result.dataValues.cust_email;
                     req.session.customerId = result.dataValues.cust_id;
                     next(); //////
-                } else {                
+                } else {
                     next({ "status": 409, "message": "Password didnot match" });
                 }
             });
