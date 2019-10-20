@@ -12,7 +12,9 @@ function showTab(n) {
         document.getElementById("prevBtn").style.display = "inline";
     }
     if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit";
+        $('#nextBtn').hide();
+        $('#cshop').show();
+        document.getElementById("nextBtn").innerHTML = "Search_Cake";
     } else {
         document.getElementById("nextBtn").innerHTML = "Next";
     }

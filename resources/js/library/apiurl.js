@@ -15,6 +15,9 @@ addFeedbackURL = "/user/sendFeedback/";
 addPlacedOrder = "/user/sendOrder/";
 
 
+
+
+
 "/user/login"
 "/user/register"
 "/user/dashboard"
