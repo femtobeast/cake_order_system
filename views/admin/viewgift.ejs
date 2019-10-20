@@ -1,0 +1,175 @@
+<% include partials/header.ejs %>
+<% include partials/menu.ejs %>
+<!-- cake view section -->
+<section id="cart-view">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+
+
+                    <div class="cart-view-table">
+                        <!-- <form action=""> -->
+                        <legend class="text-center header">View gift details</legend>
+                        <div class="table-responsive">
+                            <form class="form-inline">
+                                <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
+                                <input class="form-control form-control-sm ml-3 w-80" id="searchhere" type="text"
+                                    placeholder="Search" aria-label="Search" onkeyup="searchFun()">
+                            </form>
+                            <table id='tablehere' class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">GIFT ID</th>
+                                        <th scope="col">Gift Name</th>
+                                        <th scope="col">Gift Image</th>
+                                        <th scope="col">Gift Price</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="giftList">
+
+                                    <% data.forEach(function(data){%>
+                                    <tr id="">
+                                        <td scope="row"><%= data.gift_id %> </td>
+                                        <td><%= data.gift_name %> </td>
+                                        <td scope="row"> <img style="width: 150px;
+                                            height: 100px;"
+                                                src="http://localhost:1234/giftuploads/<%= data.gift_image %>    ">
+                                        </td>
+                                        <td><%= data.gift_price %>
+                                        </td>
+                                        <td><button id="individualgiftview" type="button" gid="<%= data.gift_id %>"
+                                                class="btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModalLong">Update</button>
+                                        </td>
+                                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div id="popup" class="modal-content">
+                                                    <div class="modal-header">
+                                                        <form class="form-horizontal" method="post" id="updategiftform">
+                                                            <fieldset>
+                                                                <legend class="text-center header">Update gift details
+                                                                </legend>
+                                                                <!-- <% if(typeof message !== 'undefined') { %>
+                                                                        <p><%= message %></p>
+                                                                        <% } %> -->
+                                                                <alert id="message"></alert>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="fn">Gift Name</label>
+
+                                                                        <input id="giftname" name="giftname" type="text"
+                                                                            placeholder="Gift Name"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="fn">Gift Price</label>
+
+                                                                        <input id="giftprice" name="giftprice"
+                                                                            type="text" placeholder="Gift Price"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="fn">Gift Image</label>
+
+                                                                        <input id="giftimage" name="giftimage"
+                                                                            type="file" placeholder="Gift Price"
+                                                                            value="" class="form-control">
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary btn-lg">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                        </form>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <!-- <div class="modal-footer">
+                                                
+                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                </div> -->
+                                        </div>
+
+                                        <td> <button id="giftdelete" type="button" gid="<%= data.gift_id %>"
+                                                class="btn btn-danger">Delete</button>
+                                        </td>
+                                        <%}) %>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- </form> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // $(document).ready(function () {
+    //     $("#updatecake1").submit(function (e) {
+    //         e.preventDefault();
+    //         alert("i am here")
+    //     })
+    // })
+    const searchFun = () => {
+        let filter = document.getElementById('searchhere').value.toUpperCase();
+        let myTable = document.getElementById('tablehere');
+        // let tbody = myTable.getElementsByTagName('cakeList');
+        let tr = myTable.getElementsByTagName('tr');
+
+        for (var i = 1; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName('td')[1];
+            if (td) {
+                let textvalue = td.textContent || td.innerHTML;
+                if (textvalue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+
+
+        }
+
+
+    }
+</script>
+<% include partials/footer.ejs %>

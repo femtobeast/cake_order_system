@@ -1,0 +1,191 @@
+<% include partials/header.ejs %>
+<% include partials/menu.ejs %>
+<!-- cake view section -->
+<section id="cart-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+                        <!-- <form action=""> -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">staff ID</th>
+                                        <th scope="col">staff Name</th>
+                                        <th scope="col">department</th>
+                                        <th scope="col">Email address</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="staffList">
+
+                                    <% data.forEach(function(data){%>
+                                    <tr id="">
+                                        <td scope="row"><%= data.staff_id %> </td>
+                                        <td><%= data.first_name %> </td>
+                                        <td><%= data.department %>
+                                        </td>
+                                        <td><%= data.email %> </td>
+                                        <td><button id="usbutton" type="button" sid="<%= data.staff_id %>"
+                                                class="btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModalLong">Update</button>
+                                        </td>
+                                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div id="popup" class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="form-horizontal" method="post" id="updatestaff1"
+                                                            name="updatestaff1">
+                                                            <fieldset>
+                                                                <legend class="text-center header">Update Staff
+                                                                    details</legend>
+                                                                <% if(typeof message !== 'undefined') { %>
+                                                                <p><%= message %></p>
+                                                                <% } %>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-user"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="sfname">Staff first
+                                                                            Name</label>
+
+                                                                        <input id="sfname" name="sfname" type="text"
+                                                                            placeholder="Staff first Name"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-user"></i></span>
+
+                                                                    <div class="col-md-8">
+                                                                        <label for="slname">Staff Last
+                                                                            Name</label>
+                                                                        <input class="form-control"
+                                                                            placeholder="Staff Last Name" id="slname"
+                                                                            name="slname" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-map"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="price">Staff's address</label>
+
+                                                                        <input id="saddress" name="saddress" type="text"
+                                                                            placeholder="Staff's address"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-envelope"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="email">Email address</label>
+                                                                        <input id="email" name="email" type="text"
+                                                                            placeholder="Email address of staff"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-phone"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="size"> Phone Number</label>
+
+                                                                        <input id="phonenumber" name="phonenumber"
+                                                                            type="text" placeholder="phone number"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="department">Department</label>
+
+                                                                        <input id="department" name="department"
+                                                                            type="text" placeholder="Department"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+
+
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary btn-lg">Submit</button>
+                                                                    </div>
+
+                                                                </div>
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <!-- <div class="modal-footer">
+                                                
+                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                </div> -->
+                                        </div>
+
+                                        <td> <button id="bdelete" type="button" sid="<%= data.staff_id %>"
+                                                class="btn btn-danger">Delete</button>
+                                        </td>
+                                        <%}) %>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- </form> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // $(document).ready(function () {
+    //     $("#up").click(function (e) {
+    //         e.preventDefault();
+    //         alert("i am here")
+    //     })
+    // })
+</script>
+<!-- / cake view section -->
+<% include partials/footer.ejs %>
