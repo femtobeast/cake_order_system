@@ -639,6 +639,23 @@ exports.loginadmindata = (req, res, next) => {
         })
     // next() 
 }
+//-----------------------------ORDER--------------------------------------------------------------
+//data of notapproval order
+exports.notapprovalorder = (req, res) => {
+    mySeq.sequelize.query("select  * from tblorder where order_status='complete'", { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            res.json(result);
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+
+
+
+//-----------------------------END OF ORDER--------------------------------------------------------------
 
 
 

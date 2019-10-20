@@ -62,271 +62,288 @@
             <!-- //------------------------------ -->
             <div class="col-md-12">
                 <div class="checkout-area">
+<<<<<<< HEAD
                     <!-- <form id="orderFrm" method="POST"> -->
                     <div class="row">
                         <!-- ///left panel for product delivery detail -->
                         <div class="col-md-8">
                             <div class="checkout-left">
                                 <div class="panel-group" id="accordion">
+=======
+                    <form action="/user/sendOrder" method="POST">
+                        <div class="row">
+                            <!-- ///left panel for product delivery detail -->
+                            <div class="col-md-8">
+                                <div class="checkout-left">
+                                    <div class="panel-group" id="accordion">
+>>>>>>> admin
 
-                                    <!-- Coupon section -->
-                                    <div class="panel panel-default aa-checkout-coupon">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="nib" data-toggle="collapse" data-parent="#accordion"
-                                                    href="#collapseOne">
-                                                    Have a Coupon?
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <input type="text" placeholder="Coupon Code" class="aa-coupon-code">
-                                                <input type="submit" value="Apply Coupon" class="aa-browse-btn">
+                                        <!-- Coupon section -->
+                                        <div class="panel panel-default aa-checkout-coupon">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="nib" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseOne">
+                                                        Have a Coupon?
+                                                    </a>
+                                                </h4>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Billing Details -->
-                                    <div class="panel panel-default aa-checkout-billaddress">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="nib" data-toggle="collapse" data-parent="#accordion"
-                                                    href="#collapseThree">
-                                                    Review and Confirm Your Order
-                                                    <% if(locals.carttemp){ var tempprice = locals.carttemp.totalPrice } %>
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                <div class="main">
-                                                    <ul class="cards">
-                                                        <% if(locals.products) { %>
-                                                        <input value="<%= products.length %>" type="hidden"
-                                                            id="itemarray">
-
-                                                        <%  products.forEach(function(data){ %>
-                                                        <li class="card_item">
-                                                            <div class="card">
-                                                                <div class="card_image"><img width="100" height="auto"
-                                                                        src="/uploads/<%= data.item.cake_image %>">
-                                                                    <span
-                                                                        id="itemname"><%= data.item.cake_name %></span>
-                                                                </div>
-                                                                <div class="card_content">
-                                                                    <h2 class="card_title">
-                                                                        <span>Price:
-                                                                        </span><%= data.item.cake_price %></h2>
-                                                                    <h2 class="card_title"><span>Quantity:
-                                                                        </span><%= data.qty %></h2>
-                                                                    <input type="hidden" value="<%= data.qty %>"
-                                                                        name="oqty" id="oqty">
-                                                                    <input type="hidden" value="<%= data.totalPrice %>"
-                                                                        name="ototal" id="ototal">
-                                                                    <h2 class="card_title">
-                                                                        <span>Total:
-                                                                        </span><%= data.totalPrice %></h2>
-
-
-                                                                    <input type="hidden"
-                                                                        value="<%= data.item.cake_id %>" name="cake_id"
-                                                                        id="cake_id">
-
-                                                                    <a class="btn btn-danger"
-                                                                        href="/user/removeItemCheckout/<%= data.item.cake_id%>">Remove</a>
-                                                                </div>
-                                                            </div>
-
-                                                        </li>
-                                                        <% }) %>
-                                                        <% } %>
-                                                    </ul>
-                                                    <span>
-                                                        <a href="#aa-catg-head-banner">Total:
-                                                            Rs-<strong><%= tempprice %></strong></a>
-                                                        <input type="hidden" value="<%= tempprice %>" name="ototalprice"
-                                                            id="ototalprice">
-                                                        <button href="" class="btn btn-primary">Confirm
-                                                            Order</button>
-                                                    </span>
+                                            <div id="collapseOne" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <input type="text" placeholder="Coupon Code" class="aa-coupon-code">
+                                                    <input type="submit" value="Apply Coupon" class="aa-browse-btn">
                                                 </div>
                                             </div>
+                                        </div>
 
+                                        <!-- Billing Details -->
+                                        <div class="panel panel-default aa-checkout-billaddress">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="nib" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseThree">
+                                                        Review and Confirm Your Order
+                                                        <% if(locals.carttemp){ var tempprice = locals.carttemp.totalPrice } %>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseThree" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <div class="main">
+                                                        <ul class="cards">
+                                                            <% if(locals.products) { %>
+                                                            <input value="<%= products.length %>" type="hidden"
+                                                                id="itemarray">
+
+                                                            <%  products.forEach(function(data){ %>
+                                                            <li class="card_item">
+                                                                <div class="card">
+                                                                    <div class="card_image"><img width="100"
+                                                                            height="auto"
+                                                                            src="/uploads/<%= data.item.cake_image %>">
+                                                                        <span
+                                                                            id="itemname"><%= data.item.cake_name %></span>
+                                                                    </div>
+                                                                    <div class="card_content">
+                                                                        <h2 class="card_title">
+                                                                            <span>Price:
+                                                                            </span><%= data.item.cake_price %></h2>
+                                                                        <h2 class="card_title"><span>Quantity:
+                                                                            </span><%= data.qty %></h2>
+                                                                        <input type="hidden" value="<%= data.qty %>"
+                                                                            name="oqty" id="oqty">
+                                                                        <input type="hidden"
+                                                                            value="<%= data.totalPrice %>" name="ototal"
+                                                                            id="ototal">
+                                                                        <h2 class="card_title">
+                                                                            <span>Total:
+                                                                            </span><%= data.totalPrice %></h2>
+
+
+                                                                        <input type="hidden"
+                                                                            value="<%= data.item.cake_id %>"
+                                                                            name="cake_id" id="cake_id">
+
+                                                                        <a class="btn btn-danger"
+                                                                            href="/user/removeItemCheckout/<%= data.item.cake_id%>">Remove</a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </li>
+                                                            <% }) %>
+                                                            <% } %>
+                                                        </ul>
+                                                        <span>
+                                                            <a href="#aa-catg-head-banner">Total:
+                                                                Rs-<strong><%= tempprice %></strong></a>
+                                                            <input type="hidden" value="<%= tempprice %>"
+                                                                name="ototalprice" id="ototalprice">
+                                                            <button href="" class="btn btn-primary">Confirm
+                                                                Order</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- Shipping Address -->
-                                    <div class="panel panel-default aa-checkout-billaddress">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="nib" data-toggle="collapse" data-parent="#accordion"
-                                                    href="#collapseFour">
-                                                    Shippping Address
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseFour" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <label>Alias</label>
-                                                            <div class="aa-checkout-single-bill">
-                                                                <select name="alias" id="alias">
-                                                                    <option>Office</option>
-                                                                    <option>Friend</option>
-                                                                    <option>Cousin</option>
-                                                                    <option>School</option>
-                                                                    <option>Colege</option>
-                                                                    <option>Other</option>
-                                                                </select>
+                                        <!-- Shipping Address -->
+                                        <div class="panel panel-default aa-checkout-billaddress">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="nib" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseFour">
+                                                        Shippping Address
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseFour" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <form>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label>Alias</label>
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <select name="alias" id="alias">
+                                                                        <option>Office</option>
+                                                                        <option>Friend</option>
+                                                                        <option>Cousin</option>
+                                                                        <option>School</option>
+                                                                        <option>Colege</option>
+                                                                        <option>Other</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <label>Receiver Name</label>
-                                                            <div class="aa-checkout-single-bill">
-                                                                <input type="text" name="receiverName" id="receiverName"
-                                                                    value="<%= session.fname %>">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Receiver Name</label>
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <input type="text" name="receiverName"
+                                                                        id="receiverName" value="<%= session.fname %>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <label>Last Name</label>
+                                                                    <input type="text" name="lastname" id="lastname"
+                                                                        value="<%= session.lname %>">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <label>Last Name</label>
-                                                                <input type="text" name="lastname" id="lastname"
-                                                                    value="<%= session.lname %>">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <label>Mobile Number</label>
+                                                                    <input type="text" id="mobileno" name="mobileno"
+                                                                        value="<%= session.mobile %>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <label>Alternate Mobile Number</label>
+                                                                    <input type="text" name="mobileno2" id="mobileno2"
+                                                                        placeholder="Alternate Mobile Number*">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <label>Mobile Number</label>
-                                                                <input type="text" id="mobileno" name="mobileno"
-                                                                    value="<%= session.mobile %>">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <label>Email Address</label>
+                                                                    <input type="email" name="oemail" id="oemail"
+                                                                        value="<%= session.customerEmail %>"
+                                                                        placeholder="Email Address*">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <label>City</label>
+                                                                    <select name="city" id="city">
+                                                                        <option>Kathmandu</option>
+                                                                        <option>Bhaktapur</option>
+                                                                        <option>Lalitpur</option>
+                                                                        <option>Kritipur</option>
+                                                                        <option>Banepa</option>
+                                                                        <option>Other</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <label>Alternate Mobile Number</label>
-                                                                <input type="text" name="mobileno2" id="mobileno2"
-                                                                    placeholder="Alternate Mobile Number*">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="aa-checkout-single-bill">
+                                                                    <label>Delivery Location*</label>
+                                                                    <textarea id="dlocation" name="dlocation" cols="8"
+                                                                        rows="3" placeholder="Full Address"></textarea>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <label>Email Address</label>
-                                                                <input type="email" name="oemail" id="oemail"
-                                                                    value="<%= session.customerEmail %>"
-                                                                    placeholder="Email Address*">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <label>City</label>
-                                                                <select name="city" id="city">
-                                                                    <option>Kathmandu</option>
-                                                                    <option>Bhaktapur</option>
-                                                                    <option>Lalitpur</option>
-                                                                    <option>Kritipur</option>
-                                                                    <option>Banepa</option>
-                                                                    <option>Other</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="aa-checkout-single-bill">
-                                                                <label>Delivery Location*</label>
-                                                                <textarea id="dlocation" name="dlocation" cols="8"
-                                                                    rows="3" placeholder="Full Address"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- //right panel for product checkout -->
-                        <div class="col-md-4">
-                            <div class="checkout-right">
+                            <!-- //right panel for product checkout -->
+                            <div class="col-md-4">
+                                <div class="checkout-right">
 
-                                <div class="aa-order-summary-area">
-                                    <table class="table table-responsive">
-                                        <thead>
-                                            <tr></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="col-md-12 ">
-                                                        <div class="form-group">
-                                                            <label for="sel1">Delivery Option</label>
-                                                            <select class="form-control" id="doption" name="doption">
-                                                                <option>urgent</option>
-                                                                <option>normal</option>
-                                                                <option>any</option>
-                                                            </select>
+                                    <div class="aa-order-summary-area">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="col-md-12 ">
+                                                            <div class="form-group">
+                                                                <label for="sel1">Delivery Option</label>
+                                                                <select class="form-control" id="doption"
+                                                                    name="doption">
+                                                                    <option>urgent</option>
+                                                                    <option>normal</option>
+                                                                    <option>any</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="sel1">Select Delivery Date</label>
+                                                                <i
+                                                                    class="zmdi zmdi-calendar-note input-icon js-btn-calendar">
+                                                                </i>
+                                                                <input class="input--style-2 js-datepicker form-control"
+                                                                    type="text" placeholder="Birthdate" name="ddate"
+                                                                    id="ddate">
+                                                            </div>
                                                         </div>
+                                                        <h4>Order Summary</h4>
+                                                    </td>
+                                                </tr>
 
-                                                        <div class="form-group">
-                                                            <label for="sel1">Select Delivery Date</label>
-                                                            <i
-                                                                class="zmdi zmdi-calendar-note input-icon js-btn-calendar">
-                                                            </i>
-                                                            <input class="input--style-2 js-datepicker form-control"
-                                                                type="text" placeholder="Birthdate" name="ddate"
-                                                                id="ddate">
-                                                        </div>
-                                                    </div>
-                                                    <h4>Order Summary</h4>
-                                                </td>
-                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Subtotal</th>
+                                                    <td>Rs: <%= tempprice %></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tax</th>
+                                                    <td>Rs: 35</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total</th>
+                                                    <td>Rs: <%= tempprice %></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <h4>Payment Method</h4>
+                                    <div class="aa-payment-method">
+                                        <label>Cash On Delivery
+                                            <input type="radio" id="p1" name="p1">
+                                        </label>
+                                        <label>Via Online Payment
+                                            <input type="radio" id="p2" name="p1">
+                                        </label>
 
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Subtotal</th>
-                                                <td>Rs: <%= tempprice %></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tax</th>
-                                                <td>Rs: 35</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Total</th>
-                                                <td>Rs: <%= tempprice %></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <h4>Payment Method</h4>
-                                <div class="aa-payment-method">
-                                    <label>Cash On Delivery
-                                        <input type="radio" id="p1" name="p1">
-                                    </label>
-                                    <label>Via Online Payment
-                                        <input type="radio" id="p2" name="p1">
-                                    </label>
-
-                                    <!-- <input type="radio" id="paypal" name="optionsRadios">  -->
-                                    <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"
-                                        border="30" alt="PayPal Acceptance Mark">
-                                    <button type="submit" value="Place Order" id="oplacedbtn"
-                                        class="aa-browse-btn">Place Order</button>
+                                        <!-- <input type="radio" id="paypal" name="optionsRadios">  -->
+                                        <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"
+                                            border="30" alt="PayPal Acceptance Mark">
+                                        <button type="submit" value="Place Order" id="oplacedbtn"
+                                            class="aa-browse-btn">Place Order</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <!-- </form> -->
+=======
+                    </form>
+>>>>>>> admin
                 </div>
             </div>
             <% } %>
