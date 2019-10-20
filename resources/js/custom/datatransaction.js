@@ -128,11 +128,15 @@ require(['jquery', 'api_url'], function ($, main) {
             dataType: "json",
             data: JSON.stringify(orderData),
             success: function (result, status) {
-                alert('Order is placed. Will be notify as soon as order is confirmed')
+                console.log(result)
+                if (result.status == true) {
+                    redirectPage('/user/order/');
+                }
+                // alert('Order is placed. Will be notify as soon as order is confirmed')
             },
             error: function (err, status) {
                 // alert('Order is not placed. ')
-                console.log(err)
+            alert(err)
 
             }
         });

@@ -62,6 +62,10 @@ var order = mysequelize.sequelize.define(
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
+        delivery_by: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: null
+        },
         paymentM: {
             type: mysequelize.Sequelize.ENUM,
             values: ['cashondelivery', 'epay'],
