@@ -24,6 +24,7 @@
                                             <th scope="col">Customer Address</th>
                                             <th scope="col">Customer Phone</th>
                                             <th scope="col">delivery_option</th>
+                                            <th scope="col">Assign delivery work to</th>
                                             <th scope="col">order status</th>
 
                                         </tr>
@@ -44,6 +45,9 @@
 
                                             <td>
                                                 <%= data.delivery_option %>
+                                            </td>
+                                            <td>
+                                                <%= data.delivery_by %>
                                             </td>
                                             <td>
                                                 <button name="notapproval" id="notapproval" class="btn btn-primary"

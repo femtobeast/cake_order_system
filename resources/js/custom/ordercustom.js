@@ -4,7 +4,8 @@ $(document).ready(function () {
     $("#updateorderstatus").submit(function (e) {
         e.preventDefault();
         var updateorderstatus = {
-            orderstatus: $('#orderstatus').val()
+            orderstatus: $('#orderstatus').val(),
+            assignwork: $('#assignwork').val(),
         }
         console.log(updateorderstatus)
 
@@ -41,9 +42,26 @@ $(document).ready(function () {
         console.log(orderid)
 
         $.ajax({
-
+            url: 'http://localhost:1234/admin/staffdataorder',
+            method: 'GET',
+            dataType: 'json',
             success: function (result) {
+                var len = result.length;
 
+                $("#assignwork").empty();
+                // for( var i = 0; i<len; i++){
+                //     var id = response[i]['id'];
+                //     var name = response[i]['name'];
+                for (key = 0; key < result.length; key++) {
+
+                    console.log(result[key].first_name);
+                    // $("#sel_user").append("<option value='" + id + "'>" + name + "</option>");
+
+                    $('#assignwork').append("<option>" + result[key].first_name + " " + result[key].last_name + "</option>")
+                    // $(".dynm_drop").clone().appendTo("class or id of element");
+                    console.log(result)
+
+                }
             },
             error: function (jqXHR) {
                 $("#message").html(jqXHR.responseText);

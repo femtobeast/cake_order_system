@@ -454,7 +454,7 @@ exports.addStaff = (req, res, next) => {
 
         })
         .then(function (result) {
-            next();
+            // next();
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -662,7 +662,7 @@ exports.notapprovalorder = (req, res) => {
 
 exports.completeorder = (req, res) => {
     mySeq.sequelize.query(
-        "select delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+        "select delivery_by,delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
             (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
             (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
         from tblorder o where o.order_status = 'complete'",
@@ -688,6 +688,7 @@ exports.progressorder = (req, res) => {
         .then((result) => {
             res.render("admin/orderprogress", { data: result[0] });
             // res.json(result)
+            // next()
 
         }).catch((err) => {
             console.log(err)
@@ -698,7 +699,8 @@ exports.progressorder = (req, res) => {
 //update not approval order data
 exports.updatenotapprovalorder = (req, res, next) => {
     Ordermodel.order.update({
-        order_status: req.body.orderstatus
+        order_status: req.body.orderstatus,
+        delivery_by: req.body.assignwork
     }, {
         where: {
             order_id: req.params.orderid
@@ -713,6 +715,42 @@ exports.updatenotapprovalorder = (req, res, next) => {
 
         })
         .catch((err) => {
+
+        })
+}
+
+//GETTING FIRSTNAME,LASTNAME OF STAFF FOR DELIVERY INFORMATION IN PROGRESS ORDER
+exports.Staffdataorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select first_name,last_name    \
+        from tblstaff ts  where ts.department = 'delivery'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/orderprogress", { data: result[0] });
+            res.json(result[0])
+            console.log(result)
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//data of delivered cake order
+exports.deliveredorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select delivery_by,delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'delivered'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            res.render("admin/deliveredorder", { data: result[0] });
+            // res.json(result)
+            // next()
+
+        }).catch((err) => {
+            console.log(err)
 
         })
 }

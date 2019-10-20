@@ -40,7 +40,7 @@ var order = mysequelize.sequelize.define(
         order_total: {
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
-           
+
         },
         order_cust_id: {
             type: mysequelize.Sequelize.BIGINT(10),
@@ -48,11 +48,11 @@ var order = mysequelize.sequelize.define(
         },
         order_status: {
             type: mysequelize.Sequelize.ENUM,
-            values: [ 'notapproval','complete','progress','delivered']
+            values: ['notapproval', 'complete', 'progress', 'delivered']
         },
         delivery_option: {
             type: mysequelize.Sequelize.ENUM,
-            values: ['normal', 'urgent','any']
+            values: ['normal', 'urgent', 'any']
         },
         delivery_date: {
             type: mysequelize.Sequelize.DATEONLY,
@@ -69,7 +69,7 @@ var order = mysequelize.sequelize.define(
         paymentM: {
             type: mysequelize.Sequelize.ENUM,
             values: ['cashondelivery', 'epay'],
-            allowNull:false
+            allowNull: false
         },
         cake_id: {
             type: mysequelize.Sequelize.INTEGER,
