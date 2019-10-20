@@ -148,16 +148,12 @@ router.put("/updatestaff/:sid", adminController.staffvalidation, adminController
 //END OF METHOD FOR STAFF
 
 //update admin profile get page 
-// router.get("/profile", function (req, res, next) {
-//     res.render("admin/adminprofile")
-// })
+router.get("/profile", function (req, res, next) {
+    res.render("admin/adminprofile")
+})
 
-//METHOD FOR ORDER
 
-//get method for order status 
-router.get("/notapproval", function (req, res, next) {
-    res.render("admin/notapproval");
-});
+
 
 //END OF METHOD FOR gift
 
@@ -198,17 +194,56 @@ router.put("/updategift/:gid", giftController.giftvalidation, giftController.upd
 //END OF METHOD FOR ORDER
 
 //data of login data
-router.get("/profiledata", adminController.loginadmindata, function (req, res) {
-    console.log(req.body);
-    console.log(req.headers)
-    res.render("admin/adminprofile");
-})
+// router.get("/profiledata", adminController.loginadmindata, function (req, res) {
+//     // console.log(req.body);
+//     // console.log(req.headers)
+//     res.render("admin/adminprofile");
+// })
 //------------------------------------ORDER-------------------------------------
 //get data of order where status is not approval
 router.get("/ordernotapproval", adminController.notapprovalorder, function (req, res) {
 
+});
+
+// update method for notapproval order
+router.put("/updateordernotapproval/:orderid", adminController.updatenotapprovalorder, function (req, res) {
+
+});
+
+//get data of order where status is complete
+router.get("/orderprogress", adminController.progressorder, function (req, res) {
+});
+
+// update method for progress order
+
+//get data of order where status is complete
+router.get("/ordercomplete", adminController.completeorder, function (req, res) {
+
+});
+//get data of delivery department staff for complete order
+router.get("/staffdataorder", adminController.Staffdataorder, function (req, res) {
+
 })
+
+//get data of order where status is delivered
+router.get("/orderdelivered", adminController.deliveredorder, function (req, res) {
+
+});
 //------------------------------------end of ORDER-------------------------------------
+//dashboard
+//get the page of dashboard
+router.get('/dashboard', function (req, res) {
+    res.render("admin/dashboard");
+});
+//count the delivery
+router.get('/countdelivery', adminController.countdelivery, function (req, res, next) {
+
+});
+
+//count today the delivery
+router.get('/counttotalorder', adminController.counttotalorder, function (req, res, next) {
+
+});
 
 
 

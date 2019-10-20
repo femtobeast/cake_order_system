@@ -9,6 +9,7 @@ var fs = require('fs');
 var bcrypt = require("bcrypt");
 var Joi = require("joi");
 const jwt = require('jsonwebtoken');
+var Ordermodel = require("../model/Order");
 
 
 
@@ -453,7 +454,7 @@ exports.addStaff = (req, res, next) => {
 
         })
         .then(function (result) {
-            next();
+            // next();
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -642,9 +643,111 @@ exports.loginadmindata = (req, res, next) => {
 //-----------------------------ORDER--------------------------------------------------------------
 //data of notapproval order
 exports.notapprovalorder = (req, res) => {
-    mySeq.sequelize.query("select  * from tblorder where order_status='complete'", { query: mySeq.sequelize.QueryTypes.SELECT })
+    mySeq.sequelize.query(
+        "select delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'notapproval'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
         .then((result) => {
-            res.json(result);
+            res.render("admin/notapproval", { data: result[0] });
+            // res.json(result)
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+//data of completion of making cake
+
+exports.completeorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select delivery_by,delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'complete'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            res.render("admin/ordercomplete", { data: result[0] });
+            // res.json(result)
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//data of progress of making cake
+exports.progressorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'progress'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            res.render("admin/orderprogress", { data: result[0] });
+            // res.json(result)
+            // next()
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//update not approval order data
+exports.updatenotapprovalorder = (req, res, next) => {
+    Ordermodel.order.update({
+        order_status: req.body.orderstatus,
+        delivery_by: req.body.assignwork
+    }, {
+        where: {
+            order_id: req.params.orderid
+        }
+    }
+    )
+        .then((result) => {
+            res.send({
+                "message": "order status updated successfully"
+            })
+
+
+        })
+        .catch((err) => {
+
+        })
+}
+
+//GETTING FIRSTNAME,LASTNAME OF STAFF FOR DELIVERY INFORMATION IN PROGRESS ORDER
+exports.Staffdataorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select first_name,last_name    \
+        from tblstaff ts  where ts.department = 'delivery'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/orderprogress", { data: result[0] });
+            res.json(result[0])
+            console.log(result)
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//data of delivered cake order
+exports.deliveredorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select delivery_by,delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'delivered'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            res.render("admin/deliveredorder", { data: result[0] });
+            // res.json(result)
+            // next()
 
         }).catch((err) => {
             console.log(err)
@@ -657,6 +760,40 @@ exports.notapprovalorder = (req, res) => {
 
 //-----------------------------END OF ORDER--------------------------------------------------------------
 
+//dashboard
+// get total number of total delivery
+exports.countdelivery = (req, res) => {
+    mySeq.sequelize.query(
+        "select count(order_id) co from tblorder o where o.order_status='delivered' ",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/deliveredorder", { data: result[0] });
+            res.json(result[0])
+            // next()
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//get total number of order 
+// select * from tbl_name
+// where datecolumn = cast(getdate() as Date)
+exports.counttotalorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select count(order_id) co from tblorder o where o.order_status <>'delivered' ",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/deliveredorder", { data: result[0] });
+            res.json(result[0])
+            // next()
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
 
 
 

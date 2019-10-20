@@ -14,7 +14,7 @@
 
                             <table class="table" id="tablehere">
                                 <fieldset>
-                                    <legend class="text-center header">NOT APPROVE CAKE</legend>
+                                    <legend class="text-center header">Making cake completed</legend>
                                     <thead>
                                         <tr>
                                             <th scope="col">Order ID</th>
@@ -24,6 +24,7 @@
                                             <th scope="col">Customer Address</th>
                                             <th scope="col">Customer Phone</th>
                                             <th scope="col">delivery_option</th>
+                                            <th scope="col">Assign delivery work to</th>
                                             <th scope="col">order status</th>
 
                                         </tr>
@@ -46,10 +47,12 @@
                                                 <%= data.delivery_option %>
                                             </td>
                                             <td>
+                                                <%= data.delivery_by %>
+                                            </td>
+                                            <td>
                                                 <button name="notapproval" id="notapproval" class="btn btn-primary"
                                                     data-toggle="modal" data-target="#exampleModalLong"
-                                                    orderid="<%= data.order_id %>"> Not
-                                                    Approval</button>
+                                                    orderid="<%= data.order_id %>"> complete</button>
                                                 <div class="modal fade" id="exampleModalLong" tabindex="-1"
                                                     role="dialog" aria-labelledby="exampleModalLongTitle"
                                                     aria-hidden="true">
@@ -78,9 +81,9 @@
                                                                                     id="orderstatus" name="orderstatus"
                                                                                     orderid="<%= data.order_id %>">
 
-                                                                                    <option selected>notapproval
+                                                                                    <option>notapproval
                                                                                     </option>
-                                                                                    <option>complete</option>
+                                                                                    <option selected>complete</option>
                                                                                     <option>progress</option>
                                                                                     <option>delivered</option>
                                                                                 </select>
