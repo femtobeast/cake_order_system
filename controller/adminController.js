@@ -642,9 +642,15 @@ exports.loginadmindata = (req, res, next) => {
 //-----------------------------ORDER--------------------------------------------------------------
 //data of notapproval order
 exports.notapprovalorder = (req, res) => {
-    mySeq.sequelize.query("select  * from tblorder where order_status='complete'", { query: mySeq.sequelize.QueryTypes.SELECT })
+    mySeq.sequelize.query(
+        "select delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'notapproval'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
         .then((result) => {
-            res.json(result);
+            res.render("admin/notapproval", { data: result[0] });
+            // res.json(result)
 
         }).catch((err) => {
             console.log(err)

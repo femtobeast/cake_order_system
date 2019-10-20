@@ -148,16 +148,12 @@ router.put("/updatestaff/:sid", adminController.staffvalidation, adminController
 //END OF METHOD FOR STAFF
 
 //update admin profile get page 
-// router.get("/profile", function (req, res, next) {
-//     res.render("admin/adminprofile")
-// })
+router.get("/profile", function (req, res, next) {
+    res.render("admin/adminprofile")
+})
 
-//METHOD FOR ORDER
 
-//get method for order status 
-router.get("/notapproval", function (req, res, next) {
-    res.render("admin/notapproval");
-});
+
 
 //END OF METHOD FOR gift
 
@@ -198,11 +194,11 @@ router.put("/updategift/:gid", giftController.giftvalidation, giftController.upd
 //END OF METHOD FOR ORDER
 
 //data of login data
-router.get("/profiledata", adminController.loginadmindata, function (req, res) {
-    console.log(req.body);
-    console.log(req.headers)
-    res.render("admin/adminprofile");
-})
+// router.get("/profiledata", adminController.loginadmindata, function (req, res) {
+//     // console.log(req.body);
+//     // console.log(req.headers)
+//     res.render("admin/adminprofile");
+// })
 //------------------------------------ORDER-------------------------------------
 //get data of order where status is not approval
 router.get("/ordernotapproval", adminController.notapprovalorder, function (req, res) {

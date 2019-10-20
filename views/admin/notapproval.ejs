@@ -13,47 +13,51 @@
                                 aria-label="Search" onkeyup="searchFun()">
 
                             <table class="table" id="tablehere">
-                                    <fieldset>
-                                            <legend class="text-center header">NOT APPROVE CAKE</legend>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Cake ID</th>
-                                        <th scope="col">Cake Name</th>
-                                        <th scope="col">flavour Name</th>
-                                        <th scope="col">Flavour Type</th>
-                                        <th scope="col">Customer Name</th>
-                                        <th scope="col">Customer Address</th>
-                                        <th scope="col">Customer Phone</th>
-                                        <th scope="col">order status</th>
+                                <fieldset>
+                                    <legend class="text-center header">NOT APPROVE CAKE</legend>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order ID</th>
+                                            <th scope="col">Cake Name</th>
+                                            <th scope="col">Flavour Type</th>
+                                            <th scope="col">Customer Name</th>
+                                            <th scope="col">Customer Address</th>
+                                            <th scope="col">Customer Phone</th>
+                                            <th scope="col">delivery_option</th>
+                                            <th scope="col">order status</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody id="cakeList">
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cakeList">
 
-                                  
-                                    <tr id="">
-                                        <td scope="row"> </td>
-                                        <td></td>
-                                        <td ></td>
-                                       <td></td> 
-                                        <td> </td>
-                                        <td>
-                                        </td>
-                                       
-                                        <td>
-                                        </td>
-                                        <td>
+                                        <% data.forEach(function(data){%>
+                                        <tr id="">
+                                            <td scope="row"><%= data.order_id %> </td>
+                                            <td><%= data.cake_name %> </td>
+
+                                            <td><%= data.flavour_type %></td>
+                                            <td><%= data.order_by %> </td>
+                                            <td> <%= data.delivery_location %></td>
+                                            <td>
+                                                <%= data.order_phone %>
+                                            </td>
+
+                                            <td>
+                                                <%= data.delivery_option %>
+                                            </td>
+                                            <td>
                                                 <select class="form-control" id="orderstatus" name="orderstatus">
 
-                                                        <option selected>NOTAPPROVE</option>
-                                                        <option>PROGRESS</option>
-                                                        <option >COMPLETE</option>
-                                                        <option>DELIVERED</option>
-                                                    </select>
-                                        </td>
-                                     
-                                    </tr>
-                                </tbody>
+                                                    <option selected>notapproval</option>
+                                                    <option>complete</option>
+                                                    <option>progress</option>
+                                                    <option>delivered</option>
+                                                </select>
+                                            </td>
+                                            <%}) %>
+                                        </tr>
+
+                                    </tbody>
                                 </fieldset>
                             </table>
                         </div>
