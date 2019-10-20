@@ -218,7 +218,7 @@ exports.validateuserdata = async (req, res, next) => {
 //------FEEDBACK----------------
 //USER REGISTRATION FUNCTION ----------------
 exports.addFeedback = (req, res, next) => {
-    
+
     // const { desc, email, cid } = req.body;
     feedbackmodel.feedback.create({
         feedback_desc: req.body.desc,
