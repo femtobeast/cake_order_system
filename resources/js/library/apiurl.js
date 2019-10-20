@@ -4,7 +4,9 @@ imagePath = "/uploads/"
 
 loginURL = "/user/sendLogin"
 
-addCustomerByGoogleUser = "/user/registerAdd/";
+addCustomerByUser = "/user/registerAdd";
+
+addCustomerByGoogleUser = "/user/gdata";
 
 checkEmail = "/user/check/";
 

@@ -41,9 +41,9 @@ require(['jquery', 'api_url'], function ($, main) {
             firstname: document.getElementsByName('firstname')[0].value,
             lastname: document.getElementsByName('lastname')[0].value
         }
-        console.table(addCustomerByGoogleUser);
+        console.table(addCustomerByUser);
         $.ajax({
-            url: addCustomerByGoogleUser,
+            url: addCustomerByUser,
             method: "POST",
             contentType: "application/json",
             dataType: "json",
@@ -52,7 +52,6 @@ require(['jquery', 'api_url'], function ($, main) {
                 $('#errors').html(result.message + ": Please refresh or login for checkout.");
             },
             error: function (err, status) {
-
                 $('.error-group').css('display', 'block');
                 var errors = JSON.parse(err.responseText);
                 var errorsContainer = $('#errors');
