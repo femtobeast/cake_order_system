@@ -17,7 +17,6 @@
                                 <th>Order Placed</th>
                                 <th>Delivery Date</th>
                                 <th>Status</th>
-                                <th>Payment Method</th>
                                 <th>Order Number</th>
                             </tr>
                         </thead>
@@ -32,8 +31,7 @@
                                 <%}else{%>
                                 <td><strong style="color: green"> Order is in progress. . .</strong></td>
                                 <%}%>
-                                <td><%= data.paymentM %></td>
-                                <td>1</td>
+                                <td><%= data.order_id %></td>
                             </tr>
                             <% })%>
                         </tbody>

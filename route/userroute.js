@@ -50,7 +50,7 @@ router.post('/sendLogin', Auth.loginValidation, Auth.generateJwtToken, (req, res
 router.post('/sendFeedback',UserController.addFeedback)
 router.post('/sendOrder', OrderController.placeOrder, (req, res) => {
     res.status(201);
-    res.send({message:"Order Placed !!! Done"});
+    res.send({status:true});
 });
 //------------------------------------------
 router.get('/logoutCart', (req, res) => {
