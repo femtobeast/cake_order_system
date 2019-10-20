@@ -1,0 +1,68 @@
+<% include partials/header.ejs %>
+
+<% include partials/menu.ejs %>
+<section id="cart-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+
+                        <div class="table-responsive">
+                            <input class="form-control" id="searchhere" type="text" placeholder="Search"
+                                aria-label="Search" onkeyup="searchFun()">
+
+                            <table class="table" id="tablehere">
+                                    <fieldset>
+                                            <legend class="text-center header">NOT APPROVE CAKE</legend>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cake ID</th>
+                                        <th scope="col">Cake Name</th>
+                                        <th scope="col">flavour Name</th>
+                                        <th scope="col">Flavour Type</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Customer Address</th>
+                                        <th scope="col">Customer Phone</th>
+                                        <th scope="col">order status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="cakeList">
+
+                                  
+                                    <tr id="">
+                                        <td scope="row"> </td>
+                                        <td></td>
+                                        <td ></td>
+                                       <td></td> 
+                                        <td> </td>
+                                        <td>
+                                        </td>
+                                       
+                                        <td>
+                                        </td>
+                                        <td>
+                                                <select class="form-control" id="orderstatus" name="orderstatus">
+
+                                                        <option selected>NOTAPPROVE</option>
+                                                        <option>PROGRESS</option>
+                                                        <option >COMPLETE</option>
+                                                        <option>DELIVERED</option>
+                                                    </select>
+                                        </td>
+                                     
+                                    </tr>
+                                </tbody>
+                                </fieldset>
+                            </table>
+                        </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<% include partials/footer.ejs %>

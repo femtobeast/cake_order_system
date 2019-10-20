@@ -1,0 +1,267 @@
+<% include partials/header.ejs %>
+
+<% include partials/menu.ejs %>
+
+<!-- cake view section -->
+<section id="cart-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table">
+
+                        <div class="table-responsive">
+                            <input class="form-control" id="searchhere" type="text" placeholder="Search"
+                                aria-label="Search" onkeyup="searchFun()">
+
+                            <table class="table" id="tablehere">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cake ID</th>
+                                        <th scope="col">Cake Name</th>
+                                        <th scope="col">Cake Image</th>
+                                        <th scope="col">Flavour Name</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cakeList">
+
+                                    <% data.forEach(function(data){%>
+                                    <tr id="">
+                                        <td scope="row"><%= data.cake_id %> </td>
+                                        <td><%= data.cake_name %> </td>
+                                        <td scope="row"> <img style="width: 150px;
+                                                                            height: 100px;"
+                                                src="http://localhost:1234/upload/<%= data.cake_image %>    ">
+                                        </td>
+                                        <td><%= data.flavour_name %> </td>
+                                        <td><button id="ucbutton" type="button" cid="<%= data.cake_id %>"
+                                                class="btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModalLong">Update</button>
+                                        </td>
+                                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div id="popup" class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <form class="form-horizontal" method="post" id="updatecake1"
+                                                            enctype="multipart/form-data">
+                                                            <fieldset>
+                                                                <legend class="text-center header">Update cake
+                                                                    details</legend>
+                                                                <% if(typeof message !== 'undefined') { %>
+                                                                <p><%= message %></p>
+                                                                <% } %>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="cakename">Cake Name</label>
+
+                                                                        <input id="cakename" name="cakename" type="text"
+                                                                            placeholder="cake Name"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div id="fldiv" class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+
+                                                                    <div class="col-md-8">
+                                                                        <label for="flavourname">Flavour
+                                                                            Name</label>
+                                                                        <select class="form-control" id="flavourname"
+                                                                            name="flavourname">
+                                                                            <option>
+
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="flavourtype">Flavour
+                                                                            Type</label>
+                                                                        <select class="form-control" id="flavourtype"
+                                                                            name="flavourtype">
+
+                                                                            <option>s</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="price">Price of cake</label>
+
+                                                                        <input id="price" name="price" type="text"
+                                                                            placeholder="price of cake"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="serve">Serve</label>
+
+                                                                        <input id="serve" name="serve" type="text"
+                                                                            placeholder="serve" class="form-control">
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="version">Version</label>
+                                                                        <select class="form-control" id="version"
+                                                                            name="version">
+
+                                                                            <option>Egg</option>
+                                                                            <option>Eggless</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="size">Number of pound</label>
+
+                                                                        <input id="size" name="size" type="text"
+                                                                            placeholder="Cake Size"
+                                                                            class="form-control">
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-birthday-cake"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <label for="cakeimage">Update Image of
+                                                                            Cake</label>
+                                                                        <p style="color: red">
+                                                                            <%= typeof msg != 'undefined' ? msg:'' %>
+                                                                        </p>
+
+                                                                        <input id="cakeimage" name="cakeimage"
+                                                                            type="file" placeholder="cake image"
+                                                                            class="form-control">
+
+
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="form-group">
+                                                                    <span
+                                                                        class="col-md-1 col-md-offset-2 text-center"><i
+                                                                            class="fa fa-pencil-square-o bigicon"></i></span>
+                                                                    <div class="col-md-8">
+                                                                        <textarea class="form-control" id="desc"
+                                                                            name="desc"
+                                                                            placeholder="Description of cake"
+                                                                            rows="7"></textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="submit" id="updatesubmit"
+                                                                            class="btn btn-primary btn-lg">Submit</button>
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                                <!-- <div class="modal-footer">
+                                                
+                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <td> <button id="bdelete" type="button" cid="<%= data.cake_id %>"
+                                                class="btn btn-danger">Delete</button>
+                                        </td>
+                                        <%}) %>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    // $(document).ready(function () {
+    //     $("#updatecake1").submit(function (e) {
+    //         e.preventDefault();
+    //         alert("i am here")
+    //     })
+    // })
+    const searchFun = () => {
+        let filter = document.getElementById('searchhere').value.toUpperCase();
+        let myTable = document.getElementById('tablehere');
+        // let tbody = myTable.getElementsByTagName('cakeList');
+        let tr = myTable.getElementsByTagName('tr');
+
+        for (var i = 1; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName('td')[1];
+            if (td) {
+                let textvalue = td.textContent || td.innerHTML;
+                if (textvalue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+
+
+        }
+
+
+    }
+</script>
+<!-- / cake view section -->
+<% include partials/footer.ejs %>
