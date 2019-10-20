@@ -116,7 +116,7 @@ require(['jquery', 'api_url'], function ($, main) {
             doption: document.getElementsByName('doption')[0].value,
             ddate: document.getElementsByName('ddate')[0].value,
             dlocation: document.getElementsByName('dlocation')[0].value,
-            paymentM: 'cashondelivery',
+            paymentM: "cashondelivery",
             cake_id: $('#cake_id').val(),
             orderLength: $('#itemarray').val()
         }

@@ -203,6 +203,13 @@ router.get("/profiledata", adminController.loginadmindata, function (req, res) {
     console.log(req.headers)
     res.render("admin/adminprofile");
 })
+//------------------------------------ORDER-------------------------------------
+//get data of order where status is not approval
+router.get("/ordernotapproval", adminController.notapprovalorder, function (req, res) {
+
+})
+//------------------------------------end of ORDER-------------------------------------
+
 
 
 
