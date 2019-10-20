@@ -52,7 +52,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.session = req.session;
   res.locals.carttemp = req.cookies.carttemp;
-  const { customerId,customerEmail,token } = res.locals.session;
+  const { customerId, customerEmail, token } = res.locals.session;
   if (token) {
     res.locals.custid = customerId;
     res.locals.custemail = customerEmail;
@@ -101,6 +101,16 @@ app.get("/upload", function (req, res, next) {
   res.send(publicDir)
 })
 //end of route for upload folders
+//route for giftuploads folders
+//Serves all the request which includes /images in the url from Images folder
+var giftuploadDir = require('path').join(__filename, '/resources/giftuploads');
+app.use(express.static(giftuploadDir));
+app.use(express.static('public'));
+app.use('/giftuploads', express.static(__dirname + '/resources/giftuploads'));
+app.get("/giftuploads", function (req, res, next) {
+  res.send(giftuploadDir)
+})
+//end of route for giftuploads folders
 //ignore favicon problem
 function ignoreFavicon(req, res, next) {
   if (req.originalUrl == './favicon.ico') {
