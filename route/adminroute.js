@@ -230,6 +230,20 @@ router.get("/orderdelivered", adminController.deliveredorder, function (req, res
 
 });
 //------------------------------------end of ORDER-------------------------------------
+//dashboard
+//get the page of dashboard
+router.get('/dashboard', function (req, res) {
+    res.render("admin/dashboard");
+});
+//count the delivery
+router.get('/countdelivery', adminController.countdelivery, function (req, res, next) {
+
+});
+
+//count today the delivery
+router.get('/counttotalorder', adminController.counttotalorder, function (req, res, next) {
+
+});
 
 
 

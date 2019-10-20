@@ -760,6 +760,40 @@ exports.deliveredorder = (req, res) => {
 
 //-----------------------------END OF ORDER--------------------------------------------------------------
 
+//dashboard
+// get total number of total delivery
+exports.countdelivery = (req, res) => {
+    mySeq.sequelize.query(
+        "select count(order_id) co from tblorder o where o.order_status='delivered' ",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/deliveredorder", { data: result[0] });
+            res.json(result[0])
+            // next()
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//get total number of order 
+// select * from tbl_name
+// where datecolumn = cast(getdate() as Date)
+exports.counttotalorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select count(order_id) co from tblorder o where o.order_status <>'delivered' ",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/deliveredorder", { data: result[0] });
+            res.json(result[0])
+            // next()
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
 
 
 
