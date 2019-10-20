@@ -9,8 +9,8 @@
                     <div class="cart-view-table">
 
                         <div class="table-responsive">
-                            <input class="form-control" id="searchhere" type="text" placeholder="Search"
-                                aria-label="Search" onkeyup="searchFun()">
+                            <input class="form-control form-control-sm ml-3 w-80" id="searchhere" type="text"
+                                placeholder="Search" aria-label="Search" onkeyup="searchFun()">
 
                             <table class="table" id="tablehere">
                                 <fieldset>
@@ -123,4 +123,34 @@
         </div>
     </div>
 </section>
+<script>
+    // $(document).ready(function () {
+    //     $("#updatecake1").submit(function (e) {
+    //         e.preventDefault();
+    //         alert("i am here")
+    //     })
+    // })
+    const searchFun = () => {
+        let filter = document.getElementById('searchhere').value.toUpperCase();
+        let myTable = document.getElementById('tablehere');
+        // let tbody = myTable.getElementsByTagName('cakeList');
+        let tr = myTable.getElementsByTagName('tr');
+
+        for (var i = 1; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName('td')[1];
+            if (td) {
+                let textvalue = td.textContent || td.innerHTML;
+                if (textvalue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+
+
+        }
+
+
+    }
+</script>
 <% include partials/footer.ejs %>
