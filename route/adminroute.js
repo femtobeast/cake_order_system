@@ -209,6 +209,13 @@ router.get("/ordernotapproval", adminController.notapprovalorder, function (req,
 router.put("/updateordernotapproval/:orderid", adminController.updatenotapprovalorder, function (req, res) {
 
 });
+
+//get data of order where status is complete
+router.get("/ordercomplete", adminController.completeorder, function (req, res) {
+
+});
+
+
 //------------------------------------end of ORDER-------------------------------------
 
 

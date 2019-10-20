@@ -16,7 +16,9 @@ $(document).ready(function () {
             // headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             data: JSON.stringify(updateorderstatus),
             success: function (result) {
-                // console.log(result)
+                console.log(result.message)
+                $("#message").html(result.message);
+
                 // console.log("cake data updated")
 
                 // window.location.href = "Medicineinfo.html"
@@ -39,23 +41,13 @@ $(document).ready(function () {
         console.log(orderid)
 
         $.ajax({
-            // url: 'http://localhost:1234/admin/updateordernotapproval/' + orderid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
-            // method: "PUT",
-            // contentType: 'application/json',
-            // dataType: 'json',
-            // // headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
-            // data: JSON.stringify(updatecake),
-            success: function (result) {
-                // console.log(result)
-                // console.log("cake data updated")
 
-                // window.location.href = "Medicineinfo.html"
-                // your logic here , redirect to another page or show message etc
+            success: function (result) {
+
             },
             error: function (jqXHR) {
                 $("#message").html(jqXHR.responseText);
-                // alert($("#message").innerhtml(jqXHR.responseText);
-                // console.log($("#message").html(jqXHR.responseText))
+
 
 
             }
