@@ -658,6 +658,7 @@ exports.notapprovalorder = (req, res) => {
 
         })
 }
+//data of completion of making cake
 
 exports.completeorder = (req, res) => {
     mySeq.sequelize.query(
@@ -668,6 +669,24 @@ exports.completeorder = (req, res) => {
         { query: mySeq.sequelize.QueryTypes.SELECT })
         .then((result) => {
             res.render("admin/ordercomplete", { data: result[0] });
+            // res.json(result)
+
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+
+//data of progress of making cake
+exports.progressorder = (req, res) => {
+    mySeq.sequelize.query(
+        "select delivery_option,order_phone,delivery_location, order_id,delivery_option ,order_by,order_phone,delivery_location,cake_id,\
+            (select cake_name from tblcake where cake_id = o.cake_id) as 'cake_name',\
+            (select flavour_type from tblcake where cake_id = o.cake_id) as 'flavour_type'\
+        from tblorder o where o.order_status = 'progress'",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            res.render("admin/orderprogress", { data: result[0] });
             // res.json(result)
 
         }).catch((err) => {
