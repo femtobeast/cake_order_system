@@ -21,7 +21,7 @@ exports.addUser = (req, res, next) => {
             // res.json({ errors: errors.array() });
             return res.status(422).jsonp(errors.array());
             //  next({ "status": 422, "message": errors.array()})
-            //add user
+
 
         } else {
             usermodel.customer.create({
