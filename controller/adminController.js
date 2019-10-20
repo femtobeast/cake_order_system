@@ -9,6 +9,7 @@ var fs = require('fs');
 var bcrypt = require("bcrypt");
 var Joi = require("joi");
 const jwt = require('jsonwebtoken');
+var Ordermodel = require("../model/Order");
 
 
 
@@ -654,6 +655,24 @@ exports.notapprovalorder = (req, res) => {
 
         }).catch((err) => {
             console.log(err)
+
+        })
+}
+
+//update not approval order data
+exports.updatenotapprovalorder = (req, res, next) => {
+    Ordermodel.order.update({
+        order_status: req.body.orderstatus
+    }, {
+        where: {
+            order_id: req.params.orderid
+        }
+    }
+    )
+        .then((result) => {
+
+        })
+        .catch((err) => {
 
         })
 }

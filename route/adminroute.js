@@ -203,7 +203,12 @@ router.put("/updategift/:gid", giftController.giftvalidation, giftController.upd
 //get data of order where status is not approval
 router.get("/ordernotapproval", adminController.notapprovalorder, function (req, res) {
 
-})
+});
+
+// update method for notapproval order
+router.put("/updateordernotapproval/:orderid", adminController.updatenotapprovalorder, function (req, res) {
+
+});
 //------------------------------------end of ORDER-------------------------------------
 
 
