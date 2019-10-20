@@ -1,77 +1,56 @@
 var mysequelize = require("../config/databaseConfig");
-var flavour = require("./Flavour");
-var cake = mysequelize.sequelize.define(
-    "tblcake",
+var staff = mysequelize.sequelize.define(
+    "tblstaff",
     {
-        cake_id: {
+        staff_id: {
             type: mysequelize.Sequelize.BIGINT(10),
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        cake_name: {
+        first_name: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
-        // flavourname: {
-        //     type: mysequelize.Sequelize.STRING,
-        //     allowNull: false
-        // },
-        // flavourtype: {
-        //     type: mysequelize.Sequelize.STRING,
-        //     allowNull: false
-        // },
-        pound: {
+        last_name: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
-        cake_image: {
+        email: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
-        flavour_id: {
-            type: mysequelize.Sequelize.INTEGER,
-            allowNull: true
-        },
-        descriptions: {
+        address: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
-        flavour_type: {
-            type: mysequelize.Sequelize.STRING,
-            allowNull: false
-        },
-        cake_price: {
+        phonenumber: {
             type: mysequelize.Sequelize.INTEGER,
             allowNull: false
         },
-        serves: {
-            type: mysequelize.Sequelize.INTEGER,
-            allowNull: false
-        },
-        version: {
+        department: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
     },
     {
         freezeTableName: true,
-        tableName: "tblcake"
+        tableName: "tblstaff"
     }
 );
 // cake.hasMany(flavour, { foreignKey: 'channel_fk', as: 'channels' });
 // cake.hasMany(flavour, { foreignKey: 'flavour_id' });
 
 
-cake
+staff
     .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     // flavour.sync
     .then(function () {
-        console.log("cake table created");
+        console.log("staff table created");
     })
     .catch(function (err) {
         console.log("err in creating table");
     });
 
 
-module.exports = { cake };
+module.exports = { staff };

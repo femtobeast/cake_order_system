@@ -1,30 +1,38 @@
 var mysequelize = require("../config/databaseConfig");
-var flavour = mysequelize.sequelize.define(
-    "tblflavour",
+var gift = mysequelize.sequelize.define(
+    "tblgift",
     {
-        flavour_id: {
+        gift_id: {
             type: mysequelize.Sequelize.INTEGER(10),
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        flavour_name: {
+        gift_name: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },
+        gift_price: {
+            type: mysequelize.Sequelize.INTEGER,
+            allowNull: false
+        },
+        gift_image: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        }
 
     },
     {
         freezeTableName: true,
-        tableName: "tblflavour"
+        tableName: "tblgift"
     }
 );
-flavour
+gift
     .sync({ force: false }) //first time is true second should be false. repeatedly creating tables new
     .then(function () {
-        console.log("flavour table created");
+        console.log("gift table created");
     })
     .catch(function (err) {
         console.log("err in creating table");
     });
-module.exports = { flavour };
+module.exports = { gift };
