@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Yummybakery | Home</title>
+      
+    <meta name="google-signin-client_id"
+        content="915969573855-vjr1qlcc9pnevsvp0gnlc4lg5jqk508o.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <!-- Font awesome -->
     <link href="/dashboard/css/font-awesome.css" rel="stylesheet">
@@ -88,14 +91,16 @@
                                     <!-- <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li> -->
                                     <li class="hidden-xs"><a href="/user/shopping-cart">My Cart</a></li>
                                     <li class="hidden-xs"><a href="/user/checkout">Checkout</a></li>
-                                    <li class="hidden-xs"><a href="/user/logout">Logout</a></li>
+                                    <!-- <li class="hidden-xs"><a href="/user/logout">Logout</a></li> -->
+                                    <li class="hidden-xs"><a href="javascript:void(0);" onclick="onSignOut();">Logout from google</a></li>
                                     <!-- <form method="POST" action="/logout">
                                         <button>Logout</button>
                                     </form> -->
+                                    <div style="display: none;"><div class="g-signin2" id="gSignIn"></div></div>
                                     <% }else{ %>
                                     <li class="hidden-xs"><a href="/user/register">Register</a></li>
-                                    <li><a href="/user/login">Login</a></li>
-                                    <% } %>
+                                    <li  class="hidden-xs"><a href="/user/login">Login</a></li>
+                                 <% } %>
                                 </ul>
                             </div>
                         </div>

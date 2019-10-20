@@ -47,7 +47,28 @@ exports.addUser = (req, res, next) => {
     }
 
 }
+//USER REGISTRATION FUNCTION ----------------
+exports.addGoogleUser = (req, res, next) => {
+    usermodel.customer.findOne({
+        where: { cust_email: req.body.email }
+    }).then(function (result) {
+        usermodel.customer.create({
+            cust_email: req.body.email,
+            cust_password: req.myhash,
+            cust_phone: req.body.phone,
+            cust_address: req.body.address,
+            cust_gender: req.body.gender,
+            cust_fname: req.body.firstname,
+            cust_lname: req.body.lastname
+        }).then(function (result) {
+            req.session.customerEmail = result.dataValues.cust_email;
+            res.redirect('/user/dashboard');
+        })
+    }).catch(function (err) {
+        next();
+    })
 
+}
 //CHECKING USER CUSTOMER EMAIL INTO DATABASE--------------
 exports.checkUserEmail = (req, res, next) => {
     // console.log(req.body)
@@ -55,6 +76,7 @@ exports.checkUserEmail = (req, res, next) => {
         where: { cust_email: req.body.email }
     }).then(function (result) {
         if (result.dataValues != "") {
+
             next({ "status": 409, "message": result.dataValues.cust_email + ' | email already exists' })
         }
     }).catch(function (err) {
