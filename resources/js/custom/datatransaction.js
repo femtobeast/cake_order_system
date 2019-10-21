@@ -143,6 +143,39 @@ require(['jquery', 'api_url'], function ($, main) {
     })
 
 
+
+    //Update User Profile
+      //LOGIN AJAX 
+      $('#updateBtn').on('click',  function () {
+        var customerData = {
+            fname:$('#fname').val(),
+            lname:$('#lname').val(),
+            email:$('#email').val(),
+            address:$('#address').val(),
+            phone:$('#PhoneNumber').val(),
+            password: $('#password').val(),
+            // gender: $('#gender').val(),
+            birthday: document.getElementsByName('birthday')[0].value,
+            gender: document.getElementsByName('gender')[0].value
+          }
+        $.ajax({
+            url: updateCustomerURL,
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(customerData),
+            success: function (result, status) {
+                alert(result)
+                redirectPage('/user/profile')
+                // $('#errors').html(result.message + ": Please refresh or login for checkout.");
+            },
+            error: function (err, status) {
+              console.log(err)
+            }
+        });
+
+    });
+
 });
 function redirectPage(path) {
     return window.location.href = path;;
