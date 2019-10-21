@@ -586,12 +586,45 @@ exports.jwtTokenGen = (req, res, next) => {
     // next()
 
 }
-//verify the
+//verify the token
+
+exports.tokenVerify = (req, res, next) => {
+    // console.log(req.headers)
+
+    if (req.headers.authorization == undefined) {
+
+        // next({ status: 500, message: 'no authorization header present' })
+        // res.send({ message: "token expired" })
+        // console.log("token  expiry")
+        // res.message("400")
+
+
+    }
+    else {
+
+        let token = req.headers.authorization.slice(6, req.headers.authorization.length)
+
+        jwt.verify(token, 'mySecretKey', function (err, decoded) {
+            // console.log(decoded);
+            if (err != null) {
+                next({ status: 500, message: err.message })
+                // next({ error: err })
+                // console.log(err)
+                // console.log(err);
+            }
+            else {
+                next();
+            }
+        })
+
+    }
+}
+
 
 //retrieve id of admin for profile page
 exports.AdminData = (req, res, next) => {
     Adminmodel.admin.findOne({
-        attributes: ['admin_id'],
+        // attributes: ['admin_id'],
         where: { email: req.body.email }
     })
         .then(function (result) {
@@ -794,7 +827,22 @@ exports.counttotalorder = (req, res) => {
 
         })
 }
+//total sales amount
+exports.countsaleamount = (req, res) => {
+    mySeq.sequelize.query(
+        // "select tblcake.cake_price from tblcake left join tblorder  where cake_id.tblcake = tblorder.cake_id   ",
+        "select cake_price from tblcake;",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/deliveredorder", { data: result[0] });
+            res.json(result[0])
+            // next()
 
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
 
 
 

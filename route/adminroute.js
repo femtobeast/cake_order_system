@@ -14,7 +14,9 @@ router.get('/acd', adminController.getflavour);
 
 
 //GET method for getting cake data from database
-router.get('/vc', adminController.getcake);
+router.get('/vc',
+    // adminController.tokenVerify, 
+    adminController.getcake);
 
 //POST method for adding cake
 router.post('/cakeAdd', adminController.upload.single('cakeimage'), adminController.cakevalidation, adminController.addCake, function (req, res, next) {
@@ -242,6 +244,10 @@ router.get('/countdelivery', adminController.countdelivery, function (req, res, 
 
 //count today the delivery
 router.get('/counttotalorder', adminController.counttotalorder, function (req, res, next) {
+
+});
+//sum the sale amount from cake sales
+router.get('/countsaleamount', adminController.countsaleamount, function (req, res, next) {
 
 });
 
