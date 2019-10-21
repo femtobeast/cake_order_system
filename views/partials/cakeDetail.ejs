@@ -6,7 +6,8 @@
             <!-- <%= %> -->
             <a class="aa-product-img" href="#"><img imgagecake="<%=data.cake_image %>" height="300" width="250"
                     src="/uploads/<%=data.cake_image %>" + alt="polo shirt img"></a>
-            <a class="aa-add-card-btn" href="/user/add-to-cart/<%=data.cake_id %>"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                    <a style="color: white;" id="cartbtn" href="/user/add-to-cart/<%=data.cake_id %>">Add To Cart</a>
+            <a id="addcartBtn" class="aa-add-card-btn" href="/user/add-to-cart/<%=data.cake_id %>"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
             <!-- cartdata='user=[data.cake_id,data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type] ' -->
             <figcaption>
                 <h4 class="aa-product-title">

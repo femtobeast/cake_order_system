@@ -227,18 +227,13 @@
             dataType: 'json',
 
             success: function (result, status) {
-                // window.location.href = "http://localhost:1234/admin/acd"
+                window.location.href = "http://localhost:1234/admin/acd"
                 console.log(result);
-
-
-
             },
             error: function (jqXHR) {
                 console.log(jqXHR);
                 // $("#message").html(jqXHR.responseText);
                 $("#message").html(jqXHR.responseText);
-
-
             }
         })
     })

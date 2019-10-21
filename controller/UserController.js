@@ -69,6 +69,8 @@ exports.addGoogleUser = (req, res, next) => {
             cust_lname: req.body.lastname
         }).then(function (result) {
             req.session.customerEmail = result.dataValues.cust_email;
+            req.session.fname = result.dataValues.cust_fname;
+            req.session.lname = result.dataValues.cust_lname;
             res.redirect('/user/dashboard');
         })
     })
@@ -127,6 +129,35 @@ exports.getProfileDetail = (req, res, next) => {
         //error handling
         next({ "status": 500, "message": err });
     });
+};
+
+///GET CAKE PLAN DETAIL
+exports.getSelectPlanCakeDetail = (req, res, next) => {
+    console.log(req.body)
+    mySeq.sequelize.query("SELECT * \
+            FROM tblcake c \
+            WHERE c.serves = :serves AND \
+            c.pound =:pound AND \
+            c.version = :version AND \
+            c.flavour_type= :flvType AND \
+            c.cake_price <= :cakeprice;",
+        {
+            replacements: {
+                serves: req.body.serves,
+                pound: req.body.pound,
+                version: req.body.version,
+                flvType: req.body.flvType,
+                cakeprice: req.body.cakeprice
+
+            }, type: mySeq.sequelize.QueryTypes.SELECT
+        }
+    ).then(result => {
+        res.json(result)
+        // res.render('cakeplan', {carray:result})
+        // next();
+    }).catch(err => {
+        next({ "status": 500, "message": err });
+    })
 };
 
 //--GETTING CUSTOMER DETAIL----------------

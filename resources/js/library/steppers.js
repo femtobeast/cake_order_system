@@ -37,6 +37,8 @@ function nextPrev(n) {
         document.getElementById("regForm").submit();
         return false;
     }
+    $('#nextBtn').show();
+    $('#cshop').hide();
     // Otherwise, display the correct tab:
     showTab(currentTab);
 }

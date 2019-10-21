@@ -51,6 +51,10 @@ router.post('/sendUpdate',Auth.passwordHashGenerate, UserController.updateUser, 
     res.status(201);
     res.send({ message: "Updated Successful!!" });
 });
+
+router.post('/sendCplan',UserController.getSelectPlanCakeDetail, (req, res, next) => {
+  
+});
 //------------------------------------------
 router.get('/logoutCart', (req, res) => {
     req.session.destroy(err => {

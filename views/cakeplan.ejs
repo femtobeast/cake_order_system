@@ -5,125 +5,112 @@
 <div class="container">
     <div class="col-md-12">
         <div class="plandiv">
-            <form>
-                <h1>Plan your cake | Fill all the detail provided</h1>
-                <!-- One "tab" for each step in the form: -->
-                <div class="tab">
-                    <label>Number of people to serve.</label>
-                    <p><input placeholder="serve number" class="pinput" name="serven"></p>
-                </div>
-                <div class="tab">
-                    <label>Number of pound.</label>
-                    <p><input placeholder="example 1" class="pinput" name="pound"></p>
-                </div>
-                <div class="tab">
-                    <label>Select Flavour</label>
-                    <p><input placeholder="example 1" class="pinput" name="sflavour"></p>
-                </div>
-                <div class="tab">
-                    <div class="budget-wrap">
-                        <div class="budget">
-                            <div class="header">
-                                <div class="title clearfix">Set your budget! <span class="pull-right"></span>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <input id="rangevalue" class="pinput" type="range" min="1" max="5000" value="500"
-                                    data-rangeslider>
-                            </div>
 
+            <!-- <form action="/user/sendCplan" method="POST"> -->
+            <h1>Plan your cake | Fill all the detail provided</h1>
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab">
+                <label>Number of people to serve.</label>
+                <p><input id="servecake" placeholder="serve number" class="pinput" name="serven"></p>
+            </div>
+            <div class="tab">
+                <label>Number of pound.</label>
+                <p><input id="poundcake" placeholder="example 1" class="pinput" name="pound"></p>
+            </div>
+            <div class="tab">
+                <label>Select Flavour</label>
+                <p><input id="flavourcake" placeholder="example 1" class="pinput" name="sflavour"></p>
+            </div>
+            <div class="tab">
+                <div class="budget-wrap">
+                    <div class="budget">
+                        <div class="header">
+                            <div class="title clearfix">Set your budget! <span class="pull-right"></span>
+                            </div>
                         </div>
+                        <div class="content">
+                            <input id="rangevalue" class="pinput" type="range" min="1" max="5000" value="500"
+                                data-rangeslider>
+                        </div>
+
                     </div>
                 </div>
-                <div class="tab">
-                    <label>Egg or Eggless?</label>
-                    <div class="form-group">
-                        <select class="form-control" id="sel1">
-                            <option>Egg</option>
-                            <option>Egless</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="tab">
+                <label>Egg or Eggless?</label>
+                <div class="form-group">
+                    <select class="form-control" id="sel1">
+                        <option>Egg</option>
+                        <option>Egless</option>
+                    </select>
                 </div>
-                <div class="tab">
-                    <label>Any sepecific shape of cake?</label>
-                    <div class="shapediv">
-                        <div class="col-md-5">
-                            <label>
-                                <input class="rdbtn" type="radio" name="test" value="square" checked>
-                                <img height="auto" width="50" src="/dashboard/img/cakeimg/square.png">
-                            </label>
-                            <label>
-                                <input class="rdbtn" type="radio" name="test" value="heart">
-                                <img height="auto" width="50" src="/dashboard/img/cakeimg/heart.png">
-                            </label>
-                            <label>
-                                <input class="rdbtn" type="radio" name="test" value="round">
-                                <img height="auto" width="50" src="/dashboard/img/cakeimg/round.png">
-                            </label>
-                        </div>
-                        <script>
-                            var f = document.querySelector('input[name="test"]:checked').value;
+            </div>
+            <div class="tab">
+                <label>Any sepecific shape of cake?</label>
+                <div class="shapediv">
+                    <div class="col-md-5">
+                        <label>
+                            <input class="rdbtn" type="radio" name="test" value="square" checked>
+                            <img height="auto" width="50" src="/dashboard/img/cakeimg/square.png">
+                        </label>
+                        <label>
+                            <input class="rdbtn" type="radio" name="test" value="heart">
+                            <img height="auto" width="50" src="/dashboard/img/cakeimg/heart.png">
+                        </label>
+                        <label>
+                            <input class="rdbtn" type="radio" name="test" value="round">
+                            <img height="auto" width="50" src="/dashboard/img/cakeimg/round.png">
+                        </label>
+                    </div>
+                    <script>
+                        var f = document.querySelector('input[name="test"]:checked').value;
 
-                            (function () {
-                                var radios = document.getElementsByName('test');
-                                for (var i = 0; i < radios.length; i++) {
-                                    radios[i].onclick = function () {
+                        (function () {
+                            var radios = document.getElementsByName('test');
+                            for (var i = 0; i < radios.length; i++) {
+                                radios[i].onclick = function () {
 
-                                        // document.getElementById('choiceLabel').innerText = this.value;
-                                    }
+                                    // document.getElementById('choiceLabel').innerText = this.value;
                                 }
-                            })();                       
-                        </script>
-                    </div>
+                            }
+                        })();                       
+                    </script>
                 </div>
+            </div>
 
-                <div class="tab">Login Info:
-                    <label>Select any occasions | to order your special cake.</label>
-                    <div class="main">
-                        <ul class="cards">
+            <div class="tab">Login Info:
+                <label>Select any occasions | to order your special cake.</label>
+                <div class="main">
+                    <ul id="cardItem" class="cards">
+                           
+                    </ul>
+                </div>
+            </div>
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" class="pbtn" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" class="pbtn" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    <button type="button" class="pbtn" id="cshop">Search</button>
+                </div>
+            </div>
 
-                            <li class="card_item">
-                                <div class="card">
-                                    <div class="card_image"><img width="100" height="auto"
-                                            src="/uploads/cakeimage-1570622387922.jpg" alt="cake img">
-                                        <span id="itemname">Cake Name</span>
-                                    </div>
-                                    <div class="card_content">
-                                        <h2 class="card_title">
-                                            <span>Price:
-                                            </span>Rs. Cake Price</h2>
-                                        <a href="/user/add-to-cart" class="card_title"><button>Add to cart</button> </a>
-
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="overflow:auto;">
-                    <div style="float:right;">
-                        <button type="button" class="pbtn" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                        <button type="button" class="pbtn" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                        <button type="button" class="pbtn" id="cshop">Continue Shop!!!</button>
-                    </div>
-                </div>
-                <!-- Circles which indicates the steps of the form: -->
-                <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                </div>
-            </form>
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+            <!-- </form> -->
         </div>
     </div>
 </div>
 <% include partials/footer.ejs %>
 <script src="/js/library/steppers.js"></script>
 <script>
-$('#cshop').hide();
+    // $('#cshop').hide();
     function continueShop() {
         var sbtn = document.getElementById("nextBtn").innerHTML;
         if (sbtn == 'Search_Cake') {
