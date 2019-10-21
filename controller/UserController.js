@@ -52,6 +52,13 @@ exports.addGoogleUser = (req, res, next) => {
     usermodel.customer.findOne({
         where: { cust_email: req.body.email }
     }).then(function (result) {
+        if (result.dataValues != "") {
+            req.session.customerEmail = result.dataValues.cust_email;
+            req.session.fname = result.dataValues.cust_fname;
+            req.session.lname = result.dataValues.cust_lname;
+            res.redirect('/user/dashboard');
+        }
+    }).catch(function (err) {
         usermodel.customer.create({
             cust_email: req.body.email,
             cust_password: req.myhash,
@@ -64,11 +71,34 @@ exports.addGoogleUser = (req, res, next) => {
             req.session.customerEmail = result.dataValues.cust_email;
             res.redirect('/user/dashboard');
         })
-    }).catch(function (err) {
-        next();
     })
 
 }
+
+exports.updateUser = function (req, res, next) {
+    var updateDetail = {
+        cust_email: req.body.email,
+        cust_password: req.myhash,
+        cust_phone: req.body.phone,
+        cust_address: req.body.address,
+        // cust_gender: req.body.gender,
+        cust_dob: req.body.birthday,
+        cust_fname: req.body.firstname,
+        cust_lname: req.body.lastname
+    }
+    usermodel.customer.update(updateDetail, { where: { cust_email: req.body.email } })
+        .then(function (result) {
+            next();
+        }).catch(function (err) {
+            console.log(err);
+            next({
+                "status": 500,
+                "message": "Couldnot Register User, Database Error ! "
+            });
+        })
+}
+
+
 //CHECKING USER CUSTOMER EMAIL INTO DATABASE--------------
 exports.checkUserEmail = (req, res, next) => {
     // console.log(req.body)
@@ -85,26 +115,31 @@ exports.checkUserEmail = (req, res, next) => {
 
 }
 
+///GET CUSTOMER PROFILE DETAIL
+exports.getProfileDetail = (req, res, next) => {
+    usermodel.customer.findAll({
+        where: { cust_email: req.session.customerEmail }
+    }).then(function (result) {
+        if (result.dataValues != "") {
+            res.render('userProfile', { customerD: result })
+        }
+    }).catch(function (err) {
+        //error handling
+        next({ "status": 500, "message": err });
+    });
+};
+
 //--GETTING CUSTOMER DETAIL----------------
 var info = {};
 exports.getCustomerDetali = (req, res, next) => {
-    // request(url, function (error, response, body) {
-    //     const info = JSON.parse(body);
-    //     res.render('user_dashboard', { info });
-    // });
-
     usermodel.customer.findAll({})
         .then(function (result) {
-            // console.log(result[0].cust_id);
             if (result.dataValues != "") {
-                res.render('/', {
-                    info: result
-                });
                 // var carray = JSON.parse(result);
                 // carray.pop();
                 // carray.push(result);
                 // res.json(result);
-                // res.render('user_dashboard',{carray})
+                res.render('profile', { customerD: result })
             }
         })
         .catch(function (err) {

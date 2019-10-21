@@ -8,6 +8,8 @@ addCustomerByUser = "/user/registerAdd";
 
 addCustomerByGoogleUser = "/user/gdata";
 
+updateCustomerURL = "/user/sendUpdate";
+
 checkEmail = "/user/check/";
 
 viewDetailURL = "/user/vp/";
