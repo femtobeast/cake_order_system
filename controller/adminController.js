@@ -132,30 +132,40 @@ exports.getflavour = (req, res, next) => {
 //     });
 
 // }
+exports.cakeimagevalidation = (req, res, next) => {
+    if (req.file == undefined) {
+        // res.send({
+        //     "message": "no image selected"
+        // })
+        res.status(404).send("Please fill all field properly")
+        console.log("")
+    } else {
+        next()
+    }
+
+}
 
 //validation for add cake form
 exports.cakevalidation = (req, res, next) => {
 
     const schema = {
-
-
-
-
         cakename: Joi.string().required(),
+        price: Joi.number().required(),
+        serve: Joi.number().required(),
+        version: Joi.string().required(),
         size: Joi.number().required(),
-        // filename: Joi.required(),
         flavourtype: Joi.string().required(),
         flavourname: Joi.string(),
         desc: Joi.string().required(),
-        price: Joi.number().required(),
-        version: Joi.string().required(),
-        serve: Joi.number().required()
     }
-
     const result = Joi.validate(req.body, schema);
     console.log(result);
     if (result.error) {
         //bad request
+        fs.unlink(('./resources/uploads/' + req.file.filename), function (err) {
+            if (err) throw err;
+            console.log("image deleted");
+        })
         res.status(400).send(result.error.details[0].message);
         // req.result.error = result.error.details[0].message
         // console.log(result.error.details[0])
@@ -191,6 +201,8 @@ exports.addCake = (req, res, next) => {
             serves: req.body.serve
         }).then(function (result) {
             // { fdata: flavour_arry[0] }
+            // res.redirect(req.originalUrl)
+
             next()
         })
     }).catch(function (err) {
@@ -442,6 +454,7 @@ exports.staffvalidation = (req, res, next) => {
 
 // adding method the staff details
 exports.addStaff = (req, res, next) => {
+    console.log(req.headers)
 
 
 
@@ -567,7 +580,7 @@ exports.jwtTokenGen = (req, res, next) => {
         email: req.body.email,
         accessLevel: 'admin'
     }, 'mySecretKey', {
-        expiresIn: "10h"
+        expiresIn: "10s"
     },
 
         function (err, token) {
@@ -595,7 +608,7 @@ exports.tokenVerify = (req, res, next) => {
 
     if (req.headers.authorization == undefined) {
 
-        // next({ status: 500, message: 'no authorization header present' })
+        next({ status: 500, message: 'no authorization header present' })
         // res.send({ message: "token expired" })
         // console.log("token  expiry")
         // res.message("400")

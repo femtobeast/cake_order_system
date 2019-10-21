@@ -11,9 +11,10 @@
             <div class="col-md-12">
                 <div class="well well-sm">
                     <form class="form-horizontal" id="addcakeform" method="post" enctype="multipart/form-data">
-                        <% if(typeof message !== 'undefined') { %>
+                        <!-- <% if(typeof message !== 'undefined') { %>
                         <p><%= message %></p>
-                        <% } %>
+                        <% } %> -->
+                        <strong style="color:red;" id="message"></strong>
                         <fieldset>
                             <legend class="text-center header">Add cake details</legend>
 
@@ -52,7 +53,10 @@
                                     <label for="flavourtype">Flavour Type</label>
                                     <select class="form-control" id="flavourtype" name="flavourtype">
 
-                                        <option>s</option>
+                                        <option>Basic</option>
+                                        <option>Special</option>
+                                        <option>Butterscotch</option>
+                                        <option>Chocolate</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,20 +148,6 @@
     </div>
 </section>
 
-
-<script>
-    // $(document).ready(function () {
-    //     $('#flavourname').on('click', '#anup', function () {
-    //         console.log('i asdasd here')
-    //     })
-    // })
-    function getcube() {
-        var number = document.getElementById("#fid");
-        alert(number);
-        console.log("i am here man")
-        console.log($(this))
-    }
-</script>
 
 
 

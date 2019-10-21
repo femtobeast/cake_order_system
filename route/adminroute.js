@@ -3,6 +3,12 @@ const router = express.Router();
 const adminController = require("../controller/adminController");
 const giftController = require("../controller/giftController");
 const path = require("path");
+router.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE');
+    res.setHeader("Access-Control-Allow-Headers", "content-type,X-Requested-With,authorization,ERR_HTTP_HEADERS_SENT");
+    next();
+});
 
 
 // ---------START OF cake get post delete and update method -------------
@@ -19,8 +25,10 @@ router.get('/vc',
     adminController.getcake);
 
 //POST method for adding cake
-router.post('/cakeAdd', adminController.upload.single('cakeimage'), adminController.cakevalidation, adminController.addCake, function (req, res, next) {
-    res.redirect("http://localhost:1234/admin/acd");
+router.post('/cakeAdd', adminController.upload.single('cakeimage'), adminController.cakeimagevalidation, adminController.cakevalidation, adminController.addCake, function (req, res, next) {
+    // res.redirect("http://localhost:1234/admin/acd");
+
+
 });
 //image upload method
 // router.post('/cakeimageAdd', adminController.upload, adminController.addCakeImage, function (req, res, next) {
@@ -28,7 +36,7 @@ router.post('/cakeAdd', adminController.upload.single('cakeimage'), adminControl
 // });
 // DELETE method for cake
 router.delete('/cakedelete/:cid', adminController.deleteCake, function (req, res, next) {
-    res.redirect("http://localhost:1234/admin/vc");
+    // res.redirect("http://localhost:1234/admin/vc");
 });
 
 //GET method to get individual cake data
@@ -36,7 +44,7 @@ router.get('/getindividualcake/:cid', adminController.getindividualCake, functio
 })
 
 //UPDATE method to get individual cake data
-router.put("/updatecake/:cid", adminController.updateCake, function (req, res, next) {
+router.put("/updatecake/:cid", adminController.upload.single('cakeimage'), adminController.cakevalidation, adminController.updateCake, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
     console.log("data updated")
 });
@@ -123,16 +131,18 @@ router.get("/astaff", function (req, res, next) {
 });
 
 router.post("/as", adminController.staffvalidation, adminController.addStaff, function (req, res, next) {
-    res.redirect("http://localhost:1234/admin/astaff");
+    // res.render("admin/addstaff", { "message": "staff data successfully saved" })
+
 });
 
 //get view cake page
 router.get("/vstaff", adminController.getstaff, function (req, res, next) {
+
     res.render("admin/viewstaff")
 });
 
 //delete method for individual staff
-router.delete('/staffdelete/:sid', adminController.deleteStaff, function (req, res, next) {
+router.delete('/staffdelete/:sid', adminController.tokenVerify, adminController.deleteStaff, function (req, res, next) {
     res.redirect("http://localhost:1234/admin/vstaff");
 });
 

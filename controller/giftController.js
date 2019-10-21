@@ -51,7 +51,7 @@ exports.imagevalidation = (req, res, next) => {
         // res.send({
         //     "message": "no image selected"
         // })
-        res.status(404).send("Please fill all field properly")
+        res.status(404).send({ message: "Please fill all field properly" })
         console.log("")
     } else {
         next()
@@ -99,6 +99,7 @@ exports.addGift = (req, res, next) => {
         })
 
         .then(function (result) {
+            res.render("admin/addgift")
             next();
         })
         .catch(function (err) {
@@ -108,6 +109,7 @@ exports.addGift = (req, res, next) => {
             next({ "status": 500, "message": err });
             // console.log(err)
         })
+    // next()
 
 }
 
