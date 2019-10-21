@@ -23,7 +23,12 @@ var admin = mysequelize.sequelize.define(
         address: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
-        }, password: {
+        },
+        phone: {
+            type: mysequelize.Sequelize.STRING,
+            allowNull: false
+        },
+        password: {
             type: mysequelize.Sequelize.STRING,
             allowNull: false
         },

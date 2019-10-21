@@ -21,7 +21,9 @@ $(document).ready(function () {
             dataType: 'json',
 
             success: function (result, status) {
-                window.location.href = "http://localhost:1234/admin/addgift"
+                // window.location.href = "admin/addgift.ejs"
+                windows.location.reload(true);
+                // alert("adsasd")
                 // console.log(result);
                 // location.reload();
 
@@ -75,7 +77,7 @@ $(document).ready(function () {
     $('#giftList').on('click', '#individualgiftview', function () {
         //this is the userid
         gid = $(this)[0].attributes.gid.nodeValue;
-        console.log(sid)
+        // console.log(sid)
         $.ajax({
             url: 'http://localhost:1234/admin/getindividualgift/' + gid,
             method: 'GET',
@@ -115,7 +117,8 @@ $(document).ready(function () {
             dataType: 'json',
             data: JSON.stringify(updategift),
             success: function (result) {
-                console.log(result)
+                // console.log(result)
+                window.href.location = "http://localhost:1234/admin/viewgift";
             },
             error: function (jqXHR) {
                 console.log(jqXHR)

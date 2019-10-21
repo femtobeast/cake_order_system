@@ -1,206 +1,4 @@
-<!-- footer -->
-<footer id="aa-footer">
-
-    <!-- footer bottom -->
-    <div class="aa-footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-footer-top-area">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <h3>Main Menu</h3>
-                                    <ul class="aa-footer-nav">
-                                        <li><a href="#">Dashboard</a></li>
-                                        <li><a href="/admin/acd">Add Cake</a></li>
-                                        <li><a href="#">View Cake Details</a></li>
-                                        <li><a href="/admin/af">Add Flavour</a></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="aa-footer-widget">
-                                        <h3>Knowledge Base</h3>
-                                        <ul class="aa-footer-nav">
-                                            <li><a href="#">Delivery</a></li>
-                                            <li><a href="#">Returns</a></li>
-                                            <li><a href="#">Services</a></li>
-                                            <li><a href="#">Discount</a></li>
-                                            <li><a href="#">Special Offer</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="aa-footer-widget">
-                                        <h3>Useful Links</h3>
-                                        <ul class="aa-footer-nav">
-                                            <li><a href="#">Site Map</a></li>
-                                            <li><a href="#">Search</a></li>
-                                            <li><a href="#">Advanced Search</a></li>
-                                            <li><a href="#">Suppliers</a></li>
-                                            <li><a href="#">FAQ</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="aa-footer-widget">
-                                    <div class="aa-footer-widget">
-                                        <h3>Contact Us</h3>
-                                        <address>
-                                            <p> kathmandu, Nepal</p>
-                                            <p><span class="fa fa-phone"></span>+977 9860355983</p>
-                                            <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
-                                        </address>
-                                        <div class="aa-footer-social">
-                                            <a href="#"><span class="fa fa-facebook"></span></a>
-                                            <a href="#"><span class="fa fa-twitter"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus"></span></a>
-                                            <a href="#"><span class="fa fa-youtube"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- footer-bottom -->
-    <div class="aa-footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-footer-bottom-area">
-                        <p>Designed by Yummy group</p>
-                        <div class="aa-footer-payment">
-                            <span class="fa fa-cc-mastercard"></span>
-                            <span class="fa fa-cc-visa"></span>
-                            <span class="fa fa-paypal"></span>
-                            <span class="fa fa-cc-discover"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</footer>
-<!-- / footer -->
-
-<!-- Login Modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4>Login or Register</h4>
-                <form class="aa-login-form" action="">
-                    <label for="">Username or Email address<span>*</span></label>
-                    <input type="text" placeholder="Username or email">
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button class="aa-browse-btn" type="submit">Login</button>
-                    <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me
-                    </label>
-                    <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
-                    <div class="aa-register-now">
-                        Don't have an account?<a href="account.html">Register now!</a>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/dashboard/js/bootstrap.js"></script>
-<!-- SmartMenus jQuery plugin -->
-<script type="text/javascript" src="/dashboard/js/jquery.smartmenus.js"></script>
-<!-- SmartMenus jQuery Bootstrap Addon -->
-<script type="text/javascript" src="/dashboard/js/jquery.smartmenus.bootstrap.js"></script>
-<!-- To Slider JS -->
-<script src="/dashboard/js/sequence.js"></script>
-<script src="/dashboard/js/sequence-theme.modern-slide-in.js"></script>
-<!-- Product view slider -->
-<script type="text/javascript" src="/dashboard/js/jquery.simpleGallery.js"></script>
-<script type="text/javascript" src="/dashboard/js/jquery.simpleLens.js"></script>
-<!-- slick slider -->
-<script type="text/javascript" src="/dashboard/js/slick.js"></script>
-<!-- Price picker slider -->
-<script type="text/javascript" src="/dashboard/js/nouislider.js"></script>
-<!-- Custom js -->
-<script src="/dashboard/js/custom.js"></script>
-<!-- <script src="/js/custom/adminnotoken.js">
-</script> -->
-<script src="/js/custom/ordercustom.js">
-</script>
-<script src="/js/custom/adminlogout.js">
-</script>
-<script src="/js/custom/gift.js"></script>
-<script src="/js/custom/dashboard.js"></script>
-<script src="/js/custom/admincustom.js"></script>
-<script>
-<<<<<<< HEAD
-
-
-
-
-    // $(document).ready(function () {
-    //     //add cake
-    //     $("#addcakeform").submit(function (event) {
-    //         event.preventDefault();
-
-    //         const cakedata = {
-
-    //             cakename: $("#cakename").val(),
-    //             desc: $("#desc").val(),
-    //             flavourtype: $('#flavourtype').val(),
-    //             serve: $("#serve").val(),
-    //             version: $("#version").val(),
-    //             size: $("#size").val(),
-    //             price: $("#price").val(),
-    //             flavourname: $("#flavourname").val()
-
-
-    //         }
-    //         // console.log(cakedata);
-
-    //         // for (key in noticeData) {
-    //         //     console.log(noticeData[key]);
-    //         // }
-
-    //         $.ajax({
-    //             url: "http://localhost:1234/admin/cakeAdd",
-    //             method: "POST",
-    //             // contentType: "application/json",
-    //             data: JSON.stringify(cakedata),
-    //             contentType: "application/json",
-    //             dataType: 'json',
-
-    //             success: function (result, status) {
-    //                 // window.location.href = "http://localhost:1234/admin/astaff"
-    //                 console.log(result);
-
-
-
-    //             },
-    //             error: function (jqXHR) {
-    //                 console.log(jqXHR);
-    //                 $("#message").html(jqXHR.responseText);
-
-    //             }
-    //         })
-    //     })
+$(document).ready(function () {
 
     $("#addcakeform").submit(function (event) {
         event.preventDefault();
@@ -229,13 +27,18 @@
             dataType: 'json',
 
             success: function (result, status) {
-                window.location.href = "http://localhost:1234/admin/acd"
+                // window.location.href = "http://localhost:1234/admin/acd"
                 console.log(result);
+
+
+
             },
             error: function (jqXHR) {
                 console.log(jqXHR);
                 // $("#message").html(jqXHR.responseText);
                 $("#message").html(jqXHR.responseText);
+
+
             }
         })
     })
@@ -294,6 +97,10 @@
                 $('#desc').val(result.descriptions)
 
 
+                $('#Icakeimage').append(
+                    '<img class="rounded" src="http://localhost:1234/uploads/' + result.cake_image + '" alt="User Avatar" width="110">'
+                )
+
 
             },
             error: function () {
@@ -344,6 +151,7 @@
     var cid;
     $("#updatecake1").submit(function (e) {
         e.preventDefault();
+        var formdata = new FormData();
         var updatecake = {
             cakename: $('#cakename').val(),
             flavourname: $('#flavourname').val(),
@@ -397,7 +205,7 @@
     //add staff
     $("#addstaffform").submit(function (event) {
         event.preventDefault();
-
+        // alert("added")
         const staffdata = {
 
             staff_firstname: $("#staff_firstname").val(),
@@ -410,21 +218,18 @@
 
         }
 
-        // for (key in noticeData) {
-        //     console.log(noticeData[key]);
-        // }
-
         $.ajax({
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             url: "http://localhost:1234/admin/as",
             method: "POST",
-            // contentType: "application/json",
             data: JSON.stringify(staffdata),
             contentType: "application/json",
-            dataType: 'json',
+            dataType: "json",
+            success: function (result) {
+                // window.location.href = "http://localhost:1234/admin/astaff"
+                alert("added");
 
-            success: function (result, status) {
-                window.location.href = "http://localhost:1234/admin/astaff"
-                console.log(result);
+                // console.log(result);
 
 
 
@@ -445,6 +250,7 @@
         if (deleteConfirm == true) {
             $.ajax({
                 url: "http://localhost:1234/admin/staffdelete/" + sid,
+                headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
                 method: "DELETE",
                 dataType: 'json',
                 success: function (result, status) {
@@ -478,6 +284,7 @@
         $.ajax({
 
             url: 'http://localhost:1234/admin/getindividualstaff/' + sid,
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: 'GET',
             dataType: 'json',
             success: function (result) {
@@ -563,29 +370,67 @@
 
     });
 
+    //update admin profile
+    $('#updateLoginUser').submit(function (e) {
+        e.preventDefault();
+
+
+        var updateadmin = {
+
+
+            updateadminfname: $('#updateadminfname').val(),
+            updateadminlname: $('#updateadminlname').val(),
+            updateadminaddress: $('#updateadminaddress').val(),
+            updateadminemail: $('#updateadminemail').val(),
+            updateadminphone: $("#updateadminphone").val(),
+            updateadminpassword: $('#updateadminpassword').val()
 
 
 
-=======
-    // Check browser support
-    if (typeof (Storage) !== "undefined") {
-
-        // Retrieve
-        // document.getElementById("updateadminfname").innerHTML = localStorage.getItem("first_name");
-        $('#updateadminfname').val(localStorage.getItem("first_name"));
-        $('#updateadminlname').val(localStorage.getItem("last_name"));
-        $('#updateadminaddress').val(localStorage.getItem("address"));
-        $('#updateadminemail').val(localStorage.getItem("email"));
-        $('#updateadminphone').val(localStorage.getItem("phone"));
-        $('#updateadminid').val(localStorage.getItem("admin_id"));
-
-    } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-    }
->>>>>>> 72c0ab0bbee5de330a56c18af00708185a8756b8
-</script>
 
 
-</body>
+        }
+        // console.log(updateadmin);
+        adminid = localStorage.getItem('admin_id');
+        console.log(adminid)
 
-</html>
+        // alert("i am here")
+        $.ajax({
+
+            url: 'http://localhost:1234/admin/updateadminprofile/' + adminid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
+            method: "PUT",
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(updateadmin),
+            success: function (result) {
+                console.log(updateadmin.updateadminfname)
+                window.localStorage.setItem('first_name', updateadmin.updateadminfname);
+                window.localStorage.setItem('last_name', updateadmin.updateadminlname);
+                window.localStorage.setItem('email', updateadmin.updateadminemail);
+                window.localStorage.setItem('address', updateadmin.updateadminaddress);
+                window.localStorage.setItem('phone', updateadmin.updateadminphone);
+
+                // console.log(result);
+                alert(result.message);
+                // your logic here , redirect to another page or show message etc
+                window.location.href = "http://localhost:1234/admin/profile"
+
+
+            },
+            error: function (jqXHR) {
+                console.log(jqXHR)
+                $("#message").html(jqXHR.responseText);
+
+
+            }
+
+        })
+
+
+    })
+
+
+
+
+
+})

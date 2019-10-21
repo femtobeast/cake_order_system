@@ -34,7 +34,7 @@ var cake = mysequelize.sequelize.define(
             allowNull: true
         },
         descriptions: {
-            type: mysequelize.Sequelize.STRING,
+            type: mysequelize.Sequelize.TEXT,
             allowNull: false
         },
         flavour_type: {

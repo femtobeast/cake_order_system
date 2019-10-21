@@ -10,6 +10,8 @@ var bcrypt = require("bcrypt");
 var Joi = require("joi");
 const jwt = require('jsonwebtoken');
 var Ordermodel = require("../model/Order");
+var bcrypt = require("bcrypt")
+var saltRounds = 10;
 
 
 
@@ -130,30 +132,40 @@ exports.getflavour = (req, res, next) => {
 //     });
 
 // }
+exports.cakeimagevalidation = (req, res, next) => {
+    if (req.file == undefined) {
+        // res.send({
+        //     "message": "no image selected"
+        // })
+        res.status(404).send("Please fill all field properly")
+        console.log("")
+    } else {
+        next()
+    }
+
+}
 
 //validation for add cake form
 exports.cakevalidation = (req, res, next) => {
 
     const schema = {
-
-
-
-
         cakename: Joi.string().required(),
+        price: Joi.number().required(),
+        serve: Joi.number().required(),
+        version: Joi.string().required(),
         size: Joi.number().required(),
-        // filename: Joi.required(),
         flavourtype: Joi.string().required(),
         flavourname: Joi.string(),
         desc: Joi.string().required(),
-        price: Joi.number().required(),
-        version: Joi.string().required(),
-        serve: Joi.number().required()
     }
-
     const result = Joi.validate(req.body, schema);
     console.log(result);
     if (result.error) {
         //bad request
+        fs.unlink(('./resources/uploads/' + req.file.filename), function (err) {
+            if (err) throw err;
+            console.log("image deleted");
+        })
         res.status(400).send(result.error.details[0].message);
         // req.result.error = result.error.details[0].message
         // console.log(result.error.details[0])
@@ -189,6 +201,8 @@ exports.addCake = (req, res, next) => {
             serves: req.body.serve
         }).then(function (result) {
             // { fdata: flavour_arry[0] }
+            // res.redirect(req.originalUrl)
+
             next()
         })
     }).catch(function (err) {
@@ -440,6 +454,7 @@ exports.staffvalidation = (req, res, next) => {
 
 // adding method the staff details
 exports.addStaff = (req, res, next) => {
+    console.log(req.headers)
 
 
 
@@ -565,7 +580,7 @@ exports.jwtTokenGen = (req, res, next) => {
         email: req.body.email,
         accessLevel: 'admin'
     }, 'mySecretKey', {
-        expiresIn: "10h"
+        expiresIn: "10s"
     },
 
         function (err, token) {
@@ -586,12 +601,45 @@ exports.jwtTokenGen = (req, res, next) => {
     // next()
 
 }
-//verify the
+//verify the token
+
+exports.tokenVerify = (req, res, next) => {
+    // console.log(req.headers)
+
+    if (req.headers.authorization == undefined) {
+
+        next({ status: 500, message: 'no authorization header present' })
+        // res.send({ message: "token expired" })
+        // console.log("token  expiry")
+        // res.message("400")
+
+
+    }
+    else {
+
+        let token = req.headers.authorization.slice(6, req.headers.authorization.length)
+
+        jwt.verify(token, 'mySecretKey', function (err, decoded) {
+            // console.log(decoded);
+            if (err != null) {
+                next({ status: 500, message: err.message })
+                // next({ error: err })
+                // console.log(err)
+                // console.log(err);
+            }
+            else {
+                next();
+            }
+        })
+
+    }
+}
+
 
 //retrieve id of admin for profile page
 exports.AdminData = (req, res, next) => {
     Adminmodel.admin.findOne({
-        attributes: ['admin_id'],
+        // attributes: ['admin_id'],
         where: { email: req.body.email }
     })
         .then(function (result) {
@@ -615,6 +663,7 @@ exports.AdminData = (req, res, next) => {
         })
     // next()
 }
+
 
 
 //END OF AUTHENTICATION OF admin login
@@ -794,7 +843,87 @@ exports.counttotalorder = (req, res) => {
 
         })
 }
+//total sales amount
+exports.countsaleamount = (req, res) => {
+    mySeq.sequelize.query(
+        // "select tblcake.cake_price from tblcake left join tblorder  where cake_id.tblcake = tblorder.cake_id   ",
+        "select cake_price from tblcake;",
+        { query: mySeq.sequelize.QueryTypes.SELECT })
+        .then((result) => {
+            // res.render("admin/deliveredorder", { data: result[0] });
+            res.json(result[0])
+            // next()
 
+        }).catch((err) => {
+            console.log(err)
+
+        })
+}
+//hash update password
+exports.hashGenerator = (req, res, next) => {
+    // req.body.password // this is plain text password /
+    bcrypt.hash(req.body.updateadminpassword, saltRounds)
+        .then(function (hash) {
+            console.log(hash);
+            req.hashvalue = hash;
+            next();
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+}
+//udateadmin profile
+exports.updateadminprofile = (req, res, next) => {
+    Adminmodel.admin.update({
+        first_name: req.body.updateadminfname,
+        last_name: req.body.updateadminlname,
+        email: req.body.updateadminemail,
+        addresss: req.body.updateadminaddress,
+        phone: req.body.updateadminphone,
+        password: req.hashvalue
+    }, {
+        where: {
+            admin_id: req.params.adminid
+        }
+    }
+    )
+        .then((result) => {
+            res.send({
+                "message": "admin profile status updated successfully"
+            })
+
+
+        })
+        .catch((err) => {
+
+        })
+}
+
+//validation for the admin profile
+exports.adminprofilevalidation = (req, res, next) => {
+    // console.log(req.body)
+    const schema = {
+
+        updateadminfname: Joi.string().required(),
+        updateadminlname: Joi.string().required(),
+        updateadminaddress: Joi.string().required(),
+        updateadminemail: Joi.string().email().required(),
+        updateadminphone: Joi.number().required(),
+        updateadminpassword: Joi.string().required().min(8)
+    }
+
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error) {
+        //bad request
+        res.status(400).send(result.error.details[0].message);
+        // res.render("admin/viewstaff", { "message": result.error.details[0].message })
+        return;
+        // }
+    }
+    next()
+
+}
 
 
 

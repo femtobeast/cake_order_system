@@ -9,7 +9,12 @@
                     <div class="cart-view-table">
                         <!-- <form action=""> -->
                         <div class="table-responsive">
-                            <table class="table">
+                            <form class="form-inline">
+                                <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
+                                <input class="form-control form-control-sm ml-3 w-80" id="searchhere" type="text"
+                                    placeholder="Search" aria-label="Search" onkeyup="searchFun()">
+                            </form>
+                            <table class="table" id="tablehere">
                                 <thead>
                                     <tr>
                                         <th scope="col">staff ID</th>
@@ -181,11 +186,32 @@
 
 <script>
     // $(document).ready(function () {
-    //     $("#up").click(function (e) {
+    //     $("#updatecake1").submit(function (e) {
     //         e.preventDefault();
     //         alert("i am here")
     //     })
     // })
+    const searchFun = () => {
+        let filter = document.getElementById('searchhere').value.toUpperCase();
+        let myTable = document.getElementById('tablehere');
+        // let tbody = myTable.getElementsByTagName('cakeList');
+        let tr = myTable.getElementsByTagName('tr');
+
+        for (var i = 1; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName('td')[1];
+            if (td) {
+                let textvalue = td.textContent || td.innerHTML;
+                if (textvalue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+
+
+        }
+
+
+    }
 </script>
-<!-- / cake view section -->
 <% include partials/footer.ejs %>
