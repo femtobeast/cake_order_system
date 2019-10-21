@@ -149,10 +149,15 @@ router.put("/updatestaff/:sid", adminController.staffvalidation, adminController
 
 //END OF METHOD FOR STAFF
 
-//update admin profile get page 
+// update admin profile get page
 router.get("/profile", function (req, res, next) {
     res.render("admin/adminprofile")
 })
+
+//update admin profile
+router.put("/updateadminprofile/:adminid", adminController.adminprofilevalidation, adminController.hashGenerator, adminController.updateadminprofile, function (req, res, next) {
+
+});
 
 
 
@@ -250,6 +255,7 @@ router.get('/counttotalorder', adminController.counttotalorder, function (req, r
 router.get('/countsaleamount', adminController.countsaleamount, function (req, res, next) {
 
 });
+
 
 
 

@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <input id="adminid" placeholder="id">
+
 
 </footer>
 <!-- / footer -->
@@ -148,6 +148,23 @@
 </script>
 <script src="/js/custom/gift.js"></script>
 <script src="/js/custom/dashboard.js"></script>
+<script>
+    // Check browser support
+    if (typeof (Storage) !== "undefined") {
+
+        // Retrieve
+        // document.getElementById("updateadminfname").innerHTML = localStorage.getItem("first_name");
+        $('#updateadminfname').val(localStorage.getItem("first_name"));
+        $('#updateadminlname').val(localStorage.getItem("last_name"));
+        $('#updateadminaddress').val(localStorage.getItem("address"));
+        $('#updateadminemail').val(localStorage.getItem("email"));
+        $('#updateadminphone').val(localStorage.getItem("phone"));
+        $('#updateadminid').val(localStorage.getItem("admin_id"));
+
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+</script>
 <script>
 
 
@@ -565,6 +582,65 @@
 
 
     });
+
+    //update admin profile
+    $('#updateLoginUser').submit(function (e) {
+        e.preventDefault();
+
+
+        var updateadmin = {
+
+
+            updateadminfname: $('#updateadminfname').val(),
+            updateadminlname: $('#updateadminlname').val(),
+            updateadminaddress: $('#updateadminaddress').val(),
+            updateadminemail: $('#updateadminemail').val(),
+            updateadminphone: $("#updateadminphone").val(),
+            updateadminpassword: $('#updateadminpassword').val()
+
+
+
+
+
+        }
+        // console.log(updateadmin);
+        adminid = localStorage.getItem('admin_id');
+        console.log(adminid)
+
+        // alert("i am here")
+        $.ajax({
+
+            url: 'http://localhost:1234/admin/updateadminprofile/' + adminid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
+            method: "PUT",
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(updateadmin),
+            success: function (result) {
+                console.log(updateadmin.updateadminfname)
+                window.localStorage.setItem('first_name', updateadmin.updateadminfname);
+                window.localStorage.setItem('last_name', updateadmin.updateadminlname);
+                window.localStorage.setItem('email', updateadmin.updateadminemail);
+                window.localStorage.setItem('address', updateadmin.updateadminaddress);
+                window.localStorage.setItem('phone', updateadmin.updateadminphone);
+
+                // console.log(result);
+                alert(result.message);
+                // your logic here , redirect to another page or show message etc
+                window.location.href = "http://localhost:1234/admin/profile"
+
+
+            },
+            error: function (jqXHR) {
+                console.log(jqXHR)
+                $("#message").html(jqXHR.responseText);
+
+
+            }
+
+        })
+
+
+    })
 
 
 

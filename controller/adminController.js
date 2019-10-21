@@ -10,6 +10,8 @@ var bcrypt = require("bcrypt");
 var Joi = require("joi");
 const jwt = require('jsonwebtoken');
 var Ordermodel = require("../model/Order");
+var bcrypt = require("bcrypt")
+var saltRounds = 10;
 
 
 
@@ -650,6 +652,7 @@ exports.AdminData = (req, res, next) => {
 }
 
 
+
 //END OF AUTHENTICATION OF admin login
 
 //LOGIN USER DATA
@@ -842,6 +845,71 @@ exports.countsaleamount = (req, res) => {
             console.log(err)
 
         })
+}
+//hash update password
+exports.hashGenerator = (req, res, next) => {
+    // req.body.password // this is plain text password /
+    bcrypt.hash(req.body.updateadminpassword, saltRounds)
+        .then(function (hash) {
+            console.log(hash);
+            req.hashvalue = hash;
+            next();
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+}
+//udateadmin profile
+exports.updateadminprofile = (req, res, next) => {
+    Adminmodel.admin.update({
+        first_name: req.body.updateadminfname,
+        last_name: req.body.updateadminlname,
+        email: req.body.updateadminemail,
+        addresss: req.body.updateadminaddress,
+        phone: req.body.updateadminphone,
+        password: req.hashvalue
+    }, {
+        where: {
+            admin_id: req.params.adminid
+        }
+    }
+    )
+        .then((result) => {
+            res.send({
+                "message": "admin profile status updated successfully"
+            })
+
+
+        })
+        .catch((err) => {
+
+        })
+}
+
+//validation for the admin profile
+exports.adminprofilevalidation = (req, res, next) => {
+    // console.log(req.body)
+    const schema = {
+
+        updateadminfname: Joi.string().required(),
+        updateadminlname: Joi.string().required(),
+        updateadminaddress: Joi.string().required(),
+        updateadminemail: Joi.string().email().required(),
+        updateadminphone: Joi.number().required(),
+        updateadminpassword: Joi.string().required().min(8)
+    }
+
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error) {
+        //bad request
+        res.status(400).send(result.error.details[0].message);
+        // res.render("admin/viewstaff", { "message": result.error.details[0].message })
+        return;
+        // }
+    }
+    next()
+
 }
 
 
