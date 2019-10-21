@@ -11,8 +11,8 @@ router.get('/register', (req, res) => res.render('register'));
 router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct);
 router.get('/checkout', CartController.orderDetail);
-router.get('/cplan', (req, res)=> {res.render('cakeplan');});
-router.get('/profile', function (req, res) {
+router.get('/cplan', (req, res) => { res.render('cakeplan'); });
+router.get('/profile',UserController.getProfileDetail, function (req, res) {
     res.render('userProfile');
 });
 router.get('/order', OrderController.getNotApproveOrder, (req, res) => {
@@ -36,7 +36,7 @@ router.post('/registerAdd',
     Auth.passwordHashGenerate,
     UserController.checkUserEmail,
     UserController.addUser);
-router.post('/gdata',Auth.generateJwtToken,
+router.post('/gdata', Auth.generateJwtToken,
     UserController.addGoogleUser);
 //-- SEARCHING CAKE DETAIL POST METHOD
 router.post('/cakeSearchQuery', UserController.searchCakeDetail, (req, res, next) => res.status(201));
@@ -46,6 +46,10 @@ router.post('/sendFeedback', UserController.addFeedback)
 router.post('/sendOrder', OrderController.placeOrder, (req, res) => {
     res.status(201);
     res.send({ status: true });
+});
+router.post('/sendUpdate',Auth.passwordHashGenerate, UserController.updateUser, (req, res, next) => {
+    res.status(201);
+    res.send({ message: "Updated Successful!!" });
 });
 //------------------------------------------
 router.get('/logoutCart', (req, res) => {
