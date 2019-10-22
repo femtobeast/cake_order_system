@@ -28,8 +28,8 @@ define(['jquery', 'api_url'], function ($, main) {
     });
 
     $('.aa-product-view-content').on('click', '#lnkViewDetail', function (e) {
-        e.preventDefault();      
-       
+        e.preventDefault();
+
         window.location.href = viewDetailURL + tempCakeId;
     })
     //AUTOMATIC CALCULATION FOR CART QUNATITY AND PRICE DETAIL
@@ -52,15 +52,12 @@ define(['jquery', 'api_url'], function ($, main) {
         document.getElementById("finalTotal").innerHTML = total;
 
     })
-
-
-
     ///FEEDBACK ADD    
-    $('#fdbtn').on('click', function () {        
+    $('#fdbtn').on('click', function () {
         var feedbackData = {
             desc: $('#feedbackdesc').val(),
             email: $('#femail').val(),
-            cid: $('#cakeid').val(),          
+            cid: $('#cakeid').val(),
         }
         console.table(feedbackData);
         $.ajax({
@@ -71,7 +68,7 @@ define(['jquery', 'api_url'], function ($, main) {
             data: JSON.stringify(feedbackData),
             success: function (result, status) {
                 alert('added')
-              console.log(result)
+                console.log(result)
             },
             error: function (err, status) {
                 console.log(err)
@@ -79,5 +76,55 @@ define(['jquery', 'api_url'], function ($, main) {
         });
 
     });
-});
 
+    var locations = new Array();
+    ///Search Plan Cake ADD    
+    $('#cshop').on('click', function () {
+        var shapeCake = document.querySelector('input[name="test"]:checked').value;
+
+        var cakeSearch = {
+            "serves": $('#servecake').val(),
+            "pound": $('#poundcake').val(),
+            "version": $('#sel1').val(),
+            "flvType": $('#flavourcake').val(),
+            "cakeprice": $('#rangevalue').val()
+        }
+        $.ajax({
+            url: "http://localhost:1234/user/sendCplan/",
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(cakeSearch),
+            success: function (result, status) {
+                // console.log(result[i].cake_name)
+                locations.push(result);
+                // $.each(locations, function (index, result) {
+                for (i = 0; i < result.length; i++) {
+                    $('#cardItem').append('<li class="card_item">\
+                        <div class="card">\
+                            <div class="card_image"><img width="100" height="auto"\
+                                    src="/uploads/'+ result[i].cake_image + '" alt="cake img">\
+                                <span id="itemname">'+ result[i].cake_name + '</span>\
+                            </div>\
+                            <div class="card_content">\
+                                <h2 class="card_title">\
+                                    <span>Rs. '+result[i].cake_price+'\
+                                    </span></h2>\
+                                <a href="/user/add-to-cart/'+result[i].cake_id+'" class="card_title"><button>Add to cart</button>\
+                                </a>\
+                            </div>\
+                        </div></li>');
+                    }
+                // })
+                console.log(result)
+            },
+            error: function (err, status) {
+                alert('err')
+                console.log(err)
+            }
+        });
+
+    });
+
+
+});
