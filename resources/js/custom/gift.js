@@ -5,8 +5,7 @@ $(document).ready(function () {
         var formdata = new FormData();
         const cakedata = {
             giftname: $("#giftname").val(),
-            giftprice: $("#giftprice").val(),
-            giftimage: $('#giftimage')[0].files[0]
+
         }
         console.log(cakedata)
         for (key in cakedata) {
@@ -16,18 +15,14 @@ $(document).ready(function () {
             url: "http://localhost:1234/admin/agift",
             headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: "POST",
-            processData: false,
-            contentType: false,
+            contentType: 'application/json',
+            dataType: 'json',
             data: formdata,
             dataType: 'json',
 
             success: function (result, status) {
-                // window.location.href = "admin/addgift.ejs"
-                windows.location.reload(true);
-                // alert("adsasd")
-                // console.log(result);
-                // location.reload();
-
+                alert(result.message)
+                window.location.href = "http://localhost:1234/admin/viewgift"
 
             },
             error: function (jqXHR) {
@@ -53,9 +48,9 @@ $(document).ready(function () {
                 headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
                 dataType: 'json',
                 success: function (result, status) {
-                    window.location.href = "vc"
-                    console.log(result.message)
-                    $("#message").html(result.message);
+                    window.location.href = "http://localhost:1234/admin/viewgift"
+                    alert(result.message)
+
 
 
                 },
@@ -90,7 +85,7 @@ $(document).ready(function () {
                 $('#giftname').val(result.gift_name)
                 $('#giftprice').val(result.gift_price)
 
-                $('#giftimage').files(result.gift_image)
+
             },
             error: function () {
 
@@ -122,7 +117,8 @@ $(document).ready(function () {
             data: JSON.stringify(updategift),
             success: function (result) {
                 // console.log(result)
-                window.href.location = "http://localhost:1234/admin/viewgift";
+                window.location.href = "http://localhost:1234/admin/viewgift";
+                alert(result.message)
             },
             error: function (jqXHR) {
                 console.log(jqXHR)

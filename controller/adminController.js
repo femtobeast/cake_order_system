@@ -266,19 +266,18 @@ exports.deleteCake = (req, res, next) => {
         })
             .then(function () {
 
-<<<<<<< HEAD
-                    // res.status(200);
-                    // res.render("admin/viewcake", { data: result })
-                    res.send({ message: "cake delete successfully" })
 
-                    // next();
-                })
-=======
                 // res.status(200);
                 // res.render("admin/viewcake", { data: result })
-                next();
+                res.send({ message: "cake delete successfully" })
+
+                // next();
             })
->>>>>>> 9203b2f90af03ee08ace832248cbb23bd8fe02dd
+
+        // res.status(200);
+        // res.render("admin/viewcake", { data: result })
+
+
 
 
     })
@@ -358,10 +357,7 @@ exports.updateCake = (req, res, next) => {
             }
         }
         ).then(function (result) {
-            // { fdata: flavour_arry[0] }
-            // res.send({ "message": "deleted" })
-            console.log("mes")
-            next()
+            res.send({ message: "cake successfully updated" })
         })
             // })
             .catch(function (err) {
@@ -428,8 +424,8 @@ exports.staffvalidation = (req, res, next) => {
     // console.log(req.body)
     const schema = {
 
-        staff_firstname: Joi.string().required(),
-        staff_lastname: Joi.string().required(),
+        sfname: Joi.string().required(),
+        slname: Joi.string().required(),
         saddress: Joi.string().required(),
         email: Joi.string().email().required(),
         phonenumber: Joi.number().required(),
@@ -461,8 +457,8 @@ exports.addStaff = (req, res, next) => {
 
         })
         .then(function (result) {
-            // res.send({message:"Staff Added"});
-            next();
+            res.send({ message: "Staff Added" });
+            // next();
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -499,7 +495,8 @@ exports.deleteStaff = (req, res, next) => {
 
             // res.status(200);
             // res.render("admin/viewcake", { data: result })
-            next();
+            res.send({ message: "staff delete" })
+            // next();
         })
 
 
@@ -547,7 +544,9 @@ exports.updateStaff = (req, res, next) => {
         }
     )
         .then(function (result) {
-            next();
+            // next();
+            res.send({ message: "staff updated" })
+
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -751,7 +750,7 @@ exports.updatenotapprovalorder = (req, res, next) => {
     )
         .then((result) => {
             res.send({
-                "message": "order status updated successfully"
+                message: "order status updated successfully"
             })
 
 
@@ -882,7 +881,7 @@ exports.updateadminprofile = (req, res, next) => {
     )
         .then((result) => {
             res.send({
-                "message": "admin profile status updated successfully"
+                message: "admin profile status updated successfully"
             })
 
 

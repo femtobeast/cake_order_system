@@ -130,15 +130,15 @@ router.get("/astaff", function (req, res, next) {
     res.render("admin/addstaff")
 });
 
-<<<<<<< HEAD
+
 router.post("/as", adminController.tokenVerify, adminController.staffvalidation, adminController.addStaff, function (req, res, next) {
     // res.render("admin/addstaff", { "message": "staff data successfully saved" })
 
 });
-=======
+
 router.post("/as", adminController.staffvalidation,
     adminController.addStaff)
->>>>>>> 9203b2f90af03ee08ace832248cbb23bd8fe02dd
+
 
 //get view cake page
 router.get("/vstaff", adminController.getstaff, function (req, res, next) {
@@ -195,7 +195,7 @@ router.get("/viewgift", giftController.getgift, function (req, res, next) {
 });
 
 //DELETE METHOD TO DELETE INDVIDUAL GIFT DATA
-router.delete('/giftdelete/:gid', adminController.tokenVerify, giftController.deleteCake, function (req, res, next) {
+router.delete('/giftdelete/:gid', adminController.tokenVerify, giftController.deleteGift, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
 });
 

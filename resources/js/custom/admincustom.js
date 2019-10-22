@@ -52,12 +52,12 @@ $(document).ready(function () {
         var deleteConfirm = confirm("Are your Sure??");
         if (deleteConfirm == true) {
             $.ajax({
-<<<<<<< HEAD
+
                 url: "http://localhost:1234/admin/cakedelete/" + cid,
                 headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
-=======
+
                 url: "/admin/cakedelete/" + cid,
->>>>>>> 9203b2f90af03ee08ace832248cbb23bd8fe02dd
+
                 method: "DELETE",
                 dataType: 'json',
                 success: function (result, status) {
@@ -161,7 +161,7 @@ $(document).ready(function () {
     var cid;
     $("#updatecake1").submit(function (e) {
         e.preventDefault();
-        var formdata = new FormData();
+
         var updatecake = {
             cakename: $('#cakename').val(),
             flavourname: $('#flavourname').val(),
@@ -192,13 +192,14 @@ $(document).ready(function () {
             method: "PUT",
             contentType: 'application/json',
             dataType: 'json',
-            // headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             data: JSON.stringify(updatecake),
             success: function (result) {
                 console.log(result)
-                console.log("cake data updated")
+                // console.log("cake data updated")
+                alert(result.message)
 
-                // window.location.href = "Medicineinfo.html"
+                window.location.href = "http://localhost:1234/admin/vc"
                 // your logic here , redirect to another page or show message etc
             },
             error: function (jqXHR) {
@@ -260,7 +261,7 @@ $(document).ready(function () {
                 success: function (result, status) {
                     window.location.href = "http://localhost:1234/admin/vstaff"
                     console.log(result.message)
-                    $("#message").html(result.message);
+                    // $("#message").html(result.message);
 
 
                 },
@@ -335,10 +336,12 @@ $(document).ready(function () {
             dataType: 'json',
             data: JSON.stringify(updatestaff),
             success: function (result) {
-                console.log(result)
+                // console.log(result)
+                alert(result.message)
 
 
-                // window.location.href = "Medicineinfo.html"
+
+                window.location.href = "http://localhost:1234/admin/vstaff"
                 // your logic here , redirect to another page or show message etc
             },
             error: function (jqXHR) {

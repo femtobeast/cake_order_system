@@ -17,13 +17,8 @@ $(document).ready(function () {
             // headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             data: JSON.stringify(updateorderstatus),
             success: function (result) {
-                console.log(result.message)
-                $("#message").html(result.message);
-
-                // console.log("cake data updated")
-
-                // window.location.href = "Medicineinfo.html"
-                // your logic here , redirect to another page or show message etc
+                alert(result.message);
+                window.location.href = "http://localhost:1234/admin/orderdelivered"
             },
             error: function (jqXHR) {
                 $("#message").html(jqXHR.responseText);
@@ -39,7 +34,7 @@ $(document).ready(function () {
     $('#notapprovalList').on('click', '#notapproval', function (e) {
         e.preventDefault();
         orderid = $(this)[0].attributes.orderid.nodeValue;
-        console.log(orderid)
+
 
         $.ajax({
             url: 'http://localhost:1234/admin/staffdataorder',
@@ -59,7 +54,7 @@ $(document).ready(function () {
 
                     $('#assignwork').append("<option>" + result[key].first_name + " " + result[key].last_name + "</option>")
                     // $(".dynm_drop").clone().appendTo("class or id of element");
-                    console.log(result)
+
 
                 }
             },
