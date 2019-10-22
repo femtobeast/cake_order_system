@@ -1,6 +1,7 @@
 const usermodel = require("../model/Customer");
 const cakemodel = require("../model/Cake");
 const feedbackmodel = require("../model/Feedback");
+const giftModel = require("../model/Gift");
 const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
 const Sequelize = require('sequelize');
@@ -99,7 +100,6 @@ exports.updateUser = function (req, res, next) {
             });
         })
 }
-
 
 //CHECKING USER CUSTOMER EMAIL INTO DATABASE--------------
 exports.checkUserEmail = (req, res, next) => {
@@ -255,6 +255,18 @@ exports.searchCakeDetail = async (req, res, next) => {
         // res.json(cakeresult)
         res.render('searchAllCake', { cakeresult })
     })
+}
+
+//--SEARCH CAKE DETAIL FUNCTION FROM DATABASE
+exports.getGiftDetail = async (req, res, next) => {
+    giftModel.gift.findAll()
+    .then(function (result) {
+        res.status(200);
+        res.render("giftDetail", { cdata: result });
+    })
+    .catch(function (err) {
+        next({ "status": 500, "message": err });
+    });
 }
 
 //VALIDATION OF CUSTOMER DETAIL FUNCTION

@@ -6,7 +6,7 @@ $(document).ready(function () {
             password: $("#password").val()
         }
         $.ajax({
-            url: "http://localhost:1234/admin/auth",
+            url: "/admin/auth",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(adminlogin),

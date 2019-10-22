@@ -255,27 +255,33 @@ exports.deleteCake = (req, res, next) => {
     cakemodel.cake.findOne({
         attributes: ['cake_image'],
         where: { cake_id: req.params.cid }
-    })
-        .then(function (result) {
-            console.log(result.cake_image);
-            fs.unlink(('./resources/uploads/' + result.cake_image), function (err) {
-                if (err) throw err;
-                console.log("image deleted");
-            })
-            cakemodel.cake.destroy({
-                where: { cake_id: req.params.cid }
-            })
-                .then(function () {
+    }).then(function (result) {
+        console.log(result.cake_image);
+        fs.unlink(('./resources/uploads/' + result.cake_image), function (err) {
+            if (err) throw err;
+            console.log("image deleted");
+        })
+        cakemodel.cake.destroy({
+            where: { cake_id: req.params.cid }
+        })
+            .then(function () {
 
+<<<<<<< HEAD
                     // res.status(200);
                     // res.render("admin/viewcake", { data: result })
                     res.send({ message: "cake delete successfully" })
 
                     // next();
                 })
+=======
+                // res.status(200);
+                // res.render("admin/viewcake", { data: result })
+                next();
+            })
+>>>>>>> 9203b2f90af03ee08ace832248cbb23bd8fe02dd
 
 
-        })
+    })
         .catch(function (err) {
             console.log(err)
         })
@@ -369,7 +375,6 @@ exports.updateCake = (req, res, next) => {
 exports.verify = (req, res, next) => {
 
     Adminmodel.admin.findOne({
-
         where: {
             email: req.body.email
         }
@@ -382,7 +387,6 @@ exports.verify = (req, res, next) => {
             } else {
                 next({ "status": 409, "message": "Credential didn't match" });
                 // res.render("admin/adminlogin", { "message": "Credential didn't match." });
-
             }
         })
         .catch(function (err) {
@@ -392,35 +396,25 @@ exports.verify = (req, res, next) => {
 
 }
 
-
 exports.check = (req, res, next) => {
     Adminmodel.admin.findOne({
         where: { email: req.body.email }
+    }).then(function (result) {
+        if (result != null) {
+            bcrypt.compare(req.body.password, result.dataValues.password, function (err, res) {
+                if (res) {
+                    next();
+                } else {
+                    next({ "status": 500, "message": "Credential didn't match." });
+                    // res.render("admin/adminlogin", { "message": "Credential didn't match." });
+                }
+            });
+        } else {
+            next({ "status": 500, "message": "Credential didn't match." });
+            // res.render("admin/adminlogin", { "message": "Credential didn't match." });
+        }
+
     })
-
-        .then(function (result) {
-            if (result != null) {
-                bcrypt.compare(req.body.password, result.dataValues.password, function (err, res) {
-                    if (res) {
-
-                        next();
-
-                    }
-
-                    else {
-                        next({ "status": 500, "message": "Credential didn't match." });
-                        // res.render("admin/adminlogin", { "message": "Credential didn't match." });
-
-                    }
-                });
-            } else {
-                next({ "status": 500, "message": "Credential didn't match." });
-                // res.render("admin/adminlogin", { "message": "Credential didn't match." });
-
-
-            }
-
-        })
         .catch(function (err) {
             next({ "status": 500, "message": "Error Occured" });
             console.log(err)
@@ -441,9 +435,7 @@ exports.staffvalidation = (req, res, next) => {
         phonenumber: Joi.number().required(),
         department: Joi.string().required()
     }
-
     const result = Joi.validate(req.body, schema);
-
     if (result.error) {
         //bad request
         res.status(400).send(result.error.details[0].message);
@@ -451,16 +443,13 @@ exports.staffvalidation = (req, res, next) => {
         return;
         // }
     }
-    next()
+    next();
 
 }
 
 // adding method the staff details
 exports.addStaff = (req, res, next) => {
     console.log(req.headers)
-
-
-
     Staffmodel.staff.create(
         {
             first_name: req.body.staff_firstname,
@@ -472,13 +461,14 @@ exports.addStaff = (req, res, next) => {
 
         })
         .then(function (result) {
-            // next();
+            // res.send({message:"Staff Added"});
+            next();
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
             //extraNote: whenever we write some thing in next by defaultly it
             //will go to error.
-            next({ "status": 500, "message": "Something went wrong" });
+            next({ "status": 500, "message": err });
             console.log(err)
         })
 }

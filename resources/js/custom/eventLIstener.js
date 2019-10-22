@@ -27,6 +27,33 @@ define(['jquery', 'api_url'], function ($, main) {
         $("#vcakeServe").text(tempCakeServe);
     });
 
+    //QUICK LOOK FOR CAKE DETAIL
+    $('.qbtn').on('click', '#quickViewBtn1', function () {
+        aid = $(this)[0].attributes.aid.nodeValue;
+        var path = imagePath;
+        var caked = aid.split(',');
+        var tempCakeName = caked[0];//cake_price
+        var tempCakeImage = caked[1];//cake_price
+        var tempCakePrice = caked[2];//cake_price
+        var tempCakeDesc = caked[3];//descriptions
+        var tempCakeFlavourType = caked[4];//cake flavour
+        tempCakeId = caked[5];//cake id
+        var tempCakePound = caked[6];//number of pound
+        var tempCakeServe = caked[7];//number people serve
+
+
+        console.log(aid)
+
+        $("#vcakeimg").attr("src", path + tempCakeImage);
+        $("#lens_img").attr("data-lens-image", path + tempCakeImage);
+        $("#vcakename").text(tempCakeName);
+        $("#vcakeprice").text(tempCakePrice);
+        $("#vcakedesc").text(tempCakeDesc);
+        $("#vcakeFtype").text(tempCakeFlavourType);
+        $("#vcakepound").text(tempCakePound);
+        $("#vcakeServe").text(tempCakeServe);
+    });
+
     $('.aa-product-view-content').on('click', '#lnkViewDetail', function (e) {
         e.preventDefault();
 
@@ -90,7 +117,7 @@ define(['jquery', 'api_url'], function ($, main) {
             "cakeprice": $('#rangevalue').val()
         }
         $.ajax({
-            url: "http://localhost:1234/user/sendCplan/",
+            url: "/user/sendCplan/",
             method: "POST",
             contentType: "application/json",
             dataType: "json",

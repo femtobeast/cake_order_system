@@ -19,7 +19,7 @@ $(document).ready(function () {
             formdata.append(key, cakedata[key]);
         }
         $.ajax({
-            url: "http://localhost:1234/admin/cakeAdd",
+            url: "/admin/cakeAdd",
             method: "POST",
             headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             processData: false,
@@ -52,8 +52,12 @@ $(document).ready(function () {
         var deleteConfirm = confirm("Are your Sure??");
         if (deleteConfirm == true) {
             $.ajax({
+<<<<<<< HEAD
                 url: "http://localhost:1234/admin/cakedelete/" + cid,
                 headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
+=======
+                url: "/admin/cakedelete/" + cid,
+>>>>>>> 9203b2f90af03ee08ace832248cbb23bd8fe02dd
                 method: "DELETE",
                 dataType: 'json',
                 success: function (result, status) {
@@ -220,8 +224,6 @@ $(document).ready(function () {
             email: $("#email").val(),
             department: $("#department").val(),
             phonenumber: $("#phonenumber").val()
-
-
         }
 
         $.ajax({
@@ -232,13 +234,9 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
-                // window.location.href = "http://localhost:1234/admin/astaff"
-                alert("added");
-
+                alert(result.message);
+                window.location.href = "/admin/astaff"
                 // console.log(result);
-
-
-
             },
             error: function (jqXHR) {
                 console.log(jqXHR);

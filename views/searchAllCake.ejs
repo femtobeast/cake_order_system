@@ -31,17 +31,14 @@
                             class="fa fa-heart-o"></span></a>
                     <a href="#"
                         aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type,data.cake_id,data.pound,data.serves] %>'
-                        id="quickViewBt" data-toggle2="tooltip" data-placement="top" title="Quick View"
+                        id="quickViewBtn" data-toggle2="tooltip" data-placement="top" title="Quick View"
                         data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
                 </div>
-                <a href="#" aid='<%- user=[data.cake_name,data.cake_image,data.cake_price,data.descriptions,data.flavour_type,data.cake_id,data.pound,data.serves] %>'
-                    id="quickViewBtn" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal"
-                    data-target="#quick-view-modal"><strong >Quick Look</strong></a>
-
+          
                 <!-- product badge -->
                 <span class="aa-badge aa-sale" href="#">SALE!</span>
-            </li>
 
+            </li>
             <%})%>
         </ul>
     </div>
