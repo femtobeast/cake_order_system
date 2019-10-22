@@ -35,16 +35,16 @@ router.post('/cakeAdd', adminController.upload.single('cakeimage'), adminControl
 //     res.redirect("http://localhost:1234/admin/acd");
 // });
 // DELETE method for cake
-router.delete('/cakedelete/:cid', adminController.deleteCake, function (req, res, next) {
+router.delete('/cakedelete/:cid', adminController.tokenVerify, adminController.deleteCake, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
 });
 
 //GET method to get individual cake data
-router.get('/getindividualcake/:cid', adminController.getindividualCake, function (req, res, next) {
+router.get('/getindividualcake/:cid', adminController.tokenVerify, adminController.getindividualCake, function (req, res, next) {
 })
 
 //UPDATE method to get individual cake data
-router.put("/updatecake/:cid", adminController.upload.single('cakeimage'), adminController.cakevalidation, adminController.updateCake, function (req, res, next) {
+router.put("/updatecake/:cid", adminController.tokenVerify, adminController.cakevalidation, adminController.updateCake, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
     console.log("data updated")
 });
@@ -68,7 +68,7 @@ router.get('/af', function (req, res) {
 });
 
 //POST method for adding flavour
-router.post('/flavourAdd', adminController.addFlavour,
+router.post('/flavourAdd', adminController.tokenVerify, adminController.addFlavour,
     function (req, res, next) {
         res.render("admin/addflavour", { "message": "Flavour data successfully saved" })
 
@@ -130,7 +130,7 @@ router.get("/astaff", function (req, res, next) {
     res.render("admin/addstaff")
 });
 
-router.post("/as", adminController.staffvalidation, adminController.addStaff, function (req, res, next) {
+router.post("/as", adminController.tokenVerify, adminController.staffvalidation, adminController.addStaff, function (req, res, next) {
     // res.render("admin/addstaff", { "message": "staff data successfully saved" })
 
 });
@@ -142,16 +142,16 @@ router.get("/vstaff", adminController.getstaff, function (req, res, next) {
 });
 
 //delete method for individual staff
-router.delete('/staffdelete/:sid', adminController.tokenVerify, adminController.deleteStaff, function (req, res, next) {
+router.delete('/staffdelete/:sid', adminController.tokenVerify, adminController.tokenVerify, adminController.deleteStaff, function (req, res, next) {
     res.redirect("http://localhost:1234/admin/vstaff");
 });
 
 //get method to get individual staff data
-router.get('/getindividualstaff/:sid', adminController.getindividualStaff, function (req, res, next) {
+router.get('/getindividualstaff/:sid', adminController.tokenVerify, adminController.getindividualStaff, function (req, res, next) {
 })
 
 //UPDATE method to get individual cake data
-router.put("/updatestaff/:sid", adminController.staffvalidation, adminController.updateStaff, function (req, res, next) {
+router.put("/updatestaff/:sid", adminController.tokenVerify, adminController.staffvalidation, adminController.updateStaff, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
     console.log("data updated")
 });
@@ -165,7 +165,7 @@ router.get("/profile", function (req, res, next) {
 })
 
 //update admin profile
-router.put("/updateadminprofile/:adminid", adminController.adminprofilevalidation, adminController.hashGenerator, adminController.updateadminprofile, function (req, res, next) {
+router.put("/updateadminprofile/:adminid", adminController.tokenVerify, adminController.adminprofilevalidation, adminController.hashGenerator, adminController.updateadminprofile, function (req, res, next) {
 
 });
 
@@ -180,7 +180,7 @@ router.get("/addgift", function (req, res, next) {
 });
 
 //POST METHOD TO ADD GIFT DATA IN DATABASE
-router.post("/agift", giftController.upload, giftController.imagevalidation, giftController.giftvalidation, giftController.addGift, function (req, res, next) {
+router.post("/agift", adminController.tokenVerify, giftController.upload, giftController.imagevalidation, giftController.giftvalidation, giftController.addGift, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/addgift");
 })
 
@@ -190,16 +190,16 @@ router.get("/viewgift", giftController.getgift, function (req, res, next) {
 });
 
 //DELETE METHOD TO DELETE INDVIDUAL GIFT DATA
-router.delete('/giftdelete/:gid', giftController.deleteCake, function (req, res, next) {
+router.delete('/giftdelete/:gid', adminController.tokenVerify, giftController.deleteCake, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
 });
 
 //get method to get individual gift data
-router.get('/getindividualgift/:gid', giftController.getindividualGift, function (req, res, next) {
+router.get('/getindividualgift/:gid', adminController.tokenVerify, giftController.getindividualGift, function (req, res, next) {
 })
 
 //UPDATE method to get individual gift data
-router.put("/updategift/:gid", giftController.giftvalidation, giftController.updateGift, function (req, res, next) {
+router.put("/updategift/:gid", adminController.tokenVerify, giftController.giftvalidation, giftController.updateGift, function (req, res, next) {
     // res.redirect("http://localhost:1234/admin/vc");
     console.log("data updated")
 });

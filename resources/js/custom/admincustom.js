@@ -21,6 +21,8 @@ $(document).ready(function () {
         $.ajax({
             url: "http://localhost:1234/admin/cakeAdd",
             method: "POST",
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
+
             processData: false,
             contentType: false,
             data: formdata,
@@ -51,6 +53,7 @@ $(document).ready(function () {
         if (deleteConfirm == true) {
             $.ajax({
                 url: "http://localhost:1234/admin/cakedelete/" + cid,
+                headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
                 method: "DELETE",
                 dataType: 'json',
                 success: function (result, status) {
@@ -82,6 +85,7 @@ $(document).ready(function () {
         $.ajax({
 
             url: 'http://localhost:1234/admin/getindividualcake/' + cid,
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: 'GET',
             dataType: 'json',
             success: function (result) {
@@ -117,6 +121,8 @@ $(document).ready(function () {
     $('#cakeList').on('click', '#ucbutton', function () {
         $.ajax({
             url: 'http://localhost:1234/admin/gffso/',
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
+
             method: 'GET',
             dataType: 'json',
             success: function (result) {
@@ -326,6 +332,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:1234/admin/updatestaff/' + sid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
             method: "PUT",
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify(updatestaff),
@@ -354,7 +361,7 @@ $(document).ready(function () {
             url: 'http://localhost:1234/admin/profiledata' + adminid,
             method: 'GET',
             dataType: 'json',
-            // headers: { 'authorization': 'Bearer ' + window.localStorage.getItem('token') },
+            headers: { 'authorization': 'Bearer ' + window.localStorage.getItem('token') },
             success: function (result, status) {
                 console.log(result)
 
@@ -398,6 +405,7 @@ $(document).ready(function () {
         $.ajax({
 
             url: 'http://localhost:1234/admin/updateadminprofile/' + adminid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: "PUT",
             contentType: 'application/json',
             dataType: 'json',

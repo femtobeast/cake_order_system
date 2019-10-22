@@ -14,6 +14,7 @@ $(document).ready(function () {
         }
         $.ajax({
             url: "http://localhost:1234/admin/agift",
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: "POST",
             processData: false,
             contentType: false,
@@ -49,6 +50,7 @@ $(document).ready(function () {
             $.ajax({
                 url: "http://localhost:1234/admin/giftdelete/" + gid,
                 method: "DELETE",
+                headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
                 dataType: 'json',
                 success: function (result, status) {
                     window.location.href = "vc"
@@ -81,6 +83,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:1234/admin/getindividualgift/' + gid,
             method: 'GET',
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             dataType: 'json',
             success: function (result) {
                 console.log(result);
@@ -113,6 +116,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:1234/admin/updategift/' + gid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
             method: "PUT",
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify(updategift),
