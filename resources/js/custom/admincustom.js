@@ -22,15 +22,15 @@ $(document).ready(function () {
             url: "http://localhost:1234/admin/cakeAdd",
             method: "POST",
             headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
-
             processData: false,
             contentType: false,
             data: formdata,
             dataType: 'json',
 
             success: function (result, status) {
-                // window.location.href = "http://localhost:1234/admin/acd"
-                console.log(result);
+                window.location.href = "http://localhost:1234/admin/acd"
+                // console.log(result);
+                alert(result.message)
 
 
 
@@ -57,9 +57,9 @@ $(document).ready(function () {
                 method: "DELETE",
                 dataType: 'json',
                 success: function (result, status) {
-                    window.location.href = "vc"
-                    console.log(result.message)
-                    $("#message").html(result.message);
+                    window.location.href = "http://localhost:1234/admin/vc"
+                    alert(result.message)
+                    // $("#message").html(result.message);
 
 
                 },

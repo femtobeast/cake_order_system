@@ -202,8 +202,9 @@ exports.addCake = (req, res, next) => {
         }).then(function (result) {
             // { fdata: flavour_arry[0] }
             // res.redirect(req.originalUrl)
+            res.send({ message: "cake added successfully" })
 
-            next()
+            // next()
         })
     }).catch(function (err) {
         console.log(err);
@@ -268,7 +269,9 @@ exports.deleteCake = (req, res, next) => {
 
                     // res.status(200);
                     // res.render("admin/viewcake", { data: result })
-                    next();
+                    res.send({ message: "cake delete successfully" })
+
+                    // next();
                 })
 
 
@@ -580,7 +583,7 @@ exports.jwtTokenGen = (req, res, next) => {
         email: req.body.email,
         accessLevel: 'admin'
     }, 'mySecretKey', {
-        expiresIn: "10s"
+        expiresIn: "10h"
     },
 
         function (err, token) {
