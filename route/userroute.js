@@ -12,8 +12,11 @@ router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct);
 router.get('/checkout', CartController.orderDetail);
 router.get('/cplan', (req, res) => { res.render('cakeplan'); });
-router.get('/profile',UserController.getProfileDetail, function (req, res) {
+router.get('/profile', UserController.getProfileDetail, function (req, res) {
     res.render('userProfile');
+}); 
+router.get('/gift', function (req, res) {
+    res.render('giftDetail');
 });
 router.get('/order', OrderController.getNotApproveOrder, (req, res) => {
     res.render('orderDetail');
@@ -47,14 +50,12 @@ router.post('/sendOrder', OrderController.placeOrder, (req, res) => {
     res.status(201);
     res.send({ status: true });
 });
-router.post('/sendUpdate',Auth.passwordHashGenerate, UserController.updateUser, (req, res, next) => {
+router.post('/sendUpdate', Auth.passwordHashGenerate, UserController.updateUser, (req, res, next) => {
     res.status(201);
     res.send({ message: "Updated Successful!!" });
 });
 
-router.post('/sendCplan',UserController.getSelectPlanCakeDetail, (req, res, next) => {
-  
-});
+router.post('/sendCplan', UserController.getSelectPlanCakeDetail);
 //------------------------------------------
 router.get('/logoutCart', (req, res) => {
     req.session.destroy(err => {

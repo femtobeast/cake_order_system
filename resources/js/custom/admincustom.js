@@ -214,8 +214,6 @@ $(document).ready(function () {
             email: $("#email").val(),
             department: $("#department").val(),
             phonenumber: $("#phonenumber").val()
-
-
         }
 
         $.ajax({
@@ -226,13 +224,9 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: "json",
             success: function (result) {
-                // window.location.href = "http://localhost:1234/admin/astaff"
-                alert("added");
-
+                alert(result.message);
+                window.location.href = "/admin/astaff"
                 // console.log(result);
-
-
-
             },
             error: function (jqXHR) {
                 console.log(jqXHR);

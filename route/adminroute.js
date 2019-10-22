@@ -130,10 +130,8 @@ router.get("/astaff", function (req, res, next) {
     res.render("admin/addstaff")
 });
 
-router.post("/as", adminController.staffvalidation, adminController.addStaff, function (req, res, next) {
-    // res.render("admin/addstaff", { "message": "staff data successfully saved" })
-
-});
+router.post("/as", adminController.staffvalidation,
+    adminController.addStaff)
 
 //get view cake page
 router.get("/vstaff", adminController.getstaff, function (req, res, next) {
