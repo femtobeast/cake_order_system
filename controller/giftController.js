@@ -99,8 +99,7 @@ exports.addGift = (req, res, next) => {
         })
 
         .then(function (result) {
-            res.render("admin/addgift")
-            next();
+            res.send({ message: "gift added" })
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -130,7 +129,7 @@ exports.getgift = (req, res, next) => {
 }
 
 //delete individual gift data
-exports.deleteCake = (req, res, next) => {
+exports.deleteGift = (req, res, next) => {
     giftmodel.gift.findOne({
         attributes: ['gift_image'],
         where: { gift_id: req.params.gid }
@@ -146,9 +145,7 @@ exports.deleteCake = (req, res, next) => {
             })
                 .then(function () {
 
-                    // res.status(200);
-                    // res.render("admin/viewcake", { data: result })
-                    next();
+                    res.send({ message: "gift deleted successfully" })
                 })
 
 
@@ -191,7 +188,7 @@ exports.updateGift = (req, res, next) => {
         }
     )
         .then(function (result) {
-            next();
+            res.send({ message: "update gift successfully" })
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.

@@ -6,27 +6,27 @@ $(document).ready(function () {
         const cakedata = {
             giftname: $("#giftname").val(),
             giftprice: $("#giftprice").val(),
-            giftimage: $('#giftimage')[0].files[0]
+            giftimage: $("#giftimage")[0].files[0]
+
+
         }
-        console.log(cakedata)
+
         for (key in cakedata) {
             formdata.append(key, cakedata[key]);
         }
         $.ajax({
             url: "http://localhost:1234/admin/agift",
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: "POST",
             processData: false,
             contentType: false,
             data: formdata,
             dataType: 'json',
 
-            success: function (result, status) {
-                // window.location.href = "admin/addgift.ejs"
-                windows.location.reload(true);
-                // alert("adsasd")
-                // console.log(result);
-                // location.reload();
 
+            success: function (result) {
+                alert(result.message)
+                window.location.href = "http://localhost:1234/admin/addgift"
 
             },
             error: function (jqXHR) {
@@ -49,11 +49,12 @@ $(document).ready(function () {
             $.ajax({
                 url: "http://localhost:1234/admin/giftdelete/" + gid,
                 method: "DELETE",
+                headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
                 dataType: 'json',
                 success: function (result, status) {
-                    window.location.href = "vc"
-                    console.log(result.message)
-                    $("#message").html(result.message);
+                    window.location.href = "http://localhost:1234/admin/viewgift"
+                    alert(result.message)
+
 
 
                 },
@@ -81,13 +82,14 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:1234/admin/getindividualgift/' + gid,
             method: 'GET',
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             dataType: 'json',
             success: function (result) {
                 console.log(result);
                 $('#giftname').val(result.gift_name)
                 $('#giftprice').val(result.gift_price)
 
-                $('#giftimage').files(result.gift_image)
+
             },
             error: function () {
 
@@ -113,12 +115,14 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:1234/admin/updategift/' + gid, // here uid has already been set to actual userid in previous funciton when edit is clicked, since uid is global
             method: "PUT",
+            headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify(updategift),
             success: function (result) {
                 // console.log(result)
-                window.href.location = "http://localhost:1234/admin/viewgift";
+                window.location.href = "http://localhost:1234/admin/viewgift";
+                alert(result.message)
             },
             error: function (jqXHR) {
                 console.log(jqXHR)

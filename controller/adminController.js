@@ -202,8 +202,9 @@ exports.addCake = (req, res, next) => {
         }).then(function (result) {
             // { fdata: flavour_arry[0] }
             // res.redirect(req.originalUrl)
+            res.send({ message: "cake added successfully" })
 
-            next()
+            // next()
         })
     }).catch(function (err) {
         console.log(err);
@@ -265,10 +266,18 @@ exports.deleteCake = (req, res, next) => {
         })
             .then(function () {
 
+
                 // res.status(200);
                 // res.render("admin/viewcake", { data: result })
-                next();
+                res.send({ message: "cake delete successfully" })
+
+                // next();
             })
+
+        // res.status(200);
+        // res.render("admin/viewcake", { data: result })
+
+
 
 
     })
@@ -348,10 +357,7 @@ exports.updateCake = (req, res, next) => {
             }
         }
         ).then(function (result) {
-            // { fdata: flavour_arry[0] }
-            // res.send({ "message": "deleted" })
-            console.log("mes")
-            next()
+            res.send({ message: "cake successfully updated" })
         })
             // })
             .catch(function (err) {
@@ -418,8 +424,8 @@ exports.staffvalidation = (req, res, next) => {
     // console.log(req.body)
     const schema = {
 
-        staff_firstname: Joi.string().required(),
-        staff_lastname: Joi.string().required(),
+        sfname: Joi.string().required(),
+        slname: Joi.string().required(),
         saddress: Joi.string().required(),
         email: Joi.string().email().required(),
         phonenumber: Joi.number().required(),
@@ -451,8 +457,8 @@ exports.addStaff = (req, res, next) => {
 
         })
         .then(function (result) {
-            // res.send({message:"Staff Added"});
-            next();
+            res.send({ message: "Staff Added" });
+            // next();
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -489,7 +495,8 @@ exports.deleteStaff = (req, res, next) => {
 
             // res.status(200);
             // res.render("admin/viewcake", { data: result })
-            next();
+            res.send({ message: "staff delete" })
+            // next();
         })
 
 
@@ -537,7 +544,9 @@ exports.updateStaff = (req, res, next) => {
         }
     )
         .then(function (result) {
-            next();
+            // next();
+            res.send({ message: "staff updated" })
+
         })
         .catch(function (err) {
             //to show error if any mistake is occured in addEmployee function.
@@ -563,7 +572,7 @@ exports.jwtTokenGen = (req, res, next) => {
         email: req.body.email,
         accessLevel: 'admin'
     }, 'mySecretKey', {
-        expiresIn: "10s"
+        expiresIn: "10h"
     },
 
         function (err, token) {
@@ -741,7 +750,7 @@ exports.updatenotapprovalorder = (req, res, next) => {
     )
         .then((result) => {
             res.send({
-                "message": "order status updated successfully"
+                message: "order status updated successfully"
             })
 
 
@@ -830,7 +839,7 @@ exports.counttotalorder = (req, res) => {
 exports.countsaleamount = (req, res) => {
     mySeq.sequelize.query(
         // "select tblcake.cake_price from tblcake left join tblorder  where cake_id.tblcake = tblorder.cake_id   ",
-        "select cake_price from tblcake;",
+        "select sum(order_total) totalsale1 from tblorder;",
         { query: mySeq.sequelize.QueryTypes.SELECT })
         .then((result) => {
             // res.render("admin/deliveredorder", { data: result[0] });
@@ -872,7 +881,7 @@ exports.updateadminprofile = (req, res, next) => {
     )
         .then((result) => {
             res.send({
-                "message": "admin profile status updated successfully"
+                message: "admin profile status updated successfully"
             })
 
 
