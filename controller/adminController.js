@@ -847,7 +847,7 @@ exports.counttotalorder = (req, res) => {
 exports.countsaleamount = (req, res) => {
     mySeq.sequelize.query(
         // "select tblcake.cake_price from tblcake left join tblorder  where cake_id.tblcake = tblorder.cake_id   ",
-        "select cake_price from tblcake;",
+        "select sum(order_total) totalsale1 from tblorder;",
         { query: mySeq.sequelize.QueryTypes.SELECT })
         .then((result) => {
             // res.render("admin/deliveredorder", { data: result[0] });

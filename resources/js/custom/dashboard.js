@@ -17,7 +17,8 @@ $(document).ready(function () {
 
 //display the total amount of saole
 $.getJSON('http://localhost:1234/admin/countsaleamount', function (result) {
-    console.log(result);
+    // console.log(result);
+    $("#totalsale1").text("Rs." + result[0].totalsale1);
 
     // $('#totalorder1').text(result[0].co);
 })
