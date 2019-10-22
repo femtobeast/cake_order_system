@@ -36,7 +36,7 @@
                                     <label for="flavourname">Flavour Name</label>
                                     <select class="form-control" id="flavourname" name="flavourname">
                                         <% fdata.forEach(function(data){%>
-                                        <option><%=
+                                        <option id="optionflavourname"><%=
                                         data.flavour_name %> <%})%>
                                         </option>
                                     </select>
@@ -53,10 +53,10 @@
                                     <label for="flavourtype">Flavour Type</label>
                                     <select class="form-control" id="flavourtype" name="flavourtype">
 
-                                        <option>Basic</option>
-                                        <option>Special</option>
-                                        <option>Butterscotch</option>
-                                        <option>Chocolate</option>
+                                        <option id="basic">Basic</option>
+                                        <option id="special">Special</option>
+                                        <option id="butters">Butterscotch</option>
+                                        <option id="chocolate">Chocolate</option>
                                     </select>
                                 </div>
                             </div>

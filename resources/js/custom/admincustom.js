@@ -19,7 +19,7 @@ $(document).ready(function () {
             formdata.append(key, cakedata[key]);
         }
         $.ajax({
-            url: "http://localhost:1234/admin/cakeAdd",
+            url: "/admin/cakeAdd",
             method: "POST",
             processData: false,
             contentType: false,
@@ -50,7 +50,7 @@ $(document).ready(function () {
         var deleteConfirm = confirm("Are your Sure??");
         if (deleteConfirm == true) {
             $.ajax({
-                url: "http://localhost:1234/admin/cakedelete/" + cid,
+                url: "/admin/cakedelete/" + cid,
                 method: "DELETE",
                 dataType: 'json',
                 success: function (result, status) {
