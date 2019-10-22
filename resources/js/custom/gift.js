@@ -5,9 +5,12 @@ $(document).ready(function () {
         var formdata = new FormData();
         const cakedata = {
             giftname: $("#giftname").val(),
+            giftprice: $("#giftprice").val(),
+            giftimage: $("#giftimage")[0].files[0]
+
 
         }
-        console.log(cakedata)
+
         for (key in cakedata) {
             formdata.append(key, cakedata[key]);
         }
@@ -15,14 +18,15 @@ $(document).ready(function () {
             url: "http://localhost:1234/admin/agift",
             headers: { 'authorization': 'Bearer' + window.localStorage.getItem('token') },
             method: "POST",
-            contentType: 'application/json',
-            dataType: 'json',
+            processData: false,
+            contentType: false,
             data: formdata,
             dataType: 'json',
 
-            success: function (result, status) {
+
+            success: function (result) {
                 alert(result.message)
-                window.location.href = "http://localhost:1234/admin/viewgift"
+                window.location.href = "http://localhost:1234/admin/addgift"
 
             },
             error: function (jqXHR) {
