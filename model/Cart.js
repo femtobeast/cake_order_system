@@ -5,13 +5,15 @@ module.exports = function Cart(sessionCart) {
 
     //ADD ITEM DETAIL IN TO CART OBJECT 
     this.add = function (item, id) {
-        var storedItem = this.items[id];//grouping item detail of same data
+        var storedItem = this.items[id];//grouping item detail of same data  /1
         if (!storedItem) {
+            // storedItem = this.items[id] = { item: item, giftitem: giftitem, qty: 0, totalPrice: 0 }
             storedItem = this.items[id] = { item: item, qty: 0, totalPrice: 0 }
         }
         storedItem.qty++;
         storedItem.totalPrice = storedItem.item.cake_price * storedItem.qty;
         this.totalQty++;
+        // this.totalPrice += storedItem.item.cake_price + storedItem.giftitem.gift_price;
         this.totalPrice += storedItem.item.cake_price;
     }
 
