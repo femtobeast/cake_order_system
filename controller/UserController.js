@@ -259,9 +259,11 @@ exports.searchCakeDetail = async (req, res, next) => {
 
 //--SEARCH CAKE DETAIL FUNCTION FROM DATABASE
 exports.getGiftDetail = async (req, res, next) => {
+
     giftModel.gift.findAll()
     .then(function (result) {
         res.status(200);
+        // res.json(result)
         res.render("giftDetail", { cdata: result });
     })
     .catch(function (err) {

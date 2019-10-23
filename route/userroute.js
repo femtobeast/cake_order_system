@@ -15,9 +15,8 @@ router.get('/cplan', (req, res) => { res.render('cakeplan'); });
 router.get('/profile', UserController.getProfileDetail, function (req, res) {
     res.render('userProfile');
 }); 
-router.get('/gift', function (req, res) {
-    res.render('giftDetail');
-});
+router.get('/gift', UserController.getGiftDetail);
+router.get('/help',(req,res)=>{res.render('help')});
 router.get('/order', OrderController.getNotApproveOrder, (req, res) => {
     res.render('orderDetail');
 })

@@ -6,25 +6,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
-                <label>Select any occasions | to order your special cake.</label>
+                <h1>Gift Collection | YummyCake</h1>
                 <div class="main">
                     <ul id="cardItem" class="cards">
+                        <% cdata.forEach(function(data){ %>
                         <li class="card_item">
                             <div class="card">
-                                <div class="card_image"><img width="100" height="auto" 
-                                        src="/uploads/'+ result[i].cake_image + '" alt="cake img">
-                                    <span id="itemname">'+ result[i].cake_name + '</span>
+                                <div class="card_image"><img width="100" height="auto"
+                                        src="/giftuploads/<%= data.gift_image%>" alt="cake img">
+                                    <span id="itemname"><%= data.gift_name%></span>
                                 </div>
                                 <div class="card_content">
                                     <h2 class="card_title">
-                                        <span>Rs. '+result[i].cake_price+'
+                                        <span>Rs. <%= data.gift_price%>
                                         </span></h2>
-                                    <a href="/user/add-to-cart/'+result[i].cake_id+'" class="card_title"><button>Add to
+                                    <a href="/user/add-to-cart/<%= data.gift_id %>" class="card_title"><button>Add to
                                             cart</button>
                                     </a>
                                 </div>
                             </div>
                         </li>
+                        <% }) %>
                     </ul>
                 </div>
 

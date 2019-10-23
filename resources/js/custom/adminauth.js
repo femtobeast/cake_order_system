@@ -6,7 +6,7 @@ $(document).ready(function () {
             password: $("#password").val()
         }
         $.ajax({
-            url: "/admin/auth",
+            url: "http://localhost:1234/admin/auth",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(adminlogin),
@@ -23,7 +23,7 @@ $(document).ready(function () {
                 window.localStorage.setItem('phone', result.result.phone);
 
 
-                window.location.href = "http://localhost:1234/admin/profile";
+                window.location.href = "/admin/profile";
 
             },
             error: function (jqXHR, error) {

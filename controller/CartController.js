@@ -1,7 +1,7 @@
 
 const Cart = require('../model/Cart');
 const cakeModel = require('../model/Cake');
-const HOURS = 1000 * 60 * 60 * 24;
+const HOURS = 1000 * 60 * 60 * 24 * 2; //milisecond * sec * minute * hour * days = total days
 exports.addToCart = (req, res, next) => {
     var cakeId = req.params.id;
     var cart = new Cart(req.cookies.carttemp ? req.cookies.carttemp : {});
@@ -33,7 +33,7 @@ exports.orderDetail = async (req, res, next) => {
    await renderCartDetail(req,res,'checkout');
 }
  function renderCartDetail(req,res,renderpage) {
-    console.log(res.locals.carttemp)
+    console.log(res.locals.carttemp.items)
     if (!req.cookies.carttemp) {
         return res.render(renderpage, { product: null })
     }
