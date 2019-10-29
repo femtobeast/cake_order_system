@@ -54,10 +54,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="PhoneNumber">Birthday</label> <i
+                                <label for="PhoneNumber">Birthday: </label> <i
                                     class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 <input class="input--style-2 js-datepicker form-control" type="text"
-                                    placeholder="Birthdate" name="birthday" value="<%= data.cust_dob%>" id="dob">
+                                    placeholder="Birthdate" value="<%= dob%>" name="birthday" id="dob">
 
 
                             </div>
@@ -78,6 +78,10 @@
 
                     <% })%>
                     <% }%>
+                    <div id="loadingdiv">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>
                     <button type="submit" id="updateBtn" class="btn btn-accent">Update Account</button>
                     <!-- </form> -->
 

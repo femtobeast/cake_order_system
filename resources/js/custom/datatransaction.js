@@ -158,6 +158,7 @@ require(['jquery', 'api_url'], function ($, main) {
             birthday: document.getElementsByName('birthday')[0].value,
             gender: document.getElementsByName('gender')[0].value
           }
+          showLoad();
         $.ajax({
             url: updateCustomerURL,
             method: "POST",
@@ -165,11 +166,12 @@ require(['jquery', 'api_url'], function ($, main) {
             dataType: "json",
             data: JSON.stringify(customerData),
             success: function (result, status) {
-                alert(result)
+                holdContent();
                 redirectPage('/user/profile')
                 // $('#errors').html(result.message + ": Please refresh or login for checkout.");
             },
             error: function (err, status) {
+                holdContent();
               console.log(err)
             }
         });

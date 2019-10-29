@@ -9,7 +9,7 @@ exports.placeOrder = (req, res, next) => {
 console.log(req.body)
         ordermodel.order.create({
             order_by: req.body.receiverName,
-            order_pdate: moment.utc("2019/09/09", 'YYYY-MM-DD'),
+            order_pdate: moment.utc("2019/09/09", 'DD-MM-YYYY'),
             order_alias: req.body.alias,
             order_city: req.body.city,
             order_phone: req.body.mobileno,
@@ -19,7 +19,7 @@ console.log(req.body)
             order_cust_id: req.session.customerId,
             order_status: 'notapproval',
             delivery_option: req.body.doption,
-            delivery_date: moment.utc(req.body.ddate, 'YYYY-MM-DD'),
+            delivery_date: moment.utc(req.body.ddate, 'DD-MM-YYYY'),
             delivery_location: req.body.dlocation,
             paymentM: req.body.paymentM,
             cake_id: req.body.cake_id

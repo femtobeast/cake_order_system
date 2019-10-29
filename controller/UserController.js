@@ -1,6 +1,7 @@
 const usermodel = require("../model/Customer");
 const cakemodel = require("../model/Cake");
 const feedbackmodel = require("../model/Feedback");
+const flavourmodel = require("../model/Flavour");
 const giftModel = require("../model/Gift");
 const { check, validationResult } = require('express-validator');
 const mySeq = require('../config/databaseConfig');
@@ -29,7 +30,7 @@ exports.addUser = (req, res, next) => {
                 cust_email: req.body.email,
                 cust_password: req.myhash,
                 cust_phone: req.body.phone,
-                cust_dob: moment.utc(req.body.birthday, 'YYYY-MM-DD'),
+                cust_dob: moment.utc(req.body.birthday, 'DD-MM-YYYY'),
                 cust_address: req.body.address,
                 cust_gender: req.body.gender,
                 cust_fname: req.body.firstname,
@@ -85,7 +86,7 @@ exports.updateUser = function (req, res, next) {
         cust_phone: req.body.phone,
         cust_address: req.body.address,
         // cust_gender: req.body.gender,
-        cust_dob: req.body.birthday,
+        cust_dob: moment.utc(req.body.birthday, 'DD-MM-YYYY'),
         cust_fname: req.body.firstname,
         cust_lname: req.body.lastname
     }
@@ -122,14 +123,34 @@ exports.getProfileDetail = (req, res, next) => {
     usermodel.customer.findAll({
         where: { cust_email: req.session.customerEmail }
     }).then(function (result) {
+       
+        const birthday =  moment(result[0].dataValues.cust_dob).format('DD/MM/YYYY');
+       
         if (result.dataValues != "") {
-            res.render('userProfile', { customerD: result })
-        }
+            res.render('userProfile', { customerD: result,dob:birthday })
+        } 
     }).catch(function (err) {
         //error handling
-        next({ "status": 500, "message": err });
+        console.log(err)
+        // res.redirect('/user/dashboard');
     });
 };
+
+exports.getflavourForPlan = (req, res, next) => {
+    flavourmodel.flavour.findAll({
+        attributes:['flavour_name']
+    })
+        .then(function (result) {
+            res.status(200);
+            // res.json(result)
+            // flavour_arry.pop();
+            // flavour_arry.push(result);
+            res.render("cakeplan", { fdata: result });
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+}
 
 ///GET CAKE PLAN DETAIL
 exports.getSelectPlanCakeDetail = (req, res, next) => {
@@ -139,14 +160,14 @@ exports.getSelectPlanCakeDetail = (req, res, next) => {
             WHERE c.serves = :serves AND \
             c.pound =:pound AND \
             c.version = :version AND \
-            c.flavour_type= :flvType AND \
+            c.flavour_id = (SELECT f.flavour_id FROM tblflavour f WHERE f.flavour_name = :flvname) AND\
             c.cake_price <= :cakeprice;",
         {
             replacements: {
                 serves: req.body.serves,
                 pound: req.body.pound,
                 version: req.body.version,
-                flvType: req.body.flvType,
+                flvname: req.body.flvname,
                 cakeprice: req.body.cakeprice
 
             }, type: mySeq.sequelize.QueryTypes.SELECT

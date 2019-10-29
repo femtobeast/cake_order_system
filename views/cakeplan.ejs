@@ -18,8 +18,22 @@
                 <p><input id="poundcake" placeholder="example 1" class="pinput" name="pound"></p>
             </div>
             <div class="tab">
-                <label>Select Flavour</label>
-                <p><input id="flavourcake" placeholder="example 1" class="pinput" name="sflavour"></p>
+                <div class="form-group col-md-8">
+                    <label for="PhoneNumber">Select Flavour Name</label>
+                    <div class="rs-select2 js-select-simple select--no-search">
+                      
+                        <select name="flvname" id="flavourname">
+                            <!-- <option disabled="disabled" selected="selected">Select Flavour Name</option> -->
+                            <% if(typeof fdata !== 'undefined') { %>
+                            <% fdata.forEach(function(data){%>
+                            <option><%=data.flavour_name %> <%})%>
+                            </option>
+                            <% } %>
+                        </select>
+                        <div class="select-dropdown"></div>
+                    </div>
+                </div>
+                <!-- <p><input id="flavourcake" placeholder="example 1" class="pinput" name="sflavour"></p> -->
             </div>
             <div class="tab">
                 <div class="budget-wrap">
@@ -82,7 +96,7 @@
                 <label>Select any occasions | to order your special cake.</label>
                 <div class="main">
                     <ul id="cardItem" class="cards">
-                           
+
                     </ul>
                 </div>
             </div>

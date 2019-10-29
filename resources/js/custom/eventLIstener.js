@@ -113,9 +113,10 @@ define(['jquery', 'api_url'], function ($, main) {
             "serves": $('#servecake').val(),
             "pound": $('#poundcake').val(),
             "version": $('#sel1').val(),
-            "flvType": $('#flavourcake').val(),
+            "flvname": $('#flavourname').val(),
             "cakeprice": $('#rangevalue').val()
         }
+        console.log(cakeSearch)
         $.ajax({
             url: "/user/sendCplan/",
             method: "POST",

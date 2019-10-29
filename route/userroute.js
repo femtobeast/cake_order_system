@@ -11,8 +11,8 @@ router.get('/register', (req, res) => res.render('register'));
 router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct);
 router.get('/checkout', CartController.orderDetail);
-router.get('/cplan', (req, res) => { res.render('cakeplan'); });
-router.get('/profile', UserController.getProfileDetail, function (req, res) {
+router.get('/cplan',UserController.getflavourForPlan);
+router.get('/profile',Auth.redirectToLogin, UserController.getProfileDetail, function (req, res) {
     res.render('userProfile');
 }); 
 router.get('/gift', UserController.getGiftDetail);

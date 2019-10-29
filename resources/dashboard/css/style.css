@@ -1673,9 +1673,9 @@ img {
 #aa-testimonial .aa-testimonial-area .aa-testimonial-slider .aa-testimonial-single .aa-testimonial-img {
     border: 1px solid #fff;
     border-radius: 50%;
-    height: 100px;
+    height: auto;
     margin: 0 auto;
-    width: 100px;
+    width: 15%;
 }
 
 #aa-testimonial .aa-testimonial-area .aa-testimonial-slider .aa-testimonial-single .aa-testimonial-quote {
