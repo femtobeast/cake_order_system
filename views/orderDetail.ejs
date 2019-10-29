@@ -26,10 +26,14 @@
                                 <td><%= data.order_by %></td>
                                 <td><%= data.order_pdate %></td>
                                 <td><%= data.delivery_date %></td>
-                                <% if(data.order_status == 'notapproval'){ %>
+                                <% if(data.order_status === 'notapproval'){ %>
                                 <td><strong style="color: red">Not Approved</strong></td>
+                                <%}else if(data.order_status === 'complete'){%>
+                                <td><strong style="color: green"> Cake is ready to dispatch.</strong></td>
+                                <%}else if(data.order_status === 'delivered'){%>
+                                <td><strong style="color: green">Delivered | Cake will be arrived with in 30min.</strong></td>
                                 <%}else{%>
-                                <td><strong style="color: green"> Order is in progress. . .</strong></td>
+                                <td><strong style="color: #424040"> Order is in progress. . .</strong></td>
                                 <%}%>
                                 <td><%= data.order_id %></td>
                             </tr>
