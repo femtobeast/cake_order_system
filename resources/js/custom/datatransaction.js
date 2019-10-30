@@ -135,7 +135,65 @@ require(['jquery', 'api_url'], function ($, main) {
             },
             error: function (err, status) {
                 // alert('Order is not placed. ')
-            alert(err)
+                alert(err)
+
+            }
+        });
+
+    })
+
+    //TRACK ORDER DETAIL PLACED 
+    $('#shopGetOrderStatusID').on('click', function () {
+
+        var orderid = { orderid: document.getElementById('orderTrackingId').value };
+        $.ajax({
+            url: 'http://localhost:1234/user/sendTrackId',
+            method: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(orderid),
+            success: function (result, status) {
+                var orderState = result.order_status;
+                if (orderState === 'notapproval') {
+                    $("#timeline")
+                        .removeClass('order-status-timeline-completion c0')
+                        .removeClass('order-status-timeline-completion c1')
+                        .removeClass('order-status-timeline-completion c3')
+                        .removeClass('order-status-timeline-completion c4')
+                        .addClass("order-status-timeline-completion c0");
+                } else if (orderState === 'complete') {
+                     $("#timeline")
+                     .removeClass('order-status-timeline-completion c0')
+                     .removeClass('order-status-timeline-completion c1')
+                     .removeClass('order-status-timeline-completion c3')
+                     .removeClass('order-status-timeline-completion c2')
+                     .addClass("order-status-timeline-completion c4");
+                } else if (orderState === 'delivered') {
+                    $("#timeline")
+                    .removeClass('order-status-timeline-completion c0')
+                    .removeClass('order-status-timeline-completion c1')
+                    .removeClass('order-status-timeline-completion c4')
+                    .removeClass('order-status-timeline-completion c2')
+                    .addClass("order-status-timeline-completion c3");
+                }  else if (orderState === 'progress') {
+                    $("#timeline")
+                    .removeClass('order-status-timeline-completion c0')
+                    .removeClass('order-status-timeline-completion c3')
+                    .removeClass('order-status-timeline-completion c4')
+                    .removeClass('order-status-timeline-completion c2')
+                    .addClass("order-status-timeline-completion c1");
+                } else {
+                    $("#timeline")
+                    .removeClass('order-status-timeline-completion c3')
+                    .removeClass('order-status-timeline-completion c1')
+                    .removeClass('order-status-timeline-completion c4')
+                    .removeClass('order-status-timeline-completion c2')
+                    .addClass("order-status-timeline-completion c0");
+                }
+            },
+            error: function (err, status) {
+                // alert('Order is not placed. ')
+                console.log(err)
 
             }
         });
@@ -145,20 +203,20 @@ require(['jquery', 'api_url'], function ($, main) {
 
 
     //Update User Profile
-      //LOGIN AJAX 
-      $('#updateBtn').on('click',  function () {
+    //LOGIN AJAX 
+    $('#updateBtn').on('click', function () {
         var customerData = {
-            fname:$('#fname').val(),
-            lname:$('#lname').val(),
-            email:$('#email').val(),
-            address:$('#address').val(),
-            phone:$('#PhoneNumber').val(),
+            fname: $('#fname').val(),
+            lname: $('#lname').val(),
+            email: $('#email').val(),
+            address: $('#address').val(),
+            phone: $('#PhoneNumber').val(),
             password: $('#password').val(),
             // gender: $('#gender').val(),
             birthday: document.getElementsByName('birthday')[0].value,
             gender: document.getElementsByName('gender')[0].value
-          }
-          showLoad();
+        }
+        showLoad();
         $.ajax({
             url: updateCustomerURL,
             method: "POST",
@@ -172,7 +230,7 @@ require(['jquery', 'api_url'], function ($, main) {
             },
             error: function (err, status) {
                 holdContent();
-              console.log(err)
+                console.log(err)
             }
         });
 

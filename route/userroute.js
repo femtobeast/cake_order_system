@@ -8,6 +8,7 @@ const CartController = require('../controller/CartController');
 //---------GET FUNCTION PAGES ROUTE
 router.get('/login', Auth.redirectToHome, (req, res) => res.render('userLogin'));
 router.get('/register', (req, res) => res.render('register'));
+router.get('/to', (req, res) => res.render('trackOrder'));
 router.get('/dashboard', UserController.getAllCakeDetail);
 router.get('/product', UserController.browseAllCakeProduct);
 router.get('/checkout', CartController.orderDetail);
@@ -55,6 +56,7 @@ router.post('/sendUpdate', Auth.passwordHashGenerate, UserController.updateUser,
 });
 
 router.post('/sendCplan', UserController.getSelectPlanCakeDetail);
+router.post('/sendTrackId', OrderController.trackOrderStatus);
 //------------------------------------------
 router.get('/logoutCart', (req, res) => {
     req.session.destroy(err => {

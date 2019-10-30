@@ -1,7 +1,7 @@
 <% include partials/header.ejs %>
 <% include partials/menu.ejs %>
 
-
+<link href="/dashboard/css/trackorder.css" rel="stylesheet">
 <!-- Cart view section -->
 <section id="cart-view">
     <% if(locals.orders) { %>
@@ -22,6 +22,7 @@
                         </thead>
                         <tbody>
                             <% orders.forEach(function(data){ %>
+                            <% status = data.order_status; %>
                             <tr>
                                 <td><%= data.order_by %></td>
                                 <td><%= data.order_pdate %></td>
@@ -31,7 +32,8 @@
                                 <%}else if(data.order_status === 'complete'){%>
                                 <td><strong style="color: green"> Cake is ready to dispatch.</strong></td>
                                 <%}else if(data.order_status === 'delivered'){%>
-                                <td><strong style="color: green">Delivered | Cake will be arrived with in 30min.</strong></td>
+                                <td><strong style="color: green">Delivered | Cake will be arrived with in
+                                        30min.</strong></td>
                                 <%}else{%>
                                 <td><strong style="color: #424040"> Order is in progress. . .</strong></td>
                                 <%}%>
@@ -64,6 +66,60 @@
                         </ul>
                     </div>
                 </div>
+
+                <!-- --- Tracking order detail -->
+               <section id="aa-track">
+                    <div class="row shop-tracking-status">
+    
+                      <div class="col-md-12">
+                                <div class="well">
+                                    <div class="form-vertical">
+                                        <div class="form-group">
+                                                <div class="col-sm-4">
+                                                <input type="text" class="form-control" id="orderTrackingId" value="" placeholder="# put your order id here">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- <div class="col-sm-offset-2 col-sm-10"> -->
+                                                <button type="button" id="shopGetOrderStatusID" class="btn btn-success">Track Your Order</button>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div> 
+    
+                                        <div class="order-status">        
+                                                <div class="order-status-timeline">
+                                                    <!-- class names: c0 c1 c2 c3 and c4 -->
+                                                    <div id="timeline" ></div>
+                                                    <!-- //code added from ajax -->
+                                                </div>                                
+                                                <div class="image-order-status image-order-status-new active img-circle">
+                                                    <span class="status">Accepted</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-active active img-circle">
+                                                    <span class="status">In progress</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-intransit active img-circle">
+                                                    <span class="status">Shipped</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-delivered active img-circle">
+                                                    <span class="status">Delivered</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                                <div class="image-order-status image-order-status-completed active img-circle">
+                                                    <span class="status">Completed</span>
+                                                    <div class="icon"></div>
+                                                </div>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                </div>
+               </section>
+                 <!-- --- Tracking order detail -->
             </div>
             <% }else{ %>
                             <div class="container">

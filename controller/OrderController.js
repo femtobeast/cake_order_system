@@ -6,30 +6,30 @@ const Sequelize = require('sequelize');
 //USER REGISTRATION FUNCTION ----------------
 exports.placeOrder = (req, res, next) => {
     var orderLength = req.body.orderLength;
-console.log(req.body)
-        ordermodel.order.create({
-            order_by: req.body.receiverName,
-            order_pdate: moment.utc("2019/09/09", 'DD-MM-YYYY'),
-            order_alias: req.body.alias,
-            order_city: req.body.city,
-            order_phone: req.body.mobileno,
-            order_phone2: req.body.mobileno2,
-            order_qty: req.body.oqty,
-            order_total: req.body.ototalprice,
-            order_cust_id: req.session.customerId,
-            order_status: 'notapproval',
-            delivery_option: req.body.doption,
-            delivery_date: moment.utc(req.body.ddate, 'DD-MM-YYYY'),
-            delivery_location: req.body.dlocation,
-            paymentM: req.body.paymentM,
-            cake_id: req.body.cake_id
-        }).then(function (result) {
-            next();
-        }).catch(function (err) {
-            next({ "status": 500, "message": err });
-            console.log(err)
-        })
-    
+    console.log(req.body)
+    ordermodel.order.create({
+        order_by: req.body.receiverName,
+        order_pdate: moment.utc("2019/09/09", 'DD-MM-YYYY'),
+        order_alias: req.body.alias,
+        order_city: req.body.city,
+        order_phone: req.body.mobileno,
+        order_phone2: req.body.mobileno2,
+        order_qty: req.body.oqty,
+        order_total: req.body.ototalprice,
+        order_cust_id: req.session.customerId,
+        order_status: 'notapproval',
+        delivery_option: req.body.doption,
+        delivery_date: moment.utc(req.body.ddate, 'DD-MM-YYYY'),
+        delivery_location: req.body.dlocation,
+        paymentM: req.body.paymentM,
+        cake_id: req.body.cake_id
+    }).then(function (result) {
+        next();
+    }).catch(function (err) {
+        next({ "status": 500, "message": err });
+        console.log(err)
+    })
+
 }
 exports.getNotApproveOrder = (req, res, next) => {
     const ocid = req.session.customerId;
@@ -63,3 +63,20 @@ exports.getNotApproveOrder = (req, res, next) => {
     //     console.log(err)
     // })
 }
+
+exports.trackOrderStatus = (req, res, next) => {
+
+    ordermodel.order.findOne({
+        attributes: ['order_status'],
+        where: { order_id: req.body.orderid }
+    }).then(function (result) {
+        if (result.dataValues != "") {
+            res.status(200);
+            res.send(result);
+        }
+
+    }).catch(function (err) {
+        res.send('false');
+    });
+}
+
